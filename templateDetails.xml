@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8" type="template" client="site" method="upgrade">
+	<name>nerudas</name>
+	<author>Nerudas</author>
+	<creationDate>September 2017</creationDate>
+	<copyright>Copyright (c) 2015 - 2017 Nerudas. All rights reserved.</copyright>
+	<license>>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>support@nerudas.ru</authorEmail>
+	<authorUrl>nerudas.ru</authorUrl>
+	<version>5.0.0</version>
+	<description>TPL_NERUDAS_DESCRIPTION</description>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_nerudas.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_nerudas.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.sys.ini</language>
+	</languages>
+	<files>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<filename>favicon.ico</filename>
+		<filename>helper.php</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+	</files>
+	<positions>
+		<position>scripts</position>
+	</positions>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="minified" type="radio"
+					   label="TPL_NERUDAS_PARAMS_MINIFIED"
+					   default=".min"
+					   class="btn-group btn-group-yesno">
+					<option value=".min">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+			<fieldset name="logo" label="TPL_NERUDAS_PARAMS_LOGO">
+				<fields name="logo">
+					<field name="src" type="text"
+						   label="TPL_NERUDAS_PARAMS_LOGO_SRC"
+						   class="input-xxlarge"
+						   default="templates/nerudas/images/logo.svg"/>
+					<field name="alt" type="text"
+						   label="TPL_NERUDAS_PARAMS_LOGO_ALT"
+						   class="input-xxlarge"/>
+					<field name="height" type="number"
+						   label="TPL_NERUDAS_PARAMS_LOGO_HEIGHT"
+						   class="input-small"
+						   default="0"/>
+				</fields>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

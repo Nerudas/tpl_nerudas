@@ -1,0 +1,151 @@
+/*
+ * @package    Nerudas Template
+ * @version    5.0.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+/* Font
+========================================================================== */
+html {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 1.5;
+	-webkit-text-size-adjust: 100%;
+	color: #666;
+}
+
+body, h1, h2, h3, h4, h5, h6, .uk-navbar-nav > li > a {
+	font-family: 'Open Sans', sans-serif;
+}
+
+/*  Link
+========================================================================== */
+a, a:hover, .uk-link, .uk-link:hover {
+	text-decoration: none;
+}
+
+a.uk-link-muted, .uk-link-muted a {
+	color: #666;
+}
+
+a.uk-link-muted:hover, .uk-link-muted a:hover {
+	color: #444;
+}
+
+.uk-link-inherit, .uk-link-inherit:hover {
+	color: inherit;
+}
+
+a.forbidden {
+	cursor: not-allowed;
+}
+
+
+/*  Container
+========================================================================== */
+.uk-container {
+	box-sizing: border-box;
+	max-width: 1380px;
+	padding: 0 15px;
+}
+
+@media (min-width: 1220px) {
+	.uk-container {
+		padding: 0 40px;
+	}
+}
+
+@media (min-width: 530px) {
+	.uk-container {
+		padding: 0 30px;
+	}
+}
+
+/* Tooltip
+========================================================================== */
+.uk-tooltip {
+	font-size: 0.875rem;
+	color: #666;
+	text-shadow: none;
+	background: #FFF;
+	padding: 0 10px;
+	line-height: 1.7rem;
+	border: 1px solid #e5e5e5;
+	max-width: 320px;
+}
+
+
+/*  Dropdown
+========================================================================== */
+.uk-dropdown {
+	padding: 10px;
+	line-height: 1.5;
+}
+
+.uk-dropdown.uk-dropdown-auto {
+	min-width: auto;
+}
+
+
+/*  Notification
+========================================================================== */
+.uk-notification-message {
+	position: relative;
+	margin: 1em 0;
+	padding: 1em 1em 1em 2em;
+	font-size: 1rem;
+	border-left: 4px solid #DDD;
+	background: #fff;
+	color: #666;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.uk-notification-message-icon {
+	position: absolute;
+	top: 50%;
+	margin-top: -17px;
+	left: -17px;
+	background-color: #DDD;
+	color: #FFF;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	text-align: center;
+	line-height: 30px;
+	text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.uk-notification-message-primary {
+	border-color: #0074D9;
+}
+
+.uk-notification-message-primary .uk-notification-message-icon {
+	background: #0074D9;
+}
+
+.uk-notification-message-success {
+	border-color: #2ECC40;
+}
+
+.uk-notification-message-success .uk-notification-message-icon {
+	background: #2ECC40;
+}
+
+.uk-notification-message-warning {
+	border-color: #FFDC00;
+}
+
+.uk-notification-message-warning .uk-notification-message-icon {
+	background: #FFDC00;
+}
+
+.uk-notification-message-danger {
+	border-color: #FF4136;
+}
+
+.uk-notification-message-danger .uk-notification-message-icon {
+	background: #FF4136;
+}
