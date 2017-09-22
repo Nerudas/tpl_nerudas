@@ -89,6 +89,18 @@ a.forbidden {
 	min-width: auto;
 }
 
+/*  Logo
+========================================================================== */
+svg[data-name="Nerudas"] {
+	fill: currentcolor;
+}
+svg[data-name="Nerudas"] .letters,
+svg[data-name="Nerudas"] .dots {
+	fill: #333;
+}
+svg[data-name="Nerudas"] .dots .background {
+	fill: #FCE200;
+}
 
 /*  Notification
 ========================================================================== */

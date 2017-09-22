@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 $header = $displayData;
 
 ?>
-<header class="tm-top uk-card-secondary">
+<header class="tm-top">
 	<div class="uk-container">
 		<?php echo $header->logo->element; ?>
 	</div>
