@@ -14,8 +14,8 @@ defined('_JEXEC') or die;
 require_once __DIR__ . '/helper.php';
 $this->helper = new tplNerudasHelper;
 
-// Check beta version
-$this->helper->checkBetaVersion($this->params);
+// Check site version
+$this->helper->checkSiteVersion($this->params);
 
 // Set Head
 $this->helper->setHead($this->params);

@@ -113,19 +113,20 @@ class tplNerudasHelper
 	 *
 	 * @since   1.0.0
 	 */
-	public function checkBetaVersion($params)
+	public function checkSiteVersion($params)
 	{
-		if (!preg_match('/nerudas.ru/', (JURI::base())))
+		if (preg_match_all('/\/\/(.*)\.(.*)\.(.*)\//s', (JURI::base()), $domain) && $subDomain = $domain[1][0])
 		{
-			$doc = JFactory::getDocument();
-			$doc->setMetaData('robots', 'noindex');
-			$doc->addHeadLink(str_replace('beta.', '', JUri::getInstance()->toString()), 'canonical');
-			$doc->setTitle('[BETA] ' . $doc->getTitle());
-			$params->set('minified', '');
-
-			return true;
+			if ($subDomain == 'alpha' || $subDomain == 'beta')
+			{
+				$doc = JFactory::getDocument();
+				$doc->setMetaData('robots', 'noindex, nofollow');
+				$doc->addHeadLink(str_replace($subDomain, '', JUri::getInstance()->toString()), 'canonical');
+				$doc->setTitle('[' . strtoupper($subDomain) . '] ' . $doc->getTitle());
+				$params->set('minified', '');
+				return true;
+			}
 		}
-
 
 		return false;
 	}
