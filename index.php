@@ -9,6 +9,8 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\Layout\LayoutHelper;
+
 
 // Connect template heper
 require_once __DIR__ . '/helper.php';
@@ -22,7 +24,6 @@ $this->helper->setHead($this->params);
 
 // Prepate header
 $this->header = $this->helper->prepareHeader($this->params);
-
 ?>
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>"
@@ -32,9 +33,9 @@ $this->header = $this->helper->prepareHeader($this->params);
 </head>
 <body>
 <jdoc:include type="message"/>
-<?php echo JLayoutHelper::render('template.header', $this->header); ?>
+<?php echo LayoutHelper::render('template.header', $this->header); ?>
 <jdoc:include type="component"/>
-<?php echo JLayoutHelper::render('template.footer'); ?>
+<?php echo LayoutHelper::render('template.footer'); ?>
 <jdoc:include type="modules" name="scripts"/>
 </body>
 </html>

@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 
 use Joomla\Registry\Registry;
+use Joomla\CMS\Factory;
 
 class tplNerudasHelper
 {
@@ -25,7 +26,7 @@ class tplNerudasHelper
 	 */
 	public function setHead($params)
 	{
-		$doc = JFactory::getDocument();
+		$doc = Factory::getDocument();
 
 		// Template params
 		$minified = $params->get('minified', '');
@@ -56,13 +57,13 @@ class tplNerudasHelper
 	protected function addjQuery($minified)
 	{
 		JHtml::_('jquery.framework');
-		$doc  = JFactory::getDocument();
+		$doc  = Factory::getDocument();
 		$head = $doc->getHeadData();
 
 		// Prepare params
 		$scripts = $head['scripts'];
 		$params  = $scripts['/media/jui/js/jquery.min.js'];
-		$path    = '/templates/' . JFactory::getApplication()->getTemplate() . '/js/jquery' . $minified . '.js';
+		$path    = '/templates/' . Factory::getApplication()->getTemplate() . '/js/jquery' . $minified . '.js';
 
 		// Uset joomla jquery
 		unset(
@@ -119,11 +120,12 @@ class tplNerudasHelper
 		{
 			if ($subDomain == 'alpha' || $subDomain == 'beta')
 			{
-				$doc = JFactory::getDocument();
+				$doc = Factory::getDocument();
 				$doc->setMetaData('robots', 'noindex, nofollow');
 				$doc->addHeadLink(str_replace($subDomain, '', JUri::getInstance()->toString()), 'canonical');
 				$doc->setTitle('[' . strtoupper($subDomain) . '] ' . $doc->getTitle());
 				$params->set('minified', '');
+
 				return true;
 			}
 		}
@@ -138,7 +140,7 @@ class tplNerudasHelper
 	 */
 	public function unsetBootstrap()
 	{
-		$doc     = JFactory::getDocument();
+		$doc     = Factory::getDocument();
 		$head    = $doc->getHeadData();
 		$scripts = $head['scripts'];
 
@@ -174,7 +176,7 @@ class tplNerudasHelper
 		{
 			$header->logo         = new stdClass();
 			$header->logo->src    = $logo->get('src', 'templates/nerudas/images/logo.svg');
-			$header->logo->alt    = $logo->get('alt', JFactory::getConfig()->get('sitename'));
+			$header->logo->alt    = $logo->get('alt', Factory::getConfig()->get('sitename'));
 			$header->logo->type   = JFile::getExt($header->logo->src);
 			$header->logo->height = $logo->get('height', 0);
 			$header->logo->class  = $logo->get('class', '');
