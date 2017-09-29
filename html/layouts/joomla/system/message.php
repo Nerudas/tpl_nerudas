@@ -10,8 +10,11 @@
 
 defined('_JEXEC') or die;
 
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+
+$app = Factory::getApplication();
+$doc = Factory::getDocument();
 if (is_array($displayData['msgList']) && !empty($displayData['msgList']))
 {
 	$script = '<script>';
@@ -19,7 +22,8 @@ if (is_array($displayData['msgList']) && !empty($displayData['msgList']))
 	{
 		foreach ($messages as $message)
 		{
-			if ($message == JText::_('JGLOBAL_AUTH_INVALID_PASS') || $message == JText::_('JGLOBAL_AUTH_NO_USER'))
+			if ($message == Text::_('JGLOBAL_AUTH_INVALID_PASS')
+				|| $message == Text::_('JGLOBAL_AUTH_NO_USER'))
 			{
 				$key = 'error';
 			}

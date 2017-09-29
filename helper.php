@@ -8,11 +8,13 @@
  * @link       https://nerudas.ru
  */
 
-defined('_JEXEC') or die;
+namespace Joomla\Templates\Nerudas;
 
+defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
 class tplNerudasHelper
 {
@@ -56,7 +58,7 @@ class tplNerudasHelper
 	 */
 	protected function addjQuery($minified)
 	{
-		JHtml::_('jquery.framework');
+		HTMLHelper::_('jquery.framework');
 		$doc  = Factory::getDocument();
 		$head = $doc->getHeadData();
 
@@ -86,9 +88,9 @@ class tplNerudasHelper
 	 */
 	protected function addUIkit($minified)
 	{
-		JHtml::_('stylesheet', 'uikit' . $minified . '.css', array('version' => 'auto', 'relative' => true));
-		JHtml::_('script', 'uikit' . $minified . '.js', array('version' => 'auto', 'relative' => true));
-		JHtml::_('script', 'uikit-icons' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('stylesheet', 'uikit' . $minified . '.css', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('script', 'uikit' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('script', 'uikit-icons' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 	}
 
 	/**
@@ -100,9 +102,9 @@ class tplNerudasHelper
 	 */
 	protected function addTemplate($minified)
 	{
-		JHtml::_('stylesheet', 'template' . $minified . '.css', array('version' => 'auto', 'relative' => true));
-		JHtml::_('script', 'template' . $minified . '.js', array('version' => 'auto', 'relative' => true));
-		JHtml::_('script', 'template-icons' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('stylesheet', 'template' . $minified . '.css', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('script', 'template' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('script', 'template-icons' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 	}
 
 	/**

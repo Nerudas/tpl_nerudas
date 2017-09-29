@@ -9,9 +9,8 @@
  */
 
 defined('_JEXEC') or die;
+
 use Joomla\CMS\Layout\LayoutHelper;
-
-
 // Connect template heper
 require_once __DIR__ . '/helper.php';
 $this->helper = new tplNerudasHelper;
