@@ -8,8 +8,6 @@
  * @link       https://nerudas.ru
  */
 
-namespace Joomla\Templates\Nerudas;
-
 defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
