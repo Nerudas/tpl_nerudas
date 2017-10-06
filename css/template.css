@@ -6,6 +6,15 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
+
+/* Base
+========================================================================== */
+html {
+	background: #f6f6f6;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
 /* Font
 ========================================================================== */
 html {
@@ -43,7 +52,6 @@ a.forbidden {
 	cursor: not-allowed;
 }
 
-
 /*  Container
 ========================================================================== */
 .uk-container {
@@ -77,7 +85,6 @@ a.forbidden {
 	max-width: 320px;
 }
 
-
 /*  Dropdown
 ========================================================================== */
 .uk-dropdown {
@@ -94,10 +101,12 @@ a.forbidden {
 svg[data-name="Nerudas"] {
 	fill: currentcolor;
 }
+
 svg[data-name="Nerudas"] .letters,
 svg[data-name="Nerudas"] .dots {
 	fill: #333;
 }
+
 svg[data-name="Nerudas"] .dots .background {
 	fill: #FCE200;
 }
@@ -160,4 +169,21 @@ svg[data-name="Nerudas"] .dots .background {
 
 .uk-notification-message-danger .uk-notification-message-icon {
 	background: #FF4136;
+}
+
+/*  Header
+========================================================================== */
+header.tm-top {
+	height: 40px;
+	box-sizing: border-box;
+}
+
+header.tm-top .logo {
+	display: inline-block;
+
+}
+
+header.tm-top .logo svg,
+header.tm-top .logo img {
+	height: 25px
 }
