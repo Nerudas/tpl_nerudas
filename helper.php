@@ -29,7 +29,7 @@ class tplNerudasHelper
 		$doc = Factory::getDocument();
 
 		// Template params
-		$minified = $params->get('minified', '');
+		$minified = ($params->get('minified', 0)) ? '.min' : '';
 
 		// Add GoogleFonts
 		$doc->addStyleSheet('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600&subset=cyrillic,cyrillic-ext');
@@ -124,7 +124,8 @@ class tplNerudasHelper
 				$doc->setMetaData('robots', 'noindex, nofollow');
 				$doc->addHeadLink(str_replace($subDomain, '', JUri::getInstance()->toString()), 'canonical');
 				$doc->setTitle('[' . strtoupper($subDomain) . '] ' . $doc->getTitle());
-				$params->set('minified', '');
+
+				$params->set('minified', 0);
 
 				return true;
 			}
