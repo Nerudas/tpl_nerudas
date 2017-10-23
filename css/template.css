@@ -171,19 +171,58 @@ svg[data-name="Nerudas"] .dots .background {
 	background: #FF4136;
 }
 
-/*  Header
+/*  Top panel
 ========================================================================== */
-header.tm-top {
+.tm-toppanel {
 	height: 40px;
 	box-sizing: border-box;
 }
 
-header.tm-top .logo {
+.tm-toppanel .logo {
 	display: inline-block;
 
 }
 
-header.tm-top .logo svg,
-header.tm-top .logo img {
+.tm-toppanel .logo svg,
+.tm-toppanel .logo img {
 	height: 25px
+}
+
+.tm-toppanel .center > ul {
+	margin: 0;
+	padding: 0;
+	display: table;
+	width: 100%;
+	height: 100%;
+	list-style: none;
+}
+
+.tm-toppanel .center .level-1 {
+	margin: 0;
+	padding: 0;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.tm-toppanel .center .level-1 > a {
+	padding: 0 15px 0 15px;
+	text-align: center;
+	border-left: 1px solid #e5e5e5;
+	text-transform: uppercase;
+	color: #222222;
+	font-size: 0.85rem;
+	position: relative;
+	background: #fff;
+}
+
+.tm-toppanel .center .level-1 > a.uk-open {
+	background: #f0f0f0;
+}
+
+.tm-toppanel .center .level-1:first-child > a {
+	border-left: none;
+}
+
+.tm-toppanel .center .uk-dropdown {
+	max-width: 400px;
 }

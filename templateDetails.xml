@@ -26,6 +26,8 @@
 		<filename>templateDetails.xml</filename>
 	</files>
 	<positions>
+		<position>toppanel-center</position>
+		<position>toppanel-right</position>
 		<position>scripts</position>
 	</positions>
 	<config>
