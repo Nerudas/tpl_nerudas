@@ -10,12 +10,11 @@
 
 defined('_JEXEC') or die;
 
-
-$header = $displayData;
-
+$template = $displayData;
+$header   = $template->header;
 ?>
 <header class="tm-top">
-	<div class="tm-toppanel uk-card-default uk-box-shadow-small" data-uk-sticky="">
+	<nav class="tm-toppanel uk-card-default uk-box-shadow-small" data-uk-sticky="">
 		<div class="uk-container uk-height-1-1">
 			<div class="uk-grid-large uk-grid-match uk-height-1-1" data-uk-grid="">
 				<div class="left uk-width-1-5@m uk-flex uk-flex-middle uk-flex-left@m">
@@ -28,15 +27,17 @@ $header = $displayData;
 					</div>
 				</div>
 				<div class="center uk-width-expand@m uk-flex uk-flex-top uk-flex-center@m">
-					<ul>
+					<ul class="modules">
 						<jdoc:include type="modules" name="toppanel-center" style="toppanel_center"/>
 					</ul>
 				</div>
 				<div class="right uk-width-1-5@m uk-flex uk-flex-middle uk-flex-right@m">
-					<jdoc:include type="modules" name="toppanel-right" style="toppanel_right"/>
+					<ul class="modules">
+						<jdoc:include type="modules" name="toppanel-right" style="toppanel_right"/>
+					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	</nav>
 </header>
 

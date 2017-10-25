@@ -20,22 +20,33 @@ function modChrome_no($module, &$params, &$attribs)
 	}
 }
 
+function modChrome_default($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		echo $module->content;
+	}
+}
+
 function modChrome_toppanel_center($module, &$params, &$attribs)
 {
 	if ($module->content)
 	{
 		$params = new Registry($params);
-		$class  = 'item-' . $module->id;
-		$class  .= ' level-1';
-		$class  .= ' ' . $params->get('moduleclass_sfx');
-		$class  .= ' uk-height-1-1';
-
+		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
 		echo '<li class="' . $class . '">';
-		echo '<a class="uk-flex uk-flex-center uk-flex-middle uk-height-1-1">' . $module->title
-			. '<i data-uk-icon="icon: chevron-down; ratio: 0.8" class="uk-margin-small-left"></i>' . '</a>';
+		echo '<a>' . $module->title . '<i data-uk-icon="icon: chevron-down; ratio: 0.8"></i>' . '</a>';
 		echo '<div data-uk-dropdown="mode: click">' . $module->content . '</div>';
 		echo '</li>';
-		//echo '<pre>', print_r($module, true), '</pre>';
-		//echo ;
+	}
+}
+
+function modChrome_toppanel_right($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		$params = new Registry($params);
+		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
+		echo '<li class="' . $class . '">' . $module->content . '</li>';;
 	}
 }

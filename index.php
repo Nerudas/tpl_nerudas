@@ -33,9 +33,10 @@ $this->header = $this->helper->prepareHeader($this->params);
 </head>
 <body>
 <jdoc:include type="message"/>
-<?php echo LayoutHelper::render('template.header', $this->header); ?>
+<?php echo LayoutHelper::render('template.header', $this); ?>
 <jdoc:include type="component"/>
 <?php echo LayoutHelper::render('template.footer'); ?>
+<jdoc:include type="modules" name="modal"/>
 <jdoc:include type="modules" name="scripts"/>
 </body>
 </html>

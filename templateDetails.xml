@@ -29,6 +29,7 @@
 		<position>toppanel-center</position>
 		<position>toppanel-right</position>
 		<position>scripts</position>
+		<position>modal</position>
 	</positions>
 	<config>
 		<fields name="params">
