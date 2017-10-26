@@ -122,7 +122,8 @@ class tplNerudasHelper
 			{
 				$doc = Factory::getDocument();
 				$doc->setMetaData('robots', 'noindex, nofollow');
-				$doc->addHeadLink(str_replace($subDomain, '', JUri::getInstance()->toString()), 'canonical');
+				$doc->addHeadLink(str_replace($subDomain . '.', '', JUri::getInstance()->toString())
+					, 'canonical');
 				$doc->setTitle('[' . strtoupper($subDomain) . '] ' . $doc->getTitle());
 
 				$params->set('minified', 0);
