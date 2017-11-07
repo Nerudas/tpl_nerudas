@@ -7,6 +7,7 @@
  * @link       https://nerudas.ru
  */
 
+
 /* Base
 ========================================================================== */
 html {
@@ -18,7 +19,7 @@ html {
 /* Font
 ========================================================================== */
 html {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans';
 	font-size: 16px;
 	font-weight: normal;
 	line-height: 1.5;
@@ -26,7 +27,7 @@ html {
 }
 
 body, h1, h2, h3, h4, h5, h6, .uk-navbar-nav > li > a {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans';
 }
 
 /*  Link

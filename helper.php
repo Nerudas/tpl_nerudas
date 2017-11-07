@@ -33,7 +33,7 @@ class tplNerudasHelper
 
 		// Add Fonts
 		HTMLHelper::_('stylesheet', 'fonts' . $minified . '.css', array('version' => 'auto', 'relative' => true));
-
+		
 		// Add jQuery
 		$this->addjQuery($minified);
 
@@ -89,6 +89,7 @@ class tplNerudasHelper
 		HTMLHelper::_('stylesheet', 'uikit' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('script', 'uikit' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('script', 'uikit-icons' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('script', 'uikit-fa-icons' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 	}
 
 	/**
