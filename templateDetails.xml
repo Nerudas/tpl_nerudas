@@ -30,6 +30,7 @@
 		<position>toppanel-right</position>
 		<position>scripts</position>
 		<position>modal</position>
+		<position>navigation</position>
 	</positions>
 	<config>
 		<fields name="params">

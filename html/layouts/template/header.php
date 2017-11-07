@@ -19,7 +19,7 @@ $header   = $template->header;
 			<div class="uk-grid-large uk-grid-match uk-height-1-1" data-uk-grid="">
 				<div class="left uk-width-1-5@m uk-flex uk-flex-middle uk-flex-left@m">
 					<div>
-						<a class="menu uk-margin-small-right" data-uk-icon="icon: fa-navicon; ratio: 1.5"
+						<a class="menu uk-margin-small-right" data-uk-icon="icon: menu; ratio: 1.5" data-uk-toggle
 						   href="#navigation">
 						</a>
 						<a class="logo" href="<?php echo \Joomla\CMS\Uri\Uri::root(); ?>">
@@ -42,4 +42,9 @@ $header   = $template->header;
 	</nav>
 </header>
 
+<nav id="navigation" data-uk-offcanvas="overlay: true; content: body">
+	<div class="uk-offcanvas-bar">
+		<jdoc:include type="modules" name="navigation"/>
+	</div>
+</nav>
 

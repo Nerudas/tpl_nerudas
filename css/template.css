@@ -7,7 +7,6 @@
  * @link       https://nerudas.ru
  */
 
-
 /* Base
 ========================================================================== */
 html {
@@ -252,19 +251,22 @@ nav.tm-toppanel .right > .modules > li > a {
 	color: #222;
 	background: #fff;
 }
+
 nav.tm-toppanel .right > .modules > li > a.uk-open {
 	opacity: 0.9;
 }
+
 nav.tm-toppanel .right > .modules > li > .uk-dropdown {
 	min-width: auto;
 }
+
 nav.tm-toppanel .right > .modules > li > .uk-dropdown > ul > li > a {
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-	/*  Avatar
-	========================================================================== */
+/*  Avatar
+========================================================================== */
 [class*="nerudas-avatar-"] {
 	display: flex;
 	position: relative;
@@ -279,6 +281,7 @@ nav.tm-toppanel .right > .modules > li > .uk-dropdown > ul > li > a {
 	color: #999;
 	border-color: #999;
 }
+
 [class*="nerudas-avatar-"].empty:hover {
 	color: #ddd;
 	border-color: #ddd;
@@ -287,4 +290,27 @@ nav.tm-toppanel .right > .modules > li > .uk-dropdown > ul > li > a {
 .nerudas-avatar-32 {
 	width: 32px;
 	height: 32px;
+}
+
+/* Off canvas
+========================================================================== */
+.uk-offcanvas-bar {
+	background: #fff;
+	color: #666;
+}
+
+body.uk-offcanvas-container {
+	overflow-y: hidden !important;
+	overflow: hidden !important;
+	height: 100vh !important;
+}
+
+.uk-offcanvas-bar .uk-close {
+	color: #666;
+}
+
+@media (min-width: 960px) {
+	.uk-offcanvas-overlay::before {
+		background: rgba(0, 0, 0, 0.1);
+	}
 }
