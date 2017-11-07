@@ -24,6 +24,10 @@ $this->helper->setHead($this->params);
 
 // Prepate header
 $this->header = $this->helper->prepareHeader($this->params);
+
+// Get middle Layout
+$this->middleLayout = $this->helper->getMiddleLayot($this);
+
 ?>
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>"
@@ -34,7 +38,8 @@ $this->header = $this->helper->prepareHeader($this->params);
 <body>
 <jdoc:include type="message"/>
 <?php echo LayoutHelper::render('template.header', $this); ?>
-<jdoc:include type="component"/>
+<?php echo LayoutHelper::render($this->middleLayout, $this); ?>
+
 <?php echo LayoutHelper::render('template.footer'); ?>
 <jdoc:include type="modules" name="modal"/>
 <jdoc:include type="modules" name="scripts"/>

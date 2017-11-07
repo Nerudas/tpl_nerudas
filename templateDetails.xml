@@ -31,6 +31,8 @@
 		<position>scripts</position>
 		<position>modal</position>
 		<position>navigation</position>
+		<position>right</position>
+		<position>left</position>
 	</positions>
 	<config>
 		<fields name="params">

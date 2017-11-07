@@ -33,7 +33,7 @@ class tplNerudasHelper
 
 		// Add Fonts
 		HTMLHelper::_('stylesheet', 'fonts' . $minified . '.css', array('version' => 'auto', 'relative' => true));
-		
+
 		// Add jQuery
 		$this->addjQuery($minified);
 
@@ -45,6 +45,35 @@ class tplNerudasHelper
 
 		// Set meta viewport
 		$doc->setMetaData('viewport', 'width=device-width, initial-scale=1, minimum-scale=1');
+	}
+
+	/**
+	 * Get middle layout
+	 *
+	 * @param $template This template
+	 *
+	 * @return string layput name
+	 *
+	 * @since   1.0.0
+	 */
+	public function getMiddleLayot($template)
+	{
+		$app    = Factory::getApplication();
+		$params = $template->params;
+
+		// Columns
+		$layout = '1column';
+		if ($template->countModules('right') || $template->countModules('left'))
+		{
+			$layout = '2columns';
+		}
+		if ($template->countModules('right') && $template->countModules('left'))
+		{
+			$layout = '3columns';
+		}
+
+
+		return 'template.middle.' . $layout;
 	}
 
 	/**

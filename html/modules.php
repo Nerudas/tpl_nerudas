@@ -50,3 +50,23 @@ function modChrome_toppanel_right($module, &$params, &$attribs)
 		echo '<li class="' . $class . '">' . $module->content . '</li>';;
 	}
 }
+
+function modChrome_sidebar_right($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		$params = new Registry($params);
+		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
+		echo $module->content;
+	}
+}
+
+function modChrome_sidebar_left($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		$params = new Registry($params);
+		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
+		echo $module->content;
+	}
+}
