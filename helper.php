@@ -31,8 +31,8 @@ class tplNerudasHelper
 		// Template params
 		$minified = ($params->get('minified', 0)) ? '.min' : '';
 
-		// Add GoogleFonts
-		$doc->addStyleSheet('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600&subset=cyrillic,cyrillic-ext');
+		// Add Fonts
+		HTMLHelper::_('stylesheet', 'fonts' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 
 		// Add jQuery
 		$this->addjQuery($minified);
