@@ -1003,13 +1003,14 @@ a.uk-link-reset:hover,
  * Note: 1. - 7. is required for `button` elements. Needed for Close and Form Icon component.
  * 1. Remove margins in Chrome, Safari and Opera.
  * 2. Remove borders for `button`.
- * 3. Address `overflow` set to `hidden` in IE.
- * 4. Correct `font` properties and `color` not being inherited for `button`.
- * 5. Remove the inheritance of text transform in Edge, Firefox, and IE.
- * 6. Remove default `button` padding and background color
- * 7. Style
- * 8. Fill all SVG elements with the current text color if no `fill` attribute is set
- * 9. Let the container fit the height of the icon
+ * 3. Remove border-radius in Chrome.
+ * 4. Address `overflow` set to `hidden` in IE.
+ * 5. Correct `font` properties and `color` not being inherited for `button`.
+ * 6. Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 7. Remove default `button` padding and background color
+ * 8. Style
+ * 9. Fill all SVG elements with the current text color if no `fill` attribute is set
+ * 10. Let the container fit the height of the icon
  */
 .uk-icon {
   /* 1 */
@@ -1017,20 +1018,22 @@ a.uk-link-reset:hover,
   /* 2 */
   border: none;
   /* 3 */
-  overflow: visible;
+  border-radius: 0;
   /* 4 */
+  overflow: visible;
+  /* 5 */
   font: inherit;
   color: inherit;
-  /* 5 */
+  /* 6 */
   text-transform: none;
-  /* 6. */
+  /* 7. */
   padding: 0;
   background-color: transparent;
-  /* 7 */
-  display: inline-block;
   /* 8 */
-  fill: currentcolor;
+  display: inline-block;
   /* 9 */
+  fill: currentcolor;
+  /* 10 */
   line-height: 0;
 }
 /* Required for `button`. */
@@ -1840,14 +1843,15 @@ select.uk-form-width-xsmall {
 /*
  * 1. Remove margins in Chrome, Safari and Opera.
  * 2. Remove borders for `button`.
- * 3. Address `overflow` set to `hidden` in IE.
- * 4. Correct `font` properties and `color` not being inherited for `button`.
- * 5. Remove the inheritance of text transform in Edge, Firefox, and IE.
- * 6. Style
- * 7. `line-height` is used to create a height because it also centers the text vertically for `a` elements.
+ * 3. Remove border-radius in Chrome.
+ * 4. Address `overflow` set to `hidden` in IE.
+ * 5. Correct `font` properties and `color` not being inherited for `button`.
+ * 6. Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 7. Style
+ * 8. `line-height` is used to create a height because it also centers the text vertically for `a` elements.
  *    Better would be to use height and flexbox to center the text vertically but flexbox doesn't work in Firefox on `button` elements.
- * 8. Align text if button has a width
- * 9. Required for `a`.
+ * 9. Align text if button has a width
+ * 10. Required for `a`.
  */
 .uk-button {
   /* 1 */
@@ -1855,23 +1859,25 @@ select.uk-form-width-xsmall {
   /* 2 */
   border: none;
   /* 3 */
-  overflow: visible;
+  border-radius: 0;
   /* 4 */
+  overflow: visible;
+  /* 5 */
   font: inherit;
   color: inherit;
-  /* 5 */
-  text-transform: none;
   /* 6 */
+  text-transform: none;
+  /* 7 */
   display: inline-block;
   box-sizing: border-box;
   padding: 0 30px;
   vertical-align: middle;
   font-size: 0.875rem;
-  /* 7 */
-  line-height: 38px;
   /* 8 */
-  text-align: center;
+  line-height: 38px;
   /* 9 */
+  text-align: center;
+  /* 10 */
   text-decoration: none;
   text-transform: uppercase;
   -webkit-transition: 0.1s ease-in-out;
@@ -3490,44 +3496,8 @@ select.uk-form-width-xsmall {
 .uk-search-input::-webkit-input-placeholder {
   color: #999;
 }
-/* Icon
+/* Icon (Adopts `uk-icon`)
  ========================================================================== */
-/*
- * Adopts `uk-icon`
- * Required for `button`
- * 1. Remove margins in Chrome, Safari and Opera.
- * 2. Remove borders for `button`.
- * 3. Address `overflow` set to `hidden` in IE.
- * 4. Correct `font` properties and `color` not being inherited for `button`.
- * 5. Remove the inheritance of text transform in Edge, Firefox, and IE.
- * 6. Remove default `button` padding and background color
- * 7. Required for `button`.
- */
-.uk-search-icon {
-  /* 1 */
-  margin: 0;
-  /* 2 */
-  border: none;
-  /* 3 */
-  overflow: visible;
-  /* 4 */
-  font: inherit;
-  color: inherit;
-  /* 5 */
-  text-transform: none;
-  /* 6. */
-  padding: 0;
-  background-color: transparent;
-  /* 7 */
-  cursor: pointer;
-}
-/*
- * Remove the inner border and padding in Firefox. Required for `button`.
- */
-.uk-search-icon::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
 /*
  * Remove default focus style
  */
@@ -4623,20 +4593,20 @@ ul.uk-nav-sub {
  * Adopts `uk-icon`
  */
 .uk-slidenav {
-  padding: 5px;
-  color: rgba(102, 102, 102, 0.6);
+  padding: 5px 10px;
+  color: rgba(102, 102, 102, 0.5);
   -webkit-transition: color 0.1s ease-in-out;
   transition: color 0.1s ease-in-out;
 }
 /* Hover + Focus */
 .uk-slidenav:hover,
 .uk-slidenav:focus {
-  color: rgba(102, 102, 102, 0.8);
+  color: rgba(102, 102, 102, 0.9);
   outline: none;
 }
 /* OnClick */
 .uk-slidenav:active {
-  color: rgba(102, 102, 102, 0.9);
+  color: rgba(102, 102, 102, 0.5);
 }
 /* Icon modifier
  ========================================================================== */
@@ -4646,6 +4616,11 @@ ul.uk-nav-sub {
 /*
  * Next
  */
+/* Size modifier
+ ========================================================================== */
+.uk-slidenav-large {
+  padding: 10px 10px;
+}
 /* Container
  ========================================================================== */
 .uk-slidenav-container {
@@ -4674,7 +4649,7 @@ ul.uk-nav-sub {
   padding: 0;
   list-style: none;
   /* 3 */
-  margin-left: -15px;
+  margin-left: -12px;
 }
 /*
  * 1. Space is allocated solely based on content dimensions: 0 0 auto
@@ -4686,7 +4661,7 @@ ul.uk-nav-sub {
   -webkit-flex: none;
   flex: none;
   /* 2 */
-  padding-left: 15px;
+  padding-left: 12px;
 }
 /* Items
  ========================================================================== */
@@ -4696,31 +4671,37 @@ ul.uk-nav-sub {
  */
 .uk-dotnav > * > * {
   display: block;
-  box-sizing: content-box;
-  width: 16px;
-  height: 16px;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgba(102, 102, 102, 0.1);
+  background: transparent;
   /* 1 */
   text-indent: 100%;
   overflow: hidden;
   white-space: nowrap;
-  -webkit-transition: background-color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out;
+  border: 1px solid rgba(102, 102, 102, 0.4);
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  -webkit-transition-property: background-color, border-color;
+  transition-property: background-color, border-color;
 }
 /* Hover + Focus */
 .uk-dotnav > * > :hover,
 .uk-dotnav > * > :focus {
-  background-color: rgba(102, 102, 102, 0.4);
+  background-color: rgba(102, 102, 102, 0.6);
   outline: none;
+  border-color: transparent;
 }
 /* OnClick */
 .uk-dotnav > * > :active {
-  background-color: rgba(102, 102, 102, 0.6);
+  background-color: rgba(102, 102, 102, 0.2);
+  border-color: transparent;
 }
 /* Active */
 .uk-dotnav > .uk-active > * {
-  background-color: rgba(102, 102, 102, 0.4);
+  background-color: rgba(102, 102, 102, 0.6);
+  border-color: transparent;
 }
 /* Modifier: 'uk-dotnav-vertical'
  ========================================================================== */
@@ -4735,10 +4716,98 @@ ul.uk-nav-sub {
   flex-direction: column;
   /* 2 */
   margin-left: 0;
-  margin-top: -15px;
+  margin-top: -12px;
 }
 /* 2 */
 .uk-dotnav-vertical > * {
+  padding-left: 0;
+  padding-top: 12px;
+}
+/* ========================================================================
+   Component: Thumbnav
+ ========================================================================== */
+/*
+ * 1. Allow items to wrap into the next line
+ * 2. Reset list
+ * 3. Gutter
+ */
+.uk-thumbnav {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  /* 1 */
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* 2 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* 3 */
+  margin-left: -15px;
+}
+/*
+ * 1. Space is allocated solely based on content dimensions: 0 0 auto
+ * 2. Gutter
+ */
+.uk-thumbnav > * {
+  /* 1 */
+  -ms-flex: none;
+  -webkit-flex: none;
+  flex: none;
+  /* 2 */
+  padding-left: 15px;
+}
+/* Items
+ ========================================================================== */
+/*
+ * Items
+ */
+.uk-thumbnav > * > * {
+  display: inline-block;
+  position: relative;
+}
+.uk-thumbnav > * > *::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+}
+/* Hover + Focus */
+.uk-thumbnav > * > :hover,
+.uk-thumbnav > * > :focus {
+  outline: none;
+}
+.uk-thumbnav > * > :hover::after,
+.uk-thumbnav > * > :focus::after {
+  background-color: transparent;
+}
+/* Active */
+.uk-thumbnav > .uk-active > *::after {
+  background-color: transparent;
+}
+/* Modifier: 'uk-thumbnav-vertical'
+ ========================================================================== */
+/*
+ * 1. Change direction
+ * 2. Gutter
+ */
+.uk-thumbnav-vertical {
+  /* 1 */
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  /* 2 */
+  margin-left: 0;
+  margin-top: -15px;
+}
+/* 2 */
+.uk-thumbnav-vertical > * {
   padding-left: 0;
   padding-top: 15px;
 }
@@ -4783,12 +4852,12 @@ ul.uk-nav-sub {
 /*
  * Micro clearfix
  */
-.uk-accordion-content:before,
-.uk-accordion-content:after {
+.uk-accordion-content::before,
+.uk-accordion-content::after {
   content: "";
   display: table;
 }
-.uk-accordion-content:after {
+.uk-accordion-content::after {
   clear: both;
 }
 /*
@@ -5306,6 +5375,13 @@ ul.uk-nav-sub {
 /* ========================================================================
    Component: Slideshow
  ========================================================================== */
+/*
+ * 1. Prevent tab highlighting on iOS.
+ */
+.uk-slideshow {
+  /* 1 */
+  -webkit-tap-highlight-color: transparent;
+}
 /* Items
  ========================================================================== */
 /*
@@ -7569,6 +7645,9 @@ td.uk-text-break {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+iframe.uk-cover {
+  pointer-events: none;
+}
 /* Container
  ========================================================================== */
 /*
@@ -9094,6 +9173,46 @@ td.uk-text-break {
   -webkit-transform: translateX(-50%) translateX(-30px);
   transform: translateX(-50%) translateX(-30px);
 }
+/*
+ * Large
+ */
+.uk-position-large {
+  margin: 30px;
+}
+.uk-position-large.uk-position-center {
+  -webkit-transform: translate(-50%, -50%) translate(-30px, -30px);
+  transform: translate(-50%, -50%) translate(-30px, -30px);
+}
+.uk-position-large.uk-position-center-left,
+.uk-position-large.uk-position-center-right {
+  -webkit-transform: translateY(-50%) translateY(-30px);
+  transform: translateY(-50%) translateY(-30px);
+}
+.uk-position-large.uk-position-top-center,
+.uk-position-large.uk-position-bottom-center {
+  -webkit-transform: translateX(-50%) translateX(-30px);
+  transform: translateX(-50%) translateX(-30px);
+}
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+  .uk-position-large {
+    margin: 50px;
+  }
+  .uk-position-large.uk-position-center {
+    -webkit-transform: translate(-50%, -50%) translate(-50px, -50px);
+    transform: translate(-50%, -50%) translate(-50px, -50px);
+  }
+  .uk-position-large.uk-position-center-left,
+  .uk-position-large.uk-position-center-right {
+    -webkit-transform: translateY(-50%) translateY(-50px);
+    transform: translateY(-50%) translateY(-50px);
+  }
+  .uk-position-large.uk-position-top-center,
+  .uk-position-large.uk-position-bottom-center {
+    -webkit-transform: translateX(-50%) translateX(-50px);
+    transform: translateX(-50%) translateX(-50px);
+  }
+}
 /* ========================================================================
    Component: Transition
  ========================================================================== */
@@ -9132,18 +9251,20 @@ td.uk-text-break {
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
 }
-.uk-transition-toggle:hover .uk-transition-scale-up,
-.uk-transition-toggle.uk-hover .uk-transition-scale-up {
-  opacity: 1;
-  -webkit-transform: scale3d(1.1, 1.1, 1);
-  transform: scale3d(1.1, 1.1, 1);
-}
 .uk-transition-scale-down {
   -webkit-transform: scale3d(1.1, 1.1, 1);
   transform: scale3d(1.1, 1.1, 1);
 }
+.uk-transition-toggle:hover .uk-transition-scale-up,
+.uk-transition-toggle.uk-hover .uk-transition-scale-up,
+.uk-transition-active.uk-active .uk-transition-scale-up {
+  opacity: 1;
+  -webkit-transform: scale3d(1.1, 1.1, 1);
+  transform: scale3d(1.1, 1.1, 1);
+}
 .uk-transition-toggle:hover .uk-transition-scale-down,
-.uk-transition-toggle.uk-hover .uk-transition-scale-down {
+.uk-transition-toggle.uk-hover .uk-transition-scale-down,
+.uk-transition-active.uk-active .uk-transition-scale-down {
   opacity: 1;
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
@@ -11859,7 +11980,7 @@ td.uk-text-break {
 .uk-card-secondary > :not([class*='uk-card-media']) .uk-slidenav,
 .uk-overlay-primary .uk-slidenav,
 .uk-offcanvas-bar .uk-slidenav {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.7);
 }
 .uk-light .uk-slidenav:hover,
 .uk-light .uk-slidenav:focus,
@@ -11883,7 +12004,7 @@ td.uk-text-break {
 .uk-overlay-primary .uk-slidenav:focus,
 .uk-offcanvas-bar .uk-slidenav:hover,
 .uk-offcanvas-bar .uk-slidenav:focus {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.95);
 }
 .uk-light .uk-slidenav:active,
 .uk-section-primary:not(.uk-preserve-color) .uk-slidenav:active,
@@ -11896,7 +12017,7 @@ td.uk-text-break {
 .uk-card-secondary > :not([class*='uk-card-media']) .uk-slidenav:active,
 .uk-overlay-primary .uk-slidenav:active,
 .uk-offcanvas-bar .uk-slidenav:active {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 .uk-light .uk-dotnav > * > *,
 .uk-section-primary:not(.uk-preserve-color) .uk-dotnav > * > *,
@@ -11909,7 +12030,8 @@ td.uk-text-break {
 .uk-card-secondary > :not([class*='uk-card-media']) .uk-dotnav > * > *,
 .uk-overlay-primary .uk-dotnav > * > *,
 .uk-offcanvas-bar .uk-dotnav > * > * {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.9);
 }
 .uk-light .uk-dotnav > * > :hover,
 .uk-light .uk-dotnav > * > :focus,
@@ -11933,7 +12055,8 @@ td.uk-text-break {
 .uk-overlay-primary .uk-dotnav > * > :focus,
 .uk-offcanvas-bar .uk-dotnav > * > :hover,
 .uk-offcanvas-bar .uk-dotnav > * > :focus {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: transparent;
 }
 .uk-light .uk-dotnav > * > :active,
 .uk-section-primary:not(.uk-preserve-color) .uk-dotnav > * > :active,
@@ -11946,7 +12069,8 @@ td.uk-text-break {
 .uk-card-secondary > :not([class*='uk-card-media']) .uk-dotnav > * > :active,
 .uk-overlay-primary .uk-dotnav > * > :active,
 .uk-offcanvas-bar .uk-dotnav > * > :active {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-color: transparent;
 }
 .uk-light .uk-dotnav > .uk-active > *,
 .uk-section-primary:not(.uk-preserve-color) .uk-dotnav > .uk-active > *,
@@ -11959,7 +12083,8 @@ td.uk-text-break {
 .uk-card-secondary > :not([class*='uk-card-media']) .uk-dotnav > .uk-active > *,
 .uk-overlay-primary .uk-dotnav > .uk-active > *,
 .uk-offcanvas-bar .uk-dotnav > .uk-active > * {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: transparent;
 }
 .uk-light .uk-iconnav > * > *,
 .uk-section-primary:not(.uk-preserve-color) .uk-iconnav > * > *,

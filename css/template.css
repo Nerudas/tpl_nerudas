@@ -15,6 +15,11 @@ html {
 	overflow-x: hidden;
 }
 
+html.uk-offcanvas-page,
+html.uk-modal-page {
+	overflow: hidden !important;
+}
+
 /* Font
 ========================================================================== */
 html {
@@ -299,18 +304,22 @@ nav.tm-toppanel .right > .modules > li > .uk-dropdown > ul > li > a {
 	color: #666;
 }
 
-body.uk-offcanvas-container {
-	overflow-y: hidden !important;
-	overflow: hidden !important;
-	height: 100vh !important;
-}
-
 .uk-offcanvas-bar .uk-close {
 	color: #666;
 }
 
-@media (min-width: 960px) {
-	.uk-offcanvas-overlay::before {
-		background: rgba(0, 0, 0, 0.1);
-	}
+.uk-offcanvas.uk-open::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.1);
+	-webkit-transition: opacity 0.15s linear;
+	transition: opacity 0.15s linear;
+}
+.uk-offcanvas-bar a, .uk-offcanvas-bar .uk-link,
+.uk-offcanvas-bar a:hover, .uk-offcanvas-bar .uk-link:hover {
+	color: inherit;
 }

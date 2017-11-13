@@ -42,8 +42,8 @@ $header   = $template->header;
 	</nav>
 </header>
 
-<nav id="navigation" data-uk-offcanvas="overlay: true; content: body">
-	<div class="uk-offcanvas-bar">
+<nav id="navigation" data-uk-offcanvas>
+	<div class="uk-offcanvas-bar uk-padding-remove">
 		<jdoc:include type="modules" name="navigation"/>
 	</div>
 </nav>

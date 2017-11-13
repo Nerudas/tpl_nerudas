@@ -1,4 +1,4 @@
-/*! UIkit 3.0.0-beta.31 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
+/*! UIkit 3.0.0-beta.34 | http://www.getuikit.com | (c) 2014 - 2017 YOOtheme | MIT License */
 
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -416,7 +416,6 @@ function ajax(url, options) {
     return new Promise(function (resolve, reject) {
 
         var env = assign({
-            url: url,
             data: null,
             method: 'GET',
             headers: {},
@@ -425,33 +424,44 @@ function ajax(url, options) {
             responseType: ''
         }, options);
 
+        var xhr = env.xhr;
+
         env.beforeSend(env);
 
-        env.xhr.open(env.method, env.url);
-        env.xhr.responseType = env.responseType;
+        for (var prop in env) {
+            if (prop in xhr) {
+                try {
 
-        env.xhr.onload = function() {
-            if (this.status === 0 || this.status >= 200 && this.status < 300 || this.status === 304) {
-                resolve(this);
+                    xhr[prop] = env[prop];
+
+                } catch (e) {}
             }
-            else {
-                reject(assign(Error(this.statusText), {
-                    xhr: this,
-                    status: this.status
+        }
+
+        xhr.open(env.method.toUpperCase(), url);
+
+        for (var header in env.headers) {
+            xhr.setRequestHeader(header, env.headers[header]);
+        }
+
+        on(xhr, 'load', function () {
+
+            if (xhr.status === 0 || xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                resolve(xhr);
+            } else {
+                reject(assign(Error(xhr.statusText), {
+                    xhr: xhr,
+                    status: xhr.status
                 }));
             }
-        };
 
-        env.xhr.onerror = function() {
-            reject(assign(Error('Network Error'), {xhr: this}));
-        };
+        });
 
-        env.xhr.ontimeout = function() {
-            reject(assign(Error('Network Timeout'), {xhr: this}));
-        };
+        on(xhr, 'error', function () { return reject(assign(Error('Network Error'), {xhr: xhr})); });
+        on(xhr, 'timeout', function () { return reject(assign(Error('Network Timeout'), {xhr: xhr})); });
 
-        env.xhr.send(env.data);
-    })
+        xhr.send(env.data);
+    });
 }
 
 var arrayProto = Array.prototype;
@@ -460,7 +470,7 @@ function $$1(selector, context) {
     return !isString(selector)
         ? toNode(selector)
         : isHtml(selector)
-            ? $$1(fragment(selector))
+            ? toNode(fragment(selector))
             : find(selector, context);
 }
 
@@ -468,7 +478,7 @@ function $$(selector, context) {
     return !isString(selector)
         ? toNodes(selector)
         : isHtml(selector)
-            ? $$(fragment(selector))
+            ? toNodes(fragment(selector))
             : findAll(selector, context);
 }
 
@@ -485,47 +495,74 @@ function queryAll(selector, context) {
 }
 
 function find(selector, context) {
-    if ( context === void 0 ) context = doc;
-
-
-    try {
-
-        return !selector
-            ? null
-            : !isContextSelector(selector)
-                ? context.querySelector(selector)
-                : $$1(_query(selector, context));
-
-    } catch (e) {
-        return null;
-    }
+    return toNode(_query(selector, context, 'querySelector'));
 }
 
 function findAll(selector, context) {
+    return toNodes(_query(selector, context, 'querySelectorAll'));
+}
+
+function _query(selector, context, queryFn) {
     if ( context === void 0 ) context = doc;
 
 
+    if (!selector || !isString(selector)) {
+        return null;
+    }
+
+    selector = selector.replace(contextSanitizeRe, '$1 *');
+
+    var removes;
+
+    if (isContextSelector(selector)) {
+
+        removes = [];
+
+        selector = selector.split(',').map(function (selector, i) {
+
+            var ctx = context;
+
+            selector = selector.trim();
+
+            if (selector[0] === '!') {
+
+                var selectors = selector.substr(1).trim().split(' ');
+                ctx = closest(context.parentNode, selectors[0]);
+                selector = selectors.slice(1).join(' ');
+
+            }
+
+            if (!ctx) {
+                return null;
+            }
+
+            if (!ctx.id) {
+                ctx.id = "uk-" + (Date.now()) + i;
+                removes.push(function () { return removeAttr(ctx, 'id'); });
+            }
+
+            return ("#" + (ctx.id) + " " + selector);
+
+        }).filter(Boolean).join(',');
+
+        context = doc;
+
+    }
+
     try {
 
-        return !selector
-            ? []
-            : !isContextSelector(selector)
-                ? $$(context.querySelectorAll(selector))
-                : $$(_query(selector, context));
+        return context[queryFn](selector);
 
     } catch (e) {
-        return [];
+
+        return null;
+
+    } finally {
+
+        removes && removes.forEach(function (remove) { return remove(); });
+
     }
 
-}
-
-function _query(selector, context) {
-
-    if (includes(selector, ',')) {
-        return merge(selector.split(',').map(function (selector) { return find(selector.trim(), context); }));
-    }
-
-    return getContextSelectors(selector).reduce(function (context, selector) { return resolveQuery(selector, context); }, context);
 }
 
 function filter(element, selector) {
@@ -538,57 +575,11 @@ function within(element, selector) {
         : matches(element, selector) || closest(element, selector);
 }
 
-var contextSelector = '^,?[!+-]?\\s*>|(?:^|\\s)[!+-]';
-var contextSelectorRe = new RegExp(contextSelector);
-var contextSplitRe = new RegExp(("(?=" + contextSelector + ")"), 'g');
+var contextSelectorRe = /(^|,)\s*[!>+~]/;
+var contextSanitizeRe = /([!>+~])(?=\s+[!>+~]|\s*$)/g;
 
 function isContextSelector(selector) {
     return isString(selector) && selector.match(contextSelectorRe);
-}
-
-function getContextSelectors(selector) {
-    return isString(selector) && selector.split(contextSplitRe);
-}
-
-function resolveQuery(query, context) {
-
-    if (!isString(query) || !context) {
-        return null;
-    }
-
-    query = query.trim();
-
-    var selectors = query.substr(1).trim().split(' '),
-        contextSelector = selectors[0] || '*',
-        selector = selectors.slice(1).join(' ');
-    switch (query[0]) {
-        case '>':
-            return merge(filter(context.children, contextSelector).map(function (el) { return !selector && el || $$(selector, el); }));
-        case '!':
-            return closest(context.parentNode, query.substr(1));
-        case '+':
-            return findDir(context, contextSelector, selector, 'next');
-        case '-':
-            return findDir(context, contextSelector, selector, 'previous');
-    }
-
-    return $$1(query, context);
-}
-
-function findDir(element, contextSelector, selector, dir) {
-    var fn = [(dir + "ElementSibling")], nodes = [];
-
-    element = element[fn];
-
-    while (element) {
-        if (matches(element, contextSelector)) {
-            nodes = nodes.concat(selector ? $$(selector, element) : element);
-        }
-
-        element = element[fn];
-    }
-
-    return nodes;
 }
 
 var elProto = Element.prototype;
@@ -600,10 +591,6 @@ function matches(element, selector) {
 
 var closestFn = elProto.closest || function (selector) {
     var ancestor = this;
-
-    if (!docEl.contains(this)) {
-        return;
-    }
 
     do {
 
@@ -622,7 +609,9 @@ function closest(element, selector) {
         selector = selector.slice(1);
     }
 
-    return isNode(element) ? closestFn.call(element, selector) : toNodes(element).map(function (element) { return closestFn.call(element, selector); });
+    return isNode(element)
+        ? element.parentNode && closestFn.call(element, selector)
+        : toNodes(element).map(function (element) { return element.parentNode && closestFn.call(element, selector); }).filter(Boolean);
 }
 
 function parents(element, selector) {
@@ -672,10 +661,6 @@ function toNodes(element) {
                 : isJQuery(element)
                     ? element.toArray()
                     : [];
-}
-
-function merge(arrays) {
-    return arrayProto.concat.apply([], arrays);
 }
 
 function attr(element, name, value) {
@@ -766,7 +751,10 @@ function transition(element, props, duration, transition) {
     return Promise.all(toNodes(element).map(function (element) { return new Promise(function (resolve, reject) {
 
             for (var name in props) {
-                css(element, name, css(element, name));
+                var value = css(element, name);
+                if (value === '') {
+                    css(element, name, value);
+                }
             }
 
             var timer = setTimeout(function () { return trigger(element, transitionend); }, duration);
@@ -1133,7 +1121,7 @@ function unwrap(element) {
 }
 
 var fragmentRE = /^\s*<(\w+|!)[^>]*>/;
-var singleTagRE = /^<(\w+)\s*\/?>(?:<\/\1>|)$/;
+var singleTagRE = /^<(\w+)\s*\/?>(?:<\/\1>)?$/;
 
 function fragment(html) {
 
@@ -1426,30 +1414,30 @@ function on() {
 
 
     var ref = getArgs$1(args);
-    var element = ref[0];
+    var target = ref[0];
     var type = ref[1];
     var selector = ref[2];
     var listener = ref[3];
     var useCapture = ref[4];
 
-    element = toNode(element);
+    target = toEventTarget(target);
 
     if (selector) {
-        listener = delegate(element, selector, listener);
+        listener = delegate(target, selector, listener);
     }
 
     if (listener.length > 1) {
         listener = detail(listener);
     }
 
-    type.split(' ').forEach(function (type) { return element.addEventListener(type, listener, useCapture); });
-    return function () { return off(element, type, listener, useCapture); };
+    type.split(' ').forEach(function (type) { return target.addEventListener(type, listener, useCapture); });
+    return function () { return off(target, type, listener, useCapture); };
 }
 
-function off(element, type, listener, useCapture) {
+function off(target, type, listener, useCapture) {
     if ( useCapture === void 0 ) useCapture = false;
 
-    type.split(' ').forEach(function (type) { return toNode(element).removeEventListener(type, listener, useCapture); });
+    type.split(' ').forEach(function (type) { return toEventTarget(target).removeEventListener(type, listener, useCapture); });
 }
 
 function once() {
@@ -1475,8 +1463,8 @@ function once() {
     return off;
 }
 
-function trigger(element, event, detail) {
-    return toNodes(element).reduce(function (notCanceled, element) { return notCanceled && element.dispatchEvent(createEvent(event, true, true, detail)); }
+function trigger(target, event, detail) {
+    return toEventTargets(target).reduce(function (notCanceled, target) { return notCanceled && target.dispatchEvent(createEvent(event, true, true, detail)); }
     , true);
 }
 
@@ -1526,6 +1514,24 @@ function delegate(element, selector, listener) {
 
 function detail(listener) {
     return function (e) { return isArray(e.detail) ? listener.apply(listener, [e].concat(e.detail)) : listener(e); };
+}
+
+function isEventTarget(target) {
+    return 'EventTarget' in win
+        ? target instanceof EventTarget
+        : 'addEventListener' in target;
+}
+
+function toEventTarget(target) {
+    return isEventTarget(target) ? target : toNode(target);
+}
+
+function toEventTargets(target) {
+    return isEventTarget(target)
+        ? [target]
+        : isArray(target)
+            ? target.map(toEventTarget).filter(Boolean)
+            : toNodes(target);
 }
 
 /*
@@ -2248,18 +2254,18 @@ ready(function () {
 
     on(doc, pointerDown, function (e) {
 
-        var ref = e.touches ? e.touches[0] : e;
-        var target = ref.target;
-        var pageX = ref.pageX;
-        var pageY = ref.pageY;
+        var target = e.target;
+        var ref = getPos$1(e);
+        var x = ref.x;
+        var y = ref.y;
         var now = Date.now();
 
         touch.el = 'tagName' in target ? target : target.parentNode;
 
         clickTimeout && clearTimeout(clickTimeout);
 
-        touch.x1 = pageX;
-        touch.y1 = pageY;
+        touch.x1 = x;
+        touch.y1 = y;
 
         if (touch.last && now - touch.last <= 250) {
             touch = {};
@@ -2273,12 +2279,12 @@ ready(function () {
 
     on(doc, pointerMove, function (e) {
 
-        var ref = e.touches ? e.touches[0] : e;
-        var pageX = ref.pageX;
-        var pageY = ref.pageY;
+        var ref = getPos$1(e);
+        var x = ref.x;
+        var y = ref.y;
 
-        touch.x2 = pageX;
-        touch.y2 = pageY;
+        touch.x2 = x;
+        touch.y2 = y;
     });
 
     on(doc, pointerUp, function (ref) {
@@ -2328,6 +2334,16 @@ on(doc, 'touchcancel', function () { return touching = false; }, true);
 
 function isTouch(e) {
     return touching || e.pointerType === 'touch';
+}
+
+function getPos$1(e) {
+    var touches = e.touches;
+    var changedTouches = e.changedTouches;
+    
+    var ref = touches && touches[0] || changedTouches && changedTouches[0] || e;
+    var x = ref.pageX;
+    var y = ref.pageY;
+    return {x: x, y: y};
 }
 
 
@@ -2444,6 +2460,7 @@ var util = Object.freeze({
 	once: once,
 	trigger: trigger,
 	createEvent: createEvent,
+	toEventTargets: toEventTargets,
 	fastdom: fastdom,
 	MouseTracker: MouseTracker,
 	mergeOptions: mergeOptions,
@@ -2454,7 +2471,8 @@ var util = Object.freeze({
 	height: height,
 	width: width,
 	flipPosition: flipPosition,
-	isTouch: isTouch
+	isTouch: isTouch,
+	getPos: getPos$1
 });
 
 var boot = function (UIkit) {
@@ -3045,16 +3063,16 @@ var stateAPI = function (UIkit) {
         var self = event.self;
         var filter = event.filter;
         var handler = event.handler;
-        el = isFunction(el) && el.call(component) || el || component.$el;
+        el = isFunction(el)
+            ? el.call(component)
+            : el || component.$el;
 
         if (isArray(el)) {
-
-            el.forEach(function (el) { return registerEvent(component, assign(event, {el: el}), key); });
-
+            el.forEach(function (el) { return registerEvent(component, assign({}, event, {el: el}), key); });
             return;
         }
 
-        if (filter && !filter.call(component)) {
+        if (!el || filter && !filter.call(component)) {
             return;
         }
 
@@ -3581,6 +3599,11 @@ var Modal = {
             name: 'toggle',
 
             handler: function handler(e) {
+
+                if (e.defaultPrevented) {
+                    return;
+                }
+
                 e.preventDefault();
                 this.toggle();
             }
@@ -3698,14 +3721,18 @@ var Modal = {
         _toggleImmediate: function _toggleImmediate(el, show) {
             var this$1 = this;
 
+            return new Promise(function (resolve) { return requestAnimationFrame(function () {
+                    this$1._toggle(el, show);
 
-            requestAnimationFrame(function () { return this$1._toggle(el, show); });
+                    if (this$1.transitionDuration) {
+                        once(this$1.transitionElement, transitionend, resolve, false, function (e) { return e.target === this$1.transitionElement; });
+                    } else {
+                        resolve();
+                    }
+                }); }
+            );
+        }
 
-            return this.transitionDuration
-                ? new Promise(function (resolve) { return once(this$1.transitionElement, transitionend, resolve, false, function (e) { return e.target === this$1.transitionElement; }); })
-                : Promise.resolve();
-
-        },
     }
 
 };
@@ -3719,7 +3746,7 @@ function registerEvents() {
     }
 
     events = [
-        on(doc, 'click', function (ref) {
+        on(docEl, 'click', function (ref) {
             var target = ref.target;
             var defaultPrevented = ref.defaultPrevented;
 
@@ -4021,14 +4048,6 @@ var Cover = function (UIkit) {
             automute: true
         },
 
-        ready: function ready() {
-
-            if (this.$el.tagName === 'IFRAME') {
-                css(this.$el, 'pointerEvents', 'none');
-            }
-
-        },
-
         update: {
 
             write: function write() {
@@ -4052,7 +4071,7 @@ var Cover = function (UIkit) {
                         },
                         {
                             width: width + (width % 2 ? 1 : 0),
-                            height: height
+                            height: height + (height % 2 ? 1 : 0)
                         }
                     )
                 );
@@ -4097,7 +4116,7 @@ var Drop = function (UIkit) {
 
         defaults: {
             mode: ['click', 'hover'],
-            toggle: '-',
+            toggle: true,
             boundary: win,
             boundaryAlign: false,
             delayShow: 0,
@@ -4121,7 +4140,7 @@ var Drop = function (UIkit) {
             this.updateAria(this.$el);
 
             if (this.toggle) {
-                this.toggle = UIkit.toggle(query(this.toggle, this.$el), {target: this.$el, mode: this.mode});
+                this.toggle = UIkit.toggle(isString(this.toggle) ? query(this.toggle, this.$el) : this.$el.previousElementSibling, {target: this.$el, mode: this.mode});
             }
 
         },
@@ -4481,7 +4500,7 @@ var Drop = function (UIkit) {
         }
 
         registered = true;
-        on(doc, 'click', function (ref) {
+        on(docEl, 'click', function (ref) {
             var target = ref.target;
             var defaultPrevented = ref.defaultPrevented;
 
@@ -4582,10 +4601,10 @@ var FormCustom = function (UIkit) {
                         return;
                     }
 
-                    target[isInput(target) ? 'value' : 'innerText'] = input.files && input.files[0]
+                    target[isInput(target) ? 'value' : 'textContent'] = input.files && input.files[0]
                         ? input.files[0].name
                         : matches(input, 'select') && (option = $$('option', input).filter(function (el) { return el.selected; })[0])
-                            ? option.innerText
+                            ? option.textContent
                             : input.value;
                 }
 
@@ -4769,13 +4788,15 @@ var HeightViewport = function (UIkit) {
         props: {
             expand: Boolean,
             offsetTop: Boolean,
-            offsetBottom: Boolean
+            offsetBottom: Boolean,
+            minHeight: Number
         },
 
         defaults: {
             expand: false,
             offsetTop: false,
-            offsetBottom: false
+            offsetBottom: false,
+            minHeight: 0
         },
 
         update: {
@@ -4790,10 +4811,10 @@ var HeightViewport = function (UIkit) {
 
                     css(this.$el, {height: '', minHeight: ''});
 
-                    var diff = viewport - docEl.offsetHeight;
+                    var diff = viewport - offsetHeight(docEl);
 
                     if (diff > 0) {
-                        css(this.$el, 'minHeight', minHeight = this.$el.offsetHeight + diff);
+                        minHeight = offsetHeight(this.$el) + diff;
                     }
 
                 } else {
@@ -4806,7 +4827,7 @@ var HeightViewport = function (UIkit) {
 
                     if (this.offsetBottom === true) {
 
-                        offsetTop += this.$el.nextElementSibling.offsetHeight || 0;
+                        offsetTop += offsetHeight(this.$el.nextElementSibling);
 
                     } else if (isNumeric(this.offsetBottom)) {
 
@@ -4818,18 +4839,28 @@ var HeightViewport = function (UIkit) {
 
                     } else if (isString(this.offsetBottom)) {
 
-                        var el = query(this.offsetBottom, this.$el);
-                        offsetTop += el && el.offsetHeight || 0;
+                        offsetTop += offsetHeight(query(this.offsetBottom, this.$el));
 
                     }
 
-                    css(this.$el, 'minHeight', minHeight = offsetTop ? ("calc(100vh - " + offsetTop + "px)") : '100vh');
+                    // on mobile devices (iOS and Android) window.innerHeight !== 100vh
+                    minHeight = offsetTop ? ("calc(100vh - " + offsetTop + "px)") : '100vh';
 
                 }
 
+                if (!minHeight) {
+                    return;
+                }
+
+                css(this.$el, {height: '', minHeight: minHeight});
+
+                var elHeight = this.$el.offsetHeight;
+                if (this.minHeight && this.minHeight > elHeight) {
+                    css(this.$el, 'minHeight', this.minHeight);
+                }
+
                 // IE 10-11 fix (min-height on a flex container won't apply to its flex items)
-                height(this.$el, '');
-                if (minHeight && viewport - offsetTop >= this.$el.offsetHeight) {
+                if (viewport - offsetTop >= elHeight) {
                     css(this.$el, 'height', minHeight);
                 }
 
@@ -4840,6 +4871,10 @@ var HeightViewport = function (UIkit) {
         }
 
     });
+
+    function offsetHeight(el) {
+        return el && el.offsetHeight || 0;
+    }
 
 };
 
@@ -4899,13 +4934,13 @@ var searchLarge = "<svg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\
 
 var searchNavbar = "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><circle fill=\"none\" stroke=\"#000\" stroke-width=\"1.1\" cx=\"10.5\" cy=\"10.5\" r=\"9.5\"/><line fill=\"none\" stroke=\"#000\" stroke-width=\"1.1\" x1=\"23\" y1=\"23\" x2=\"17\" y2=\"17\"/></svg>";
 
-var slidenavNext = "<svg width=\"11\" height=\"20\" viewBox=\"0 0 11 20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"1.2\" points=\"1 1 10 10 1 19\"></polyline></svg>";
+var slidenavNext = "<svg width=\"14px\" height=\"24px\" viewBox=\"0 0 14 24\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"1.4\" points=\"1.225,23 12.775,12 1.225,1 \"></polyline></svg>";
 
-var slidenavNextLarge = "<svg width=\"18\" height=\"34\" viewBox=\"0 0 18 34\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"1.4\" points=\"1 1 17 17 1 33\"></polyline></svg>";
+var slidenavNextLarge = "<svg width=\"25px\" height=\"40px\" viewBox=\"0 0 25 40\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"2\" points=\"4.002,38.547 22.527,20.024 4,1.5 \"></polyline></svg>";
 
-var slidenavPrevious = "<svg width=\"11\" height=\"20\" viewBox=\"0 0 11 20\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"1.2\" points=\"10 1 1 10 10 19\"></polyline></svg>";
+var slidenavPrevious = "<svg width=\"14px\" height=\"24px\" viewBox=\"0 0 14 24\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"1.4\" points=\"12.775,1 1.225,12 12.775,23 \"></polyline></svg>";
 
-var slidenavPreviousLarge = "<svg width=\"18\" height=\"34\" viewBox=\"0 0 18 34\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"1.4\" points=\"17 1 1 17 17 33\"></polyline></svg>";
+var slidenavPreviousLarge = "<svg width=\"25px\" height=\"40px\" viewBox=\"0 0 25 40\" xmlns=\"http://www.w3.org/2000/svg\"><polyline fill=\"none\" stroke=\"#000\" stroke-width=\"2\" points=\"20.527,1.5 2,20.024 20.525,38.547 \"></polyline></svg>";
 
 var spinner = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><circle fill=\"none\" stroke=\"#000\" cx=\"15\" cy=\"15\" r=\"14\"></circle></svg>";
 
@@ -5631,7 +5666,7 @@ var Navbar = function (UIkit) {
             transitionTo: function transitionTo(newHeight) {
                 height(this.$el, isVisible(this.$el) ? height(this.$el) : 0);
                 Transition.cancel(this.$el);
-                return Transition.start(this.$el, {height: newHeight}, this.duration).then(null, noop);
+                return Transition.start(this.$el, {height: newHeight}, this.duration).catch(noop);
             }
 
         }
@@ -5807,7 +5842,7 @@ var Offcanvas = function (UIkit) {
                     height(doc.body); // force reflow
                     addClass(this.content, this.clsContentAnimation);
                     addClass(this.panel, ((this.clsSidebarAnimation) + " " + (this.mode !== 'reveal' ? this.clsMode : '')));
-                    addClass(this.clsOverlay);
+                    addClass(this.$el, this.clsOverlay);
                     css(this.$el, 'display', 'block');
                     height(this.$el); // force reflow
 
@@ -6351,6 +6386,8 @@ var Sticky = function (UIkit) {
             {
                 name: 'active',
 
+                self: true,
+
                 handler: function handler() {
                     replaceClass(this.selTarget, this.clsInactive, this.clsActive);
                 }
@@ -6359,6 +6396,8 @@ var Sticky = function (UIkit) {
 
             {
                 name: 'inactive',
+
+                self: true,
 
                 handler: function handler() {
                     replaceClass(this.selTarget, this.clsActive, this.clsInactive);
@@ -6485,7 +6524,7 @@ var Sticky = function (UIkit) {
 
                         Animation.cancel(this.$el);
                         this.show();
-                        Animation.in(this.$el, this.animation).then(null, noop);
+                        Animation.in(this.$el, this.animation).catch(noop);
 
                     } else {
                         this.show();
@@ -6547,9 +6586,7 @@ var Sticky = function (UIkit) {
                 }
 
                 toggleClass(this.$el, this.clsBelow, this.scroll > this.bottomOffset);
-
-
-                    addClass(this.$el, this.clsFixed);
+                addClass(this.$el, this.clsFixed);
 
             }
 
@@ -6613,7 +6650,7 @@ var Svg = function (UIkit) {
                         svg = parseSymbols(svg, this$1.icon) || svg;
                     }
 
-                    el = $$1(svg.trim());
+                    el = $$1(svg.substr(svg.indexOf('<svg')));
 
                 } else {
                     el = svg.cloneNode(true);
@@ -6773,7 +6810,7 @@ var Switcher = function (UIkit) {
         },
 
         defaults: {
-            connect: '+ .uk-switcher',
+            connect: '~.uk-switcher',
             toggle: '> *',
             active: 0,
             swiping: true,
@@ -6836,7 +6873,7 @@ var Switcher = function (UIkit) {
             {
                 name: 'swipeRight swipeLeft',
 
-                filter: function filter$$1() {
+                filter: function filter() {
                     return this.swiping;
                 },
 
@@ -6873,12 +6910,8 @@ var Switcher = function (UIkit) {
                 var this$1 = this;
 
 
-                if (!this.connects.length) {
-                    return;
-                }
-
                 var length = this.toggles.length,
-                    prev = index(filter(this.connects[0].children, ("." + (this.cls)))[0]),
+                    prev = this.connects.length && index(filter(this.connects[0].children, ("." + (this.cls)))[0]),
                     hasPrev = prev >= 0,
                     next = getIndex(item, this.toggles, prev),
                     dir = item === 'previous' ? -1 : 1,
@@ -7080,6 +7113,7 @@ var Video = function (UIkit) {
         defaults: {automute: false, autoplay: true},
 
         ready: function ready() {
+
             this.player = new Player(this.$el);
 
             if (this.automute) {
@@ -7170,7 +7204,7 @@ var core = function (UIkit) {
 
 };
 
-UIkit$2.version = '3.0.0-beta.31';
+UIkit$2.version = '3.0.0-beta.34';
 
 mixin(UIkit$2);
 core(UIkit$2);
@@ -7183,6 +7217,7 @@ function plugin(UIkit) {
 
     var ref = UIkit.util;
     var $ = ref.$;
+    var doc = ref.doc;
     var empty = ref.empty;
     var html = ref.html;
 
@@ -7253,6 +7288,26 @@ function plugin(UIkit) {
             this.units.forEach(function (unit) { return empty(this$1[unit]); });
         },
 
+        events: [
+
+            {
+
+                name: 'visibilitychange',
+
+                el: doc,
+
+                handler: function handler() {
+                    if (doc.hidden) {
+                        this.stop();
+                    } else  {
+                        this.start();
+                    }
+                }
+
+            }
+
+        ],
+
         update: {
 
             write: function write() {
@@ -7279,14 +7334,14 @@ function plugin(UIkit) {
                     digits = digits.length < 2 ? ("0" + digits) : digits;
 
                     var el = this$1[unit];
-                    if (el.innerText !== digits) {
+                    if (el.textContent !== digits) {
                         digits = digits.split('');
 
                         if (digits.length !== el.children.length) {
                             html(el, digits.map(function () { return '<span></span>'; }).join(''));
                         }
 
-                        digits.forEach(function (digit, i) { return el.children[i].innerText = digit; });
+                        digits.forEach(function (digit, i) { return el.children[i].textContent = digit; });
                     }
 
                 });
@@ -7483,8 +7538,8 @@ var Animations = function (UIkit) {
 
             show: function show(dir) {
                 return [
-                    {transform: translate3d(dir * -100)},
-                    {transform: translate3d()}
+                    {transform: translate(dir * -100)},
+                    {transform: translate()}
                 ];
             },
 
@@ -7492,10 +7547,10 @@ var Animations = function (UIkit) {
                 return Animations.translated(current);
             },
 
-            translate: function translate(percent, dir) {
+            translate: function translate$1(percent, dir) {
                 return [
-                    {transform: translate3d(dir * -100 * percent)},
-                    {transform: translate3d(dir * 100 * (1 - percent))}
+                    {transform: translate(dir * -100 * percent)},
+                    {transform: translate(dir * 100 * (1 - percent))}
                 ];
             }
 
@@ -7511,10 +7566,10 @@ var Animations = function (UIkit) {
 
 };
 
-function translate3d(value) {
+function translate(value) {
     if ( value === void 0 ) value = 0;
 
-    return ("translate3d(" + value + (value ? '%' : '') + ", 0, 0)");
+    return ("translate(" + value + (value ? '%' : '') + ", 0)"); // currently not translate3d to support IE, translate3d within translate3d does not work while transitioning
 }
 
 function scale3d(value) {
@@ -7532,13 +7587,14 @@ function plugin$3(UIkit) {
     var $ = ref.$;
     var addClass = ref.addClass;
     var assign = ref.assign;
-    var attr = ref.attr;
     var createEvent = ref.createEvent;
     var css = ref.css;
+    var data = ref.data;
     var doc = ref.doc;
     var endsWith = ref.endsWith;
     var fastdom = ref.fastdom;
     var getIndex = ref.getIndex;
+    var getPos = ref.getPos;
     var hasClass = ref.hasClass;
     var index = ref.index;
     var isTouch = ref.isTouch;
@@ -7552,8 +7608,12 @@ function plugin$3(UIkit) {
     var Promise = ref.Promise;
     var removeClass = ref.removeClass;
     var toggleClass = ref.toggleClass;
+    var toNodes = ref.toNodes;
     var Transition = ref.Transition;
     var trigger = ref.trigger;
+    var win = ref.win;
+
+    var abs = Math.abs;
 
     UIkit.mixin.slideshow = {
 
@@ -7581,7 +7641,6 @@ function plugin$3(UIkit) {
             percent: 0,
             clsActive: 'uk-active',
             clsActivated: 'uk-transition-active',
-            forwardDuration: 150,
             initialAnimation: false,
             Animations: Animations(UIkit)
         },
@@ -7595,7 +7654,7 @@ function plugin$3(UIkit) {
             },
 
             slides: function slides() {
-                return $$(this.list.children);
+                return toNodes(this.list.children);
             },
 
             animation: function animation(ref) {
@@ -7620,8 +7679,10 @@ function plugin$3(UIkit) {
                 var fn = this$1[key];
                 this$1[key] = function (e) {
 
-                    this$1.prevPos = this$1.pos;
-                    this$1.pos = (e.touches && e.touches[0] || e).pageX;
+                    var pos = getPos(e).x;
+
+                    this$1.prevPos = pos !== this$1.pos ? this$1.pos : this$1.prevPos;
+                    this$1.pos = pos;
 
                     fn(e);
                 };
@@ -7657,13 +7718,13 @@ function plugin$3(UIkit) {
                 name: 'click',
 
                 delegate: function delegate() {
-                    return ("[" + (this.attrItem) + "]");
+                    return ("[" + (this.attrItem) + "],[data-" + (this.attrItem) + "]");
                 },
 
                 handler: function handler(e) {
                     e.preventDefault();
                     e.current.blur();
-                    this.show(attr(e.current, this.attrItem));
+                    this.show(data(e.current, this.attrItem));
                 }
 
             },
@@ -7676,7 +7737,27 @@ function plugin$3(UIkit) {
                     return ((this.selList) + " > *");
                 },
 
-                handler: 'start'
+                handler: function handler(e) {
+                    if (isTouch(e) || !hasTextNodesOnly(e.target)) {
+                        this.start(e);
+                    }
+                }
+
+            },
+
+            {
+
+                name: 'visibilitychange',
+
+                el: doc,
+
+                handler: function handler() {
+                    if (doc.hidden) {
+                        this.stopAutoplay();
+                    } else  {
+                        this.startAutoplay();
+                    }
+                }
 
             },
 
@@ -7765,7 +7846,7 @@ function plugin$3(UIkit) {
                     var type = ref.type;
                     var target = ref.target;
 
-                    toggleClass($$(("[" + (this.attrItem) + "=\"" + (index(target)) + "\"]"), this.$el), this.clsActive, endsWith(type, 'show'));
+                    toggleClass($$(("[" + (this.attrItem) + "=\"" + (index(target)) + "\"],[data-" + (this.attrItem) + "=\"" + (index(target)) + "\"]"), this.$el), this.clsActive, endsWith(type, 'show'));
                 }
 
             },
@@ -7805,6 +7886,14 @@ function plugin$3(UIkit) {
                     UIkit.update(null, target);
                 }
 
+            },
+
+            {
+                name: 'dragstart',
+
+                handler: function handler(e) {
+                    e.preventDefault();
+                }
             }
 
         ],
@@ -7815,10 +7904,6 @@ function plugin$3(UIkit) {
 
                 if (e.button && e.button !== 0 || this.slides.length < 2) {
                     return;
-                }
-
-                if (!isTouch(e)) {
-                    e.preventDefault();
                 }
 
                 if (this._animation && this._animation.animation !== this.animation) {
@@ -7832,40 +7917,45 @@ function plugin$3(UIkit) {
                     var dir = ref.dir;
                     var getPercent = ref.percent;
                     var cancel = ref.cancel;
-                    var translate = ref.translate;
+                    var translate$$1 = ref.translate;
 
                     percent = getPercent() * dir;
 
-                    this.percent = Math.abs(percent) * -dir;
+                    this.percent = abs(percent) * -dir;
 
                     this.stack.splice(0, this.stack.length);
 
                     cancel();
-                    translate(Math.abs(percent));
+                    translate$$1(abs(percent));
 
                     this.index = this.getIndex(this.index - dir);
-                    this.touching = true;
+                    this.dragging = true;
 
                 }
 
-                on(doc, pointerMove, this.move, true);
+                this.unbindMove = on(doc, pointerMove, this.move, {capture: true, passive: false});
+                on(win, 'scroll', this.unbindMove);
                 on(doc, pointerUp, this.end, true);
 
-                this.touch = this.pos + this.$el.offsetWidth * percent;
+                this.drag = this.pos + this.$el.offsetWidth * percent;
 
             },
 
-            move: function move() {
+            move: function move(e) {
                 var this$1 = this;
 
 
-                if (this.pos === this.prevPos || (!this.touching && Math.abs(this.touch - this.pos) < this.threshold)) {
+                var distance = this.pos - this.drag;
+
+                if (this.prevPos === this.pos || !this.dragging && abs(distance) < this.threshold) {
                     return;
                 }
 
-                this.touching = true;
+                e.cancelable && e.preventDefault();
 
-                var percent = (this.pos - this.touch) / this.$el.offsetWidth;
+                this.dragging = true;
+
+                var percent = distance / this.$el.offsetWidth;
 
                 if (this.percent === percent) {
                     return;
@@ -7880,14 +7970,15 @@ function plugin$3(UIkit) {
 
                 this.slides.forEach(function (el, i) { return toggleClass(el, this$1.clsActive, i === index || i === nextIndex); });
 
+                this._animation && this._animation.reset();
+
                 if (index !== prevIndex) {
-                    this._animation && this._animation.reset();
                     trigger(this.slides[prevIndex], 'itemhide', [this]);
                     trigger(current, 'itemshow', [this]);
                 }
 
                 this._animation = new Transitioner(this.animation, this.easing, current, next, dir, noop);
-                this._animation.translate(Math.abs(percent % 1));
+                this._animation.translate(abs(percent % 1));
 
                 this.percent = percent;
 
@@ -7897,32 +7988,32 @@ function plugin$3(UIkit) {
 
             end: function end() {
 
-                off(doc, pointerMove, this.move, true);
+                off(win, 'scroll', this.unbindMove);
+                this.unbindMove();
                 off(doc, pointerUp, this.end, true);
 
-                if (this.touching) {
+                if (this.dragging) {
 
                     var percent = this.percent;
 
-                    this.percent = Math.abs(this.percent) % 1;
+                    this.percent = abs(this.percent) % 1;
                     this.index = this.getIndex(this.index - trunc(percent));
 
-                    if (this.percent < .1) {
+                    if (this.percent < .1 || percent < 0 === this.pos > this.prevPos) {
                         this.index = this.getIndex(percent > 0 ? 'previous' : 'next');
                         this.percent = 1 - this.percent;
                         percent *= -1;
                     }
 
+                    this._animation && this._animation.reset();
                     this.show(percent > 0 ? 'previous' : 'next', true);
 
                     preventClick();
 
                 }
 
-                this.pos
-                    = this.prevPos
-                    = this.touch
-                    = this.touching
+                this.drag
+                    = this.dragging
                     = this.percent
                     = null;
 
@@ -7933,7 +8024,7 @@ function plugin$3(UIkit) {
                 if ( force === void 0 ) force = false;
 
 
-                if (!force && this.touch) {
+                if (!force && this.drag) {
                     return;
                 }
 
@@ -7942,7 +8033,7 @@ function plugin$3(UIkit) {
                 if (!force && this.stack.length > 1) {
 
                     if (this.stack.length === 2) {
-                        this._animation.forward(this.forwardDuration);
+                        this._animation.forward(250);
                     }
 
                     return;
@@ -7983,7 +8074,7 @@ function plugin$3(UIkit) {
                     this._show(
                         !prev ? this.Animations[this.initialAnimation] : this.animation,
                         force ? 'cubic-bezier(0.165, 0.840, 0.440, 1.000)' : this.easing,
-                        prev || next,
+                        prev,
                         next,
                         getDirection(index, prevIndex),
                         this.stack.length > 1,
@@ -8014,12 +8105,14 @@ function plugin$3(UIkit) {
                     done
                 );
 
-                this._animation.show(prev === next
-                    ? 300
-                    : forward
-                        ? this.forwardDuration
-                        : this.duration
-                    , this.percent, forward
+                this._animation.show(
+                    prev === next
+                        ? 300
+                        : forward
+                            ? 150
+                            : this.duration,
+                    this.percent,
+                    forward
                 );
 
             },
@@ -8037,7 +8130,11 @@ function plugin$3(UIkit) {
                 this.stopAutoplay();
 
                 if (this.autoplay) {
-                    this.interval = setInterval(function () { return (!this$1.isHovering || ! this$1.pauseOnHover) && this$1.show('next'); }, this.autoplayInterval);
+                    this.interval = setInterval(function () {
+                        if (!(this$1.isHovering && this$1.pauseOnHover) && !this$1.stack.length) {
+                            this$1.show('next');
+                        }
+                    }, this.autoplayInterval);
                 }
 
             },
@@ -8055,7 +8152,7 @@ function plugin$3(UIkit) {
     function Transitioner(animation, easing, current, next, dir, cb) {
 
         var percent = animation.percent;
-        var translate = animation.translate;
+        var translate$$1 = animation.translate;
         var show = animation.show;
         var props = show(dir);
 
@@ -8076,12 +8173,12 @@ function plugin$3(UIkit) {
 
                 this.translate(percent);
 
-                triggerUpdate(current, 'itemout', {percent: 1 - percent, duration: duration, ease: ease, dir: dir});
                 triggerUpdate(next, 'itemin', {percent: percent, duration: duration, ease: ease, dir: dir});
+                current && triggerUpdate(current, 'itemout', {percent: 1 - percent, duration: duration, ease: ease, dir: dir});
 
                 return Promise.all([
-                    Transition.start(current, props[0], duration, ease),
-                    Transition.start(next, props[1], duration, ease)
+                    Transition.start(next, props[1], duration, ease),
+                    current && Transition.start(current, props[0], duration, ease)
                 ]).then(function () {
                     this$1.reset();
                     cb();
@@ -8089,34 +8186,34 @@ function plugin$3(UIkit) {
             },
 
             stop: function stop() {
-                return Transition.stop([current, next]);
+                return Transition.stop([next, current]);
             },
 
             cancel: function cancel() {
-                Transition.cancel([current, next]);
+                Transition.cancel([next, current]);
             },
 
             reset: function reset() {
                 for (var prop in props[0]) {
-                    css([current, next], prop, '');
+                    css([next, current], prop, '');
                 }
             },
 
             forward: function forward(duration) {
 
                 var percent = this.percent();
-                Transition.cancel([current, next]);
+                Transition.cancel([next, current]);
                 this.show(duration, percent, true);
 
             },
 
             translate: function translate$1(percent) {
 
-                var props = translate(percent, dir);
-                css(current, props[0]);
+                var props = translate$$1(percent, dir);
                 css(next, props[1]);
-                triggerUpdate(current, 'itemtranslateout', {percent: 1 - percent, dir: dir});
+                current && css(current, props[0]);
                 triggerUpdate(next, 'itemtranslatein', {percent: percent, dir: dir});
+                current && triggerUpdate(current, 'itemtranslateout', {percent: 1 - percent, dir: dir});
             },
 
             percent: function percent$1() {
@@ -8150,6 +8247,10 @@ function plugin$3(UIkit) {
         return .5 * x + 300; // parabola through (400,500; 600,600; 1800,1200)
     }
 
+    function hasTextNodesOnly(el) {
+        return !el.children.length && el.childNodes.length;
+    }
+
 }
 
 var Animations$1 = function (UIkit) {
@@ -8174,7 +8275,7 @@ var Animations$1 = function (UIkit) {
                 return 1 - css(current, 'opacity');
             },
 
-            translate: function translate(percent) {
+            translate: function translate$$1(percent) {
                 return [
                     {opacity: 1 - percent},
                     {opacity: percent}
@@ -8196,7 +8297,7 @@ var Animations$1 = function (UIkit) {
                 return 1 - css(current, 'opacity');
             },
 
-            translate: function translate(percent) {
+            translate: function translate$$1(percent) {
                 return [
                     {opacity: 1 - percent, transform: scale3d(1 - .2 * percent)},
                     {opacity: percent, transform: scale3d(1 - .2 + .2 * percent)}
@@ -8458,7 +8559,7 @@ function plugin$2(UIkit) {
 
             {
 
-                name: 'keydown',
+                name: 'keyup',
 
                 el: function el() {
                     return doc;
@@ -8696,6 +8797,8 @@ function plugin$2(UIkit) {
                 clearTimeout(this.controlsTimer);
                 this.controlsTimer = setTimeout(this.hideControls, this.delayControls);
 
+                attr($$(("[" + (this.attrItem) + "],[data-" + (this.attrItem) + "]"), this.$el), 'hidden', this.items.length < 2 ? '' : null);
+
                 addClass(this.$el, 'uk-active uk-transition-active');
 
             },
@@ -8861,7 +8964,6 @@ function plugin$5(UIkit) {
 
     var mixin = UIkit.mixin;
     var util = UIkit.util;
-    var assign = util.assign;
     var clamp = util.clamp;
     var css = util.css;
     var Dimensions = util.Dimensions;
@@ -8908,7 +9010,7 @@ function plugin$5(UIkit) {
                     var isColor = prop.match(/color/i),
                         isCssProp = isColor || prop === 'opacity',
                         steps = properties[prop].slice(0),
-                        pos, diff;
+                        pos, bgPos, diff;
 
                     if (isCssProp) {
                         css($el, prop, '');
@@ -8938,24 +9040,28 @@ function plugin$5(UIkit) {
 
                     if (prop.match(/^bg/)) {
 
+                        css($el, ("background-position-" + (prop[2])), '');
+                        bgPos = css($el, 'backgroundPosition').split(' ')[prop[2] === 'x' ? 0 : 1]; // IE 11 can't read background-position-[x|y]
+
                         if (this$1.covers) {
 
                             var min = Math.min.apply(Math, steps),
-                                max = Math.max.apply(Math, steps);
+                                max = Math.max.apply(Math, steps),
+                                down = steps.indexOf(min) < steps.indexOf(max);
 
-                            steps = steps.map(function (step) { return step - min; });
                             diff = max - min;
-                            pos = (-1 * Math.max.apply(Math, steps)) + "px";
+
+                            steps = steps.map(function (step) { return step - (down ? min : max); });
+                            pos = (down ? -diff : 0) + "px";
 
                         } else {
 
-                            css($el, ("background-position-" + (prop[2])), '');
-                            pos = css($el, 'backgroundPosition').split(' ')[prop[2] === 'x' ? 0 : 1]; // IE 11 can't read background-position-[x|y]
+                            pos = bgPos;
 
                         }
                     }
 
-                    props[prop] = {steps: steps, unit: unit, pos: pos, diff: diff};
+                    props[prop] = {steps: steps, unit: unit, pos: pos, bgPos: bgPos, diff: diff};
 
                     return props;
 
@@ -9042,11 +9148,24 @@ function plugin$5(UIkit) {
 
                         var ref = this$1.props[prop];
                         var diff = ref.diff;
+                        var bgPos = ref.bgPos;
+                        var steps = ref.steps;
                         var attr = prop === 'bgy' ? 'height' : 'width',
                             span = dim[attr] - dimEl[attr];
 
+                        if (!bgPos.match(/%$|0px/)) {
+                            return;
+                        }
+
                         if (span < diff) {
                             dimEl[attr] = dim[attr] + diff - span;
+                        } else if (span > diff) {
+
+                            bgPos = parseFloat(bgPos);
+
+                            if (bgPos) {
+                                this$1.props[prop].steps = steps.map(function (step) { return step - (span - diff) / (100 / bgPos); });
+                            }
                         }
 
                         dim = Dimensions.cover(image, dimEl);
@@ -9202,20 +9321,18 @@ function plugin$5(UIkit) {
             {
 
                 read: function read() {
-                    delete this._prev;
-                }
-
-            },
-
-            {
-
-                read: function read() {
 
                     this._percent = ease(scrolledOver(this.target) / (this.viewport || 1), this.easing);
 
                 },
 
-                write: function write() {
+                write: function write(ref) {
+                    var type = ref.type;
+
+
+                    if (type !== 'scroll') {
+                        delete this._prev;
+                    }
 
                     if (!this._active) {
                         this.reset();
@@ -9293,7 +9410,7 @@ var Animations$2 = function (UIkit) {
                 return 1 - css(current, 'opacity');
             },
 
-            translate: function translate(percent) {
+            translate: function translate$$1(percent) {
                 return [
                     {opacity: 1 - percent, zIndex: 0},
                     {zIndex: -1}
@@ -9315,7 +9432,7 @@ var Animations$2 = function (UIkit) {
                 return 1 - css(current, 'opacity');
             },
 
-            translate: function translate(percent) {
+            translate: function translate$$1(percent) {
                 return [
                     {opacity: 1 - percent, transform: scale3d(1 + .5 * percent), zIndex: 0},
                     {zIndex: -1}
@@ -9329,26 +9446,28 @@ var Animations$2 = function (UIkit) {
             show: function show(dir) {
                 return dir < 0
                     ? [
-                        {transform: translate3d(100), zIndex: 0},
-                        {transform: translate3d(), zIndex: -1} ]
+                        {transform: translate(30), zIndex: -1},
+                        {transform: translate(), zIndex: 0} ]
                     : [
-                        {transform: translate3d(-100), zIndex: 0},
-                        {transform: translate3d(), zIndex: -1}
+                        {transform: translate(-100), zIndex: 0},
+                        {transform: translate(), zIndex: -1}
                     ];
             },
 
-            percent: function percent(current) {
-                return Animations$$1.translated(current);
+            percent: function percent(current, next, dir) {
+                return dir < 0
+                    ? 1 - Animations$$1.translated(next)
+                    : Animations$$1.translated(current);
             },
 
-            translate: function translate(percent, dir) {
+            translate: function translate$1(percent, dir) {
                 return dir < 0
                     ? [
-                        {transform: translate3d(percent * 100), zIndex: 0},
-                        {transform: translate3d(-30 * (1 - percent)), zIndex: -1} ]
+                        {transform: translate(30 * percent), zIndex: -1},
+                        {transform: translate(-100 * (1 - percent)), zIndex: 0} ]
                     : [
-                        {transform: translate3d(-percent * 100), zIndex: 0},
-                        {transform: translate3d(30 * (1 - percent)), zIndex: -1}
+                        {transform: translate(-percent * 100), zIndex: 0},
+                        {transform: translate(30 * (1 - percent)), zIndex: -1}
                     ];
             }
 
@@ -9357,29 +9476,30 @@ var Animations$2 = function (UIkit) {
         push: {
 
             show: function show(dir) {
-
                 return dir < 0
                     ? [
-                        {transform: translate3d(30), zIndex: -1},
-                        {transform: translate3d(), zIndex: 0} ]
+                        {transform: translate(100), zIndex: 0},
+                        {transform: translate(), zIndex: -1} ]
                     : [
-                        {transform: translate3d(-30), zIndex: -1},
-                        {transform: translate3d(), zIndex: 0}
+                        {transform: translate(-30), zIndex: -1},
+                        {transform: translate(), zIndex: 0}
                     ];
             },
 
-            percent: function percent(current, next) {
-                return 1 - Animations$$1.translated(next);
+            percent: function percent(current, next, dir) {
+                return dir > 0
+                    ? 1 - Animations$$1.translated(next)
+                    : Animations$$1.translated(current);
             },
 
-            translate: function translate(percent, dir) {
+            translate: function translate$2(percent, dir) {
                 return dir < 0
                     ? [
-                        {transform: translate3d(30 * percent), zIndex: -1},
-                        {transform: translate3d(-100 * (1 - percent)), zIndex: 0} ]
+                        {transform: translate(percent * 100), zIndex: 0},
+                        {transform: translate(-30 * (1 - percent)), zIndex: -1} ]
                     : [
-                        {transform: translate3d(-30 * percent), zIndex: -1},
-                        {transform: translate3d(100 * (1 - percent)), zIndex: 0}
+                        {transform: translate(-30 * percent), zIndex: -1},
+                        {transform: translate(100 * (1 - percent)), zIndex: 0}
                     ];
             }
 
@@ -9438,6 +9558,7 @@ function plugin$6(UIkit) {
         update: {
 
             read: function read() {
+
                 var ref = this.ratio.split(':').map(Number);
                 var width = ref[0];
                 var height = ref[1];
@@ -9450,6 +9571,7 @@ function plugin$6(UIkit) {
                 if (this.maxHeight) {
                     this.height = Math.min(this.maxHeight, this.height);
                 }
+
             },
 
             write: function write() {
@@ -9594,7 +9716,6 @@ function plugin$7(UIkit) {
 
     var mixin = UIkit.mixin;
     var util = UIkit.util;
-    var $$ = util.$$;
     var addClass = util.addClass;
     var after = util.after;
     var assign = util.assign;
@@ -9607,6 +9728,7 @@ function plugin$7(UIkit) {
     var docEl = util.docEl;
     var height = util.height;
     var fastdom = util.fastdom;
+    var getPos = util.getPos;
     var includes = util.includes;
     var index = util.index;
     var isInput = util.isInput;
@@ -9670,9 +9792,9 @@ function plugin$7(UIkit) {
                 var fn = this$1[key];
                 this$1[key] = function (e) {
                     this$1.scrollY = win.scrollY;
-                    var ref = e.touches && e.touches[0] || e;
-                    var x = ref.pageX;
-                    var y = ref.pageY;
+                    var ref = getPos(e);
+                    var x = ref.x;
+                    var y = ref.y;
                     this$1.pos = {x: x, y: y};
 
                     fn(e);
@@ -9842,11 +9964,11 @@ function plugin$7(UIkit) {
 
                 if (this === sortable) {
                     if (this.origin.index !== index(this.placeholder)) {
-                        trigger(this.$el, 'change', [this, this.placeholder, 'moved']);
+                        trigger(this.$el, 'moved', [this, this.placeholder]);
                     }
                 } else {
-                    trigger(sortable.$el, 'change', [sortable, this.placeholder, 'added']);
-                    trigger(this.$el, 'change', [this, this.placeholder, 'removed']);
+                    trigger(sortable.$el, 'added', [sortable, this.placeholder]);
+                    trigger(this.$el, 'removed', [this, this.placeholder]);
                 }
 
                 trigger(this.$el, 'stop', [this]);
@@ -9871,7 +9993,7 @@ function plugin$7(UIkit) {
 
                     if (target) {
 
-                        if (!within(element, this$1.$el) || $$('-', element).some(function (element) { return element === target; })) {
+                        if (!within(element, this$1.$el) || isPredecessor(element, target)) {
                             before(target, element);
                         } else {
                             after(target, element);
@@ -9925,7 +10047,7 @@ function plugin$7(UIkit) {
                 action();
 
                 children.forEach(Transition.cancel);
-                css(children, reset);
+                css(this.$el.children, reset);
                 this.$update('update', true);
                 fastdom.flush();
 
@@ -9948,7 +10070,11 @@ function plugin$7(UIkit) {
     var obj;
 
     function getSortable(element) {
-        return UIkit.getComponent(element, 'sortable') || element.parentNode && getSortable(element.parentNode);
+        return element && (UIkit.getComponent(element, 'sortable') || getSortable(element.parentNode));
+    }
+
+    function isPredecessor(element, target) {
+        return element.parentNode === target.parentNode && index(element) > index(target);
     }
 
 }
@@ -10110,6 +10236,7 @@ function plugin$9(UIkit) {
     var ajax = ref.ajax;
     var matches = ref.matches;
     var noop = ref.noop;
+    var on = ref.on;
     var removeClass = ref.removeClass;
     var trigger = ref.trigger;
 
@@ -10254,26 +10381,27 @@ function plugin$9(UIkit) {
                             beforeSend: function (env) {
 
                                 var xhr = env.xhr;
-                                xhr.upload && xhr.upload.addEventListener('progress', this$1.progress);
-                                ['loadStart', 'load', 'loadEnd', 'abort'].forEach(function (type) { return xhr.addEventListener(type.toLowerCase(), this$1[type]); }
+                                xhr.upload && on(xhr.upload, 'progress', this$1.progress);
+                                ['loadStart', 'load', 'loadEnd', 'abort'].forEach(function (type) { return on(xhr, type.toLowerCase(), this$1[type]); }
                                 );
 
                                 this$1.beforeSend(env);
 
                             }
-                        }).then(function (xhr) {
+                        }).then(
+                            function (xhr) {
 
-                            this$1.complete(xhr);
+                                this$1.complete(xhr);
 
-                            if (chunks.length) {
-                                upload(chunks.shift());
-                            } else {
-                                this$1.completeAll(xhr);
-                            }
+                                if (chunks.length) {
+                                    upload(chunks.shift());
+                                } else {
+                                    this$1.completeAll(xhr);
+                                }
 
-                        }, function (e) {
-                            this$1.error(e.message);
-                        });
+                            },
+                            function (e) { return this$1.error(e.message); }
+                        );
 
                     };
 
