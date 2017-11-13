@@ -1,64 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<extension version="3.8" type="template" client="site" method="upgrade">
-	<name>nerudas</name>
+<?xml version="1.0"?>
+<extension type="template" version="3.5" method="upgrade" client="site">
+	<name>Nerudas</name>
+	<version>4.9</version>
+	<creationDate>June 2017</creationDate>
 	<author>Nerudas</author>
-	<creationDate>September 2017</creationDate>
 	<copyright>Copyright (c) 2015 - 2017 Nerudas. All rights reserved.</copyright>
-	<license>>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@nerudas.ru</authorEmail>
 	<authorUrl>nerudas.ru</authorUrl>
-	<version>5.0.0</version>
-	<description>TPL_NERUDAS_DESCRIPTION</description>
-	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.tpl_nerudas.ini</language>
-		<language tag="en-GB">en-GB/en-GB.tpl_nerudas.sys.ini</language>
-		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.ini</language>
-		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.sys.ini</language>
-	</languages>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<description>Nerudas Template</description>
 	<files>
 		<folder>css</folder>
 		<folder>html</folder>
 		<folder>images</folder>
-		<folder>js</folder>
+		<folder>layouts</folder>
+		<folder>scripts</folder>
+		<filename>component.php</filename>
+		<filename>error.php</filename>
 		<filename>favicon.ico</filename>
-		<filename>helper.php</filename>
+		<filename>index.html</filename>
 		<filename>index.php</filename>
+		<filename>offline.php</filename>
 		<filename>templateDetails.xml</filename>
 	</files>
 	<positions>
-		<position>toppanel-center</position>
-		<position>toppanel-right</position>
 		<position>scripts</position>
-		<position>modal</position>
+		<position>head</position>
+		<position>analytics</position>
 		<position>navigation</position>
-		<position>right</position>
+		<position>header-breadcrumbs</position>
+		<position>header-sidebar</position>
 		<position>left</position>
+		<position>right</position>
+		<position>footer</position>
+		<position>ads-center</position>
+		<position>articles-center</position>
+		<position>top</position>
+		<position>content-top</position>
+		<position>bottom</position>
+		<position>content-bottom</position>
+		
 	</positions>
 	<config>
 		<fields name="params">
-			<fieldset name="basic">
-				<field name="minified" type="radio"
-					   label="TPL_NERUDAS_PARAMS_MINIFIED"
-					   default="1"
-					   class="btn-group btn-group-yesno">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-			</fieldset>
-			<fieldset name="logo" label="TPL_NERUDAS_PARAMS_LOGO">
-				<fields name="logo">
-					<field name="src" type="text"
-						   label="TPL_NERUDAS_PARAMS_LOGO_SRC"
-						   class="input-xxlarge"
-						   default="templates/nerudas/images/logo.svg"/>
-					<field name="alt" type="text"
-						   label="TPL_NERUDAS_PARAMS_LOGO_ALT"
-						   class="input-xxlarge"/>
-					<field name="height" type="number"
-						   label="TPL_NERUDAS_PARAMS_LOGO_HEIGHT"
-						   class="input-small"
-						   default="0"/>
-				</fields>
+			<fieldset name="general">
 			</fieldset>
 		</fields>
 	</config>

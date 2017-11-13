@@ -1,0 +1,40 @@
+<?php
+/**
+ * @package     JoomlaZen Nerudas Template
+ * @version     4.3
+ * @author      JoomlaZen - www.joomlazen.com
+ * @copyright   Copyright (c) 2016 - 2016 JoomlaZen. All rights reserved.
+ * @license     GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ */
+defined('_JEXEC') or die('Restricted access');
+?>
+
+<ul class="uk-breadcrumb">
+	<li class="drop uk-hidden uk-position-relative" data-uk-dropdown="{mode:'click'}">
+		<a class="uk-text-ellipsis uk-width-1-1">
+			<span class="text">Text</span>
+			<i class="uk-margin-small-left uk-icon-caret-down"></i>
+			<span class="sep">
+				/
+			</span>
+		</a>
+		<div class="uk-dropdown uk-dropdown-scrollable uk-width-1-1">
+			<ul class="uk-nav uk-nav-dropdown">
+			</ul>
+		</div>
+	</li>
+	<?php foreach ($list as $li): ?>
+
+
+		<li class="item">
+			<a href="<?php echo $li->link;?>" class="uk-text-ellipsis">
+				<span class="text"><?php echo $li->name;?></span>
+				<span class="sep">
+					/
+				</span>
+			</a>			
+		</li>
+	
+	<?php endforeach; ?>
+</ul>
+<? // echo '<pre>', print_r($list), '</pre>'; ?>

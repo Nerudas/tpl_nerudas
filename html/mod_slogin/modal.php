@@ -1,114 +1,111 @@
 <?php
 /**
- * @package    Nerudas Template
- * @version    5.0.0
- * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- * @link       https://nerudas.ru
+ * @package     Nerudas Template
+ * @version     5.0
+ * @author      Nerudas - nerudas.ru
+ * @copyright   Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @license     GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
-
-defined('_JEXEC') or die;
-
-
+defined('_JEXEC') or die('Restricted access');
+if (count($plugins)) {
+	foreach($plugins as $link) {
+		$item = new stdClass();
+		$item->title = $link['plugin_title'];
+		$item->params = '';
+		if(isset($link['params'])){
+			foreach($link['params'] as $k => $v){
+				$item->params .= ' '.$k.'="'.$v.'"';
+			}
+		}
+		$item->icon = $link['plugin_name'];
+		$item->class = $link['class'];
+		$item->link = $link['link'];
+		if ($link['plugin_name'] == 'vkontakte') {
+			$item->icon = 'vk';
+		}
+		$sbuttons[] = $item;
+	}
+}
 ?>
-<?php if ($type == 'login'): ?>
-	<noindex>
-		<div id="login" class="jlslogin" data-uk-modal>
-			<div class="uk-modal-dialog uk-modal-body">
-				<? echo '<pre>', print_r($type, true), '</pre>'; ?>
-				<?php if ($params->get('inittext')): ?>
-					<div class="pretext">
-						<p><?php echo $params->get('inittext'); ?></p>
+
+<div id="login" class="uk-modal login jlslogin">
+	<div class="uk-modal-dialog">
+		<a class="uk-modal-close uk-close">
+		</a>
+		<h4 class="uk-modal-header">
+			<?php echo JText::_('NERUDAS_LOGIN_TITLE') ?>
+		</h4>
+		<?php if ($params->get('show_login_form')): ?>
+		<div class="inner-form">
+			<form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post" class="uk-form">
+				<div class="uk-form-row">
+					<div class="uk-form-icon uk-width-1-1">
+						<i class="uk-icon-at uk-form-large"></i>
+						<input type="text" name="username" placeholder="<?php echo JText::_('NERUDAS_EMAIL') ?>" class="uk-width-1-1 uk-form-large" size="18">
 					</div>
-				<?php endif; ?>
-				<div id="slogin-buttons" class="slogin-buttons slogin-default">
-
-					<?php if (count($plugins)): ?>
-						<?php
-						foreach ($plugins as $link):
-							$linkParams = '';
-							if (isset($link['params']))
-							{
-								foreach ($link['params'] as $k => $v)
-								{
-									$linkParams .= ' ' . $k . '="' . $v . '"';
-								}
-							}
-							$title = (!empty($link['plugin_title'])) ? ' title="' . $link['plugin_title'] . '"' : '';
-							?>
-							<a rel="nofollow"
-							   class="link<?php echo $link['class']; ?>" <?php echo $linkParams . $title; ?>
-							   href="<?php echo JRoute::_($link['link']); ?>"><span
-										class="<?php echo $link['class']; ?> slogin-ico">&nbsp;</span><span
-										class="text-socbtn"><?php echo $link['plugin_title']; ?></span></a>
-						<?php endforeach; ?>
-					<?php endif; ?>
-
 				</div>
-				<div class="slogin-clear"></div>
-				<?php if ($params->get('pretext')): ?>
-					<div class="pretext">
-						<p><?php echo $params->get('pretext'); ?></p>
+				<div class="uk-form-row uk-form-password uk-width-1-1">
+					<div class="uk-form-icon uk-width-1-1">
+						<i class="uk-icon-lock uk-form-large"></i>
+						<input type="password" name="password" placeholder="<?php echo JText::_('NERUDAS_PASSWORD') ?>" class="uk-form-large uk-width-1-1">
+						<a href="" class="uk-form-password-toggle" data-uk-form-password="{lblShow:'<?php echo JText::_('NERUDAS_SHOW'); ?>', lblHide:'<?php echo JText::_('NERUDAS_HIDE'); ?>'}">
+							<?php echo JText::_('NERUDAS_SHOW'); ?>
+						</a>
 					</div>
-				<?php endif; ?>
-				<?php if ($params->get('show_login_form')): ?>
-					<form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post"
-						  id="login-form">
-						<fieldset class="userdata">
-							<p id="form-login-username">
-								<label for="modlgn-username"><?php echo JText::_('MOD_SLOGIN_VALUE_USERNAME') ?></label>
-								<input id="modlgn-username" type="text" name="username" class="inputbox" size="18"/>
-							</p>
-							<p id="form-login-password">
-								<label for="modlgn-passwd"><?php echo JText::_('JGLOBAL_PASSWORD') ?></label>
-								<input id="modlgn-passwd" type="password" name="password" class="inputbox" size="18"/>
-							</p>
-							<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
-								<p id="form-login-remember">
-									<label for="modlgn-remember">
-										<input id="modlgn-remember" type="checkbox" name="remember" class="inputbox"
-											   value="yes"/>
-										<?php echo JText::_('MOD_SLOGIN_REMEMBER_ME') ?>
-									</label>
-								</p>
-								<div class="slogin-clear"></div>
-							<?php endif; ?>
-							<input type="submit" name="Submit" class="button" value="<?php echo JText::_('JLOGIN') ?>"/>
-							<input type="hidden" name="option" value="com_users"/>
-							<input type="hidden" name="task" value="user.login"/>
-							<input type="hidden" name="return" value="<?php echo $return; ?>"/>
-							<?php echo JHtml::_('form.token'); ?>
-						</fieldset>
-						<ul class="ul-jlslogin">
-							<li>
-								<a rel="nofollow"
-								   href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-									<?php echo JText::_('MOD_SLOGIN_FORGOT_YOUR_PASSWORD'); ?></a>
-							</li>
-							<li>
-								<a rel="nofollow"
-								   href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
-									<?php echo JText::_('MOD_SLOGIN_FORGOT_YOUR_USERNAME'); ?></a>
-							</li>
-							<?php
-							$usersConfig = JComponentHelper::getParams('com_users');
-							if ($usersConfig->get('allowUserRegistration')) : ?>
-								<li>
-									<a rel="nofollow"
-									   href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-										<?php echo JText::_('MOD_SLOGIN_REGISTER'); ?></a>
-								</li>
-							<?php endif; ?>
-						</ul>
-						<?php if ($params->get('posttext')): ?>
-							<div class="posttext">
-								<p><?php echo $params->get('posttext'); ?></p>
-							</div>
-						<?php endif; ?>
-					</form>
-				<?php endif; ?>
+				</div>
+				<div class="uk-form-row uk-clearfix">
+					<div class="uk-float-right">
+						<a rel="nofollow" href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
+							<?php echo JText::_('NERUDAS_FORGOT_PASSWORD'); ?>
+						</a>
+					</div>
+					<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
+					<div class="uk-float-left">
+						<input type="checkbox" name="remember" class="inputbox" checked value="yes"/>
+						<label class="uk-text-middle">
+							<?php echo JText::_('MOD_SLOGIN_REMEMBER_ME') ?>
+						</label>
+					</div>
+					<?php endif; ?>
+				</div>
+				<div class="uk-form-row uk-text-right">
+					<button type="submit" name="Submit" class="uk-button uk-button-primary">
+						<?php echo JText::_('NERUDAS_LOGIN') ?>
+					</button>
+				</div>
+				<input type="hidden" name="option" value="com_users" />
+				<input type="hidden" name="task" value="user.login" />
+				<input type="hidden" name="return" value="<?php echo $return; ?>" />
+				<?php echo JHtml::_('form.token'); ?>
+			</form>
+		</div>
+		<?php endif; ?>
+		<?php if (count($plugins)): ?>
+		<div class="slogin-buttons uk-margin-bottom uk-margin-top ">
+			<div class="uk-deviver-linetext">
+				<span class="uk-text-muted uk-text-mlarge">
+				<?php echo JText::_('NERUDAS_OR') ?>
+				</span>
+			</div>
+			<div id="slogin-buttons" class="uk-margin-top uk-text-center">
+				<?php foreach($sbuttons as $sbutton): ?>
+				<a rel="nofollow" class="link<?php echo $sbutton->class; ?> uk-vertical-align" <?php echo $sbutton->params;?> href="<?php echo JRoute::_($sbutton->link);?>">
+					<i class="uk-vertical-align-middle"></i>
+					<span class="text-socbtn uk-hidden">
+					<?php echo $sbutton->title;?>
+					</span>
+				</a>
+				<?php endforeach; ?>
 			</div>
 		</div>
-	</noindex>
-<?php endif; ?>
+		<?php endif; ?>
+		<div class="uk-modal-footer uk-text-mutted uk-text-center">
+			<?php if (JComponentHelper::getParams('com_users')->get('allowUserRegistration')): ?>
+			<?php echo JText::_('NERUDAS_LOGIN_NO_ACCOUNT') ?>
+			<a class="" rel="nofollow" href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
+				<?php echo JText::_('NERUDAS_LOGIN_REGISTER'); ?>
+			</a>
+			<?php endif; ?>
+		</div>
+	</div>
+</div>

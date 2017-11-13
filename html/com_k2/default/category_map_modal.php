@@ -1,0 +1,23 @@
+<?php
+/**
+ * @package     Nerudas Template
+ * @version     5.0
+ * @author      Nerudas - nerudas.ru
+ * @copyright   Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @license     GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ */
+$app = JFactory::getApplication();
+$doc = JFactory::getDocument();
+$doc->addScript('/templates/'.$app->getTemplate().'/scripts/map_modal.js');
+?>
+<div id="mapModal" class="uk-modal">
+	<div class="uk-modal-dialog">
+		<a class="uk-modal-close uk-close uk-position-z-index uk-position-top-right" style="color: #fff; opacity: 1" >
+		</a>
+		<h4 class="uk-modal-header uk-hidden">
+			<?php echo JText::_('NERUDAS_SHOW_ON_MAP'); ?>
+		</h4>
+		<div id="modal-map" class="uk-modal-contnet-large map">
+		</div>
+	</div>
+</div>

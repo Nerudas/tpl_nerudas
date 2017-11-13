@@ -1,72 +1,36 @@
 <?php
 /**
- * @package    Nerudas Template
- * @version    5.0.0
- * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- * @link       https://nerudas.ru
+ * @package     Nerudas Template
+ * @version     5.0
+ * @author      Nerudas - nerudas.ru
+ * @copyright   Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @license     GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
-
-defined('_JEXEC') or die;
-
-use Joomla\Registry\Registry;
-
-function modChrome_no($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
+defined('_JEXEC') or die('Restricted access');
+// Blank
+function modChrome_blank($module, &$params, &$attribs) {
+	if ($module->content) {echo $module->content;}
+}
+// Sidebar
+function modChrome_sidebar($module, &$params, &$attribs) {
+	if ($module->content) {		
+		echo '<div id="mod-'.$module->id.'" class="module uk-panel uk-panel-box uk-panel-box-min uk-margin-bottom'.htmlspecialchars($params->get('moduleclass_sfx')).'">';
+		if ($module->showtitle) {
+			echo '<h3 class="uk-margin-small-bottom">'.$module->title.'</h3>';
+		}
 		echo $module->content;
+		echo '</div>'; 
 	}
 }
-
-function modChrome_default($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
+// Mobile
+function modChrome_mobile($module, &$params, &$attribs) {
+	if ($module->content) {		
+		echo '<div id="mod-'.$module->id.'" class="module uk-margin-bottom'.htmlspecialchars($params->get('moduleclass_sfx')).'">';
+		if ($module->showtitle) {
+			echo '<div class="uk-margin-small-bottom uk-margin-small-left uk-margin-top uk-contrast uk-h4">'.$module->title.'</div>';
+		}
 		echo $module->content;
+		echo '</div>'; 
 	}
 }
-
-function modChrome_toppanel_center($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
-		$params = new Registry($params);
-		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
-		echo '<li class="' . $class . '">';
-		echo '<a>' . $module->title . '<i data-uk-icon="icon: chevron-down; ratio: 0.8"></i>' . '</a>';
-		echo '<div data-uk-dropdown="mode: click">' . $module->content . '</div>';
-		echo '</li>';
-	}
-}
-
-function modChrome_toppanel_right($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
-		$params = new Registry($params);
-		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
-		echo '<li class="' . $class . '">' . $module->content . '</li>';;
-	}
-}
-
-function modChrome_sidebar_right($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
-		$params = new Registry($params);
-		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
-		echo $module->content;
-	}
-}
-
-function modChrome_sidebar_left($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
-		$params = new Registry($params);
-		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
-		echo $module->content;
-	}
-}
+?>
