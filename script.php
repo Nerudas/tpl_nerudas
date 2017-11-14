@@ -52,6 +52,8 @@ class nerudasInstallerScript
 		// Delete Scripts folder
 		JFolder::delete($path . '/scripts');
 
+		// Delete jw_sigpro
+		JFolder::delete($path . '/html/jw_sigpro');
 	}
 
 }
