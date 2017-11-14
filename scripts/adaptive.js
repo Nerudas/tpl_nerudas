@@ -1,9 +1,10 @@
-/**
- * @package     JoomlaZen Nerudas Template
- * @version     4.4
- * @author      JoomlaZen - www.joomlazen.com
- * @copyright   Copyright (c) 2016 - 2016 JoomlaZen. All rights reserved.
- * @license     GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+/*
+ * @package    Nerudas Template
+ * @version    4.9.1
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
  */
 
 (function ($) {
