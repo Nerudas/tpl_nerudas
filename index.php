@@ -30,23 +30,6 @@ if (JUri::base() == JUri::current() || $app->input->get('Itemid') == 1874)
 {
 	$site->layout = 'home';
 }
-$full = array(662, 663, 1075);
-if ($app->input->get('view') == 'item' && $app->input->get('Itemid') == 662)
-{
-	//$site->layout = 'full';
-}
-if ($app->input->get('view') == 'item' && $app->input->get('Itemid') == 663)
-{
-	//$site->layout = 'full';
-}
-if ($app->input->get('view') == 'item' && in_array(1622, $app->getMenu()->getActive()->tree))
-{
-	//$site->layout = 'full';
-}
-if ($app->input->get('view') == 'item' && in_array(1628, $app->getMenu()->getActive()->tree))
-{
-	//$site->layout = 'full';
-}
 if ($app->input->get('view') == 'map' && $app->input->get('option') == 'com_nerudas')
 {
 	$site->layout = 'map';
