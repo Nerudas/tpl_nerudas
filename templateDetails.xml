@@ -16,6 +16,7 @@
 		<folder>images</folder>
 		<folder>layouts</folder>
 		<folder>scripts</folder>
+		<folder>js</folder>
 		<filename>component.php</filename>
 		<filename>error.php</filename>
 		<filename>favicon.ico</filename>
