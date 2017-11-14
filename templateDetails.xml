@@ -9,6 +9,7 @@
 	<authorUrl>nerudas.ru</authorUrl>
 	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<description>Nerudas Template</description>
+	<scriptfile>script.php</scriptfile>
 	<files>
 		<folder>css</folder>
 		<folder>html</folder>
