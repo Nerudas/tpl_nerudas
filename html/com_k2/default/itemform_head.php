@@ -7,71 +7,83 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
+
+defined('_JEXEC') or die;
+$app     = JFactory::getApplication();
+$doc     = JFactory::getDocument();
 $modules = $doc->loadRenderer('modules');
 // Action 
-$isNew = false;
+$isNew  = false;
 $action = 'edit';
-if (empty($this->row->id)) {
-	$isNew = true;
-	$action = 'add';
+if (empty($this->row->id))
+{
+	$isNew         = true;
+	$action        = 'add';
 	$this->row->id = 0;
 }
 // Category
-$category = NerudasK2Helper::getCategory($this->row->catid);
-$category->root = $app->getMenu()->getActive()->params->get('category');
+$category         = NerudasK2Helper::getCategory($this->row->catid);
+$category->root   = $app->getMenu()->getActive()->params->get('category');
 $category->select = NerudasK2Helper::getCategorySelect($this->row->catid, $category->root);
 // Auto title
-if ($type == 'ads' && $isNew) {
+if ($type == 'ads' && $isNew)
+{
 	$this->row->title = $category->name;
 }
 // Title
-if ($isNew) {
-	$this->title = JText::sprintf('NERUDAS_FORM_TITLE_'. mb_strtoupper(str_replace('-', '_', $type), 'UTF-8').'_ADD', $category->name);
+if ($isNew)
+{
+	$this->title = JText::sprintf('NERUDAS_FORM_TITLE_' . mb_strtoupper(str_replace('-', '_', $type), 'UTF-8') . '_ADD', $category->name);
 }
-else {
-	$this->title = JText::sprintf('NERUDAS_FORM_TITLE_'. mb_strtoupper(str_replace('-', '_', $type), 'UTF-8').'_EDIT', $this->row->title);
+else
+{
+	$this->title = JText::sprintf('NERUDAS_FORM_TITLE_' . mb_strtoupper(str_replace('-', '_', $type), 'UTF-8') . '_EDIT', $this->row->title);
 }
 $doc->setTitle($this->title);
 // User
-$user = JFactory::getUser();
+$user        = JFactory::getUser();
 $permissions = NerudasProfilesHelper::getPermissions($user);
-if ($isNew) {
+if ($isNew)
+{
 	$this->row->created_by = $user->id;
-	$author = NerudasProfilesHelper::getProfile($user->id);
-	
+	$author                = NerudasProfilesHelper::getProfile($user->id);
+
 }
-else {
+else
+{
 	$author = NerudasProfilesHelper::getProfile($this->row->created_by);
 }
 $this->author = $author;
 // Default dields
-foreach ($this->lists as $key=>$list) {
-	$list = str_replace('class="radio"','class="radio uk-button"',$list);
-	$list = str_replace('icon-calendar', 'uk-icon-calendar', $list);
-	$list = str_replace('btn' , 'uk-button', $list);
+foreach ($this->lists as $key => $list)
+{
+	$list              = str_replace('class="radio"', 'class="radio uk-button"', $list);
+	$list              = str_replace('icon-calendar', 'uk-icon-calendar', $list);
+	$list              = str_replace('btn', 'uk-button', $list);
 	$this->lists[$key] = $list;
 }
-$this->extra = NerudasK2Helper::getFormExtra($this->row->id, $this->extraFields);
+$this->extra  = NerudasK2Helper::getFormExtra($this->row->id, $this->extraFields);
 $systemFields = new stdClass();
-if ($permissions->moderator) {
-	$systemFields->css  = '';
+if ($permissions->moderator)
+{
+	$systemFields->css      = '';
 	$systemFields->textType = 'text';
 	$systemFields->readonly = 'readonly="false"';
 }
-else {
-	$systemFields->css = 'uk-hidden readonly';
+else
+{
+	$systemFields->css      = 'uk-hidden readonly';
 	$systemFields->textType = 'hidden';
 	$systemFields->readonly = 'readonly="true"';
 }
 $this->systemFields = $systemFields;
-if (empty($this->row->image)) {
-	$this->row->thumb = '/templates/'.$app->getTemplate().'/images/noimages/'.$category->id.'.jpg'; 
+if (empty($this->row->image))
+{
+	$this->row->thumb = '/templates/' . $app->getTemplate() . '/images/noimages/' . $category->id . '.jpg';
 }
 // Plugins 
-foreach ($this->K2PluginsItemOther as $plugin) {
+foreach ($this->K2PluginsItemOther as $plugin)
+{
 	$this->K2PluginsItemOther[$plugin->get('name')] = $plugin;
 }
 // Media Fields
@@ -91,13 +103,14 @@ echo '<script>
 $this->K2PluginsItemOther[2]->fields = NerudasUtility::setUIKitMediaField($this->K2PluginsItemOther[2]->fields);
 
 // Froala
-$froala = new stdClass();
+$froala          = new stdClass();
 $froala->buttons = array();
-if ($permissions->moderator) {
-	 $froala->buttons[] = 'html';
+if ($permissions->moderator)
+{
+	$froala->buttons[] = 'html';
 }
 $froala->buttons = json_encode($froala->buttons);
-$froala->key = '6tE-11nhzI-7sC5pv==';
+$froala->key     = '6tE-11nhzI-7sC5pv==';
 $doc->addStyleSheet('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css');
 $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/css/froala_editor.css');
 $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/css/froala_style.min.css');
@@ -119,13 +132,13 @@ echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.1/js/compon
 $doc->addScriptDeclaration("
 Joomla.submitbutton = function(pressbutton){
 		if (\$K2.trim(\$K2('#mtitle').val()) == '') {
-			UIkit.notify({message: '".JText::_('K2_ITEM_MUST_HAVE_A_TITLE')."',status: 'danger'});
+			UIkit.notify({message: '" . JText::_('K2_ITEM_MUST_HAVE_A_TITLE') . "',status: 'danger'});
 			\$K2('#mtitle').addClass('uk-form-danger');
 			return false;
 		}
 		else if (\$K2.trim(\$K2('#catid').val()) == '0') {
-			alert('".JText::_('K2_PLEASE_SELECT_A_CATEGORY', true)."');
-			UIkit.notify({message: '".JText::_('K2_PLEASE_SELECT_A_CATEGORY')."',status: 'danger'});
+			alert('" . JText::_('K2_PLEASE_SELECT_A_CATEGORY', true) . "');
+			UIkit.notify({message: '" . JText::_('K2_PLEASE_SELECT_A_CATEGORY') . "',status: 'danger'});
 			return false;
 		}
 		else {

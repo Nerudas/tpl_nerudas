@@ -7,24 +7,25 @@
  * @link       https://nerudas.ru
  */
 
-(function($){
-	$(document).ready(function() {
+(function ($) {
+	$(document).ready(function () {
 // Phones
-		if($('*').is('[data-phones]')) {
+		if ($('*').is('[data-phones]')) {
 			phones('start', $(this));
 		}
-		$('body').on('click', '[data-phone-add]',  function() {
+		$('body').on('click', '[data-phone-add]', function () {
 			phones('add', $(this).parents('[data-phones]'));
 		});
-		function phones (action, parent) {
+
+		function phones(action, parent) {
 			var phones = parent.find('[data-phone]');
 			if (action == 'start') {
 				$(phones).each(function () {
 					var input = $(this).find('[data-phone-number] input');
-					if (input.val() !== ''){
+					if (input.val() !== '') {
 						$(this).removeClass('uk-hidden');
 						$(this).addClass('uk-show');
-					}					
+					}
 				});
 			}
 			var hidden = parent.find('[data-phone].uk-hidden');
@@ -32,7 +33,7 @@
 				hidden[0].removeClass('uk-hidden');
 				hidden[0].addClass('uk-show');
 			}
-			var show =  parent.find('[data-phone].uk-show');
+			var show = parent.find('[data-phone].uk-show');
 			if (show.length == phones.length) {
 				parent.find('[data-phone-add]').addClass('uk-hidden');
 			}

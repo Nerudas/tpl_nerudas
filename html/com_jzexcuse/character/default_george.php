@@ -7,12 +7,15 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined( '_JEXEC' )or die( 'Restricted access' );
-if ($this->answer) {
+
+defined('_JEXEC') or die;
+if ($this->answer)
+{
 	echo $this->loadTemplate('george_answer');
-	
+
 }
-else {
+else
+{
 	echo $this->loadTemplate('george_character');
 }
 ?>

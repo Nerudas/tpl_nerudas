@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 ?>
@@ -21,7 +22,8 @@ $doc = JFactory::getDocument();
 			<div class="uk-form-row">
 				<label class="uk-form-label"><?php echo JText::_('NERUDAS_TITLE'); ?></label>
 				<div class="uk-form-controls">
-					<input id="addMarkTitle" type="text" name="title" class="uk-width-1-1" placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>">
+					<input id="addMarkTitle" type="text" name="title" class="uk-width-1-1"
+						   placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>">
 				</div>
 			</div>
 			<div class="uk-form-row">
@@ -33,16 +35,18 @@ $doc = JFactory::getDocument();
 			<div class="uk-form-row">
 				<label class="uk-form-label"><?php echo JText::_('NERUDAS_TEXT'); ?></label>
 				<div class="uk-form-controls">
-					<textarea id="addMarkText" name="text" rows="5" class="uk-width-1-1" placeholder="<?php echo JText::_('NERUDAS_TEXT'); ?>"></textarea>
+					<textarea id="addMarkText" name="text" rows="5" class="uk-width-1-1"
+							  placeholder="<?php echo JText::_('NERUDAS_TEXT'); ?>"></textarea>
 				</div>
 			</div>
-			<div id="addMarkmap"  class="uk-form-row">
+			<div id="addMarkmap" class="uk-form-row">
 			</div>
 			<div class="uk-form-row uk-text-right">
-				<button type="submit" class="uk-button uk-button-large uk-button-success"><?php echo JText::_('NERUDAS_SUBMIT'); ?></button>
+				<button type="submit"
+						class="uk-button uk-button-large uk-button-success"><?php echo JText::_('NERUDAS_SUBMIT'); ?></button>
 			</div>
-			<input id="addMarkLatitude" name="latitude" type="hidden" value="" />
-			<input id="addMarLongitude" name="longitude" type="hidden" value="" />
+			<input id="addMarkLatitude" name="latitude" type="hidden" value=""/>
+			<input id="addMarLongitude" name="longitude" type="hidden" value=""/>
 		</form>
 	</div>
 </div>

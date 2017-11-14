@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 ?>
 
 <div id="anchor-system" class="uk-anchor">
@@ -23,7 +24,8 @@ defined('_JEXEC') or die('Restricted access');
 		</label>
 		<div class="uk-form-controls">
 
-			<input type="text" id="alias" name="alias" maxlength="250" class="uk-width-1-1" value="<?php echo $this->row->alias; ?>"/>
+			<input type="text" id="alias" name="alias" maxlength="250" class="uk-width-1-1"
+				   value="<?php echo $this->row->alias; ?>"/>
 
 		</div>
 	</div>

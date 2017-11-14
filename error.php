@@ -7,16 +7,17 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
-$user = JFactory::getUser();
-$accesslevel = JAccess::getAuthorisedViewLevels($user->id);
+
+defined('_JEXEC') or die;
+$app           = JFactory::getApplication();
+$doc           = JFactory::getDocument();
+$user          = JFactory::getUser();
+$accesslevel   = JAccess::getAuthorisedViewLevels($user->id);
 $administrator = 3;
 /* Bot check
 ========================================================================== */
-$isBot = false;
-$bots = array();
+$isBot  = false;
+$bots   = array();
 $bots[] = 'rambler';
 $bots[] = 'googlebot';
 $bots[] = 'aport';
@@ -65,16 +66,20 @@ $bots[] = 'domaintools.com';
 $bots[] = 'Nigma.ru';
 $bots[] = 'bing.com';
 $bots[] = 'dotnetdotcom';
-foreach($bots as $bot) {
-	if(stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false){
+foreach ($bots as $bot)
+{
+	if (stripos($_SERVER['HTTP_USER_AGENT'], $bot) !== false)
+	{
 		$isBot = true;
 	}
 }
-if (in_array($administrator, $accesslevel) || $isBot) {
-	require_once JPATH_THEMES.'/system/error.php';
+if (in_array($administrator, $accesslevel) || $isBot)
+{
+	require_once JPATH_THEMES . '/system/error.php';
 }
-else {
-	$message = $this->error->getCode().' - '.htmlspecialchars($this->error->getMessage(), ENT_QUOTES, 'UTF-8');
-	$app->redirect($url = '/', $msg = $message, $msgType='error', $moved = true);
+else
+{
+	$message = $this->error->getCode() . ' - ' . htmlspecialchars($this->error->getMessage(), ENT_QUOTES, 'UTF-8');
+	$app->redirect($url = '/', $msg = $message, $msgType = 'error', $moved = true);
 }
 ?>

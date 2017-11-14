@@ -38,7 +38,6 @@
 		<position>content-top</position>
 		<position>bottom</position>
 		<position>content-bottom</position>
-		
 	</positions>
 	<config>
 		<fields name="params">
@@ -47,6 +46,8 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" priority="1" name="Nerudas Templale Update">https://update.nerudas.ru?extension=tpl_nerudas</server>
+		<server type="extension" priority="1" name="Nerudas Templale Update">
+			https://update.nerudas.ru?extension=tpl_nerudas
+		</server>
 	</updateservers>
 </extension>

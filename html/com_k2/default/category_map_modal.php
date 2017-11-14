@@ -9,11 +9,11 @@
  */
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-$doc->addScript('/templates/'.$app->getTemplate().'/scripts/map_modal.js');
+$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/map_modal.js');
 ?>
 <div id="mapModal" class="uk-modal">
 	<div class="uk-modal-dialog">
-		<a class="uk-modal-close uk-close uk-position-z-index uk-position-top-right" style="color: #fff; opacity: 1" >
+		<a class="uk-modal-close uk-close uk-position-z-index uk-position-top-right" style="color: #fff; opacity: 1">
 		</a>
 		<h4 class="uk-modal-header uk-hidden">
 			<?php echo JText::_('NERUDAS_SHOW_ON_MAP'); ?>

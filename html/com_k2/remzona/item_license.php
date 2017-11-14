@@ -7,11 +7,12 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 ?>
 <div class="uk-panel uk-panel-box uk-padding-top uk-padding-bottom">
 	<h2 class="uk-text-large">
-		<?php echo JText::_('NERUDAS_LICENSE');?>
+		<?php echo JText::_('NERUDAS_LICENSE'); ?>
 	</h2>
 </div>
 <hr class="uk-margin-remove">

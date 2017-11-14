@@ -7,17 +7,18 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 // uk-panel uk-panel-box
 ?>
 <div class="uk-text-small uk-panel-box uk-margin-remove">
 	<ul class="uk-breadcrumb uk-margin-remove">
 		<?php foreach ($list as $li): ?>
 			<li class="item">
-				<a href="<?php echo $li->link;?>">
-					<?php echo $li->name;?>
+				<a href="<?php echo $li->link; ?>">
+					<?php echo $li->name; ?>
 
-				</a>			
+				</a>
 			</li>
 		<?php endforeach; ?>
 	</ul>

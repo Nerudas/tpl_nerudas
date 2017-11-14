@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 if ($this->item->extra_fields)
 {
@@ -104,7 +105,7 @@ if (!empty($this->item->latitude) && !empty($this->item->longitude))
 				<div class="uk-width-medium-4-12">
 					<a class="uk-position-relative uk-display-block" href="<?php echo $this->item->link; ?>"
 					   title="<?php echo $this->item->mintext; ?>" data-uk-tooltip="pos:'bottom-left'">
-						<div class="uk-position-top-right" >
+						<div class="uk-position-top-right">
 							<?php if (!empty($this->item->extra['price']->value)) : ?>
 								<div class="price uk-text-large uk-badge uk-badge-success uk-widht-1-1">
 									<?php echo $this->item->extra['price']->value; ?>
@@ -131,12 +132,14 @@ if (!empty($this->item->latitude) && !empty($this->item->longitude))
 							</a>
 							<?php if (isset($this->item->extra['adswhen']) && !empty($this->item->extra['adswhen']->value)) :
 								$lang = JLanguage::getInstance('ru-RU');
-								$val = str_replace(' ', '-',$lang->transliterate($this->item->extra['adswhen']->value));
+								$val = str_replace(' ', '-', $lang->transliterate($this->item->extra['adswhen']->value));
 								$class = 'uk-hidden';
-								if($val == 'na-segodnya') {
+								if ($val == 'na-segodnya')
+								{
 									$class = 'uk-badge-success';
 								}
-								if($val == 'na-zavtra') {
+								if ($val == 'na-zavtra')
+								{
 									$class = 'uk-badge-warning';
 								}
 								?>
@@ -171,28 +174,29 @@ if (!empty($this->item->latitude) && !empty($this->item->longitude))
 		<div class="uk-grid uk-grid-small" data-uk-grid-match>
 			<div class="uk-width-2-3 uk-flex uk-flex-middle">
 				<?php if ($this->author->id != 115159): ?>
-				<div class="author uk-clearfix uk-width-1-1">
-					<div class="avatar uk-position-relative uk-display-inline-block uk-align-medium-left  uk-margin-bottom-remove">
-						<a class="image uk-avatar-48 "
-						   style="background-image: url('<?php echo $this->author->avatar->small; ?>');"
-						   href="<?php echo $this->author->link; ?>" target="_blank">
-						</a>
-					</div>
-					<div class="text uk-text-ellipsis">
-						<div class="name uk-text-ellipsis ">
-							<a class="uk-link-muted" href="<?php echo $this->author->link; ?>" target="_blank">
-								<?php echo $this->author->name; ?>
+					<div class="author uk-clearfix uk-width-1-1">
+						<div class="avatar uk-position-relative uk-display-inline-block uk-align-medium-left  uk-margin-bottom-remove">
+							<a class="image uk-avatar-48 "
+							   style="background-image: url('<?php echo $this->author->avatar->small; ?>');"
+							   href="<?php echo $this->author->link; ?>" target="_blank">
 							</a>
 						</div>
-						<?php if ($this->author->job): ?>
-							<div class="job uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
-								<a class="uk-text-muted" href="<?php echo $this->author->job->link; ?>" target="_blank">
-									<?php echo $this->author->job->name; ?>
+						<div class="text uk-text-ellipsis">
+							<div class="name uk-text-ellipsis ">
+								<a class="uk-link-muted" href="<?php echo $this->author->link; ?>" target="_blank">
+									<?php echo $this->author->name; ?>
 								</a>
 							</div>
-						<?php endif; ?>
+							<?php if ($this->author->job): ?>
+								<div class="job uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
+									<a class="uk-text-muted" href="<?php echo $this->author->job->link; ?>"
+									   target="_blank">
+										<?php echo $this->author->job->name; ?>
+									</a>
+								</div>
+							<?php endif; ?>
+						</div>
 					</div>
-				</div>
 				<?php endif; ?>
 			</div>
 			<div class="uk-width-1-3 uk-flex uk-flex-right uk-flex-middle uk-text-right">

@@ -7,10 +7,12 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-if ($this->category->id == 13) {
+if ($this->category->id == 13)
+{
 	echo $this->loadTemplate('news');
 }
 ?>

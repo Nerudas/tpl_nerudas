@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 //if ($params->get('itemCustomLinkMenuItem'))
@@ -82,9 +83,9 @@ if ($params->get('tt'))
 					</div>
 				<?php endif; ?>
 				<?php if (empty($date)): ?>
-				<div>
-					<?php echo JHTML::_('date', $item->publish_up,  'j F'); ?>
-				</div>
+					<div>
+						<?php echo JHTML::_('date', $item->publish_up, 'j F'); ?>
+					</div>
 				<?php endif; ?>
 			</li>
 		<?php endforeach; ?>

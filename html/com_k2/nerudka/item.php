@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app     = JFactory::getApplication();
 $doc     = JFactory::getDocument();
 $modules = $doc->loadRenderer('modules');
@@ -151,33 +152,33 @@ $this->item->company             = NerudasK2Helper::getRelatedItem($this->item->
 		</div>
 	</div>
 
-			<?php echo $this->loadTemplate('navigation'); ?>
+	<?php echo $this->loadTemplate('navigation'); ?>
 
 
-			<div id="company-tabs" class="uk-switcher">
-				<div class="contacs">
-					<?php echo $this->loadTemplate('contacts'); ?>
-				</div>
-				<?php if (isset ($this->item->extra['pricelist']) && !empty($this->item->extra['pricelist']->value)): ?>
-					<div class="pricelist">
-						<?php echo $this->loadTemplate('pricelist'); ?>
-					</div>
-				<?php endif; ?>
-				<?php if (!empty($this->item->gallery)): ?>
-					<div class="license">
-						<?php echo $this->loadTemplate('license'); ?>
+	<div id="company-tabs" class="uk-switcher">
+		<div class="contacs">
+			<?php echo $this->loadTemplate('contacts'); ?>
+		</div>
+		<?php if (isset ($this->item->extra['pricelist']) && !empty($this->item->extra['pricelist']->value)): ?>
+			<div class="pricelist">
+				<?php echo $this->loadTemplate('pricelist'); ?>
+			</div>
+		<?php endif; ?>
+		<?php if (!empty($this->item->gallery)): ?>
+			<div class="license">
+				<?php echo $this->loadTemplate('license'); ?>
 
-					</div>
-				<?php endif; ?>
-				<div class="comments">
-					<?php echo $this->loadTemplate('reviews'); ?>
-				</div>
-				<? /*
+			</div>
+		<?php endif; ?>
+		<div class="comments">
+			<?php echo $this->loadTemplate('reviews'); ?>
+		</div>
+		<? /*
 				<div class="news">
 					<?php  echo $this->loadTemplate('news'); ?>
 				</div>
 				*/ ?>
-			</div>
-		</div>
+	</div>
+</div>
 
 </div>

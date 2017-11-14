@@ -7,5 +7,5 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-include_once(__DIR__.'/category_map_modal.php')
+include_once(__DIR__ . '/category_map_modal.php')
 ?>

@@ -7,15 +7,15 @@
  * @link       https://nerudas.ru
  */
 (function ($) {
-	$(document).ready(function() {
-		$('#regionSelect').on('show.uk.modal', function(){		
+	$(document).ready(function () {
+		$('#regionSelect').on('show.uk.modal', function () {
 			$('#openRegionSelect').trigger('click');
-    	});
+		});
 	});
-	$('[data-set-region]').live('click', function() {
+	$('[data-set-region]').live('click', function () {
 		UIkit.modal('#regionSelect').hide();
-		$.cookie('region', $(this).data('set-region'), {expires: 365, path: '/' });
+		$.cookie('region', $(this).data('set-region'), {expires: 365, path: '/'});
 		location.reload();
 	});
-	
+
 })(jQuery)

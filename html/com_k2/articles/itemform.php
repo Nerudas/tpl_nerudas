@@ -7,11 +7,12 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
+
+defined('_JEXEC') or die;
+$app  = JFactory::getApplication();
+$doc  = JFactory::getDocument();
 $type = 'articles';
-require_once(realpath(__DIR__.'/..').'/default/itemform_head.php');
+require_once(realpath(__DIR__ . '/..') . '/default/itemform_head.php');
 $this->navs = array();
 ?>
 <script>
@@ -19,7 +20,8 @@ $this->navs = array();
 </script>
 
 <div id="articles" class="itemform">
-	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm" name="adminForm">
+	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm"
+		  name="adminForm">
 		<div id="anchor-top" class="uk-anchor">
 		</div>
 		<div id="k2FormTop" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
@@ -30,7 +32,8 @@ $this->navs = array();
 				<a href="javascript:history.go(-1)" class="uk-button uk-button-danger">
 					<?php echo JText::_('NERUDAS_CANCEL'); ?>
 				</a>
-				<a class="uk-button uk-button-success" onclick="Joomla.submitbutton('save'); return false;" title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
+				<a class="uk-button uk-button-success" onclick="Joomla.submitbutton('save'); return false;"
+				   title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
 					<?php echo JText::_('NERUDAS_SAVE'); ?>
 				</a>
 			</div>
@@ -39,7 +42,9 @@ $this->navs = array();
 					<?php echo JText::_('NERUDAS_TITLE'); ?>
 				</label>
 				<div class="uk-form-controls">
-					<input type="text" id="mtitle" name="title" maxlength="250" placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>" value="<?php echo $this->row->title; ?>"  class=" uk-width-1-1" />
+					<input type="text" id="mtitle" name="title" maxlength="250"
+						   placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>"
+						   value="<?php echo $this->row->title; ?>" class=" uk-width-1-1"/>
 				</div>
 			</div>
 			<div class="uk-form-row">
@@ -54,20 +59,20 @@ $this->navs = array();
 				<label class="uk-form-label">
 					<?php echo JText::_('NERUDAS_PREVIEW'); ?>
 				</label>
-				<div  class="uk-clearfix uk-margin-small-bottom">
+				<div class="uk-clearfix uk-margin-small-bottom">
 				</div>
 				<div>
-					<?php echo $this->introtext ; ?>
+					<?php echo $this->introtext; ?>
 				</div>
 			</div>
 			<div class="uk-form-row">
 				<label class="uk-form-label">
 					<?php echo JText::_('NERUDAS_ARTICLE_TEXT'); ?>
 				</label>
-				<div  class="uk-clearfix uk-margin-small-bottom">
+				<div class="uk-clearfix uk-margin-small-bottom">
 				</div>
 				<div>
-					<?php echo $this->fulltext ; ?>
+					<?php echo $this->fulltext; ?>
 				</div>
 			</div>
 			<div class="uk-form-row">
@@ -75,7 +80,8 @@ $this->navs = array();
 					<?php echo JText::_('NERUDAS_IMAGE'); ?>
 				</label>
 				<div class="uk-form-controls">
-					<img id="k2thumb" class="uk-thumbnail" alt="<?php echo $this->row->title; ?>" src="<?php echo $this->row->thumb; ?>" />
+					<img id="k2thumb" class="uk-thumbnail" alt="<?php echo $this->row->title; ?>"
+						 src="<?php echo $this->row->thumb; ?>"/>
 				</div>
 			</div>
 			<div class="uk-form-row">
@@ -90,12 +96,12 @@ $this->navs = array();
 						<span class="uk-form-file-text">
 						<?php echo JText::_('NERUDAS_SELECT_FILE_NONE'); ?>
 						</span>
-						<input type="file" name="image" class="uk-form-file-input" />
+						<input type="file" name="image" class="uk-form-file-input"/>
 					</div>
 				</div>
 			</div>
 		</div>
-		<input name="catid" type="hidden" value="<?php echo $category->id; ?>" />
+		<input name="catid" type="hidden" value="<?php echo $category->id; ?>"/>
 		<?php echo $this->loadTemplate('system'); ?>
 		<?php echo $this->loadTemplate('actions'); ?>
 	</form>

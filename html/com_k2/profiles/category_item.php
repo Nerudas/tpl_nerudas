@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 if ($this->item->extra_fields)
 {
@@ -50,9 +51,10 @@ $this->item->mintext = NerudasUtility::minimalizeText($this->item->introtext);
 								<a class="uk-text-muted" href="<<?php echo $this->author->job->link; ?>>"
 								   target="_blank">
 									<?php echo $this->author->job->name; ?>
-								</a><br />
+								</a><br/>
 								<?php if (!empty($this->item->extra['job_post']->value)): ?>
-									<i class="uk-text-lowercase">(<?php echo $this->item->extra['job_post']->value; ?>)</i>
+									<i class="uk-text-lowercase">(<?php echo $this->item->extra['job_post']->value; ?>
+										)</i>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>

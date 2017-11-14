@@ -7,12 +7,15 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined( '_JEXEC' )or die( 'Restricted access' );
-if ( $this->character->id == 1 ) {
+
+defined('_JEXEC') or die;
+if ($this->character->id == 1)
+{
 	echo $this->loadTemplate('mikhalych');
-	
+
 }
-if ( $this->character->id == 2 ) {
+if ($this->character->id == 2)
+{
 	echo $this->loadTemplate('george');
 }
 ?>

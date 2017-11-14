@@ -85,6 +85,7 @@
 
 		}
 	}
+
 	/* K2 Form System */
 	function adaptiveK2FormSystem() {
 		if ($('body').innerWidth() <= 479) {
@@ -103,6 +104,7 @@
 			$('#k2FormSystem').appendTo($('#appendRightBottom'));
 		}
 	}
+
 	/* Rubrics - Normal */
 	function adaptiveRubricsNormal() {
 		$('#rubricsMobile').appendTo('body');
@@ -127,6 +129,7 @@
 			$('#rubricsMenu.normal').attr('class', 'normal uk-nav uk-nav-parent-icon uk-nav-side');
 		}
 	}
+
 	/* Rubrics - light */
 	function adaptiveRubricsLight() {
 		$('#rubricsMobile').appendTo('body');
@@ -151,6 +154,7 @@
 			$('#rubricsMenu.light').attr('class', 'light side');
 		}
 	}
+
 	/* Profile Module */
 	function adaptiveProfileModule() {
 		if ($('body').innerWidth() <= 767) {
@@ -162,6 +166,7 @@
 			});
 		}
 	}
+
 	/* Simple filter */
 	function adaptiveSimpleFilter() {
 		$('#simpleFiterMobile').appendTo('body');
@@ -181,6 +186,7 @@
 			$('#simpleFiter').appendTo('#simpleFiterDesktop');
 		}
 	}
+
 	/* Add buttons */
 	function adaptiveAddButtons() {
 		adaptiveAddButtonsSet('#mod-285'); // Company
@@ -192,6 +198,7 @@
 		adaptiveAddButtonsSet('#mod-269'); // Articles
 		adaptiveAddButtonsSet('#mod-283'); // Nerudka
 	}
+
 	/* Add buttons Set */
 	function adaptiveAddButtonsSet(selector) {
 		if ($('body').innerWidth() <= 479) {
@@ -230,6 +237,7 @@
 			}	
 		}
 	*/
+
 	/* General */
 	function adaptive() {
 		adaptiveAds(); // Ads
@@ -240,6 +248,7 @@
 		adaptiveSimpleFilter(); // Simple Filter	
 		adaptiveAddButtons(); // Addd buttons
 	}
+
 	$(document).ready(function () {
 		adaptive();
 	});

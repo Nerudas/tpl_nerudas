@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app                 = JFactory::getApplication();
 $doc                 = JFactory::getDocument();
 $modules             = $doc->loadRenderer('modules');
@@ -46,7 +47,7 @@ if (!empty($this->item->latitude) && !empty($this->item->longitude))
 
 $text = $this->item->fulltext;
 // {comments}
-$text = str_replace('{comments}', $this->loadTemplate('comments'), $text);
+$text                 = str_replace('{comments}', $this->loadTemplate('comments'), $text);
 $this->item->fulltext = $text;
 ?>
 
@@ -105,9 +106,9 @@ $this->item->fulltext = $text;
 				 data-counter="">
 			</div>
 		</div>
- */?>
+ */ ?>
 	</div>
-<? /*
+	<? /*
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
 		<?php if (!empty($this->item->extra['comments']->value)): ?>
 			<div class="uk-margin-bottom">

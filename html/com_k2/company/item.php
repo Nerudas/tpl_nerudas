@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app     = JFactory::getApplication();
 $doc     = JFactory::getDocument();
 $modules = $doc->loadRenderer('modules');
@@ -159,30 +160,30 @@ if ($this->item->extra_fields)
 	</div>
 	<div class="uk-margin-top">
 
-			<?php echo $this->loadTemplate('navigation'); ?>
+		<?php echo $this->loadTemplate('navigation'); ?>
 
 
-			<div id="company-tabs" class="uk-switcher">
-				<div class="contacs">
-					<?php echo $this->loadTemplate('contacts'); ?>
+		<div id="company-tabs" class="uk-switcher">
+			<div class="contacs">
+				<?php echo $this->loadTemplate('contacts'); ?>
+			</div>
+			<?php if ($this->item->introtext): ?>
+				<div class="about">
+					<?php echo $this->loadTemplate('about'); ?>
 				</div>
-				<?php if ($this->item->introtext): ?>
-					<div class="about">
-						<?php echo $this->loadTemplate('about'); ?>
-					</div>
-				<?php endif; ?>
-				<div class="staff">
-					<?php echo $this->loadTemplate('staff'); ?>
-				</div>
-				<div class="comments">
-					<?php echo $this->loadTemplate('reviews'); ?>
-				</div>
-				<? /*
+			<?php endif; ?>
+			<div class="staff">
+				<?php echo $this->loadTemplate('staff'); ?>
+			</div>
+			<div class="comments">
+				<?php echo $this->loadTemplate('reviews'); ?>
+			</div>
+			<? /*
 				<div class="news">
 					<?php  echo $this->loadTemplate('news'); ?>
 				</div>
 				*/ ?>
-			</div>
+		</div>
 
 	</div>
 </div>

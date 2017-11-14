@@ -7,31 +7,33 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
+
+defined('_JEXEC') or die;
+$app  = JFactory::getApplication();
+$doc  = JFactory::getDocument();
 $type = 'news-company';
-include 'templates/'.$app->getTemplate().'/html/com_k2/form_head.php';
+include 'templates/' . $app->getTemplate() . '/html/com_k2/form_head.php';
 ?>
 <script>
-(function($){
-	$(document).ready(function() {
-		$('#introtext').froalaEditor({
-			key: '<?php echo $froala->key; ?>',
-			toolbarButtons: <?php echo $froala->buttons; ?>,
-			toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-			toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-			toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-			heightMin: 240,
-			heightMax: 480,
-			placeholderText: '<?php echo JText::_('NERUDAS_PREVIEW'); ?>'	
-		})
-	});
-})(jQuery);
+	(function ($) {
+		$(document).ready(function () {
+			$('#introtext').froalaEditor({
+				key: '<?php echo $froala->key; ?>',
+				toolbarButtons: <?php echo $froala->buttons; ?>,
+				toolbarButtonsMD: <?php echo $froala->buttons; ?>,
+				toolbarButtonsSM: <?php echo $froala->buttons; ?>,
+				toolbarButtonsXS: <?php echo $froala->buttons; ?>,
+				heightMin: 240,
+				heightMax: 480,
+				placeholderText: '<?php echo JText::_('NERUDAS_PREVIEW'); ?>'
+			})
+		});
+	})(jQuery);
 </script>
 
 <div id="news-company" class="itemform">
-	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm" name="adminForm">
+	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm"
+		  name="adminForm">
 		<div class="uk-grid uk-grid-collapse">
 			<aside class="tm-left sidebar uk-width-xsmall-1-1 uk-width-small-1-1 uk-width-medium-1-1 uk-width-large-1-4 uk-width-xlarge-1-5 uk-visible-large">
 				<div id="appendLeftBottom">
@@ -46,35 +48,38 @@ include 'templates/'.$app->getTemplate().'/html/com_k2/form_head.php';
 				<div class="uk-form-row">
 					<label class="uk-form-label"><?php echo JText::_('NERUDAS_TITLE'); ?></label>
 					<div class="uk-form-controls">
-						<input type="text" id="mtitle" name="title" maxlength="250" placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>" value="<?php echo $this->row->title; ?>"  class=" uk-width-1-1" />
+						<input type="text" id="mtitle" name="title" maxlength="250"
+							   placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>"
+							   value="<?php echo $this->row->title; ?>" class=" uk-width-1-1"/>
 					</div>
 				</div>
 				<div class="uk-form-row <?php echo $systemFields->css; ?>">
 					<label class="uk-form-label"><?php echo JText::_('NERUDAS_SELECT_REGION'); ?></label>
 					<div class="uk-form-controls">
 						<?php echo $this->K2PluginsItemOther['region']->fields; ?>
-						<input name="catid" type="hidden" value="<?php echo $category->id; ?>" />
+						<input name="catid" type="hidden" value="<?php echo $category->id; ?>"/>
 					</div>
 				</div>
 				<?php if ($this->K2PluginsItemOther['relateditems']->fields['company']): ?>
-				<div class="uk-form-row">
-					<label class="uk-form-label"><?php echo JText::_('NERUDAS_COMPANY'); ?></label>
-					<div class="uk-form-controls">
-						<?php echo $this->K2PluginsItemOther['relateditems']->fields['company']; ?>
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('NERUDAS_COMPANY'); ?></label>
+						<div class="uk-form-controls">
+							<?php echo $this->K2PluginsItemOther['relateditems']->fields['company']; ?>
+						</div>
 					</div>
-				</div>
-			 	<?php endif; ?>
+				<?php endif; ?>
 				<div class="uk-form-row">
 					<label class="uk-form-label"><?php echo JText::_('NERUDAS_NEWS_COMPANY_TEXT'); ?></label>
 					<div class="uk-clearfix uk-margin-small-bottom"></div>
 					<div>
-						<?php echo $this->introtext ; ?>
+						<?php echo $this->introtext; ?>
 					</div>
 				</div>
 				<div class="uk-form-row">
 					<label class="uk-form-label"><?php echo JText::_('NERUDAS_IMAGE'); ?></label>
 					<div class="uk-form-controls">
-						<img id="k2thumb" class="uk-thumbnail" alt="<?php echo $this->row->title; ?>" src="<?php echo $this->row->thumb; ?>" />
+						<img id="k2thumb" class="uk-thumbnail" alt="<?php echo $this->row->title; ?>"
+							 src="<?php echo $this->row->thumb; ?>"/>
 					</div>
 				</div>
 				<div class="uk-form-row">
@@ -85,7 +90,7 @@ include 'templates/'.$app->getTemplate().'/html/com_k2/form_head.php';
 							<span class="uk-form-file-text">
 								<?php echo JText::_('NERUDAS_SELECT_FILE_NONE'); ?>
 							</span>
-							<input type="file" name="image" class="uk-form-file-input" />
+							<input type="file" name="image" class="uk-form-file-input"/>
 						</div>
 					</div>
 				</div>
@@ -106,7 +111,9 @@ include 'templates/'.$app->getTemplate().'/html/com_k2/form_head.php';
 					<a href="javascript:history.go(-1)" class="uk-button uk-button-danger uk-button-large">
 						<?php echo JText::_('NERUDAS_CANCEL'); ?>
 					</a>
-					<a class="uk-button uk-button-success uk-button-large" onclick="Joomla.submitbutton('save'); return false;" title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
+					<a class="uk-button uk-button-success uk-button-large"
+					   onclick="Joomla.submitbutton('save'); return false;"
+					   title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
 						<?php echo JText::_('NERUDAS_SAVE'); ?>
 					</a>
 				</div>
@@ -116,13 +123,14 @@ include 'templates/'.$app->getTemplate().'/html/com_k2/form_head.php';
 					<a href="javascript:history.go(-1)" class="uk-button uk-button-danger">
 						<?php echo JText::_('NERUDAS_CANCEL'); ?>
 					</a>
-					<a class="uk-button uk-button-success" onclick="Joomla.submitbutton('save'); return false;" title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
+					<a class="uk-button uk-button-success" onclick="Joomla.submitbutton('save'); return false;"
+					   title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
 						<?php echo JText::_('NERUDAS_SAVE'); ?>
 					</a>
 				</p>
 				<div id="appendRightBottom">
 				</div>
-				<?php include 'templates/'.$app->getTemplate().'/html/com_k2/form_system.php'; ?>
+				<?php include 'templates/' . $app->getTemplate() . '/html/com_k2/form_system.php'; ?>
 			</aside>
 		</div>
 	</form>

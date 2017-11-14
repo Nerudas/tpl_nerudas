@@ -7,325 +7,348 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
-$app = JFactory::getApplication();
-$doc = JFactory::getDocument();
+
+defined('_JEXEC') or die;
+$app  = JFactory::getApplication();
+$doc  = JFactory::getDocument();
 $type = 'remzona';
-require_once(realpath(__DIR__.'/..').'/default/itemform_head.php');
-$doc->addScript('/templates/'.$app->getTemplate().'/scripts/phones_add.js');
-if (empty($this->row->image)) {
-	$this->row->thumb = '/templates/'.$app->getTemplate().'/images/noimages/1.jpg'; 
+require_once(realpath(__DIR__ . '/..') . '/default/itemform_head.php');
+$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/phones_add.js');
+if (empty($this->row->image))
+{
+	$this->row->thumb = '/templates/' . $app->getTemplate() . '/images/noimages/1.jpg';
 }
-if ($isNew) {
+if ($isNew)
+{
 	$this->row->title = '';
 }
 
 $froala->buttons = array();
-if ($permissions->moderator) {
+if ($permissions->moderator)
+{
 	$froala->buttons[] = '|';
 	$froala->buttons[] = 'html';
 }
-$froala->buttons = json_encode($froala->buttons);
-$this->item = $this->row;
-$this->navs = array();
+$froala->buttons        = json_encode($froala->buttons);
+$this->item             = $this->row;
+$this->navs             = array();
 $this->navs['contacts'] = JText::_('NERUDAS_CONTACTS');
-$this->navs['about'] = JText::_('NERUDAS_REMZONA_TEXT');
-$this->navs['price'] = $this->extra['pricelist']->name;
-if ($permissions->moderator) {
+$this->navs['about']    = JText::_('NERUDAS_REMZONA_TEXT');
+$this->navs['price']    = $this->extra['pricelist']->name;
+if ($permissions->moderator)
+{
 	$this->navs['license'] = JText::_('NERUDAS_LICENSE');
 }
 $this->navs['map'] = JText::_('NERUDAS_ON_MAP');
 
 ?>
-<script>
-(function($){
-	$(document).ready(function() {
-		$('#introtext').froalaEditor({
-			key: '<?php echo $froala->key; ?>',
-			toolbarButtons: <?php echo $froala->buttons; ?>,
-			toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-			toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-			toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-			heightMin: 240,
-			heightMax: 480,
-			placeholderText: '<?php echo JText::_('NERUDAS_REMZONA_TEXT'); ?>'	
-		});
-		$('#K2ExtraField_50').froalaEditor({
-			key: '<?php echo $froala->key; ?>',
-			toolbarButtons: <?php echo $froala->buttons; ?>,
-			toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-			toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-			toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-			heightMin: 240,
-			heightMax: 480,
-			placeholderText: '<?php echo $this->extra['pricelist']->name; ?>'	
-		});
-	});
-})(jQuery);
-</script>
+	<script>
+		(function ($) {
+			$(document).ready(function () {
+				$('#introtext').froalaEditor({
+					key: '<?php echo $froala->key; ?>',
+					toolbarButtons: <?php echo $froala->buttons; ?>,
+					toolbarButtonsMD: <?php echo $froala->buttons; ?>,
+					toolbarButtonsSM: <?php echo $froala->buttons; ?>,
+					toolbarButtonsXS: <?php echo $froala->buttons; ?>,
+					heightMin: 240,
+					heightMax: 480,
+					placeholderText: '<?php echo JText::_('NERUDAS_REMZONA_TEXT'); ?>'
+				});
+				$('#K2ExtraField_50').froalaEditor({
+					key: '<?php echo $froala->key; ?>',
+					toolbarButtons: <?php echo $froala->buttons; ?>,
+					toolbarButtonsMD: <?php echo $froala->buttons; ?>,
+					toolbarButtonsSM: <?php echo $froala->buttons; ?>,
+					toolbarButtonsXS: <?php echo $froala->buttons; ?>,
+					heightMin: 240,
+					heightMax: 480,
+					placeholderText: '<?php echo $this->extra['pricelist']->name; ?>'
+				});
+			});
+		})(jQuery);
+	</script>
 
-<div id="company" class="itemform">
-	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm" name="adminForm">
-		<div id="anchor-top" class="uk-anchor">
-		</div>
-		<div id="k2FormTop" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
-			<h1 data-change-category-new-title class="uk-h3 uk-margin-top-remove">
-				<?php echo $this->title; ?>
-			</h1>
-			<div class="uk-text-right uk-margin-bottom">
-				<a href="javascript:history.go(-1)" class="uk-button uk-button-danger">
-					<?php echo JText::_('NERUDAS_CANCEL'); ?>
-				</a>
-				<a class="uk-button uk-button-success" onclick="Joomla.submitbutton('save'); return false;" title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
-					<?php echo JText::_('NERUDAS_SAVE'); ?>
-				</a>
+	<div id="company" class="itemform">
+		<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post"
+			  id="adminForm" name="adminForm">
+			<div id="anchor-top" class="uk-anchor">
 			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo JText::_('NERUDAS_TITLE'); ?>
-				</label>
-				<div class="uk-form-controls">
-					<input type="text" id="mtitle" name="title" maxlength="250" placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>" value="<?php echo $this->row->title; ?>"  class=" uk-width-1-1" />
+			<div id="k2FormTop" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
+				<h1 data-change-category-new-title class="uk-h3 uk-margin-top-remove">
+					<?php echo $this->title; ?>
+				</h1>
+				<div class="uk-text-right uk-margin-bottom">
+					<a href="javascript:history.go(-1)" class="uk-button uk-button-danger">
+						<?php echo JText::_('NERUDAS_CANCEL'); ?>
+					</a>
+					<a class="uk-button uk-button-success" onclick="Joomla.submitbutton('save'); return false;"
+					   title="<?php echo JText::_('NERUDAS_SAVE'); ?>">
+						<?php echo JText::_('NERUDAS_SAVE'); ?>
+					</a>
 				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo JText::_('NERUDAS_CATEGORY'); ?>
-				</label>
-				<div id="category-change" class="uk-form-controls">
-					<?php if ($isNew) : ?>
-					<div class="uk-form-controls-condensed">
-						<strong><?php echo $category->name; ?></strong>
-						<a class="uk-button uk-margin-small-left" href="/nerudka/add" >
-							<?php echo JText::_('NERUDAS_CATEGORY_CHANGE'); ?>
-						</a>
-						<input name="catid" type="hidden" value="<?php echo $category->id; ?>" />
-					</div>
-					<?php else: ?>
-					<div class="toggle uk-form-controls-condensed">
-						<strong><?php echo $category->name; ?></strong>
-						<a class=" uk-button uk-margin-small-left"  data-uk-toggle="{target:'#category-change .toggle'}">
-							<?php echo JText::_('NERUDAS_CATEGORY_CHANGE'); ?>
-						</a>
-					</div>
-					<div  class="toggle uk-form-controls-condensed uk-hidden" >
-						<?php echo $category->select; ?>
-					</div>
-					<?php endif; ?>
-				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo JText::_('NERUDAS_SELECT_REGION'); ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->K2PluginsItemOther['region']->fields; ?>
-				</div>
-			</div>
-			<?php if ($this->K2PluginsItemOther['relateditems']->fields['company']): ?>
 				<div class="uk-form-row">
-					<label class="uk-form-label"><?php echo JText::_('NERUDAS_COMPANY'); ?></label>
+					<label class="uk-form-label">
+						<?php echo JText::_('NERUDAS_TITLE'); ?>
+					</label>
 					<div class="uk-form-controls">
-						<?php echo $this->K2PluginsItemOther['relateditems']->fields['company']; ?>
+						<input type="text" id="mtitle" name="title" maxlength="250"
+							   placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>"
+							   value="<?php echo $this->row->title; ?>" class=" uk-width-1-1"/>
 					</div>
 				</div>
-			 	<?php endif; ?>
-
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo JText::_('NERUDAS_IMAGE'); ?>
-				</label>
-				<div class="uk-form-controls">
-					<img id="k2thumb" class="uk-thumbnail" alt="<?php echo $this->row->title; ?>" src="<?php echo $this->row->thumb; ?>" />
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo JText::_('NERUDAS_CATEGORY'); ?>
+					</label>
+					<div id="category-change" class="uk-form-controls">
+						<?php if ($isNew) : ?>
+							<div class="uk-form-controls-condensed">
+								<strong><?php echo $category->name; ?></strong>
+								<a class="uk-button uk-margin-small-left" href="/nerudka/add">
+									<?php echo JText::_('NERUDAS_CATEGORY_CHANGE'); ?>
+								</a>
+								<input name="catid" type="hidden" value="<?php echo $category->id; ?>"/>
+							</div>
+						<?php else: ?>
+							<div class="toggle uk-form-controls-condensed">
+								<strong><?php echo $category->name; ?></strong>
+								<a class=" uk-button uk-margin-small-left"
+								   data-uk-toggle="{target:'#category-change .toggle'}">
+									<?php echo JText::_('NERUDAS_CATEGORY_CHANGE'); ?>
+								</a>
+							</div>
+							<div class="toggle uk-form-controls-condensed uk-hidden">
+								<?php echo $category->select; ?>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo JText::_('NERUDAS_IMAGE_UPLOAD'); ?>
-				</label>
-				<div class="uk-form-controls">
-					<div class="uk-form-file">
-						<button class="uk-button uk-button-primary">
-							<?php echo JText::_('NERUDAS_SELECT_FILE'); ?>
-						</button>
-						<span class="uk-form-file-text">
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo JText::_('NERUDAS_SELECT_REGION'); ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->K2PluginsItemOther['region']->fields; ?>
+					</div>
+				</div>
+				<?php if ($this->K2PluginsItemOther['relateditems']->fields['company']): ?>
+					<div class="uk-form-row">
+						<label class="uk-form-label"><?php echo JText::_('NERUDAS_COMPANY'); ?></label>
+						<div class="uk-form-controls">
+							<?php echo $this->K2PluginsItemOther['relateditems']->fields['company']; ?>
+						</div>
+					</div>
+				<?php endif; ?>
+
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo JText::_('NERUDAS_IMAGE'); ?>
+					</label>
+					<div class="uk-form-controls">
+						<img id="k2thumb" class="uk-thumbnail" alt="<?php echo $this->row->title; ?>"
+							 src="<?php echo $this->row->thumb; ?>"/>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo JText::_('NERUDAS_IMAGE_UPLOAD'); ?>
+					</label>
+					<div class="uk-form-controls">
+						<div class="uk-form-file">
+							<button class="uk-button uk-button-primary">
+								<?php echo JText::_('NERUDAS_SELECT_FILE'); ?>
+							</button>
+							<span class="uk-form-file-text">
 						<?php echo JText::_('NERUDAS_SELECT_FILE_NONE'); ?>
 						</span>
-						<input type="file" name="image" class="uk-form-file-input" />
+							<input type="file" name="image" class="uk-form-file-input"/>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="anchor-contacts" class="uk-anchor">
-		</div>
-		<div id="k2FormContacts" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
-			<h3>
-				<?php echo JText::_('NERUDAS_CONTACTS'); ?>
-			</h3>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo JText::_('NERUDAS_PHONE'); ?>
-				</label>
-				<div class="uk-form-controls" data-phones>
-					<div class="uk-form-controls-condensed uk-hidden" data-phone>
-						<div class="uk-grid uk-grid-small">
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-number>
-								<i class="uk-icon-phone"></i>
-								<?php echo $this->extra['phone_a']->element; ?>
-							</div>
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-contact>
-								<i class="uk-icon-user"></i>
-								<?php echo $this->extra['contact_a']->element; ?>
-							</div>
-						</div>
-					</div>
-					<div class="uk-form-controls-condensed uk-hidden" data-phone>
-						<div class="uk-grid uk-grid-small">
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-number>
-								<i class="uk-icon-phone"></i>
-								<?php echo $this->extra['phone_b']->element; ?>
-							</div>
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-contact>
-								<i class="uk-icon-user"></i>
-								<?php echo $this->extra['contact_b']->element; ?>
+			<div id="anchor-contacts" class="uk-anchor">
+			</div>
+			<div id="k2FormContacts" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
+				<h3>
+					<?php echo JText::_('NERUDAS_CONTACTS'); ?>
+				</h3>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo JText::_('NERUDAS_PHONE'); ?>
+					</label>
+					<div class="uk-form-controls" data-phones>
+						<div class="uk-form-controls-condensed uk-hidden" data-phone>
+							<div class="uk-grid uk-grid-small">
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-number>
+									<i class="uk-icon-phone"></i>
+									<?php echo $this->extra['phone_a']->element; ?>
+								</div>
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-contact>
+									<i class="uk-icon-user"></i>
+									<?php echo $this->extra['contact_a']->element; ?>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="uk-form-controls-condensed uk-hidden" data-phone>
-						<div class="uk-grid uk-grid-small">
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-number>
-								<i class="uk-icon-phone"></i>
-								<?php echo $this->extra['phone_c']->element; ?>
-							</div>
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-contact>
-								<i class="uk-icon-user"></i>
-								<?php echo $this->extra['contact_c']->element; ?>
-							</div>
-						</div>
-					</div>
-					<div class="uk-form-controls-condensed uk-hidden" data-phone>
-						<div class="uk-grid uk-grid-small">
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-number>
-								<i class="uk-icon-phone"></i>
-								<?php echo $this->extra['phone_d']->element; ?>
-							</div>
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-contact>
-								<i class="uk-icon-user"></i>
-								<?php echo $this->extra['contact_d']->element; ?>
+						<div class="uk-form-controls-condensed uk-hidden" data-phone>
+							<div class="uk-grid uk-grid-small">
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-number>
+									<i class="uk-icon-phone"></i>
+									<?php echo $this->extra['phone_b']->element; ?>
+								</div>
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-contact>
+									<i class="uk-icon-user"></i>
+									<?php echo $this->extra['contact_b']->element; ?>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="uk-form-controls-condensed uk-hidden" data-phone>
-						<div class="uk-grid uk-grid-small">
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-number>
-								<i class="uk-icon-phone"></i>
-								<?php echo $this->extra['phone_e']->element; ?>
-							</div>
-							<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom" data-phone-contact>
-								<i class="uk-icon-user"></i>
-								<?php echo $this->extra['contact_e']->element; ?>
+						<div class="uk-form-controls-condensed uk-hidden" data-phone>
+							<div class="uk-grid uk-grid-small">
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-number>
+									<i class="uk-icon-phone"></i>
+									<?php echo $this->extra['phone_c']->element; ?>
+								</div>
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-contact>
+									<i class="uk-icon-user"></i>
+									<?php echo $this->extra['contact_c']->element; ?>
+								</div>
 							</div>
 						</div>
+						<div class="uk-form-controls-condensed uk-hidden" data-phone>
+							<div class="uk-grid uk-grid-small">
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-number>
+									<i class="uk-icon-phone"></i>
+									<?php echo $this->extra['phone_d']->element; ?>
+								</div>
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-contact>
+									<i class="uk-icon-user"></i>
+									<?php echo $this->extra['contact_d']->element; ?>
+								</div>
+							</div>
+						</div>
+						<div class="uk-form-controls-condensed uk-hidden" data-phone>
+							<div class="uk-grid uk-grid-small">
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-number>
+									<i class="uk-icon-phone"></i>
+									<?php echo $this->extra['phone_e']->element; ?>
+								</div>
+								<div class="uk-form-icon uk-width-1-1 uk-width-small-1-2 uk-width-medium-1-2 uk-margin-small-bottom"
+									 data-phone-contact>
+									<i class="uk-icon-user"></i>
+									<?php echo $this->extra['contact_e']->element; ?>
+								</div>
+							</div>
+						</div>
+						<div class="uk-form-controls-condensed" data-phone-add>
+							<a class="uk-button">
+								<i class="uk-icon-plus"></i>
+								<?php echo JText::_('NERUDAS_ADD_PHONE'); ?>
+							</a>
+						</div>
 					</div>
-					<div class="uk-form-controls-condensed" data-phone-add>
-						<a class="uk-button">
-							<i class="uk-icon-plus"></i>
-							<?php echo JText::_('NERUDAS_ADD_PHONE'); ?>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo $this->extra['address']->name; ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->extra['address']->element; ?>
+					</div>
+				</div>
+
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo $this->extra['email']->name; ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->extra['email']->element; ?>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo $this->extra['site']->name; ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->extra['site']->element; ?>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo $this->extra['vk']->name; ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->extra['vk']->element; ?>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo $this->extra['fb']->name; ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->extra['fb']->element; ?>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label">
+						<?php echo $this->extra['ok']->name; ?>
+					</label>
+					<div class="uk-form-controls">
+						<?php echo $this->extra['ok']->element; ?>
+					</div>
+				</div>
+			</div>
+			<div id="anchor-about" class="uk-anchor">
+			</div>
+			<div id="k2FormAbout" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
+				<h3>
+					<?php echo JText::_('NERUDAS_REMZONA_TEXT'); ?>
+				</h3>
+				<?php echo $this->introtext; ?>
+			</div>
+			<div id="anchor-price" class="uk-anchor">
+			</div>
+			<div id="k2FormPrice" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
+				<h3>
+					<?php echo $this->extra['pricelist']->name; ?>
+				</h3>
+				<?php echo $this->extra['pricelist']->element; ?>
+			</div>
+			<div id="anchor-license" class="uk-anchor">
+			</div>
+			<?php if ($this->sigPro): ?>
+				<div id="k2FormLicense"
+					 class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom  <?php echo $this->systemFields->css; ?>">
+					<h3>
+						<?php echo JText::_('NERUDAS_LICENSE'); ?>
+					</h3>
+					<div class="uk-form-row <?php echo $systemFields->css; ?>">
+						<a class="modal uk-button uk-button-large" rel="{handler: 'iframe', size: {x: 940, y: 560}}"
+						   href="index.php?option=com_sigpro&view=galleries&task=create&newFolder=<?php echo $this->sigProFolder; ?>&type=k2&tmpl=component&template=system">
+							<?php echo JText::_('NERUDAS_LICENSE'); ?>
 						</a>
+						<input name="sigProFolder" type="hidden" value="<?php echo $this->sigProFolder; ?>"/>
 					</div>
 				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo $this->extra['address']->name; ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->extra['address']->element; ?>
-				</div>
-			</div>
-			
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo $this->extra['email']->name; ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->extra['email']->element; ?>
-				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo $this->extra['site']->name; ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->extra['site']->element; ?>
-				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo $this->extra['vk']->name; ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->extra['vk']->element; ?>
-				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo $this->extra['fb']->name; ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->extra['fb']->element; ?>
-				</div>
-			</div>
-			<div class="uk-form-row">
-				<label class="uk-form-label">
-					<?php echo $this->extra['ok']->name; ?>
-				</label>
-				<div class="uk-form-controls">
-					<?php echo $this->extra['ok']->element; ?>
-				</div>
-			</div>
-		</div>
-		<div id="anchor-about" class="uk-anchor">
-		</div>
-		<div id="k2FormAbout" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
-			<h3>
-				<?php echo JText::_('NERUDAS_REMZONA_TEXT'); ?>
-			</h3>
-			<?php echo $this->introtext ; ?>
-		</div>
-		<div id="anchor-price" class="uk-anchor">
-		</div>
-		<div id="k2FormPrice" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom">
-			<h3>
-				<?php echo $this->extra['pricelist']->name; ?>
-			</h3>
-			<?php echo $this->extra['pricelist']->element; ?>
-		</div>
-		<div id="anchor-license" class="uk-anchor">
-		</div>
-		<?php if($this->sigPro): ?>
-		<div id="k2FormLicense" class="uk-form uk-form-horizontal uk-panel uk-panel-box uk-margin-bottom  <?php echo $this->systemFields->css; ?>">
-			<h3>
-					<?php echo JText::_('NERUDAS_LICENSE');?>
-			</h3>
-				<div class="uk-form-row <?php echo $systemFields->css; ?>">
-					<a class="modal uk-button uk-button-large" rel="{handler: 'iframe', size: {x: 940, y: 560}}" href="index.php?option=com_sigpro&view=galleries&task=create&newFolder=<?php echo $this->sigProFolder; ?>&type=k2&tmpl=component&template=system">
-						<?php echo JText::_('NERUDAS_LICENSE');?>
-					</a>
-					<input name="sigProFolder" type="hidden" value="<?php echo $this->sigProFolder; ?>" />
-				</div>
-		</div>
-		<?php endif; ?>	
-				
-				
-		<?php echo $this->loadTemplate('map'); ?>
-		<?php echo $this->loadTemplate('system'); ?>
-		<?php echo $this->loadTemplate('actions'); ?>
-	</form>
-</div>
+			<?php endif; ?>
+
+
+			<?php echo $this->loadTemplate('map'); ?>
+			<?php echo $this->loadTemplate('system'); ?>
+			<?php echo $this->loadTemplate('actions'); ?>
+		</form>
+	</div>
 <?php
 /*
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 $type = 'nerudka';

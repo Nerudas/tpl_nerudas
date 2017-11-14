@@ -7,7 +7,8 @@
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
-defined('_JEXEC') or die('Restricted access');
+
+defined('_JEXEC') or die;
 $app                 = JFactory::getApplication();
 $doc                 = JFactory::getDocument();
 $modules             = $doc->loadRenderer('modules');
@@ -73,12 +74,14 @@ if (!empty($this->item->latitude) && !empty($this->item->longitude))
 				<?php echo $this->item->title; ?>
 				<?php if (isset($this->item->extra['adswhen']) && !empty($this->item->extra['adswhen']->value)) :
 					$lang = JLanguage::getInstance('ru-RU');
-					$val = str_replace(' ', '-',$lang->transliterate($this->item->extra['adswhen']->value));
+					$val = str_replace(' ', '-', $lang->transliterate($this->item->extra['adswhen']->value));
 					$class = 'uk-hidden';
-					if($val == 'na-segodnya') {
+					if ($val == 'na-segodnya')
+					{
 						$class = 'uk-badge-success';
 					}
-					if($val == 'na-zavtra') {
+					if ($val == 'na-zavtra')
+					{
 						$class = 'uk-badge-warning';
 					}
 					?>
