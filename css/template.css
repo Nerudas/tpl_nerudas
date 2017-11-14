@@ -1543,8 +1543,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 	display: inline-block;
 	position: relative;
 	border-radius: 50%;
-	background-size: cover;
 	background: no-repeat 50% 50%;
+	background-size: cover;
 	box-sizing: border-box;
 }
 
