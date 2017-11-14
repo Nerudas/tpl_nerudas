@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <extension type="template" version="3.5" method="upgrade" client="site">
-	<name>Nerudas</name>
-	<version>4.9.1</version>
-	<creationDate>November 2018</creationDate>
+	<name>nerudas</name>
 	<author>Nerudas</author>
+	<creationDate>September 2017</creationDate>
 	<copyright>Copyright (c) 2015 - 2017 Nerudas. All rights reserved.</copyright>
+	<license>>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@nerudas.ru</authorEmail>
 	<authorUrl>nerudas.ru</authorUrl>
-	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
-	<description>Nerudas Template</description>
+	<version>4.9.1</version>
+	<description>TPL_NERUDAS_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<files>
 		<folder>css</folder>
@@ -23,6 +23,12 @@
 		<filename>offline.php</filename>
 		<filename>templateDetails.xml</filename>
 	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_nerudas.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_nerudas.sys.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.sys.ini</language>
+	</languages>
 	<positions>
 		<position>scripts</position>
 		<position>head</position>
@@ -42,7 +48,14 @@
 	</positions>
 	<config>
 		<fields name="params">
-			<fieldset name="general">
+			<fieldset name="basic">
+				<field name="minified" type="radio"
+					   label="TPL_NERUDAS_PARAMS_MINIFIED"
+					   default="1"
+					   class="btn-group btn-group-yesno">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>

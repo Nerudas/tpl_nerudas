@@ -28,7 +28,7 @@ class tplNerudasHelper
 		$doc = Factory::getDocument();
 
 		// Template params
-		$minified = ($params->get('minified', 0)) ? '.min' : '';
+		$minified = ($params->get('minified', 1)) ? '.min' : '';
 
 		// Add Fonts
 		HTMLHelper::_('stylesheet', 'fonts' . $minified . '.css', array('version' => 'auto', 'relative' => true));
