@@ -45,9 +45,13 @@ class nerudasInstallerScript
 	{
 		// Delete index.html
 		$index_files = JFolder::files($path, 'index.html', true, true);
-		foreach ($index_files as $file) {
+		foreach ($index_files as $file)
+		{
 			JFile::delete($file);
 		}
+		// Delete Scripts folder
+		JFolder::delete($path . '/scripts');
+
 	}
 
 }

@@ -9,15 +9,33 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+
+// Connect template heper
+require_once __DIR__ . '/helper.php';
+$this->helper = new tplNerudasHelper;
+
+// Check site version
+$this->helper->checkSiteVersion($this->params);
+
+// Set Head
+$this->helper->setHead($this->params);
+
+
 /* General 
 ========================================================================== */
-$app    = JFactory::getApplication();
-$doc    = JFactory::getDocument();
-$config = JFactory::getConfig();
+$app    = Factory::getApplication();
+$doc    = Factory::getDocument();
+$config = Factory::getConfig();
+
 if ($_SERVER['REQUEST_URI'] == '/index.php?option=com_k2&view=itemlist')
 {
 	JError::raiseError(404);
 }
+
+
+
 /* Site Settings 
 ========================================================================== */
 $site          = new stdClass();
@@ -34,6 +52,8 @@ if ($app->input->get('view') == 'map' && $app->input->get('option') == 'com_neru
 {
 	$site->layout = 'map';
 }
+
+
 
 /* Uikit
 ========================================================================== */
@@ -54,46 +74,9 @@ $template->css = array('uikit', 'template');
 $template->js  = array('template', 'regions');
 
 
-/* StyleSheets
-========================================================================== */
-// Fonts
-$this->addStyleSheet('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic,cyrillic-ext');
-$this->addStyleSheet('/templates/' . $this->template . '/css/fonts.css');
-// UIkit
-$this->addStyleSheet($uikit->cdn . $uikit->version . '/css/uikit' . $uikit->theme . $uikit->compression . '.css');
-foreach ($uikit->components->css as $css)
-{
-	$this->addStyleSheet($uikit->cdn . $uikit->version . '/css/components/' . $css . $uikit->theme . $uikit->compression . '.css');
-}
-// Template 
-foreach ($template->css as $css)
-{
-	$this->addStyleSheet('/templates/' . $this->template . '/css/' . $css . '.css');
-}
-// Uset
 unset($doc->_styleSheets['/media/k2/assets/css/k2.css?v=2.7.1']);
 
-/* JavaScripts
-========================================================================== */
-// Uikit
-$this->addScript($uikit->cdn . $uikit->version . '/js/uikit' . $uikit->compression . '.js');
-foreach ($uikit->components->js as $js)
-{
-	$this->addScript($uikit->cdn . $uikit->version . '/js/components/' . $js . $uikit->compression . '.js');
-}
-// Cookie
-$this->addScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js');
-// Chosen
-$this->addScript('https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js');
-$this->addScriptDeclaration("jQuery(document).ready(function() {jQuery('.uk-form select').chosen({placeholder_text_single: '" . JText::_('NERUDAS_CHOSEN_SINGLE') . "', placeholder_text_multiple: '" . JText::_('NERUDAS_CHOSEN_MULTIPLE') . "', single_backstroke_delete: false});});");
-// icheck
-$this->addScript('https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js');
-$this->addScriptDeclaration("jQuery(document).ready(function(){jQuery(jQuery('.uk-form input[type=radio]')).each(function(x) {if (jQuery(this).parents('[data-uk-button-radio]').length < 1) {iCheckInitialize(jQuery(this));}});iCheckInitialize(jQuery('.uk-form input[type=checkbox]'));function iCheckInitialize(elem) {elem.iCheck({radioClass: 'iradio', checkboxClass: 'icheckbox'});}});");
-// Template
-foreach ($template->js as $js)
-{
-	$this->addScript('/templates/' . $this->template . '/scripts/' . $js . '.js');
-}
+
 
 /* Load Layout
 ========================================================================== */

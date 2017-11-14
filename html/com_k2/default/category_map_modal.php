@@ -9,7 +9,6 @@
  */
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/map_modal.js');
 ?>
 <div id="mapModal" class="uk-modal">
 	<div class="uk-modal-dialog">

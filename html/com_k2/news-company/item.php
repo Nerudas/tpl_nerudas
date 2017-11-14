@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/map_modal.js');
 $modules             = $doc->loadRenderer('modules');
 $this->item->mintext = NerudasUtility::minimalizeText($this->item->introtext);
 if (!$this->item->image)

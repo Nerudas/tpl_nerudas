@@ -9,7 +9,6 @@
  */
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/pagination.js');
 $this->pagination->selector = '#ads.itemlist .pagination > .uk-pagination';
 $doc->addScriptDeclaration("jQuery(document).ready(function(){addPagination(jQuery('" . $this->pagination->selector . "'), '" . json_encode($this->pagination) . "');});jQuery(window).resize(function(){addPagination(jQuery('" . $this->pagination->selector . "'), '" . json_encode($this->pagination) . "');});");
 ?>

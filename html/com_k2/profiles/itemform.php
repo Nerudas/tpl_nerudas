@@ -17,7 +17,7 @@ if (empty($this->row->id))
 	$app->redirect(JURI::current() . '?cid=' . NerudasProfilesHelper::getProfile(JFactory::getUser()->id)->id);
 }
 require_once(realpath(__DIR__ . '/..') . '/default/itemform_head.php');
-$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/phones_add.js');
+
 if (empty($this->row->image))
 {
 	$this->row->thumb = '/templates/' . $app->getTemplate() . '/images/noimages/1.jpg';

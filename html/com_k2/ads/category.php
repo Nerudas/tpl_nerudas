@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
-$doc->addScript('/templates/' . $app->getTemplate() . '/scripts/k2items.js');
+
 $this->addLink = '/ads/add';
 $modules       = $doc->loadRenderer('modules');
 //$this->addLink = '/forms/ads?catid='.$this->category->id;
