@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <extension type="template" version="3.5" method="upgrade" client="site">
 	<name>Nerudas</name>
-	<version>4.9</version>
+	<version>4.9.1</version>
 	<creationDate>June 2017</creationDate>
 	<author>Nerudas</author>
 	<copyright>Copyright (c) 2015 - 2017 Nerudas. All rights reserved.</copyright>
@@ -47,4 +47,7 @@
 			</fieldset>
 		</fields>
 	</config>
+	<updateservers>
+		<server type="extension" priority="1" name="Nerudas Templale Update">https://update.nerudas.ru?extension=tpl_nerudas</server>
+	</updateservers>
 </extension>
