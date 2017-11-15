@@ -2,7 +2,7 @@
 <extension type="template" version="3.5" method="upgrade" client="site">
 	<name>nerudas</name>
 	<author>Nerudas</author>
-	<creationDate>September 2017</creationDate>
+	<creationDate>November 2017</creationDate>
 	<copyright>Copyright (c) 2015 - 2017 Nerudas. All rights reserved.</copyright>
 	<license>>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@nerudas.ru</authorEmail>
@@ -62,7 +62,7 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" priority="1" name="Nerudas Templale Update">
+		<server type="extension" priority="1" name="Nerudas Template">
 			https://update.nerudas.ru?extension=tpl_nerudas
 		</server>
 	</updateservers>
