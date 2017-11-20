@@ -28,32 +28,8 @@ class nerudasInstallerScript
 	function postflight($type, $parent)
 	{
 		$path = JPATH_SITE . '/templates/nerudas';
-		$this->update491($path);
 
 		return true;
-	}
-
-
-	/**
-	 * Update to 4.9.1 version
-	 *
-	 * @param string $path path to tempalte
-	 *
-	 * @since    4.9.1
-	 */
-	protected function update491($path)
-	{
-		// Delete index.html
-		$index_files = JFolder::files($path, 'index.html', true, true);
-		foreach ($index_files as $file)
-		{
-			JFile::delete($file);
-		}
-		// Delete Scripts folder
-		JFolder::delete($path . '/scripts');
-
-		// Delete jw_sigpro
-		JFolder::delete($path . '/html/jw_sigpro');
 	}
 
 }
