@@ -64,8 +64,8 @@ html {
 	display: block;
 	width: 100%;
 	height: 100%;
-	background-size: cover;
 	background: no-repeat 50% 50%;
+	background-size: cover;
 	filter: blur(1px);
 	-webkit-filter: blur(1px);
 	-moz-filter: blur(1px);
@@ -1725,8 +1725,8 @@ a.uk-thumbnail:focus, a.uk-thumbnail:hover, a.uk-thumbnail-border:focus, a.uk-th
 }
 
 .uk-thumbnail.uk-cover-background {
-	background-size: cover;
 	background: no-repeat 50% 50%;
+	background-size: cover;
 }
 
 .uk-thumbnail.uk-border-circle {
