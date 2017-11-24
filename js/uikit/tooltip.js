@@ -1,258 +1,235 @@
-/*
- * @package    Nerudas Template
- * @version    4.9.3
- * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- * @link       https://nerudas.ru
- */
-
 /*! UIkit 2.27.4 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
-(function (addon) {
-	var component;
-
-	if (window.UIkit2) {
-		component = addon(UIkit2);
-	}
-
-	if (typeof define == 'function' && define.amd) {
-		define('uikit-tooltip', ['uikit'], function () {
-			return component || addon(UIkit2);
-		});
-	}
-
-})(function (UI) {
-
-	"use strict";
-
-	var $tooltip,   // tooltip container
-		tooltipdelay, checkIdle;
-
-	UI.component('tooltip', {
-
-		defaults: {
-			offset: 5,
-			pos: 'top',
-			animation: false,
-			delay: 0, // in miliseconds
-			cls: '',
-			activeClass: 'uk-active',
-			src: function (ele) {
-				var title = ele.attr('title');
-
-				if (title !== undefined) {
-					ele.data('cached-title', title).removeAttr('title');
-				}
-
-				return ele.data("cached-title");
-			}
-		},
-
-		tip: '',
-
-		boot: function () {
-
-			// init code
-			UI.$html.on('mouseenter.tooltip.uikit focus.tooltip.uikit', '[data-uk-tooltip]', function (e) {
-				var ele = UI.$(this);
-
-				if (!ele.data('tooltip')) {
-					UI.tooltip(ele, UI.Utils.options(ele.attr('data-uk-tooltip')));
-					ele.trigger('mouseenter');
-				}
-			});
-		},
-
-		init: function () {
-
-			var $this = this;
-
-			if (!$tooltip) {
-				$tooltip = UI.$('<div class="uk-tooltip"></div>').appendTo("body");
-			}
-
-			this.on({
-				focus: function (e) {
-					$this.show();
-				},
-				blur: function (e) {
-					$this.hide();
-				},
-				mouseenter: function (e) {
-					$this.show();
-				},
-				mouseleave: function (e) {
-					$this.hide();
-				}
-			});
-		},
+(function(addon) {
+    var component;
+
+    if (window.UIkit2) {
+        component = addon(UIkit2);
+    }
+
+    if (typeof define == 'function' && define.amd) {
+        define('uikit-tooltip', ['uikit'], function(){
+            return component || addon(UIkit2);
+        });
+    }
 
-		show: function () {
+})(function(UI){
 
-			this.tip = typeof(this.options.src) === 'function' ? this.options.src(this.element) : this.options.src;
+    "use strict";
 
-			if (tooltipdelay) clearTimeout(tooltipdelay);
-			if (checkIdle) clearInterval(checkIdle);
+    var $tooltip,   // tooltip container
+        tooltipdelay, checkIdle;
+
+    UI.component('tooltip', {
+
+        defaults: {
+            offset: 5,
+            pos: 'top',
+            animation: false,
+            delay: 0, // in miliseconds
+            cls: '',
+            activeClass: 'uk-active',
+            src: function(ele) {
+                var title = ele.attr('title');
 
-			if (typeof(this.tip) === 'string' ? !this.tip.length : true) return;
+                if (title !== undefined) {
+                    ele.data('cached-title', title).removeAttr('title');
+                }
 
-			$tooltip.stop().css({top: -2000, visibility: 'hidden'}).removeClass(this.options.activeClass).show();
-			$tooltip.html('<div class="uk-tooltip-inner">' + this.tip + '</div>');
+                return ele.data("cached-title");
+            }
+        },
 
-			var $this = this,
-				pos = UI.$.extend({}, this.element.offset(), {
-					width: this.element[0].offsetWidth,
-					height: this.element[0].offsetHeight
-				}),
-				width = $tooltip[0].offsetWidth,
-				height = $tooltip[0].offsetHeight,
-				offset = typeof(this.options.offset) === "function" ? this.options.offset.call(this.element) : this.options.offset,
-				position = typeof(this.options.pos) === "function" ? this.options.pos.call(this.element) : this.options.pos,
-				tmppos = position.split("-"),
-				tcss = {
-					display: 'none',
-					visibility: 'visible',
-					top: (pos.top + pos.height + height),
-					left: pos.left
-				};
+        tip: '',
 
+        boot: function() {
 
-			// prevent strange position
-			// when tooltip is in offcanvas etc.
-			if (UI.$html.css('position') == 'fixed' || UI.$body.css('position') == 'fixed') {
-				var bodyoffset = UI.$('body').offset(),
-					htmloffset = UI.$('html').offset(),
-					docoffset = {top: (htmloffset.top + bodyoffset.top), left: (htmloffset.left + bodyoffset.left)};
+            // init code
+            UI.$html.on('mouseenter.tooltip.uikit focus.tooltip.uikit', '[data-uk-tooltip]', function(e) {
+                var ele = UI.$(this);
 
-				pos.left -= docoffset.left;
-				pos.top -= docoffset.top;
-			}
+                if (!ele.data('tooltip')) {
+                    UI.tooltip(ele, UI.Utils.options(ele.attr('data-uk-tooltip')));
+                    ele.trigger('mouseenter');
+                }
+            });
+        },
 
+        init: function() {
 
-			if ((tmppos[0] == 'left' || tmppos[0] == 'right') && UI.langdirection == 'right') {
-				tmppos[0] = tmppos[0] == 'left' ? 'right' : 'left';
-			}
+            var $this = this;
 
-			var variants = {
-				bottom: {top: pos.top + pos.height + offset, left: pos.left + pos.width / 2 - width / 2},
-				top: {top: pos.top - height - offset, left: pos.left + pos.width / 2 - width / 2},
-				left: {top: pos.top + pos.height / 2 - height / 2, left: pos.left - width - offset},
-				right: {top: pos.top + pos.height / 2 - height / 2, left: pos.left + pos.width + offset}
-			};
+            if (!$tooltip) {
+                $tooltip = UI.$('<div class="uk-tooltip"></div>').appendTo("body");
+            }
 
-			UI.$.extend(tcss, variants[tmppos[0]]);
+            this.on({
+                focus      : function(e) { $this.show(); },
+                blur       : function(e) { $this.hide(); },
+                mouseenter : function(e) { $this.show(); },
+                mouseleave : function(e) { $this.hide(); }
+            });
+        },
 
-			if (tmppos.length == 2) tcss.left = (tmppos[1] == 'left') ? (pos.left) : ((pos.left + pos.width) - width);
+        show: function() {
 
-			var boundary = this.checkBoundary(tcss.left, tcss.top, width, height);
+            this.tip = typeof(this.options.src) === 'function' ? this.options.src(this.element) : this.options.src;
 
-			if (boundary) {
+            if (tooltipdelay) clearTimeout(tooltipdelay);
+            if (checkIdle)    clearInterval(checkIdle);
 
-				switch (boundary) {
-					case 'x':
+            if (typeof(this.tip) === 'string' ? !this.tip.length:true) return;
 
-						if (tmppos.length == 2) {
-							position = tmppos[0] + "-" + (tcss.left < 0 ? 'left' : 'right');
-						} else {
-							position = tcss.left < 0 ? 'right' : 'left';
-						}
+            $tooltip.stop().css({top: -2000, visibility: 'hidden'}).removeClass(this.options.activeClass).show();
+            $tooltip.html('<div class="uk-tooltip-inner">' + this.tip + '</div>');
 
-						break;
+            var $this      = this,
+                pos        = UI.$.extend({}, this.element.offset(), {width: this.element[0].offsetWidth, height: this.element[0].offsetHeight}),
+                width      = $tooltip[0].offsetWidth,
+                height     = $tooltip[0].offsetHeight,
+                offset     = typeof(this.options.offset) === "function" ? this.options.offset.call(this.element) : this.options.offset,
+                position   = typeof(this.options.pos) === "function" ? this.options.pos.call(this.element) : this.options.pos,
+                tmppos     = position.split("-"),
+                tcss       = {
+                    display    : 'none',
+                    visibility : 'visible',
+                    top        : (pos.top + pos.height + height),
+                    left       : pos.left
+                };
 
-					case 'y':
-						if (tmppos.length == 2) {
-							position = (tcss.top < 0 ? 'bottom' : 'top') + '-' + tmppos[1];
-						} else {
-							position = (tcss.top < 0 ? 'bottom' : 'top');
-						}
 
-						break;
+            // prevent strange position
+            // when tooltip is in offcanvas etc.
+            if (UI.$html.css('position')=='fixed' || UI.$body.css('position')=='fixed'){
+                var bodyoffset = UI.$('body').offset(),
+                    htmloffset = UI.$('html').offset(),
+                    docoffset  = {top: (htmloffset.top + bodyoffset.top), left: (htmloffset.left + bodyoffset.left)};
 
-					case 'xy':
-						if (tmppos.length == 2) {
-							position = (tcss.top < 0 ? 'bottom' : 'top') + '-' + (tcss.left < 0 ? 'left' : 'right');
-						} else {
-							position = tcss.left < 0 ? 'right' : 'left';
-						}
+                pos.left -= docoffset.left;
+                pos.top  -= docoffset.top;
+            }
 
-						break;
 
-				}
+            if ((tmppos[0] == 'left' || tmppos[0] == 'right') && UI.langdirection == 'right') {
+                tmppos[0] = tmppos[0] == 'left' ? 'right' : 'left';
+            }
 
-				tmppos = position.split('-');
+            var variants =  {
+                bottom  : {top: pos.top + pos.height + offset, left: pos.left + pos.width / 2 - width / 2},
+                top     : {top: pos.top - height - offset, left: pos.left + pos.width / 2 - width / 2},
+                left    : {top: pos.top + pos.height / 2 - height / 2, left: pos.left - width - offset},
+                right   : {top: pos.top + pos.height / 2 - height / 2, left: pos.left + pos.width + offset}
+            };
 
-				UI.$.extend(tcss, variants[tmppos[0]]);
+            UI.$.extend(tcss, variants[tmppos[0]]);
 
-				if (tmppos.length == 2) tcss.left = (tmppos[1] == 'left') ? (pos.left) : ((pos.left + pos.width) - width);
-			}
+            if (tmppos.length == 2) tcss.left = (tmppos[1] == 'left') ? (pos.left) : ((pos.left + pos.width) - width);
 
+            var boundary = this.checkBoundary(tcss.left, tcss.top, width, height);
 
-			tcss.left -= UI.$body.position().left;
+            if(boundary) {
 
-			tooltipdelay = setTimeout(function () {
+                switch(boundary) {
+                    case 'x':
 
-				$tooltip.css(tcss).attr('class', ['uk-tooltip', 'uk-tooltip-' + position, $this.options.cls].join(' '));
+                        if (tmppos.length == 2) {
+                            position = tmppos[0]+"-"+(tcss.left < 0 ? 'left': 'right');
+                        } else {
+                            position = tcss.left < 0 ? 'right': 'left';
+                        }
 
-				if ($this.options.animation) {
-					$tooltip.css({
-						opacity: 0,
-						display: 'block'
-					}).addClass($this.options.activeClass).animate({opacity: 1}, parseInt($this.options.animation, 10) || 400);
-				} else {
-					$tooltip.show().addClass($this.options.activeClass);
-				}
+                        break;
 
-				tooltipdelay = false;
+                    case 'y':
+                        if (tmppos.length == 2) {
+                            position = (tcss.top < 0 ? 'bottom': 'top')+'-'+tmppos[1];
+                        } else {
+                            position = (tcss.top < 0 ? 'bottom': 'top');
+                        }
 
-				// close tooltip if element was removed or hidden
-				checkIdle = setInterval(function () {
-					if (!$this.element.is(':visible')) $this.hide();
-				}, 150);
+                        break;
 
-			}, parseInt(this.options.delay, 10) || 0);
-		},
+                    case 'xy':
+                        if (tmppos.length == 2) {
+                            position = (tcss.top < 0 ? 'bottom': 'top')+'-'+(tcss.left < 0 ? 'left': 'right');
+                        } else {
+                            position = tcss.left < 0 ? 'right': 'left';
+                        }
 
-		hide: function () {
+                        break;
 
-			if (this.element.is('input') && this.element[0] === document.activeElement) return;
+                }
 
-			if (tooltipdelay) clearTimeout(tooltipdelay);
-			if (checkIdle) clearInterval(checkIdle);
+                tmppos = position.split('-');
 
-			$tooltip.stop();
+                UI.$.extend(tcss, variants[tmppos[0]]);
 
-			if (this.options.animation) {
+                if (tmppos.length == 2) tcss.left = (tmppos[1] == 'left') ? (pos.left) : ((pos.left + pos.width) - width);
+            }
 
-				var $this = this;
 
-				$tooltip.fadeOut(parseInt(this.options.animation, 10) || 400, function () {
-					$tooltip.removeClass($this.options.activeClass)
-				});
+            tcss.left -= UI.$body.position().left;
 
-			} else {
-				$tooltip.hide().removeClass(this.options.activeClass);
-			}
-		},
+            tooltipdelay = setTimeout(function(){
 
-		content: function () {
-			return this.tip;
-		},
+                $tooltip.css(tcss).attr('class', ['uk-tooltip', 'uk-tooltip-'+position, $this.options.cls].join(' '));
 
-		checkBoundary: function (left, top, width, height) {
+                if ($this.options.animation) {
+                    $tooltip.css({opacity: 0, display: 'block'}).addClass($this.options.activeClass).animate({opacity: 1}, parseInt($this.options.animation, 10) || 400);
+                } else {
+                    $tooltip.show().addClass($this.options.activeClass);
+                }
 
-			var axis = "";
+                tooltipdelay = false;
 
-			if (left < 0 || ((left - UI.$win.scrollLeft()) + width) > window.innerWidth) {
-				axis += "x";
-			}
+                // close tooltip if element was removed or hidden
+                checkIdle = setInterval(function(){
+                    if(!$this.element.is(':visible')) $this.hide();
+                }, 150);
 
-			if (top < 0 || ((top - UI.$win.scrollTop()) + height) > window.innerHeight) {
-				axis += "y";
-			}
+            }, parseInt(this.options.delay, 10) || 0);
+        },
 
-			return axis;
-		}
-	});
+        hide: function() {
 
-	return UI.tooltip;
+            if (this.element.is('input') && this.element[0]===document.activeElement) return;
+
+            if (tooltipdelay) clearTimeout(tooltipdelay);
+            if (checkIdle)  clearInterval(checkIdle);
+
+            $tooltip.stop();
+
+            if (this.options.animation) {
+
+                var $this = this;
+
+                $tooltip.fadeOut(parseInt(this.options.animation, 10) || 400, function(){
+                    $tooltip.removeClass($this.options.activeClass)
+                });
+
+            } else {
+                $tooltip.hide().removeClass(this.options.activeClass);
+            }
+        },
+
+        content: function() {
+            return this.tip;
+        },
+
+        checkBoundary: function(left, top, width, height) {
+
+            var axis = "";
+
+            if(left < 0 || ((left - UI.$win.scrollLeft())+width) > window.innerWidth) {
+               axis += "x";
+            }
+
+            if(top < 0 || ((top - UI.$win.scrollTop())+height) > window.innerHeight) {
+               axis += "y";
+            }
+
+            return axis;
+        }
+    });
+
+    return UI.tooltip;
 });

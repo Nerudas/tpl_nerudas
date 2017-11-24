@@ -1,565 +1,540 @@
-/*
- * @package    Nerudas Template
- * @version    4.9.3
- * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- * @link       https://nerudas.ru
- */
-
 /*! UIkit 2.27.4 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
-(function (addon) {
+(function(addon) {
 
-	var component;
+    var component;
 
-	if (window.UIkit2) {
-		component = addon(UIkit2);
-	}
+    if (window.UIkit2) {
+        component = addon(UIkit2);
+    }
 
-	if (typeof define == 'function' && define.amd) {
-		define('uikit-grid', ['uikit'], function () {
-			return component || addon(UIkit2);
-		});
-	}
+    if (typeof define == 'function' && define.amd) {
+        define('uikit-grid', ['uikit'], function(){
+            return component || addon(UIkit2);
+        });
+    }
 
-})(function (UI) {
+})(function(UI){
 
-	"use strict";
+    "use strict";
 
-	UI.component('grid', {
+    UI.component('grid', {
 
-		defaults: {
-			colwidth: 'auto',
-			animation: true,
-			duration: 300,
-			gutter: 0,
-			controls: false,
-			filter: false,
-			origin: UI.langdirection
-		},
+        defaults: {
+            colwidth  : 'auto',
+            animation : true,
+            duration  : 300,
+            gutter    : 0,
+            controls  : false,
+            filter    : false,
+            origin    : UI.langdirection
+        },
 
-		boot: function () {
+        boot:  function() {
 
-			// init code
-			UI.ready(function (context) {
+            // init code
+            UI.ready(function(context) {
 
-				UI.$('[data-uk-grid]', context).each(function () {
+                UI.$('[data-uk-grid]', context).each(function(){
 
-					var ele = UI.$(this);
+                    var ele = UI.$(this);
 
-					if (!ele.data('grid')) {
-						UI.grid(ele, UI.Utils.options(ele.attr('data-uk-grid')));
-					}
-				});
-			});
-		},
+                    if(!ele.data('grid')) {
+                        UI.grid(ele, UI.Utils.options(ele.attr('data-uk-grid')));
+                    }
+                });
+            });
+        },
 
-		init: function () {
+        init: function() {
 
-			var $this = this, gutter = String(this.options.gutter).trim().split(' ');
+            var $this = this, gutter = String(this.options.gutter).trim().split(' ');
 
-			this.gutterv = parseInt(gutter[0], 10);
-			this.gutterh = parseInt((gutter[1] || gutter[0]), 10);
+            this.gutterv  = parseInt(gutter[0], 10);
+            this.gutterh  = parseInt((gutter[1] || gutter[0]), 10);
 
-			// make sure parent element has the right position property
-			this.element.css({'position': 'relative'});
+            // make sure parent element has the right position property
+            this.element.css({'position': 'relative'});
 
-			this.controls = null;
-			this.origin = this.options.origin;
+            this.controls = null;
+            this.origin   = this.options.origin;
 
-			if (this.options.controls) {
+            if (this.options.controls) {
 
-				this.controls = UI.$(this.options.controls);
+                this.controls = UI.$(this.options.controls);
 
-				// filter
-				this.controls.on('click', '[data-uk-filter]', function (e) {
-					e.preventDefault();
-					$this.filter(UI.$(this).attr('data-uk-filter'));
-				});
+                // filter
+                this.controls.on('click', '[data-uk-filter]', function(e){
+                    e.preventDefault();
+                    $this.filter(UI.$(this).attr('data-uk-filter'));
+                });
 
-				// sort
-				this.controls.on('click', '[data-uk-sort]', function (e) {
-					e.preventDefault();
-					var cmd = UI.$(this).attr('data-uk-sort').split(':');
-					$this.sort(cmd[0], cmd[1]);
-				});
-			}
+                // sort
+                this.controls.on('click', '[data-uk-sort]', function(e){
+                    e.preventDefault();
+                    var cmd = UI.$(this).attr('data-uk-sort').split(':');
+                    $this.sort(cmd[0], cmd[1]);
+                });
+            }
 
-			UI.$win.on('load resize orientationchange', UI.Utils.debounce(function () {
+            UI.$win.on('load resize orientationchange', UI.Utils.debounce(function(){
 
-				if ($this.currentfilter) {
-					$this.filter($this.currentfilter);
-				} else {
-					this.update();
-				}
+                if ($this.currentfilter) {
+                    $this.filter($this.currentfilter);
+                } else {
+                    this.update();
+                }
 
-			}.bind(this), 100));
+            }.bind(this), 100));
 
-			this.on('display.uk.check', function () {
-				if ($this.element.is(':visible')) $this.update();
-			});
+            this.on('display.uk.check', function(){
+                if ($this.element.is(':visible'))  $this.update();
+            });
 
-			UI.domObserve(this.element, function (e) {
-				$this.update();
-			});
+            UI.domObserve(this.element, function(e) {
+                $this.update();
+            });
 
-			if (this.options.filter !== false) {
-				this.filter(this.options.filter);
-			} else {
-				this.update();
-			}
-		},
+            if (this.options.filter !== false) {
+                this.filter(this.options.filter);
+            } else {
+                this.update();
+            }
+        },
 
-		_prepareElements: function () {
+        _prepareElements: function() {
 
-			var children = this.element.children(':not([data-grid-prepared])'), css;
+            var children = this.element.children(':not([data-grid-prepared])'), css;
 
-			// exit if no already prepared elements found
-			if (!children.length) {
-				return;
-			}
+            // exit if no already prepared elements found
+            if (!children.length) {
+                return;
+            }
 
-			css = {
-				position: 'absolute',
-				boxSizing: 'border-box',
-				width: this.options.colwidth == 'auto' ? '' : this.options.colwidth
-			};
+            css = {
+                position  : 'absolute',
+                boxSizing : 'border-box',
+                width     : this.options.colwidth == 'auto' ? '' : this.options.colwidth
+            };
 
-			if (this.options.gutter) {
+            if (this.options.gutter) {
 
-				css['padding-' + this.origin] = this.gutterh;
-				css['padding-bottom'] = this.gutterv;
+                css['padding-'+this.origin] = this.gutterh;
+                css['padding-bottom'] = this.gutterv;
 
-				this.element.css('margin-' + this.origin, this.gutterh * -1);
-			}
+                this.element.css('margin-'+this.origin, this.gutterh * -1);
+            }
 
-			children.attr('data-grid-prepared', 'true').css(css);
-		},
+            children.attr('data-grid-prepared', 'true').css(css);
+        },
 
-		update: function (elements) {
+        update: function(elements) {
 
-			var $this = this;
+            var $this = this;
 
-			this._prepareElements();
+            this._prepareElements();
 
-			elements = elements || this.element.children(':visible');
+            elements = elements || this.element.children(':visible');
 
-			var children = elements,
-				maxwidth = this.element.width() + (2 * this.gutterh) + 2,
-				left = 0,
-				top = 0,
-				positions = [],
+            var children  = elements,
+                maxwidth  = this.element.width() + (2*this.gutterh) + 2,
+                left      = 0,
+                top       = 0,
+                positions = [],
 
-				item, width, height, pos, posi, i, z, max, size;
+                item, width, height, pos, posi, i, z, max, size;
 
-			this.trigger('beforeupdate.uk.grid', [children]);
+            this.trigger('beforeupdate.uk.grid', [children]);
 
-			children.each(function (index) {
+            children.each(function(index){
 
-				size = getElementSize(this);
+                size   = getElementSize(this);
 
-				item = UI.$(this);
-				width = size.outerWidth;
-				height = size.outerHeight;
-				left = 0;
-				top = 0;
+                item   = UI.$(this);
+                width  = size.outerWidth;
+                height = size.outerHeight;
+                left   = 0;
+                top    = 0;
 
-				for (i = 0, max = positions.length; i < max; i++) {
+                for (i=0,max=positions.length;i<max;i++) {
 
-					pos = positions[i];
+                    pos = positions[i];
 
-					if (left <= pos.aX) {
-						left = pos.aX;
-					}
-					if (maxwidth < (left + width)) {
-						left = 0;
-					}
-					if (top <= pos.aY) {
-						top = pos.aY;
-					}
-				}
+                    if (left <= pos.aX) { left = pos.aX; }
+                    if (maxwidth < (left + width)) { left = 0; }
+                    if (top <= pos.aY) { top = pos.aY; }
+                }
 
-				posi = {
-					ele: item,
-					top: top,
-					width: width,
-					height: height,
-					aY: (top + height),
-					aX: (left + width)
-				};
+                posi = {
+                    ele    : item,
+                    top    : top,
+                    width  : width,
+                    height : height,
+                    aY     : (top  + height),
+                    aX     : (left + width)
+                };
 
-				posi[$this.origin] = left;
+                posi[$this.origin] = left;
 
-				positions.push(posi);
-			});
+                positions.push(posi);
+            });
 
-			var posPrev, maxHeight = 0, positionto;
+            var posPrev, maxHeight = 0, positionto;
 
-			// fix top
-			for (i = 0, max = positions.length; i < max; i++) {
+            // fix top
+            for (i=0,max=positions.length;i<max;i++) {
 
-				pos = positions[i];
-				top = 0;
+                pos = positions[i];
+                top = 0;
 
-				for (z = 0; z < i; z++) {
+                for (z=0;z<i;z++) {
 
-					posPrev = positions[z];
+                    posPrev = positions[z];
 
-					// (posPrev.left + 1) fixex 1px bug when using % based widths
-					if (pos[this.origin] < posPrev.aX && (posPrev[this.origin] + 1) < pos.aX) {
-						top = posPrev.aY;
-					}
-				}
+                    // (posPrev.left + 1) fixex 1px bug when using % based widths
+                    if (pos[this.origin] < posPrev.aX && (posPrev[this.origin] +1) < pos.aX) {
+                        top = posPrev.aY;
+                    }
+                }
 
-				pos.top = top;
-				pos.aY = top + pos.height;
+                pos.top = top;
+                pos.aY  = top + pos.height;
 
-				maxHeight = Math.max(maxHeight, pos.aY);
-			}
+                maxHeight = Math.max(maxHeight, pos.aY);
+            }
 
-			maxHeight = maxHeight - this.gutterv;
+            maxHeight = maxHeight - this.gutterv;
 
-			if (this.options.animation) {
+            if (this.options.animation) {
 
-				this.element.stop().animate({'height': maxHeight}, 100);
+                this.element.stop().animate({'height': maxHeight}, 100);
 
-				positions.forEach(function (pos) {
+                positions.forEach(function(pos){
 
-					positionto = {"top": pos.top, opacity: 1};
-					positionto[$this.origin] = pos[$this.origin];
+                    positionto = {"top": pos.top, opacity: 1};
+                    positionto[$this.origin] = pos[$this.origin];
 
-					pos.ele.stop().animate(positionto, this.options.duration);
-				}.bind(this));
+                    pos.ele.stop().animate(positionto, this.options.duration);
+                }.bind(this));
 
-			} else {
+            } else {
 
-				this.element.css('height', maxHeight);
+                this.element.css('height', maxHeight);
 
-				positions.forEach(function (pos) {
-					positionto = {"top": pos.top, opacity: 1};
-					positionto[$this.origin] = pos[$this.origin];
-					pos.ele.css(positionto);
-				}.bind(this));
-			}
+                positions.forEach(function(pos){
+                    positionto = {"top": pos.top, opacity: 1};
+                    positionto[$this.origin] = pos[$this.origin];
+                    pos.ele.css(positionto);
+                }.bind(this));
+            }
 
-			// make sure to trigger possible scrollpies etc.
-			setTimeout(function () {
-				UI.$doc.trigger('scrolling.uk.document');
-			}, 2 * this.options.duration * (this.options.animation ? 1 : 0));
+            // make sure to trigger possible scrollpies etc.
+            setTimeout(function() {
+                UI.$doc.trigger('scrolling.uk.document');
+            }, 2 * this.options.duration * (this.options.animation ? 1:0));
 
-			this.trigger('afterupdate.uk.grid', [children]);
-		},
+            this.trigger('afterupdate.uk.grid', [children]);
+        },
 
-		filter: function (filter) {
+        filter: function(filter) {
 
-			this.currentfilter = filter;
+            this.currentfilter = filter;
 
-			filter = filter || [];
+            filter = filter || [];
 
-			if (typeof(filter) === 'number') {
-				filter = filter.toString();
-			}
+            if (typeof(filter) === 'number') {
+                filter = filter.toString();
+            }
 
-			if (typeof(filter) === 'string') {
-				filter = filter.split(/,/).map(function (item) {
-					return item.trim();
-				});
-			}
+            if (typeof(filter) === 'string') {
+                filter = filter.split(/,/).map(function(item){ return item.trim(); });
+            }
 
-			var $this = this, children = this.element.children(), elements = {"visible": [], "hidden": []}, visible,
-				hidden;
+            var $this = this, children = this.element.children(), elements = {"visible": [], "hidden": []}, visible, hidden;
 
-			children.each(function (index) {
+            children.each(function(index){
 
-				var ele = UI.$(this), f = ele.attr('data-uk-filter'), infilter = filter.length ? false : true;
+                var ele = UI.$(this), f = ele.attr('data-uk-filter'), infilter = filter.length ? false : true;
 
-				if (f) {
+                if (f) {
 
-					f = f.split(/,/).map(function (item) {
-						return item.trim();
-					});
+                    f = f.split(/,/).map(function(item){ return item.trim(); });
 
-					filter.forEach(function (item) {
-						if (f.indexOf(item) > -1) infilter = true;
-					});
-				}
+                    filter.forEach(function(item){
+                        if (f.indexOf(item) > -1) infilter = true;
+                    });
+                }
 
-				elements[infilter ? "visible" : "hidden"].push(ele);
-			});
+                elements[infilter ? "visible":"hidden"].push(ele);
+            });
 
-			// convert to jQuery collections
-			elements.hidden = UI.$(elements.hidden).map(function () {
-				return this[0];
-			});
-			elements.visible = UI.$(elements.visible).map(function () {
-				return this[0];
-			});
+            // convert to jQuery collections
+            elements.hidden  = UI.$(elements.hidden).map(function () {return this[0];});
+            elements.visible = UI.$(elements.visible).map(function () {return this[0];});
 
-			elements.hidden.attr('aria-hidden', 'true').filter(':visible').fadeOut(this.options.duration);
-			elements.visible.attr('aria-hidden', 'false').filter(':hidden').css('opacity', 0).show();
+            elements.hidden.attr('aria-hidden', 'true').filter(':visible').fadeOut(this.options.duration);
+            elements.visible.attr('aria-hidden', 'false').filter(':hidden').css('opacity', 0).show();
 
-			$this.update(elements.visible);
+            $this.update(elements.visible);
 
-			if (this.controls && this.controls.length) {
-				this.controls.find('[data-uk-filter]').removeClass('uk-active').filter('[data-uk-filter="' + filter + '"]').addClass('uk-active');
-			}
-		},
+            if (this.controls && this.controls.length) {
+                this.controls.find('[data-uk-filter]').removeClass('uk-active').filter('[data-uk-filter="'+filter+'"]').addClass('uk-active');
+            }
+        },
 
-		sort: function (by, order) {
+        sort: function(by, order){
 
-			order = order || 1;
+            order = order || 1;
 
-			// covert from string (asc|desc) to number
-			if (typeof(order) === 'string') {
-				order = order.toLowerCase() == 'desc' ? -1 : 1;
-			}
+            // covert from string (asc|desc) to number
+            if (typeof(order) === 'string') {
+                order = order.toLowerCase() == 'desc' ? -1 : 1;
+            }
 
-			var elements = this.element.children();
+            var elements = this.element.children();
 
-			elements.sort(function (a, b) {
+            elements.sort(function(a, b){
 
-				a = UI.$(a);
-				b = UI.$(b);
+                a = UI.$(a);
+                b = UI.$(b);
 
-				return (b.data(by) || '') < (a.data(by) || '') ? order : (order * -1);
+                return (b.data(by) || '') < (a.data(by) || '') ? order : (order*-1);
 
-			}).appendTo(this.element);
+            }).appendTo(this.element);
 
-			this.update(elements.filter(':visible'));
+            this.update(elements.filter(':visible'));
 
-			if (this.controls && this.controls.length) {
-				this.controls.find('[data-uk-sort]').removeClass('uk-active').filter('[data-uk-sort="' + by + ':' + (order == -1 ? 'desc' : 'asc') + '"]').addClass('uk-active');
-			}
-		}
-	});
+            if (this.controls && this.controls.length) {
+                this.controls.find('[data-uk-sort]').removeClass('uk-active').filter('[data-uk-sort="'+by+':'+(order == -1 ? 'desc':'asc')+'"]').addClass('uk-active');
+            }
+        }
+    });
 
 
-	/*!
-	* getSize v1.2.2
-	* measure size of elements
-	* MIT license
-	* https://github.com/desandro/get-size
-	*/
-	function _getSize() {
+    /*!
+    * getSize v1.2.2
+    * measure size of elements
+    * MIT license
+    * https://github.com/desandro/get-size
+    */
+    function _getSize() {
 
-		var prefixes = 'Webkit Moz ms Ms O'.split(' ');
-		var docElemStyle = document.documentElement.style;
+        var prefixes = 'Webkit Moz ms Ms O'.split(' ');
+        var docElemStyle = document.documentElement.style;
 
-		function getStyleProperty(propName) {
-			if (!propName) {
-				return;
-			}
+        function getStyleProperty( propName ) {
+            if ( !propName ) {
+                return;
+            }
 
-			// test standard property first
-			if (typeof docElemStyle[propName] === 'string') {
-				return propName;
-			}
+            // test standard property first
+            if ( typeof docElemStyle[ propName ] === 'string' ) {
+                return propName;
+            }
 
-			// capitalize
-			propName = propName.charAt(0).toUpperCase() + propName.slice(1);
+            // capitalize
+            propName = propName.charAt(0).toUpperCase() + propName.slice(1);
 
-			// test vendor specific properties
-			var prefixed;
-			for (var i = 0, len = prefixes.length; i < len; i++) {
-				prefixed = prefixes[i] + propName;
-				if (typeof docElemStyle[prefixed] === 'string') {
-					return prefixed;
-				}
-			}
-		}
+            // test vendor specific properties
+            var prefixed;
+            for ( var i=0, len = prefixes.length; i < len; i++ ) {
+                prefixed = prefixes[i] + propName;
+                if ( typeof docElemStyle[ prefixed ] === 'string' ) {
+                    return prefixed;
+                }
+            }
+        }
 
-		// -------------------------- helpers -------------------------- //
+        // -------------------------- helpers -------------------------- //
 
-		// get a number from a string, not a percentage
-		function getStyleSize(value) {
-			var num = parseFloat(value);
-			// not a percent like '100%', and a number
-			var isValid = value.indexOf('%') === -1 && !isNaN(num);
-			return isValid && num;
-		}
+        // get a number from a string, not a percentage
+        function getStyleSize( value ) {
+            var num = parseFloat( value );
+            // not a percent like '100%', and a number
+            var isValid = value.indexOf('%') === -1 && !isNaN( num );
+            return isValid && num;
+        }
 
-		function noop() {
-		}
+        function noop() {}
 
-		var logError = typeof console === 'undefined' ? noop : function (message) {
-			console.error(message);
-		};
+        var logError = typeof console === 'undefined' ? noop : function( message ) {
+            console.error( message );
+        };
 
-		// -------------------------- measurements -------------------------- //
+        // -------------------------- measurements -------------------------- //
 
-		var measurements = [
-			'paddingLeft',
-			'paddingRight',
-			'paddingTop',
-			'paddingBottom',
-			'marginLeft',
-			'marginRight',
-			'marginTop',
-			'marginBottom',
-			'borderLeftWidth',
-			'borderRightWidth',
-			'borderTopWidth',
-			'borderBottomWidth'
-		];
+        var measurements = [
+            'paddingLeft',
+            'paddingRight',
+            'paddingTop',
+            'paddingBottom',
+            'marginLeft',
+            'marginRight',
+            'marginTop',
+            'marginBottom',
+            'borderLeftWidth',
+            'borderRightWidth',
+            'borderTopWidth',
+            'borderBottomWidth'
+        ];
 
-		function getZeroSize() {
-			var size = {
-				width: 0,
-				height: 0,
-				innerWidth: 0,
-				innerHeight: 0,
-				outerWidth: 0,
-				outerHeight: 0
-			};
-			for (var i = 0, len = measurements.length; i < len; i++) {
-				var measurement = measurements[i];
-				size[measurement] = 0;
-			}
-			return size;
-		}
+        function getZeroSize() {
+            var size = {
+                width: 0,
+                height: 0,
+                innerWidth: 0,
+                innerHeight: 0,
+                outerWidth: 0,
+                outerHeight: 0
+            };
+            for ( var i=0, len = measurements.length; i < len; i++ ) {
+                var measurement = measurements[i];
+                size[ measurement ] = 0;
+            }
+            return size;
+        }
 
 
-		// -------------------------- setup -------------------------- //
+        // -------------------------- setup -------------------------- //
 
-		var isSetup = false;
-		var getStyle, boxSizingProp, isBoxSizeOuter;
+        var isSetup = false;
+        var getStyle, boxSizingProp, isBoxSizeOuter;
 
-		/**
-		 * setup vars and functions
-		 * do it on initial getSize(), rather than on script load
-		 * For Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=548397
-		 */
-		function setup() {
-			// setup once
-			if (isSetup) {
-				return;
-			}
-			isSetup = true;
+        /**
+        * setup vars and functions
+        * do it on initial getSize(), rather than on script load
+        * For Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+        */
+        function setup() {
+            // setup once
+            if ( isSetup ) {
+                return;
+            }
+            isSetup = true;
 
-			var getComputedStyle = window.getComputedStyle;
-			getStyle = (function () {
-				var getStyleFn = getComputedStyle ?
-					function (elem) {
-						return getComputedStyle(elem, null);
-					} :
-					function (elem) {
-						return elem.currentStyle;
-					};
-
-				return function getStyle(elem) {
-					var style = getStyleFn(elem);
-					if (!style) {
-						logError('Style returned ' + style +
-							'. Are you running this code in a hidden iframe on Firefox? ' +
-							'See http://bit.ly/getsizebug1');
-					}
-					return style;
-				};
-			})();
+            var getComputedStyle = window.getComputedStyle;
+            getStyle = ( function() {
+                var getStyleFn = getComputedStyle ?
+                function( elem ) {
+                    return getComputedStyle( elem, null );
+                } :
+                function( elem ) {
+                    return elem.currentStyle;
+                };
 
-			// -------------------------- box sizing -------------------------- //
+                return function getStyle( elem ) {
+                    var style = getStyleFn( elem );
+                    if ( !style ) {
+                        logError( 'Style returned ' + style +
+                        '. Are you running this code in a hidden iframe on Firefox? ' +
+                        'See http://bit.ly/getsizebug1' );
+                    }
+                    return style;
+                };
+            })();
 
-			boxSizingProp = getStyleProperty('boxSizing');
+            // -------------------------- box sizing -------------------------- //
 
-			/**
-			 * WebKit measures the outer-width on style.width on border-box elems
-			 * IE & Firefox measures the inner-width
-			 */
-			if (boxSizingProp) {
-				var div = document.createElement('div');
-				div.style.width = '200px';
-				div.style.padding = '1px 2px 3px 4px';
-				div.style.borderStyle = 'solid';
-				div.style.borderWidth = '1px 2px 3px 4px';
-				div.style[boxSizingProp] = 'border-box';
+            boxSizingProp = getStyleProperty('boxSizing');
 
-				var body = document.body || document.documentElement;
-				body.appendChild(div);
-				var style = getStyle(div);
+            /**
+            * WebKit measures the outer-width on style.width on border-box elems
+            * IE & Firefox measures the inner-width
+            */
+            if ( boxSizingProp ) {
+                var div = document.createElement('div');
+                div.style.width = '200px';
+                div.style.padding = '1px 2px 3px 4px';
+                div.style.borderStyle = 'solid';
+                div.style.borderWidth = '1px 2px 3px 4px';
+                div.style[ boxSizingProp ] = 'border-box';
 
-				isBoxSizeOuter = getStyleSize(style.width) === 200;
-				body.removeChild(div);
-			}
+                var body = document.body || document.documentElement;
+                body.appendChild( div );
+                var style = getStyle( div );
 
-		}
+                isBoxSizeOuter = getStyleSize( style.width ) === 200;
+                body.removeChild( div );
+            }
 
-		// -------------------------- getSize -------------------------- //
+        }
 
-		function getSize(elem) {
-			setup();
+        // -------------------------- getSize -------------------------- //
 
-			// use querySeletor if elem is string
-			if (typeof elem === 'string') {
-				elem = document.querySelector(elem);
-			}
+        function getSize( elem ) {
+            setup();
 
-			// do not proceed on non-objects
-			if (!elem || typeof elem !== 'object' || !elem.nodeType) {
-				return;
-			}
+            // use querySeletor if elem is string
+            if ( typeof elem === 'string' ) {
+                elem = document.querySelector( elem );
+            }
 
-			var style = getStyle(elem);
+            // do not proceed on non-objects
+            if ( !elem || typeof elem !== 'object' || !elem.nodeType ) {
+                return;
+            }
 
-			// if hidden, everything is 0
-			if (style.display === 'none') {
-				return getZeroSize();
-			}
+            var style = getStyle( elem );
 
-			var size = {};
-			size.width = elem.offsetWidth;
-			size.height = elem.offsetHeight;
+            // if hidden, everything is 0
+            if ( style.display === 'none' ) {
+                return getZeroSize();
+            }
 
-			var isBorderBox = size.isBorderBox = !!( boxSizingProp &&
-				style[boxSizingProp] && style[boxSizingProp] === 'border-box' );
+            var size = {};
+            size.width = elem.offsetWidth;
+            size.height = elem.offsetHeight;
 
-			// get all measurements
-			for (var i = 0, len = measurements.length; i < len; i++) {
-				var measurement = measurements[i];
-				var value = style[measurement];
+            var isBorderBox = size.isBorderBox = !!( boxSizingProp &&
+                style[ boxSizingProp ] && style[ boxSizingProp ] === 'border-box' );
 
-				var num = parseFloat(value);
-				// any 'auto', 'medium' value will be 0
-				size[measurement] = !isNaN(num) ? num : 0;
-			}
+            // get all measurements
+            for ( var i=0, len = measurements.length; i < len; i++ ) {
+                var measurement = measurements[i];
+                var value = style[ measurement ];
 
-			var paddingWidth = size.paddingLeft + size.paddingRight;
-			var paddingHeight = size.paddingTop + size.paddingBottom;
-			var marginWidth = size.marginLeft + size.marginRight;
-			var marginHeight = size.marginTop + size.marginBottom;
-			var borderWidth = size.borderLeftWidth + size.borderRightWidth;
-			var borderHeight = size.borderTopWidth + size.borderBottomWidth;
+                var num = parseFloat( value );
+                // any 'auto', 'medium' value will be 0
+                size[ measurement ] = !isNaN( num ) ? num : 0;
+            }
 
-			var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
+            var paddingWidth = size.paddingLeft + size.paddingRight;
+            var paddingHeight = size.paddingTop + size.paddingBottom;
+            var marginWidth = size.marginLeft + size.marginRight;
+            var marginHeight = size.marginTop + size.marginBottom;
+            var borderWidth = size.borderLeftWidth + size.borderRightWidth;
+            var borderHeight = size.borderTopWidth + size.borderBottomWidth;
 
-			// overwrite width and height if we can get it from style
-			var styleWidth = getStyleSize(style.width);
-			if (styleWidth !== false) {
-				size.width = styleWidth +
-					// add padding and border unless it's already including it
-					( isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth );
-			}
+            var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
 
-			var styleHeight = getStyleSize(style.height);
-			if (styleHeight !== false) {
-				size.height = styleHeight +
-					// add padding and border unless it's already including it
-					( isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight );
-			}
+            // overwrite width and height if we can get it from style
+            var styleWidth = getStyleSize( style.width );
+            if ( styleWidth !== false ) {
+                size.width = styleWidth +
+                // add padding and border unless it's already including it
+                ( isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth );
+            }
 
-			size.innerWidth = size.width - ( paddingWidth + borderWidth );
-			size.innerHeight = size.height - ( paddingHeight + borderHeight );
+            var styleHeight = getStyleSize( style.height );
+            if ( styleHeight !== false ) {
+                size.height = styleHeight +
+                // add padding and border unless it's already including it
+                ( isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight );
+            }
 
-			size.outerWidth = size.width + marginWidth;
-			size.outerHeight = size.height + marginHeight;
+            size.innerWidth = size.width - ( paddingWidth + borderWidth );
+            size.innerHeight = size.height - ( paddingHeight + borderHeight );
 
-			return size;
-		}
+            size.outerWidth = size.width + marginWidth;
+            size.outerHeight = size.height + marginHeight;
 
-		return getSize;
+            return size;
+        }
 
-	}
+        return getSize;
 
-	function getElementSize(ele) {
-		return _getSize()(ele);
-	}
+    }
+
+    function getElementSize(ele) {
+        return _getSize()(ele);
+    }
 });

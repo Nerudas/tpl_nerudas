@@ -1,10 +1,9 @@
-/*
- * @package    Nerudas Template
- * @version    4.9.3
- * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- * @link       https://nerudas.ru
+/*!
+ * jQuery Cookie Plugin v1.4.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2013 Klaus Hartl
+ * Released under the MIT license
  */
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -45,8 +44,7 @@
 			// If we can't parse the cookie, ignore it, it's unusable.
 			s = decodeURIComponent(s.replace(pluses, ' '));
 			return config.json ? JSON.parse(s) : s;
-		} catch (e) {
-		}
+		} catch(e) {}
 	}
 
 	function read(s, converter) {
@@ -69,9 +67,9 @@
 			return (document.cookie = [
 				encode(key), '=', stringifyCookieValue(value),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-				options.path ? '; path=' + options.path : '',
-				options.domain ? '; domain=' + options.domain : '',
-				options.secure ? '; secure' : ''
+				options.path    ? '; path=' + options.path : '',
+				options.domain  ? '; domain=' + options.domain : '',
+				options.secure  ? '; secure' : ''
 			].join(''));
 		}
 
@@ -112,7 +110,7 @@
 		}
 
 		// Must not alter options, thus extending a fresh object...
-		$.cookie(key, '', $.extend({}, options, {expires: -1}));
+		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
 		return !$.cookie(key);
 	};
 

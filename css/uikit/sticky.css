@@ -1,12 +1,3 @@
-/*
- * @package    Nerudas Template
- * @version    4.9.3
- * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- * @link       https://nerudas.ru
- */
-
 /*! UIkit 2.27.4 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 /* ========================================================================
    Component: Sticky
@@ -16,22 +7,20 @@
  * 2. Enable hardware acceleration for iOS browsers, resolves scrolling issue
  */
 [data-uk-sticky].uk-active {
-	z-index: 980;
-	/* 1 */
-	box-sizing: border-box;
-	/* 2 */
-	-webkit-backface-visibility: hidden;
+  z-index: 980;
+  /* 1 */
+  box-sizing: border-box;
+  /* 2 */
+  -webkit-backface-visibility: hidden;
 }
-
 /*
  * Faster animations
  */
 [data-uk-sticky][class*='uk-animation-'] {
-	-webkit-animation-duration: 0.2s;
-	animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
 }
-
 [data-uk-sticky].uk-animation-reverse {
-	-webkit-animation-duration: 0.2s;
-	animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
 }
