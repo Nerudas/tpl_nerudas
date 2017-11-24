@@ -33,6 +33,21 @@ function modChrome_sidebar($module, &$params, &$attribs)
 	}
 }
 
+// home
+function modChrome_home($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		echo '<div id="mod-' . $module->id . '" class="module uk-panel uk-panel-box uk-panel-box-min uk-margin-bottom' . htmlspecialchars($params->get('moduleclass_sfx')) . '">';
+		if ($module->showtitle)
+		{
+			echo '<h3 class="uk-margin-small-bottom uk-text-center">' . $module->title . '</h3>';
+		}
+		echo $module->content;
+		echo '</div>';
+	}
+}
+
 // Mobile
 function modChrome_mobile($module, &$params, &$attribs)
 {
