@@ -252,7 +252,8 @@ header.tm-top .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	height: 36px !important;
 	width: 36px !important;
 	background-size: 36px 36px !important;
-	background: no-repeat 50% 50% !important;
+	background-repeat: no-repeat !important;
+	background-position: 50% 50% !important;
 }
 
 .ya-share2__container_size_m .ya-share2__counter {
