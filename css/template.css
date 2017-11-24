@@ -1071,6 +1071,12 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	box-shadow: none;
 }
 
+.uk-form-width-small {
+	min-width: 130px !important;
+	width: 130px !important;
+	max-width: 130px !important;
+}
+
 /* Panel
 ========================================================================== */
 .uk-padding-large {
