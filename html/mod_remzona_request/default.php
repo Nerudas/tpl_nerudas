@@ -17,11 +17,8 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 <div data-mod-remozona-request>
 	<div class="result">
-		<div class="error uk-alert uk-alert-danger">
-
-		</div>
-		<div class="success uk-alert uk-alert-success">
-		</div>
+		<div class="error uk-alert uk-alert-danger"></div>
+		<div class="success uk-alert uk-alert-success"></div>
 	</div>
 	<form class="form-validate uk-form uk-form-stacked" enctype="multipart/form-data">
 		<div class="uk-form-row">
@@ -45,7 +42,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 		<div class="uk-form-row uk-margin-bottom-remove">
 			<div class="uk-form-controls uk-margin-bottom-remove uk-clearfix">
 				<div class="uk-align-medium-left uk-margin-small-bottom">
-				<?php echo $form->getInput('phones'); ?>
+					<?php echo $form->getInput('phones'); ?>
 				</div>
 				<div class="uk-align-medium-right uk-margin-small-bottom">
 					<a class="submit uk-button uk-button-success"><?php echo Text::_('JSUBMIT'); ?></a>
