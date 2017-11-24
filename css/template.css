@@ -1077,8 +1077,55 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	max-width: 130px !important;
 }
 
+/* Phones */
+.uk-form [data-input-phones] .item[data-key="phone_X"] {
+	display: none;
+}
+
+.uk-form [data-input-phones] .phone {
+	display: inline-flex;
+}
+
+.uk-form [data-input-phones] .phone .code {
+	display: inline-block;
+	padding: 0.286rem 0.706rem;
+	font-size: 0.882rem;
+	margin-right: -1px;
+	color: #444;
+	border: 1px solid #ddd;
+	border-radius: 2px 0 0 2px;
+	border-right: none;
+	background: #fafafa;
+}
+
+.uk-form [data-input-phones] .phone .number {
+	border-radius: 0 2px 2px 0;
+	min-width: 130px !important;
+	width: 130px !important;
+	max-width: 130px !important;
+}
+.uk-form [data-input-phones] .phone .description {
+	display: block !important;
+}
+
+.uk-form [data-input-phones] .actions .add[disabled="disabled"] {
+	display: none !important;
+}
+.uk-form [data-input-phones] .result .item .actions .add {
+	display: none;
+}
+
+.uk-form [data-input-phones] .result .item:last-child .actions .add {
+	display: inline-block;
+}
+
+.uk-form [data-input-phones] .result.sortable .item:not(.ui-sortable-helper) {
+	opacity: 0.6;
+}
+
+
 /* Panel
-========================================================================== */
+	========================================================================== */
 .uk-padding-large {
 	padding: 30px !important;
 }
