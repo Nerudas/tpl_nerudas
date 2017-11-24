@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Nerudas Template
- * @version    4.9.1
+ * @version    4.9.3
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -132,7 +132,8 @@ if (!JFactory::getUser()->guest)
 					<div id="myStatus" class="uk-position-relative">
 						<div class="status">
 						<span class="text uk-margin-small-right uk-text-slarge">
-						<?php if ($this->author->myStatus) {
+						<?php if ($this->author->myStatus)
+						{
 							echo '«' . $this->author->myStatus->text . '»';
 						} ?>
 						</span>
@@ -146,7 +147,8 @@ if (!JFactory::getUser()->guest)
 							<form id="myStatusForm" class="uk-form uk-panel uk-panel-box uk-position-top uk-hidden">
 								<div class="uk-margin-small-bottom">
 									<input id="myStatusForm-text" type="text" name="text"
-										   class="uk-width-1-1" <?php if ($this->author->myStatus) {
+										   class="uk-width-1-1" <?php if ($this->author->myStatus)
+									{
 										echo 'value="' . $this->author->myStatus->text . '"';
 									} ?> />
 								</div>

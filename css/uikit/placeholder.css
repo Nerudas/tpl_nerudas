@@ -1,29 +1,41 @@
+/*
+ * @package    Nerudas Template
+ * @version    4.9.3
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
 /*! UIkit 2.27.4 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 /* ========================================================================
    Component: Placeholder
  ========================================================================== */
 .uk-placeholder {
-  margin-bottom: 15px;
-  padding: 15px;
-  border: 1px dashed #ddd;
-  background: #fafafa;
-  color: #444;
+	margin-bottom: 15px;
+	padding: 15px;
+	border: 1px dashed #ddd;
+	background: #fafafa;
+	color: #444;
 }
+
 /*
  * Add margin if adjacent element
  */
 * + .uk-placeholder {
-  margin-top: 15px;
+	margin-top: 15px;
 }
+
 /*
  * Remove margin from the last-child
  */
 .uk-placeholder > :last-child {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
+
 /* Modifier: `uk-placeholder-large`
  ========================================================================== */
 .uk-placeholder-large {
-  padding-top: 80px;
-  padding-bottom: 80px;
+	padding-top: 80px;
+	padding-bottom: 80px;
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Nerudas Template
- * @version    4.9.1
+ * @version    4.9.3
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -35,8 +35,7 @@ if ($_SERVER['REQUEST_URI'] == '/index.php?option=com_k2&view=itemlist')
 }
 
 
-
-/* Site Settings 
+/* Site Settings
 ========================================================================== */
 $site          = new stdClass();
 $site->name    = $config->get('sitename');
@@ -52,7 +51,6 @@ if ($app->input->get('view') == 'map' && $app->input->get('option') == 'com_neru
 {
 	$site->layout = 'map';
 }
-
 
 
 /* Uikit
@@ -75,7 +73,6 @@ $template->js  = array('template', 'regions');
 
 
 unset($doc->_styleSheets['/media/k2/assets/css/k2.css?v=2.7.1']);
-
 
 
 /* Load Layout
