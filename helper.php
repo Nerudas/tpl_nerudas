@@ -10,7 +10,6 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 
@@ -45,6 +44,7 @@ class tplNerudasHelper
 		// Add icheck
 		HTMLHelper::_('script', 'icheck' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 
+		$this->unsetBootstrap();
 
 		// Add Template
 		$this->addTemplate($minified);
@@ -158,6 +158,7 @@ class tplNerudasHelper
 		$scripts = $head['scripts'];
 		// Uset bootstra
 		unset($scripts['/media/jui/js/bootstrap.min.js']);
+		unset($scripts['/media/jui/js/chosen.jquery.min.js']);
 		$head['scripts'] = $scripts;
 		$doc->setHeadData($head);
 	}
