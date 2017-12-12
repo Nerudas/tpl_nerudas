@@ -20,7 +20,7 @@ class tplNerudasHelper
 	 *
 	 * @param $params JObject $params Template params
 	 *
-	 * @since   1.0.0
+	 * @since   4.9.1
 	 */
 	public function setHead($params)
 	{
@@ -58,7 +58,7 @@ class tplNerudasHelper
 	 *
 	 * @param string $minified .min minified
 	 *
-	 * @since   1.0.0
+	 * @since   4.9.1
 	 */
 	protected function addChosen($minified)
 	{
@@ -78,7 +78,7 @@ class tplNerudasHelper
 	 *
 	 * @param string $minified .min minified
 	 *
-	 * @since   1.0.0
+	 * @since   4.9.1
 	 */
 	protected function addUIkit($minified)
 	{
@@ -108,7 +108,7 @@ class tplNerudasHelper
 	 *
 	 * @param string $minified .min minified
 	 *
-	 * @since   1.0.0
+	 * @since   4.9.1
 	 */
 	protected function addTemplate($minified)
 	{
@@ -123,7 +123,7 @@ class tplNerudasHelper
 	 *
 	 * @return boolean
 	 *
-	 * @since   1.0.0
+	 * @since   4.9.1
 	 */
 	public function checkSiteVersion($params)
 	{
@@ -149,7 +149,7 @@ class tplNerudasHelper
 	/**
 	 * Unset joomla default bootstrap framework form head
 	 *
-	 * @since   1.0.0
+	 * @since   4.9.1
 	 */
 	public function unsetBootstrap()
 	{
@@ -162,5 +162,29 @@ class tplNerudasHelper
 		$head['scripts'] = $scripts;
 		$doc->setHeadData($head);
 	}
+
+	/**
+	 * Get middle layout
+	 *
+	 * @param $template This template
+	 *
+	 * @return string layput name
+	 *
+	 * @since   4.9.3
+	 */
+	public function getMiddleLayot($template)
+	{
+		$app    = Factory::getApplication();
+		$params = $template->params;
+		// Columns
+		$layout = '1column';
+		if ($template->countModules('right'))
+		{
+			$layout = '2columns';
+		}
+
+		return 'template.middle.' . $layout;
+	}
+
 
 }
