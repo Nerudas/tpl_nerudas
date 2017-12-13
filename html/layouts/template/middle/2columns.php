@@ -14,12 +14,12 @@ $template = $displayData;
 
 ?>
 <div class="tm-middle uk-container uk-container-center uk-margin-top uk-margin-bottom">
-	<div class="uk-grid uk-grid-small">
-		<main class="tm-center uk-width-medium-1-1 uk-width-large-3-4">
+	<div class="uk-grid">
+		<main class="tm-center uk-width-medium-1-1 uk-width-large-2-3">
 			<jdoc:include type="component"/>
 		</main>
 		<?php if ($template->countModules('right')): ?>
-			<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-4 ">
+			<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-3 ">
 				<jdoc:include type="modules" name="right" style="sidebar"/>
 			</aside>
 		<?php endif; ?>

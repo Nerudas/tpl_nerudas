@@ -119,6 +119,7 @@ html.new header.tm-top .uk-navbar-flip .uk-navbar-nav > .region > a {
 	display: flex;
 	align-items: center;
 }
+
 html.new header.tm-top .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	margin-top: 0px;
 	height: 30px;
@@ -371,14 +372,7 @@ body, h1, h2, h3, h4, h5, h6, .uk-navbar-nav > li > a {
 }
 
 html.new .uk-container {
-	padding: 0 5px;
-	max-width: 980px;
-}
-
-@media (min-width: 1399px) {
-	html.new .uk-container {
-		max-width: 1110px;
-	}
+	max-width: 1110px;
 }
 
 @media (min-width: 768px) {
@@ -1516,31 +1510,50 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 
 /* breadcrumb
 ========================================================================== */
-.uk-breadcrumb > li::after {
+html:not(.new) .uk-breadcrumb > li::after {
 	content: "/";
 	display: inline-block;
 	margin: 0 8px;
 	vertical-align: middle;
 }
 
-.uk-breadcrumb > li:nth-child(n+2)::before {
+html:not(.new) .uk-breadcrumb > li:nth-child(n+2)::before {
 	display: none;
 }
 
-.uk-breadcrumb > li > a {
+html:not(.new) .uk-breadcrumb > li > a {
 	vertical-align: middle;
 }
 
-.uk-breadcrumb > li:last-child {
+html:not(.new) .uk-breadcrumb > li:last-child {
 	display: none;
 }
 
-.uk-breadcrumb > li:last-child > a {
+html:not(.new) .uk-breadcrumb > li:last-child > a {
 	color: #999;
 }
 
-.uk-breadcrumb > li:last-child::after {
+html:not(.new) .uk-breadcrumb > li:last-child::after {
 	display: none;
+}
+
+/* Title
+========================================================================== */
+html.new .tm-title {
+	display: flex;
+	justify-content: space-between;
+}
+html.new .tm-title::before, html.new .tm-title::after {
+	display: none;
+}
+
+html.new .tm-title .uk-breadcrumb h1 {
+	font-size: 1.125rem;
+	letter-spacing: 0.1rem;
+	text-transform: uppercase;
+	display: inline-block;
+	line-height: 1.429rem;
+	margin: 0;
 }
 
 /* Off-canvas
