@@ -9,6 +9,7 @@
  */
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
+JHtml::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
 ?>
 <div id="mapModal" class="uk-modal">
 	<div class="uk-modal-dialog">
