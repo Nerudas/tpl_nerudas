@@ -81,6 +81,7 @@
 				$('body').css('overflow', '');
 			}
 		});
+		$('time.timeago').timeago();
 		$('body').on('keyup', 'input[data-numbers]', function () {
 			var value = $(this).val().replace(/[^\d]*/g, '').replace(/^[^\d]*(\d+([.,]\d{0,5})?).*$/g, '$1');
 			$(this).val(value);

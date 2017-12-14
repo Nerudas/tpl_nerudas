@@ -44,6 +44,10 @@ class tplNerudasHelper
 		// Add icheck
 		HTMLHelper::_('script', 'icheck' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 
+		// Add Time ago
+		HTMLHelper::_('script', 'jquery.timeago' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('script', 'jquery.timeago.ru' . $minified . '.js', array('version' => 'auto', 'relative' => true));
+
 		$this->unsetBootstrap();
 
 		// Add Template

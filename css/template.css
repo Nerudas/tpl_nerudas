@@ -372,6 +372,7 @@ body, h1, h2, h3, h4, h5, h6, .uk-navbar-nav > li > a {
 }
 
 html.new .uk-container {
+	padding: 0 5px;
 	max-width: 1110px;
 }
 
@@ -737,7 +738,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-form .chosen-container-single .chosen-single {
 	padding: 0.286rem 0.706em;
 	font-size: 0.882rem;
-	line-height: 1.429rem;
+	line-height: 1.7rem;
 	color: #444;
 	border: 1px solid #ddd;
 	border-radius: 2px;
@@ -774,7 +775,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	right: 0;
 	width: 2.143rem;
 	text-align: center;
-	margin-top: -0.650rem;
+	margin-top: -0.7rem;
 	font-size: 1.000rem;
 }
 
@@ -1203,12 +1204,16 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	background: #fff;
 	border: none;
 	border-radius: 0;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .uk-panel-box-100 {
 	margin-left: -30px;
 	margin-right: -30px;
+}
+
+.uk-panel-box-secondary {
+	background: #f9f9f9;
 }
 
 /* Modal
@@ -1543,11 +1548,13 @@ html.new .tm-title {
 	display: flex;
 	justify-content: space-between;
 }
+
 html.new .tm-title::before, html.new .tm-title::after {
 	display: none;
 }
 
-html.new .tm-title .uk-breadcrumb h1 {
+html.new .tm-title  h1,
+html.new .tm-title  .uk-h1 {
 	font-size: 1.125rem;
 	letter-spacing: 0.1rem;
 	text-transform: uppercase;
@@ -2239,4 +2246,26 @@ blockquote {
 blockquote.uk-text-primary {
 	border-color: #90c2f2;
 	color: #90c2f2 !important;
+}
+
+/* Tag
+========================================================================== */
+.uk-tag {
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 0 10px;
+	background: #FEF568;
+	color: #222222;
+	font-size: 14px;
+}
+
+.uk-tag::before {
+	display: inline-block;
+	font-weight: 400;
+	font-style: normal;
+	content: "#";
+	margin-right: 2px;
 }
