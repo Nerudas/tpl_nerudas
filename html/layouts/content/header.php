@@ -8,6 +8,13 @@ use Joomla\CMS\Language\Text;
 
 extract($displayData);
 
+
+/**
+ * Layout variables
+ * -----------------
+ * @var   string $add Add Link
+ */
+
 $app     = Factory::getApplication();
 $pathway = $app->getPathway();
 $items   = $pathway->getPathWay();
@@ -63,7 +70,7 @@ unset($revers[0]);
 		</div>
 	</div>
 	<?php if (!empty($add)) : ?>
-		<a href="<?php echo $addLink; ?>" class="add uk-button uk-button-success">
+		<a href="<?php echo $add; ?>" class="add uk-button uk-button-success">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
 		</a>
 	<?php endif; ?>
