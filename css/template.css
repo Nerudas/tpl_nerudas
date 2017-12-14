@@ -1133,7 +1133,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 }
 
 .uk-form [data-input-phones] .result .item:last-child .actions .add {
-	display: inline-block;
+	display: inline-flex;
 }
 
 .uk-form [data-input-phones] .result.sortable .item:not(.ui-sortable-helper) {

@@ -47,13 +47,13 @@ HTMLHelper::_('jquery.ui', array('sortable'));
 			   data-id="<?php echo $id; ?>_phone_X_display">
 		<?php if ($limit !== 1): ?>
 			<div class="actions uk-button-group">
-				<a class="remove uk-button uk-height-1-1 uk-flex-inline uk-flex-middle uk-text-danger">
+				<a class="remove uk-button uk-flex-inline uk-flex-middle uk-text-danger">
 					<i class="uk-icon-remove"></i>
 				</a>
-				<a class="move uk-button uk-height-1-1 uk-flex-inline uk-flex-middle uk-text-primary">
+				<a class="move uk-button uk-flex-inline uk-flex-middle uk-text-primary">
 					<i class="uk-icon-arrows"></i>
 				</a>
-				<a class="add uk-button uk-height-1-1 uk-flex-inline uk-flex-middle uk-text-success">
+				<a class="add uk-button uk-flex-inline uk-flex-middle uk-text-success">
 					<i class="uk-icon-plus"></i>
 				</a>
 			</div>
@@ -93,13 +93,13 @@ HTMLHelper::_('jquery.ui', array('sortable'));
 					   placeholder="<?php echo Text::_($text_placeholder); ?>">
 				<?php if ($limit !== 1): ?>
 					<div class="actions uk-button-group">
-						<a class="remove uk-button uk-height-1-1 uk-flex-inline uk-flex-middle uk-text-danger">
+						<a class="remove uk-button uk-flex-inline uk-flex-middle uk-text-danger">
 							<i class="uk-icon-remove"></i>
 						</a>
-						<a class="move uk-button uk-height-1-1 uk-flex-inline uk-flex-middle uk-text-primary">
+						<a class="move uk-button uk-flex-inline uk-flex-middle uk-text-primary">
 							<i class="uk-icon-arrows"></i>
 						</a>
-						<a class="add uk-button uk-height-1-1 uk-flex-inline uk-flex-middle uk-text-success">
+						<a class="add uk-button uk-flex-inline uk-flex-middle uk-text-success">
 							<i class="uk-icon-plus"></i>
 						</a>
 					</div>
