@@ -22,7 +22,7 @@ $user = Factory::getUser();
 ?>
 
 <div id="remzona" class="suppliers itemlist">
-	<?php echo LayoutHelper::render('content.header', array('add' => $this->addLink)); ?>
+	<?php echo LayoutHelper::render('template.content.header', array('add' => $this->addLink)); ?>
 
 	<div class="uk-panel uk-panel-box uk-margin-bottom uk-panel-box-secondary">
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
@@ -87,16 +87,17 @@ $user = Factory::getUser();
 							<?php endif; ?>
 						</div>
 						<div class="uk-width-small-1-4 uk-text-right">
-							<time class="timeago  uk-text-muted uk-text-small" data-uk-tooltip
+							<time class="timeago uk-text-muted uk-text-small" data-uk-tooltip
 								  datetime="<?php echo HTMLHelper::date($item->created, 'c'); ?>"
 								  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
 							<?php if ($item->editLink) : ?>
-								<a href="<?php echo $item->editLink; ?>"
-								   class="uk-icon-pencil uk-margin-small-left"></a>
+								<a class="edit uk-icon-pencil uk-button uk-text-success uk-margin-small-left"
+								   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>"
+								   href="<?php echo $item->editLink; ?>"></a>
 							<?php endif; ?>
 						</div>
 					</div>
-					<div class="uk-grid uk-grid-small uk-margin-top-remove"  data-uk-grid-margin>
+					<div class="uk-grid uk-grid-small uk-margin-top-remove" data-uk-grid-margin>
 						<div class="uk-width-medium-3-4">
 							<div class="tags uk-margin-small-bottom">
 								<?php if ($item->tags): ?>
@@ -162,12 +163,14 @@ $user = Factory::getUser();
 						</div>
 						<div class="uk-width-medium-1-4">
 							<div class="uk-grid uk-grid-small">
-								<?php foreach ($item->brands as $brand): ?>
-									<div class="uk-width-1-3 uk-flex uk-flex-middle" data-uk-grid-margin>
-										<?php echo HTMLHelper::_('image', $brand->logo, $brand->title,
-											array('title' => $brand->title), false); ?>
-									</div>
-								<?php endforeach; ?>
+								<?php if ($item->brands): ?>
+									<?php foreach ($item->brands as $brand): ?>
+										<div class="uk-width-1-3 uk-flex uk-flex-middle" data-uk-grid-margin>
+											<?php echo HTMLHelper::_('image', $brand->logo, $brand->title,
+												array('title' => $brand->title), false); ?>
+										</div>
+									<?php endforeach; ?>
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>
