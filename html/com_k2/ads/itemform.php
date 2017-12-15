@@ -29,16 +29,6 @@ $this->navs['map']   = JText::_('NERUDAS_ON_MAP');
 <script>
 	(function ($) {
 		$(document).ready(function () {
-			$('#introtext').froalaEditor({
-				key: '<?php echo $froala->key; ?>',
-				toolbarButtons: <?php echo $froala->buttons; ?>,
-				toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-				toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-				toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-				heightMin: 240,
-				heightMax: 480,
-				placeholderText: '<?php echo JText::_('NERUDAS_ADS_TEXT'); ?>'
-			})
 			$('#adsitem-author').appendTo($('aside.tm-left'));
 		});
 		<?php if (empty($this->row->id) && isset($author->formphone) && !empty($author->formphone)) : ?>

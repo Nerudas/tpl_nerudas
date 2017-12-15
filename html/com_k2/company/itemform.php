@@ -23,16 +23,6 @@ if ($isNew)
 	$this->row->title = '';
 }
 
-$froala->buttons   = array();
-$froala->buttons[] = 'bold';
-$froala->buttons[] = 'italic';
-$froala->buttons[] = 'underline';
-if ($permissions->moderator)
-{
-	$froala->buttons[] = '|';
-	$froala->buttons[] = 'html';
-}
-$froala->buttons = json_encode($froala->buttons);
 // Check copmany
 if (!$permissions->moderator && empty($this->row->id))
 {
@@ -58,23 +48,6 @@ if ($permissions->moderator)
 	$this->navs['staff'] = JText::_('NERUDAS_STAFF');
 }
 ?>
-<script>
-	(function ($) {
-		$(document).ready(function () {
-			$('#introtext').froalaEditor({
-				key: '<?php echo $froala->key; ?>',
-				toolbarButtons: <?php echo $froala->buttons; ?>,
-				toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-				toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-				toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-				heightMin: 240,
-				heightMax: 480,
-				placeholderText: '<?php echo JText::_('NERUDAS_COMPANY_TEXT'); ?>'
-			})
-		});
-	})(jQuery);
-</script>
-
 <div id="company" class="itemform">
 	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm"
 		  name="adminForm">

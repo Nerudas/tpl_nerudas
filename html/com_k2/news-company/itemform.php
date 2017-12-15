@@ -14,22 +14,7 @@ $doc  = JFactory::getDocument();
 $type = 'news-company';
 include 'templates/' . $app->getTemplate() . '/html/com_k2/form_head.php';
 ?>
-<script>
-	(function ($) {
-		$(document).ready(function () {
-			$('#introtext').froalaEditor({
-				key: '<?php echo $froala->key; ?>',
-				toolbarButtons: <?php echo $froala->buttons; ?>,
-				toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-				toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-				toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-				heightMin: 240,
-				heightMax: 480,
-				placeholderText: '<?php echo JText::_('NERUDAS_PREVIEW'); ?>'
-			})
-		});
-	})(jQuery);
-</script>
+
 
 <div id="news-company" class="itemform">
 	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm"

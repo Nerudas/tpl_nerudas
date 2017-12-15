@@ -103,31 +103,6 @@ echo '<script>
 
 $this->K2PluginsItemOther[2]->fields = NerudasUtility::setUIKitMediaField($this->K2PluginsItemOther[2]->fields);
 
-// Froala
-$froala          = new stdClass();
-$froala->buttons = array();
-if ($permissions->moderator)
-{
-	$froala->buttons[] = 'html';
-}
-$froala->buttons = json_encode($froala->buttons);
-$froala->key     = '6tE-11nhzI-7sC5pv==';
-$doc->addStyleSheet('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css');
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/css/froala_editor.css');
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/css/froala_style.min.css');
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/css/plugins/code_view.css');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/js/froala_editor.min.js');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.4.0/js/plugins/code_view.min.js');
-// UIKit HTML Editor
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.min.css');
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.1/css/components/htmleditor.almost-flat.min.css');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.min.js');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/markdown/markdown.min.js');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/mode/overlay.min.js');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/xml/xml.min.js');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/gfm/gfm.min.js');
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js');
-echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.1/js/components/htmleditor.min.js"></script>';
 /* Submit
 ========================================================================== */
 $doc->addScriptDeclaration("

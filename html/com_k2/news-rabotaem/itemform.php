@@ -16,23 +16,7 @@ require_once(realpath(__DIR__ . '/..') . '/default/itemform_head.php');
 $this->navs        = array();
 $this->navs['map'] = JText::_('NERUDAS_ON_MAP');
 ?>
-<script>
-	(function ($) {
-		$(document).ready(function () {
-			$('#introtext').froalaEditor({
-				key: '<?php echo $froala->key; ?>',
-				toolbarButtons: <?php echo $froala->buttons; ?>,
-				toolbarButtonsMD: <?php echo $froala->buttons; ?>,
-				toolbarButtonsSM: <?php echo $froala->buttons; ?>,
-				toolbarButtonsXS: <?php echo $froala->buttons; ?>,
-				heightMin: 80,
-				heightMax: 120,
-				placeholderText: '<?php echo JText::_('NERUDAS_PREVIEW'); ?>'
-			})
-			var htmleditor = UIkit.htmleditor(fulltext);
-		});
-	})(jQuery);
-</script>
+
 
 <div id="news" class="itemform">
 	<form action="<?php echo JURI::root(true); ?>/index.php" enctype="multipart/form-data" method="post" id="adminForm"
