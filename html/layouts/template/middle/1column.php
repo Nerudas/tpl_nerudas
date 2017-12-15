@@ -13,8 +13,7 @@ defined('_JEXEC') or die;
 $template = $displayData;
 
 ?>
-<div class="tm-middle uk-container uk-container-center uk-margin-top uk-margin-bottom"
-	 data-uk-height-viewport="expand: true">
+<div class="tm-middle uk-container uk-container-center uk-margin-top uk-margin-bottom">
 	<main class="tm-center">
 		<jdoc:include type="component"/>
 	</main>

@@ -32,21 +32,12 @@
 		<language tag="ru-RU">ru-RU/ru-RU.tpl_nerudas.sys.ini</language>
 	</languages>
 	<positions>
+		<position>toppanel-center</position>
+		<position>toppanel-right</position>
 		<position>scripts</position>
-		<position>head</position>
-		<position>analytics</position>
+		<position>modal</position>
 		<position>navigation</position>
-		<position>header-breadcrumbs</position>
-		<position>header-sidebar</position>
-		<position>left</position>
-		<position>right</position>
-		<position>footer</position>
-		<position>ads-center</position>
-		<position>articles-center</position>
-		<position>top</position>
-		<position>content-top</position>
-		<position>bottom</position>
-		<position>content-bottom</position>
+		<position>sidebar</position>
 	</positions>
 	<config>
 		<fields name="params">

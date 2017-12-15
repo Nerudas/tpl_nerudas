@@ -182,7 +182,7 @@ class tplNerudasHelper
 		$params = $template->params;
 		// Columns
 		$layout = '1column';
-		if ($template->countModules('right'))
+		if ($template->countModules('sidebar'))
 		{
 			$layout = '2columns';
 		}

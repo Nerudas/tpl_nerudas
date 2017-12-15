@@ -63,4 +63,20 @@ function modChrome_mobile($module, &$params, &$attribs)
 	}
 }
 
+
+// Sidebar NEW
+function modChrome_sidebar_new($module, &$params, &$attribs)
+{
+	echo '<div id="mod-' . $module->id . '" class="module uk-width-small-1-2 uk-width-medium-1-2 uk-width-large-1-1 '
+		. htmlspecialchars($params->get('moduleclass_sfx')) . '"><div class="uk-panel uk-panel-box">';
+
+	if ($module->showtitle)
+	{
+		echo '<div class="title uk-panel-title uk-h3">' . $module->title . '</div>';
+	}
+
+	echo '<div class="content">' . $module->content . '</div>';
+	echo '</div></div>';
+}
+
 ?>

@@ -18,9 +18,11 @@ $template = $displayData;
 		<main class="tm-center uk-width-medium-1-1 uk-width-large-2-3">
 			<jdoc:include type="component"/>
 		</main>
-		<?php if ($template->countModules('right')): ?>
-			<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-3 ">
-				<jdoc:include type="modules" name="right" style="sidebar"/>
+		<?php if ($template->countModules('sidebar')): ?>
+			<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-3">
+				<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
+					<jdoc:include type="modules" name="sidebar" style="sidebar_new"/>
+				</div>
 			</aside>
 		<?php endif; ?>
 	</div>

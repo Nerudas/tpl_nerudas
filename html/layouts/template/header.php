@@ -6,6 +6,7 @@ $template = $displayData;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 $siteName = Factory::getConfig()->get('sitename');
 
@@ -29,7 +30,6 @@ $siteName = Factory::getConfig()->get('sitename');
 					</ul>
 				</div>
 			<?php endif; ?>
-
 		</div>
 	</nav>
 	<div id="navigation" class="uk-offcanvas">
