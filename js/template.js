@@ -187,20 +187,6 @@
 
 			ymaps.ready(modalMap);
 		}
-
-
-		jQuery(jQuery('.uk-form input[type=radio]')).each(function (x) {
-			if (jQuery(this).parents('[data-uk-button-radio]').length < 1) {
-				iCheckInitialize(jQuery(this));
-			}
-		});
-		iCheckInitialize(jQuery('.uk-form input[type=checkbox]'));
-
-		function iCheckInitialize(elem) {
-			elem.iCheck({radioClass: 'iradio', checkboxClass: 'icheckbox'});
-		}
-
-
 		setMiddleMinHeight();
 		setRatioHeight();
 		headerBreadcrumb();
