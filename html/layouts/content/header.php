@@ -12,7 +12,9 @@ extract($displayData);
 /**
  * Layout variables
  * -----------------
- * @var   string $add Add Link
+ * @var  string $add  Add Link
+ * @var  string $edit Edit link
+ * @var  string $form Form actions controler name
  */
 
 $app     = Factory::getApplication();
@@ -70,9 +72,22 @@ unset($revers[0]);
 		</div>
 	</div>
 	<?php if (!empty($add)) : ?>
-		<a href="<?php echo $add; ?>" class="add uk-button uk-button-success">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
-		</a>
+		<a href="<?php echo $add; ?>" class="add uk-icon-plus uk-button uk-text-success" data-uk-tooltip
+		   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>"></a>
+	<?php endif; ?>
+	<?php if (!empty($add)) : ?>
+		<a href="<?php echo $edit; ?>" class="add uk-icon-plus uk-button uk-text-success" data-uk-tooltip
+		   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>"></a>
+	<?php endif; ?>
+	<?php if (!empty($form)): ?>
+		<div class="actions uk-button-group">
+			<button class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
+					title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"
+					onclick="Joomla.submitbutton('<?php echo $form; ?>.cancel');"></button>
+			<button class="save uk-icon-check uk-button uk-text-success" data-uk-tooltip
+					title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>"
+					onclick="Joomla.submitbutton('<?php echo $form; ?>.save');"></button>
+		</div>
 	<?php endif; ?>
 </div>
 
