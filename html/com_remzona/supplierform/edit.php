@@ -71,11 +71,11 @@ $doc->addScriptDeclaration('Joomla.submitbutton = function(task){
 		</div>
 	</div>
 	<div class="uk-form-row uk-text-center">
-		<button onclick="Joomla.submitbutton('<?php echo $form; ?>.cancel');"
+		<button onclick="Joomla.submitbutton('supplier.cancel');"
 				class="uk-button uk-button-danger">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
 		</button>
-		<button onclick="Joomla.submitbutton('<?php echo $form; ?>.save');" class="uk-button uk-button-success">
+		<button onclick="Joomla.submitbutton('supplier.save');" class="uk-button uk-button-success">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
 		</button>
 	</div>
