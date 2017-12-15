@@ -35,18 +35,40 @@ $doc->addScriptDeclaration('Joomla.submitbutton = function(task){
 	  enctype="multipart/form-data">
 	<?php echo LayoutHelper::render('template.title', array('form' => 'supplier')); ?>
 
-	<div class="uk-panel uk-panel-box uk-form-horizontal uk-margin-bottom">
+	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
 		<?php echo $this->form->renderField('title'); ?>
-		<?php echo $this->form->renderField('about'); ?>
+		<div class="uk-form-row">
+			<div class="uk-from-label uk-margin-small-bottom">
+				<?php echo Text::_('COM_REMZONA_SUPPLIER_ABOUT'); ?>
+			</div>
+			<div>
+				<?php echo $this->form->getInput('about'); ?>
+			</div>
+		</div>
 	</div>
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
-		<?php echo $this->form->renderField('brands'); ?>
+		<div class="uk-panel-title uk-h3">
+			<?php echo Text::_('JGLOBAL_FIELD_SPECTECHBRANDS_LABEL'); ?>
+		</div>
+		<div>
+			<?php echo $this->form->getInput('brands'); ?>
+		</div>
 	</div>
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
-		<?php echo $this->form->renderField('tags'); ?>
+		<div class="uk-panel-title uk-h3">
+			<?php echo Text::_('JTAG'); ?>
+		</div>
+		<div>
+			<?php echo $this->form->getInput('tags'); ?>
+		</div>
 	</div>
 	<div class="uk-panel uk-panel-box uk-form-horizontal uk-margin-bottom">
-		<?php echo $this->form->renderFieldset('contacts'); ?>
+		<div class="uk-panel-title uk-h3">
+			<?php echo Text::_('COM_REMZONA_CONTACTS_FIELDSET_LABEL'); ?>
+		</div>
+		<div class="uk-form-horizontal">
+			<?php echo $this->form->renderFieldset('contacts'); ?>
+		</div>
 	</div>
 	<div class="uk-form-row uk-text-center">
 		<button onclick="Joomla.submitbutton('<?php echo $form; ?>.cancel');"
