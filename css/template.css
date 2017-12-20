@@ -1296,19 +1296,19 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 
 /* Nav
 ========================================================================== */
-.uk-nav {
+.uk-nav:not('.new') {
 	font-size: 0.882rem;
 }
 
-.uk-nav > li > a {
+.uk-nav:not('.new') > li > a {
 	padding: 0.588rem 1rem;
 }
 
-.uk-nav > li > .uk-form {
+.uk-nav:not('.new') > li > .uk-form {
 	padding: 0.588rem 1rem;
 }
 
-.uk-nav > li > .uk-form .chosen-container {
+.uk-nav:not('.new') > li > .uk-form .chosen-container {
 	min-width: 100%;
 }
 
@@ -1358,29 +1358,29 @@ footer .uk-navbar-attached {
 }
 
 /* nav-side */
-.uk-nav-side > li > a {
+.uk-nav-side:not('.new') > li > a {
 	color: #444;
 	border-left: 2px solid transparent;
 }
 
-.uk-nav-side .uk-nav-sub > li > a {
+.uk-nav-side:not('.new') .uk-nav-sub > li > a {
 	color: #444;
 	font-size: 1rem;
 	padding-left: 15px;
 }
 
-.uk-nav-side > li > a > [class*="uk-icon-"] {
+.uk-nav-side:not('.new') > li > a > [class*="uk-icon-"] {
 	color: #666;
 }
 
-.uk-nav-side > li > a:hover, .uk-nav-side > li > a:focus {
+.uk-nav-side:not('.new') > li > a:hover, .uk-nav-side:not('.new') > li > a:focus {
 	background: rgba(0, 0, 0, 0.03);
 	color: #444;
 	box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.06);
 	text-shadow: 0 -1px 0 #fff;
 }
 
-.uk-nav-side > li.uk-active > a {
+.uk-nav-side:not('.new') > li.uk-active > a {
 	position: relative;
 	background: rgba(0, 0, 0, 0.03);
 	color: #000;
@@ -1391,24 +1391,24 @@ footer .uk-navbar-attached {
 
 }
 
-.uk-nav-side > li.uk-active > a [class*="uk-icon-"] {
+.uk-nav-side:not('.new') > li.uk-active > a [class*="uk-icon-"] {
 	color: #000;
 }
 
-.uk-nav-side .uk-nav-header {
+.uk-nav-side:not('.new') .uk-nav-header {
 	color: #444;
 }
 
-.uk-nav-side .uk-nav-divider {
+.uk-nav-side:not('.new') .uk-nav-divider {
 	border-top: 1px solid #ddd;
 	box-shadow: 0 1px 0 #fff;
 }
 
-.uk-nav-side ul a {
+.uk-nav-side:not('.new') ul a {
 	color: #07D;
 }
 
-.uk-nav-side ul a:hover {
+.uk-nav-side:not('.new') ul a:hover {
 	color: #059;
 }
 
@@ -1925,7 +1925,7 @@ a.uk-thumbnail:focus, a.uk-thumbnail:hover, a.uk-thumbnail-border:focus, a.uk-th
 	border-radius: 1px;
 }
 
-.uk-dropdown .uk-nav {
+.uk-dropdown .uk-nav:not('.new') {
 	margin: -1rem;
 }
 
@@ -2336,4 +2336,33 @@ footer.tm-footer > .block.bottom {
 
 footer.tm-footer > .block.bottom .header {
 	color: #fff;
+}
+
+/* New Side nav
+========================================================================== */
+.uk-panel .uk-nav-side.new {
+	margin: 0 -15px -10px;
+}
+
+.uk-nav-side.new {
+	font-size: 15px;
+}
+.uk-nav-side.new > li.uk-active > a {
+	background: #FFCC00;
+	color: #444;
+	box-shadow: none;
+	text-shadow: none;
+	font-weight: 600;
+
+}
+
+.uk-nav-side.new .uk-nav-sub {
+	padding-left: 30px;
+}
+
+.uk-nav-side.new .uk-nav-sub a {
+	color: #444;
+}
+.uk-nav-side.new .uk-nav-sub .uk-active > a {
+	color: #ccc;
 }

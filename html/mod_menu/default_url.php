@@ -9,6 +9,9 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\HTML\HTMLHelper;
+
 $attributes = array();
 if ($item->anchor_title)
 {
@@ -31,4 +34,4 @@ elseif ($item->browserNav == 2)
 	$options               = 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes';
 	$attributes['onclick'] = "window.open(this.href, 'targetWindow', '" . $options . "'); return false;";
 }
-echo JHtml::_('link', $item->flink, $item->title, $attributes);
+echo HTMLHelper::_('link', $item->flink, $item->title, $attributes);

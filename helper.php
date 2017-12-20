@@ -190,5 +190,68 @@ class tplNerudasHelper
 		return 'template.middle.' . $layout;
 	}
 
+	/**
+	 * Get middle layout
+	 *
+	 * @param int   $active_id menu items;
+	 * @param       $path
+	 * @param array $list      menu items;
+	 *
+	 * @return array
+	 *
+	 * @since   4.9.3
+	 */
+	public static function getMenuActiveItems($active_id, $path, $list)
+	{
+		// Change array keys
+		$items = array();
+		foreach ($list as $item)
+		{
+			$items[$item->id] = $item;
+		}
+
+		//get Actives
+		$actives = array();
+		foreach ($items as $id => $item)
+		{
+			$active = false;
+			if ($item->id == $active_id || ($item->type === 'alias' && $item->params->get('aliasoptions') == $active_id))
+			{
+				$active = true;
+			}
+			if (in_array($item->id, $path))
+			{
+				$active = true;
+			}
+			elseif ($item->type === 'alias')
+			{
+				$aliasToId = $item->params->get('aliasoptions');
+
+				if (count($path) > 0 && $aliasToId == $path[count($path) - 1])
+				{
+					$active = true;
+				}
+				elseif (in_array($aliasToId, $path))
+				{
+					$active = true;
+				}
+			}
+
+			if ($active)
+			{
+				$actives[] = $item->id;
+				$parent_id = $item->parent_id;
+				while (isset($items[$parent_id]))
+				{
+					$actives[] = $parent_id;
+					$parent_id = $items[$parent_id]->parent_id;
+				}
+
+				$actives = array_unique($actives);
+			}
+		}
+
+		return $actives;
+	}
 
 }
