@@ -79,4 +79,14 @@ function modChrome_sidebar_new($module, &$params, &$attribs)
 	echo '</div></div>';
 }
 
-?>
+// Footer
+function modChrome_footer($module, &$params, &$attribs)
+{
+	echo '<div id="mod-' . $module->id . '" class="module' . htmlspecialchars($params->get('moduleclass_sfx')) . '">';
+	if ($module->showtitle)
+	{
+		echo '<div class="title uk-h3 uk-margin-small-bottom">' . $module->title . '</div>';
+	}
+	echo '<div class="content">' . $module->content . '</div>';
+	echo '</div>';
+}

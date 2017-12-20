@@ -2301,3 +2301,39 @@ blockquote.uk-text-primary {
 b, strong {
 	font-weight: 600;
 }
+
+/* Footer
+========================================================================== */
+footer.tm-footer {
+	margin-top: 50px;
+}
+
+footer.tm-footer > .block {
+	display: block;
+	position: relative;
+	box-sizing: border-box;
+	padding: 50px 20px;
+}
+
+footer.tm-footer .block .header {
+	margin-bottom: 50px;
+	font-size: 2.571rem;
+	line-height: 3.000rem;
+	text-align: center;
+}
+
+footer.tm-footer > .block.top {
+	background: #efefef;
+}
+
+footer.tm-footer > .block.top .header {
+	color: #666;
+}
+
+footer.tm-footer > .block.bottom {
+	background: #222;
+}
+
+footer.tm-footer > .block.bottom .header {
+	color: #fff;
+}

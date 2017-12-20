@@ -52,7 +52,7 @@ if (in_array($app->input->get('option', ''), $newComponents)):
 	<?php echo LayoutHelper::render('template.header', $this); ?>
 	<?php echo LayoutHelper::render($this->middleLayout, $this); ?>
 
-	<?php echo LayoutHelper::render('template.footer'); ?>
+	<?php echo LayoutHelper::render('template.footer', $this); ?>
 	<jdoc:include type="modules" name="modal"/>
 	<jdoc:include type="modules" name="scripts"/>
 	</body>
