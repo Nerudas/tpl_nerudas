@@ -38,6 +38,9 @@ if ($_SERVER['REQUEST_URI'] == '/index.php?option=com_k2&view=itemlist')
 $newComponents     = array('com_remzona');
 if (in_array($app->input->get('option', ''), $newComponents)):
 
+	// Get Header
+	$this->header = $this->helper->getHeader($this);
+
 	// Get middle Layout
 	$this->middleLayout = $this->helper->getMiddleLayot($this);
 

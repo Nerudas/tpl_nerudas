@@ -9,6 +9,9 @@
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\Registry\Registry;
+
 // Blank
 function modChrome_blank($module, &$params, &$attribs)
 {
@@ -90,3 +93,47 @@ function modChrome_footer($module, &$params, &$attribs)
 	echo '<div class="content">' . $module->content . '</div>';
 	echo '</div>';
 }
+
+// Top - Panel Center
+function modChrome_toppanel_center($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		$params = new Registry($params);
+		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
+		echo '<li class="' . $class . '" data-uk-dropdown="{mode:\'click\'}">';
+		echo '<a>' . $module->title . '<i class="uk-icon-angle-down uk-margin-left"></i>' . '</a>';
+		echo '<div class="uk-dropdown ">' . $module->content . '</div>';
+		echo '</li>';
+	}
+}
+
+// Top - Panel Center
+function modChrome_toppanel($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		$params = new Registry($params);
+		echo '<div>mod</div>';
+	}
+}
+
+// Top - Panel Center Mobile
+function modChrome_toppanel_mobile($module, &$params, &$attribs)
+{
+	echo '<div class="module mod_' . $module->id . '' . htmlspecialchars($params->get('moduleclass_sfx')) . '">';
+	echo '<div class="uk-panel uk-panel-box">';
+	if ($module->showtitle)
+	{
+		echo '<div class="module-title"  data-uk-toggle="{target:\'.mod_' . $module->id . '\', 
+		cls:\'show\'}">';
+
+		echo '<span>' . $module->title . '</span>';
+		echo '<i class="uk-icon-angle-down uk-icon-small"></i>';
+		echo '<i class="uk-icon-angle-up uk-icon-small"></i>';
+		echo '</div>';
+	}
+	echo '<div class="module-content">' . $module->content . '</div>';
+	echo '</div></div>';
+}
+

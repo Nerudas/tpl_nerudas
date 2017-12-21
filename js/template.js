@@ -1,5 +1,3 @@
-
-
 /*
  * @package    Nerudas Template
  * @version    4.9.4
@@ -79,6 +77,14 @@
 			},
 			'hide.uk.offcanvas': function () {
 				$('body').css('overflow', '');
+			}
+		});
+		$(window).scroll(function () {
+			console.log($(this).scrollTop());
+			if ($(this).scrollTop() > 100) {
+				$('#backToTop').fadeIn();
+			} else {
+				$('#backToTop').fadeOut();
 			}
 		});
 		$('time.timeago').timeago();

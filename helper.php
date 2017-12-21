@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Helper\ModuleHelper;
 
 class tplNerudasHelper
 {
@@ -300,5 +301,77 @@ class tplNerudasHelper
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Get footer object
+	 *
+	 * @param $template Template data
+	 *
+	 * @return object
+	 *
+	 * @since   4.9.4
+	 */
+
+	public function getHeader($template)
+	{
+		$header = new stdClass();
+		$params = $template->params->get('header', '');
+		$params = new Registry($params);
+
+
+		//Logo
+		$header->logo = false;
+		if ($params->get('logo-src', 0))
+		{
+			$header->logo         = new stdClass();
+			$header->logo->src    = $params->get('logo-src', 'templates/nerudas/images/logo.svg');
+			$header->logo->alt    = ($params->get('logo-alt', 0)) ? Text::_($params->get('logo-alt'))
+				: Factory::getConfig()->get('sitename');
+			$header->logo->type   = JFile::getExt($header->logo->src);
+			$header->logo->height = $params->get('logo-height', 0);
+			$header->logo->class  = $params->get('logo-class', '');
+
+			// Attributes
+			$attributes = '';
+			if (!empty($header->logo->height))
+			{
+				$attributes = ' height="' . $header->logo->height . '"';
+			}
+			if (!empty($header->logo->class))
+			{
+				$attributes = ' class="' . $header->logo->class . '"';
+			}
+
+			// Element
+			$header->logo->element = ($header->logo->type == 'svg') ? JFile::read($header->logo->src) :
+				HTMLHelper::_('image', $header->logo->src, $header->logo->alt, array('title' => $header->logo->alt));
+
+		}
+
+		// Panel
+		$header->panel = new stdClass();
+
+		// Center
+		$header->panel->center = false;
+		$header->panel->mobile = false;
+		if ($template->countModules('toppanel-center'))
+		{
+			$header->panel->center = '';
+			$header->panel->mobile = '';
+			foreach (ModuleHelper::getModules('toppanel-center') as $module)
+			{
+				$content = $module->content;
+
+				$header->panel->center .= ModuleHelper::renderModule($module, array('style' => 'toppanel_center'));
+
+				$module->content       = $content;
+				$header->panel->mobile .= ModuleHelper::renderModule($module, array('style' => 'toppanel_mobile'));
+
+			}
+		}
+
+		return $header;
 	}
 }

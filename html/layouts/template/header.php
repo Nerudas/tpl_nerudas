@@ -3,38 +3,52 @@
 defined('_JEXEC') or die;
 
 $template = $displayData;
+$header   = $template->header;
+$panel    = $header->panel;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
-$siteName = Factory::getConfig()->get('sitename');
-
+///echo '<pre>', print_r($header, true), '</pre>';
 ?>
-<header class="tm-top">
-	<nav class="uk-navbar uk-navbar-attached">
-		<div class="uk-container uk-container-center">
-			<a class="uk-navbar-toggle uk-icon-small" href="#navigation" data-uk-offcanvas="{mode:'slide'}"></a>
-			<a class="uk-navbar-brand" href="/">
-				<?php echo HTMLHelper::_('image', 'logo.png', $siteName, array('title' => $siteName), true); ?>
-			</a>
-			<?php if ($template->countModules('header-center')): ?>
-				<div class="uk-navbar-content uk-hidden-small">
-					<jdoc:include type="modules" name="header-center"/>
+<header class="tm-top new">
+	<nav class="tm-toppanel" data-uk-sticky="">
+		<div class="uk-container uk-container-center uk-height-1-1">
+			<div class="uk-grid uk-grid-large uk-height-1-1" data-uk-grid-match>
+				<div class="left uk-width-medium-1-5 uk-flex uk-flex-middle uk-flex-left">
+					<div>
+						<a class="menu uk-margin-small-right uk-icon-navicon uk-icon-small" href="#navigation"
+						   data-uk-offcanvas="{mode:'slide'}">
+						</a>
+						<?php if ($header->logo): ?>
+							<a class="logo" href="<?php echo \Joomla\CMS\Uri\Uri::root(); ?>">
+								<?php echo $header->logo->element; ?>
+							</a>
+						<?php endif; ?>
+					</div>
 				</div>
-			<?php endif; ?>
-			<?php if ($template->countModules('header-sidebar')): ?>
-				<div class="uk-navbar-flip">
-					<ul class="uk-navbar-nav">
-						<jdoc:include type="modules" name="header-sidebar"/>
-					</ul>
+				<div class="center uk-width-medium-3-5 uk-flex uk-flex-top uk-flex-center uk-visible-large">
+					<?php if ($panel->center): ?>
+						<ul class="modules">
+							<?php echo $panel->center; ?>
+						</ul>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-		</div>
+			</div>
 	</nav>
-	<div id="navigation" class="uk-offcanvas">
-		<div class="uk-offcanvas-bar">
-			<jdoc:include type="modules" name="navigation"/>
-		</div>
-	</div>
+	<?php if ($panel->mobile): ?>
+		<nav class="tm-toppanel-mobile uk-container uk-container-center uk-margin-top uk-hidden-large">
+			<div class="modules uk-accordion uk-grid uk-grid uk-grid-width-medium-1-2" data-uk-grid-match
+				 data-uk-grid-margin>
+				<?php echo $panel->mobile ?>
+			</div>
+		</nav>
+	<?php endif; ?>
 </header>
+
+<nav id="navigation" class="uk-offcanvas">
+	<div class="uk-offcanvas-bar">
+		<jdoc:include type="modules" name="navigation"/>
+	</div>
+</nav>

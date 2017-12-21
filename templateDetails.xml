@@ -52,6 +52,25 @@
 					<option value="1">JYES</option>
 				</field>
 			</fieldset>
+			<fieldset name="header" label="TPL_NERUDAS_PARAMS_HEADER">
+				<fields name="header">
+					<field type="note" label="TPL_NERUDAS_PARAMS_LOGO"/>
+					<field name="logo-src" type="text"
+						   label="TPL_NERUDAS_PARAMS_LOGO_SRC"
+						   class="input-xxlarge"
+						   default="templates/nerudas/images/logo.svg"/>
+					<field name="logo-alt" type="text"
+						   label="TPL_NERUDAS_PARAMS_LOGO_ALT"
+						   class="input-xxlarge"/>
+					<field name="logo-height" type="number"
+						   label="TPL_NERUDAS_PARAMS_LOGO_HEIGHT"
+						   class="input-small"
+						   default="0"/>
+					<field name="logo-class" type="text"
+						   label="TPL_NERUDAS_PARAMS_LOGO_CLASS"
+						   class="input-xxlarge"/>
+				</fields>
+			</fieldset>
 			<fieldset name="footer" label="TPL_NERUDAS_PARAMS_FOOTER">
 				<fields name="footer">
 					<field type="note" label="TPL_NERUDAS_PARAMS_FOOTER_TOP"/>
