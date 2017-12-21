@@ -2315,26 +2315,26 @@ footer.tm-footer > .block {
 	padding: 50px 20px;
 }
 
-footer.tm-footer .block .header {
-	margin-bottom: 50px;
-	font-size: 2.571rem;
-	line-height: 3.000rem;
-	text-align: center;
-}
-
 footer.tm-footer > .block.top {
 	background: #efefef;
-}
-
-footer.tm-footer > .block.top .header {
-	color: #666;
 }
 
 footer.tm-footer > .block.bottom {
 	background: #222;
 }
 
-footer.tm-footer > .block.bottom .header {
+footer.tm-footer .block .block-title {
+	margin-bottom: 50px;
+	font-size: 2.571rem;
+	line-height: 3.000rem;
+	text-align: center;
+}
+
+footer.tm-footer > .block.top .block-title {
+	color: #666;
+}
+
+footer.tm-footer > .block.bottom .block-title {
 	color: #fff;
 }
 
@@ -2347,6 +2347,7 @@ footer.tm-footer > .block.bottom .header {
 .uk-nav-side.new {
 	font-size: 15px;
 }
+
 .uk-nav-side.new > li.uk-active > a {
 	background: #FFCC00;
 	color: #444;
@@ -2363,6 +2364,7 @@ footer.tm-footer > .block.bottom .header {
 .uk-nav-side.new .uk-nav-sub a {
 	color: #444;
 }
+
 .uk-nav-side.new .uk-nav-sub .uk-active > a {
 	color: #ccc;
 }

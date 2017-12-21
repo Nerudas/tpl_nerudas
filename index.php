@@ -41,6 +41,9 @@ if (in_array($app->input->get('option', ''), $newComponents)):
 	// Get middle Layout
 	$this->middleLayout = $this->helper->getMiddleLayot($this);
 
+	// Get Footer
+	$this->footer = $this->helper->getFooter($this);
+
 	?>
 	<html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>"
 		  lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" class="new">

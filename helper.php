@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\Registry\Registry;
+use Joomla\CMS\Language\Text;
 
 class tplNerudasHelper
 {
@@ -254,4 +256,49 @@ class tplNerudasHelper
 		return $actives;
 	}
 
+
+	/**
+	 * Get footer object
+	 *
+	 * @param $template Template data
+	 *
+	 * @return mixed object|bool
+	 *
+	 * @since   4.9.4
+	 */
+
+	public function getFooter($template)
+	{
+		$params = $template->params->get('footer', '');
+
+		if ($template->countModules('footer-top') || $template->countModules('footer-bottom') && !empty($params))
+		{
+			$footer = new stdClass();
+			$params = new Registry($params);
+
+			// Top block
+			$footer->top = false;
+			if ($template->countModules('footer-top'))
+			{
+				$footer->top          = new stdClass();
+				$footer->top->title   = ($params->get('top-showtitle', 0)
+					&& !empty($params->get('top-title', ''))) ? Text::_($params->get('top-title')) : false;
+				$footer->top->modules = '<jdoc:include type="modules" name="footer-top" style="footer"/>';
+			}
+
+			// Bottom  block
+			$footer->bottom = false;
+			if ($template->countModules('footer-bottom'))
+			{
+				$footer->bottom          = new stdClass();
+				$footer->bottom->title   = ($params->get('bottom-showtitle', 0)
+					&& !empty($params->get('bottom-title', ''))) ? Text::_($params->get('bottom-title')) : false;
+				$footer->bottom->modules = '<jdoc:include type="modules" name="footer-bottom" style="footer"/>';
+			}
+
+			return $footer;
+		}
+
+		return false;
+	}
 }

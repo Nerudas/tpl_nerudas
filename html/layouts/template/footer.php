@@ -14,8 +14,46 @@ use Joomla\CMS\Language\Text;
 
 $template = $displayData;
 
+$footer = $template->footer;
+
 ?>
-<?php if ($template->countModules('footer-top') || $template->countModules('footer-bottom')): ?>
+<?php if ($footer) : ?>
+	<footer class="tm-footer">
+		<?php if ($footer->top): ?>
+			<div class="block top">
+				<div class="uk-container uk-container-center">
+					<?php if ($footer->top->title): ?>
+						<div class="block-title">
+							<?php echo $footer->top->title; ?>
+						</div>
+					<?php endif; ?>
+					<div class="modules uk-grid uk-grid uk-grid-width-medium-1-5" data-uk-grid-match
+						 data-uk-grid-margin>
+						<?php echo $footer->top->modules; ?>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<?php if ($footer->bottom): ?>
+			<div class="block bottom uk-text-contrast">
+				<div class="uk-container uk-container-center">
+					<?php if ($footer->bottom->title): ?>
+						<div class="block-title">
+							<?php echo $footer->bottom->title; ?>
+						</div>
+					<?php endif; ?>
+					<div class="modules uk-grid uk-grid uk-grid-width-medium-1-5" data-uk-grid-match
+						 data-uk-grid-margin>
+						<?php echo $footer->bottom->modules; ?>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
+	</footer>
+<?php endif; ?>
+
+<?php /*if ($template->countModules('footer-top') || $template->countModules('footer-bottom')): ?>
 	<footer class="tm-footer">
 		<?php if ($template->countModules('footer-top')): ?>
 			<div class="block top">
@@ -51,5 +89,5 @@ $template = $displayData;
 			</div>
 		<?php endif; ?>
 	</footer>
-<?php endif; ?>
+<?php endif; */ ?>
 

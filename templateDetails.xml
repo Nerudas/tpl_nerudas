@@ -53,28 +53,31 @@
 				</field>
 			</fieldset>
 			<fieldset name="footer" label="TPL_NERUDAS_PARAMS_FOOTER">
-				<field type="note" label="TPL_NERUDAS_PARAMS_FOOTER_TOP"/>
-				<field name="footer-top-showheader" type="radio"
-					   label="TPL_NERUDAS_PARAMS_FOOTER_SHOWHEADER"
-					   default="1"
-					   class="btn-group btn-group-yesno">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="footer-top-header" type="text"
-					   label="TPL_NERUDAS_PARAMS_FOOTER_HEADER"
-					   showon="footer-top-showheader:1"/>
-				<field type="note" label="TPL_NERUDAS_PARAMS_FOOTER_BOTTOM"/>
-				<field name="footer-bottom-showheader" type="radio"
-					   label="TPL_NERUDAS_PARAMS_FOOTER_SHOWHEADER"
-					   default="1"
-					   class="btn-group btn-group-yesno">
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="footer-bottom-header" type="text"
-					   label="TPL_NERUDAS_PARAMS_FOOTER_HEADER"
-					   showon="footer-bottom-showheader:1"/>
+				<fields name="footer">
+					<field type="note" label="TPL_NERUDAS_PARAMS_FOOTER_TOP"/>
+					<field name="top-showtitle" type="radio"
+						   label="TPL_NERUDAS_PARAMS_FOOTER_SHOWHEADER"
+						   default="1"
+						   class="btn-group btn-group-yesno">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+					<field name="top-title" type="text"
+						   label="TPL_NERUDAS_PARAMS_FOOTER_HEADER"
+						   showon="top-showtitle:1"/>
+
+					<field type="note" label="TPL_NERUDAS_PARAMS_FOOTER_BOTTOM"/>
+					<field name="bottom-showtitle" type="radio"
+						   label="TPL_NERUDAS_PARAMS_FOOTER_SHOWHEADER"
+						   default="1"
+						   class="btn-group btn-group-yesno">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+					<field name="bottom-title" type="text"
+						   label="TPL_NERUDAS_PARAMS_FOOTER_HEADER"
+						   showon="bottom-showtitle:1"/>
+				</fields>
 			</fieldset>
 		</fields>
 	</config>
