@@ -2387,3 +2387,25 @@ footer.tm-footer > .block.bottom .block-title {
 .uk-nav-side.new .uk-nav-sub > li > a {
 	padding-left: 30px;
 }
+
+/* Sidebar
+========================================================================== */
+aside.tm-sidebar .module .module-title {
+	position: relative;
+	box-sizing: border-box;
+	margin: -15px -15px 10px;
+}
+
+aside.tm-sidebar .module .module-title > span {
+	position: relative;
+	display: inline-block;
+	padding: 0 20px;
+	line-height: 3;
+	color: #666;
+	font-size: .95rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 1px solid rgba(0, 0, 0, .04);
+	border-right: 1px solid rgba(0, 0, 0, .04);
+	background: rgba(0, 0, 0, .03);
+}

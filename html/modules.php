@@ -72,10 +72,10 @@ function modChrome_sidebar_new($module, &$params, &$attribs)
 
 	if ($module->showtitle)
 	{
-		echo '<div class="title uk-panel-title uk-h3">' . $module->title . '</div>';
+		echo '<div class="module-title"><span>' . $module->title . '</span></div>';
 	}
 
-	echo '<div class="content">' . $module->content . '</div>';
+	echo '<div class="module-content">' . $module->content . '</div>';
 	echo '</div></div>';
 }
 
