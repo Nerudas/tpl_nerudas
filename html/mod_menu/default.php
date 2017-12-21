@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 require_once JPATH_THEMES . '/nerudas/helper.php';
-$actives = tplNerudasHelper::getMenuActiveItems($active_id, $path ,$list);
+$actives = tplNerudasHelper::getMenuActiveItems($active_id, $path, $list);
 
 $id = ($params->get('tag_id', 0)) ? $params->get('tag_id') : 'modMenu-' . $module->id;
 
@@ -26,10 +26,41 @@ foreach ($list as $i => &$item)
 	{
 		$class[] = 'default';
 	}
+
+	$active = false;
+	if ($item->id == $active_id || ($item->type === 'alias' && $item->params->get('aliasoptions') == $active_id))
+	{
+		$active = true;
+	}
+	if (in_array($item->id, $path))
+	{
+		$active = true;
+	}
+	elseif ($item->type === 'alias')
+	{
+		$aliasToId = $item->params->get('aliasoptions');
+
+		if (count($path) > 0 && $aliasToId == $path[count($path) - 1])
+		{
+			$active = true;
+		}
+		elseif (in_array($aliasToId, $path))
+		{
+			$active = true;
+		}
+	}
+
 	if (in_array($item->id, $actives))
 	{
+
 		$class[] = 'uk-active';
+		if (!$active)
+		{
+			$class[] = 'uk-active-parent';
+		}
 	}
+
+
 	if ($item->type == 'separator')
 	{
 		$class[] = 'uk-nav-divider';

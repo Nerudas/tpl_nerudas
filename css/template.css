@@ -2348,23 +2348,42 @@ footer.tm-footer > .block.bottom .block-title {
 	font-size: 15px;
 }
 
-.uk-nav-side.new > li.uk-active > a {
-	background: #FFCC00;
+.uk-nav-side.new > li > a,
+.uk-nav-side.new .uk-nav-sub > li > a {
+	border-left: 2px solid transparent;
+	padding: 5px 15px;
+	color: #444;
+}
+
+.uk-nav-side.new > li > a:hover,
+.uk-nav-side.new > li > a:focus,
+.uk-nav-side.new > li.uk-active > a,
+.uk-nav-side.new .uk-nav-sub > li > a:hover,
+.uk-nav-side.new .uk-nav-sub > li > a:focus,
+.uk-nav-side.new .uk-nav-sub > li.uk-active > a {
+	background: rgba(254, 245, 104, 0.5);
 	color: #444;
 	box-shadow: none;
 	text-shadow: none;
-	font-weight: 600;
+	font-weight: normal;
+}
 
+.uk-nav-side.new > li.uk-active > a,
+.uk-nav-side.new .uk-nav-sub > li.uk-active > a {
+	border-left-color: #FFCC00;
+	font-weight: 600;
+}
+
+.uk-nav-side.new > li.uk-active-parent > a,
+.uk-nav-side.new .uk-nav-sub > li.uk-active-parent > a {
+	background: none;
+	border-left-color: transparent;
 }
 
 .uk-nav-side.new .uk-nav-sub {
+	padding-left: 0;
+}
+
+.uk-nav-side.new .uk-nav-sub > li > a {
 	padding-left: 30px;
-}
-
-.uk-nav-side.new .uk-nav-sub a {
-	color: #444;
-}
-
-.uk-nav-side.new .uk-nav-sub .uk-active > a {
-	color: #ccc;
 }
