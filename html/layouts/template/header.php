@@ -47,7 +47,8 @@ use Joomla\CMS\Language\Text;
 	</nav>
 	<?php if ($panel->mobile): ?>
 		<nav class="tm-toppanel-mobile uk-container uk-container-center uk-margin-top uk-hidden-large">
-			<div class="modules uk-accordion uk-grid uk-grid uk-grid-width-medium-1-2" data-uk-grid-match
+			<div class="modules uk-accordion uk-grid uk-grid uk-grid-width-medium-1-2 uk-panel uk-panel-box"
+				 data-uk-grid-match
 				 data-uk-grid-margin>
 				<?php echo $panel->mobile ?>
 			</div>

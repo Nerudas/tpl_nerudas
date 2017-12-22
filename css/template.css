@@ -2542,7 +2542,6 @@ nav.tm-toppanel .right > .modules > li > .uk-dropdown > ul > li > a {
 
 nav.tm-toppanel-mobile .module .module-title {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	cursor: pointer;
 }
@@ -2550,6 +2549,7 @@ nav.tm-toppanel-mobile .module .module-title {
 nav.tm-toppanel-mobile .module .module-title span,
 nav.tm-toppanel-mobile .module .module-title i {
 	display: inline-block;
+	margin-right: 5px;
 }
 
 nav.tm-toppanel-mobile .module .module-title .uk-icon-angle-up {

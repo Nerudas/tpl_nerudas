@@ -123,7 +123,6 @@ function modChrome_toppanel_right($module, &$params, &$attribs)
 function modChrome_toppanel_mobile($module, &$params, &$attribs)
 {
 	echo '<div class="module mod_' . $module->id . '' . htmlspecialchars($params->get('moduleclass_sfx')) . '">';
-	echo '<div class="uk-panel uk-panel-box">';
 	if ($module->showtitle)
 	{
 		echo '<div class="module-title"  data-uk-toggle="{target:\'.mod_' . $module->id . '\', 
@@ -135,6 +134,6 @@ function modChrome_toppanel_mobile($module, &$params, &$attribs)
 		echo '</div>';
 	}
 	echo '<div class="module-content">' . $module->content . '</div>';
-	echo '</div></div>';
+	echo '</div>';
 }
 
