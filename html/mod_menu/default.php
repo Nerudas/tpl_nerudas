@@ -60,7 +60,6 @@ foreach ($list as $i => &$item)
 		}
 	}
 
-
 	if ($item->type == 'separator')
 	{
 		$class[] = 'uk-nav-divider';

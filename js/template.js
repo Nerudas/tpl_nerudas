@@ -80,7 +80,6 @@
 			}
 		});
 		$(window).scroll(function () {
-			console.log($(this).scrollTop());
 			if ($(this).scrollTop() > 100) {
 				$('#backToTop').fadeIn();
 			} else {

@@ -118,9 +118,9 @@ $user = Factory::getUser();
 											<a class="uk-button uk-button-small uk-margin-small-right uk-margin-small-bottom"
 											   href="tel:<?php echo $phone->code . $phone->number; ?>">
 												<i class="uk-icon-phone uk-margin-small-right"></i>
-												<?php $phone->display  = (!empty($phone->display)) ?
+												<?php $phone->display = (!empty($phone->display)) ?
 													$phone->display : $phone->code . $phone->number;
-												echo $phone->display;?>
+												echo $phone->display; ?>
 											</a>
 										<?php endforeach; ?>
 									<?php endif; ?>

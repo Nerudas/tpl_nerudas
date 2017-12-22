@@ -27,7 +27,7 @@ extract($displayData);
  */
 ?>
 
-<ul class="level-<?php echo $level?> uk-list uk-margin-left childs">
+<ul class="level-<?php echo $level ?> uk-list uk-margin-left childs">
 	<?php foreach ($options as $option): ?>
 		<li class="item option-<?php echo $option->key; ?> level-<?php echo $option->level; ?> ">
 			<label for="<?php echo $option->id; ?>">

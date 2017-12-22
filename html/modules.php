@@ -108,17 +108,8 @@ function modChrome_toppanel_center($module, &$params, &$attribs)
 	}
 }
 
-// Top - Panel Center
-function modChrome_toppanel($module, &$params, &$attribs)
-{
-	if ($module->content)
-	{
-		$params = new Registry($params);
-		echo '<div>mod</div>';
-	}
-}
 
-// Top - Panel Center Mobile
+// Top - Panel Mobile
 function modChrome_toppanel_mobile($module, &$params, &$attribs)
 {
 	echo '<div class="module mod_' . $module->id . '' . htmlspecialchars($params->get('moduleclass_sfx')) . '">';
