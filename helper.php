@@ -372,6 +372,9 @@ class tplNerudasHelper
 			}
 		}
 
+		// Right
+		$header->panel->right = ($template->countModules('toppanel-right'))?
+			'<jdoc:include type="modules" name="toppanel-right" style="toppanel_right"/>': false;
 		return $header;
 	}
 }

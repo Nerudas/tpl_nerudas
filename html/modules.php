@@ -108,6 +108,16 @@ function modChrome_toppanel_center($module, &$params, &$attribs)
 	}
 }
 
+// Top - Panel Right
+function modChrome_toppanel_right($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		$params = new Registry($params);
+		$class  = 'module-' . $module->id . ' ' . $params->get('moduleclass_sfx');
+		echo '<li class="' . $class . '"  data-uk-dropdown="{mode:\'click\', pos:\'bottom-right\'}">' . $module->content . '</li>';
+	}
+}
 
 // Top - Panel Mobile
 function modChrome_toppanel_mobile($module, &$params, &$attribs)

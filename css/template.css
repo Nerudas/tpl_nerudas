@@ -1660,7 +1660,9 @@ html.new .tm-title .uk-h1 {
 	background-size: cover;
 	box-sizing: border-box;
 }
-
+[class*="uk-avatar-"].uk-flex {
+	display: inline-flex;
+}
 [class*="uk-avatar-"]:hover {
 	opacity: 0.5;
 }
@@ -2378,6 +2380,35 @@ footer.tm-footer > .block.bottom .block-title {
 	padding-left: 30px;
 }
 
+/* New Dopdows nav
+========================================================================== */
+.uk-dropdown .uk-nav.new {
+	margin: -10px -15px;
+}
+
+.uk-dropdown .uk-nav.new > li > a {
+	border-left: 2px solid transparent;
+	padding: 5px 15px;
+	color: #444;
+}
+
+.uk-dropdown .uk-nav.new > li > a:hover,
+.uk-dropdown .uk-nav.new > li > a:focus,
+.uk-dropdown .uk-nav.new > li.uk-active > a {
+	background: rgba(254, 245, 104, 0.5);
+	color: #444;
+	box-shadow: none;
+	text-shadow: none;
+	font-weight: normal;
+}
+
+.uk-dropdown .uk-nav.new  > li.uk-active > a {
+	border-left-color: #FFCC00;
+	font-weight: 600;
+}
+
+
+
 /* Sidebar
 ========================================================================== */
 aside.tm-sidebar .module .module-title {
@@ -2465,6 +2496,7 @@ nav.tm-toppanel .center > .modules > li > .uk-dropdown {
 }
 
 nav.tm-toppanel .right > .modules {
+	display: flex;
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -2474,6 +2506,7 @@ nav.tm-toppanel .right > .modules {
 
 nav.tm-toppanel .right > .modules > li {
 	display: inline-flex;
+	position: relative;
 	margin: 0;
 	padding: 0;
 	height: 100%;
