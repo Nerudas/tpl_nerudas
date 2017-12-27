@@ -16,6 +16,10 @@ defined('_JEXEC') or die;
 <section class="tm-middle">
 	<?php require_once JPATH_THEMES . '/' . $this->template . '/layouts/' . $site->version . '_middle_' . $site->layout . '.php'; ?>
 </section>
-<footer class="tm-footer">
-	<?php require_once JPATH_THEMES . '/' . $this->template . '/layouts/' . $site->version . '_footer.php'; ?>
-</footer>
+<?php // Get Footer
+use Joomla\CMS\Layout\LayoutHelper;
+
+$this->footer = $this->helper->getFooter($this);
+echo LayoutHelper::render('template.footer', $this);
+?>
+
