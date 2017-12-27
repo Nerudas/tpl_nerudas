@@ -2336,11 +2336,13 @@ footer.tm-footer > .block.bottom a.uk-link-muted,
 footer.tm-footer > .block.bottom .uk-link-muted a {
 	color: #bbb;
 }
-footer.tm-footer > .block.bottom a.uk-link-muted:hover,
-footer.tm-footer > .block.bottom .uk-link-muted a:hover {
-	color: #bbb;
-}
 
+footer.tm-footer > .block.bottom a.uk-link-muted:hover,
+footer.tm-footer > .block.bottom .uk-link-muted a:hover,
+footer.tm-footer > .block.bottom a.uk-link-muted:focus,
+footer.tm-footer > .block.bottom .uk-link-muted a:focus {
+	color: #FFF;
+}
 
 /* New Side nav
 ========================================================================== */
