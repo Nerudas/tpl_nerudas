@@ -1348,29 +1348,29 @@ footer .uk-navbar-attached {
 }
 
 /* nav-side */
-.uk-nav-side:not('.new') > li > a {
+.uk-nav-side:not(.new) > li > a {
 	color: #444;
 	border-left: 2px solid transparent;
 }
 
-.uk-nav-side:not('.new') .uk-nav-sub > li > a {
+.uk-nav-side:not(.new) .uk-nav-sub > li > a {
 	color: #444;
 	font-size: 1rem;
 	padding-left: 15px;
 }
 
-.uk-nav-side:not('.new') > li > a > [class*="uk-icon-"] {
+.uk-nav-side:not(.new) > li > a > [class*="uk-icon-"] {
 	color: #666;
 }
 
-.uk-nav-side:not('.new') > li > a:hover, .uk-nav-side:not('.new') > li > a:focus {
+.uk-nav-side:not(.new) > li > a:hover, .uk-nav-side:not(.new) > li > a:focus {
 	background: rgba(0, 0, 0, 0.03);
 	color: #444;
 	box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.06);
 	text-shadow: 0 -1px 0 #fff;
 }
 
-.uk-nav-side:not('.new') > li.uk-active > a {
+.uk-nav-side:not(.new) > li.uk-active > a {
 	position: relative;
 	background: rgba(0, 0, 0, 0.03);
 	color: #000;
@@ -1381,24 +1381,24 @@ footer .uk-navbar-attached {
 
 }
 
-.uk-nav-side:not('.new') > li.uk-active > a [class*="uk-icon-"] {
+.uk-nav-side:not(.new) > li.uk-active > a [class*="uk-icon-"] {
 	color: #000;
 }
 
-.uk-nav-side:not('.new') .uk-nav-header {
+.uk-nav-side:not(.new) .uk-nav-header {
 	color: #444;
 }
 
-.uk-nav-side:not('.new') .uk-nav-divider {
+.uk-nav-side:not(.new) .uk-nav-divider {
 	border-top: 1px solid #ddd;
 	box-shadow: 0 1px 0 #fff;
 }
 
-.uk-nav-side:not('.new') ul a {
+.uk-nav-side:not(.new) ul a {
 	color: #07D;
 }
 
-.uk-nav-side:not('.new') ul a:hover {
+.uk-nav-side:not(.new) ul a:hover {
 	color: #059;
 }
 
