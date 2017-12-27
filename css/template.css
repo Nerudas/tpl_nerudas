@@ -1660,9 +1660,11 @@ html.new .tm-title .uk-h1 {
 	background-size: cover;
 	box-sizing: border-box;
 }
+
 [class*="uk-avatar-"].uk-flex {
 	display: inline-flex;
 }
+
 [class*="uk-avatar-"]:hover {
 	opacity: 0.5;
 }
@@ -2330,6 +2332,16 @@ footer.tm-footer > .block.bottom .block-title {
 	color: #fff;
 }
 
+footer.tm-footer > .block.bottom a.uk-link-muted,
+footer.tm-footer > .block.bottom .uk-link-muted a {
+	color: #bbb;
+}
+footer.tm-footer > .block.bottom a.uk-link-muted:hover,
+footer.tm-footer > .block.bottom .uk-link-muted a:hover {
+	color: #bbb;
+}
+
+
 /* New Side nav
 ========================================================================== */
 .uk-panel .uk-nav-side.new {
@@ -2402,12 +2414,10 @@ footer.tm-footer > .block.bottom .block-title {
 	font-weight: normal;
 }
 
-.uk-dropdown .uk-nav.new  > li.uk-active > a {
+.uk-dropdown .uk-nav.new > li.uk-active > a {
 	border-left-color: #FFCC00;
 	font-weight: 600;
 }
-
-
 
 /* Sidebar
 ========================================================================== */
