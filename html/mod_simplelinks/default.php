@@ -16,10 +16,14 @@ use Joomla\CMS\Language\Text;
 <ul class="uk-list">
 	<?php foreach ($links as $link): ?>
 		<li class="uk-link-muted uk-margin-small-bottom">
-			<a href="<?php echo $link->href; ?>" class="<?php echo $link->class; ?>"
-			   target="<?php echo $link->target; ?>">
-				<?php echo Text::_($link->text); ?>
-			</a>
+			<?php if (!empty($link->href)): ?>
+				<a href="<?php echo $link->href; ?>" class="<?php echo $link->class; ?>"
+				   target="<?php echo $link->target; ?>">
+					<?php echo Text::_($link->text); ?>
+				</a>
+			<?php else: ?>
+				<span class="<?php echo $link->class; ?>"><?php echo Text::_($link->text); ?></span>
+			<?php endif; ?>
 		</li>
 	<?php endforeach; ?>
 </ul>
