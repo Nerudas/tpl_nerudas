@@ -16,10 +16,14 @@ defined('_JEXEC') or die;
 <section class="tm-middle">
 	<?php require_once JPATH_THEMES . '/' . $this->template . '/layouts/' . $site->version . '_middle_' . $site->layout . '.php'; ?>
 </section>
-<?php // Get Footer
+<?php
+// Get Footer
 use Joomla\CMS\Layout\LayoutHelper;
 
-$this->footer = $this->helper->getFooter($this);
-echo LayoutHelper::render('template.footer', $this);
+if ($site->layout !== 'map')
+{
+	$this->footer = $this->helper->getFooter($this);
+	echo LayoutHelper::render('template.footer', $this);
+}
 ?>
 
