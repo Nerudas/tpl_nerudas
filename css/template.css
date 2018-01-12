@@ -2,7 +2,7 @@
  * @package    Nerudas Template
  * @version    4.9.5
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
@@ -266,10 +266,45 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	margin-left: -15px !important;
 }
 
+/* Badge
+========================================================================== */
 .uk-badge {
 	border-radius: 0;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 18px;
+	white-space: nowrap;
+}
+/*..uk-badge-notification {*/
+	/*font-size: 13px;*/
+	/*line-height: 18px;*/
+/*}*/
+.uk-badge.uk-badge-white,
+.uk-badge.uk-badge-white:hover {
+	background:  #FFF;
+	color: #222;
 }
 
+.uk-price {
+	background:  #FFF;
+	color: #333;
+	font-size: 15px;
+	border: none;
+	text-transform: uppercase;
+	/*padding: 5px 10px;*/
+	padding: 5px 0;
+	/*white-space: nowrap;*/
+	align-items: center;
+	/*display: inline-flex;*/
+}
+.uk-price:hover {
+	color: #333;
+}
+.uk-price .text {
+}
+.uk-price img {
+	margin-left: 5px;
+}
 /* Map
 ========================================================================== */
 #map.full {
@@ -658,7 +693,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-form .chosen-container-single .chosen-single {
 	padding: 0.286rem 0.706em;
 	font-size: 0.882rem;
-	line-height: 1.7rem;
+	line-height: 1.45rem;
 	color: #444;
 	border: 1px solid #ddd;
 	border-radius: 2px;
@@ -1058,6 +1093,32 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 
 .uk-form [data-input-phones] .result.sortable .item:not(.ui-sortable-helper) {
 	opacity: 0.6;
+}
+
+.uk-form [data-input-price] .text-field {
+	display: inline-flex;
+	align-items: center;
+}
+
+.uk-form [data-input-price] .text-field .currency {
+	display: inline-block;
+	padding: 0.286rem 0.706rem;
+	font-size: 0.882rem;
+	margin-left: -5px;
+	color: #444;
+	border: 1px solid #ddd;
+	border-radius: 0 2px 2px 0;
+
+	border-left: none;
+	background: #fafafa;
+}
+
+.uk-form [data-input-price] .text-field input {
+	border-radius: 2px 0 0 2px;
+	min-width: 200px !important;
+	width: 200px !important;
+	max-width: 200px !important;
+	vertical-align: inherit;
 }
 
 /* TimyMce */
