@@ -3,7 +3,7 @@
  * @package    Nerudas Template
  * @version    4.9.5
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
@@ -102,7 +102,7 @@ $alt = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $name);
 
 		?>
 		<p class="uk-form-controls-condensed">
-			<label for=" <?php echo $oid; ?>" class="checkbox">
+			<label for="<?php echo $oid; ?>" class="checkbox">
 				<?php echo sprintf($format, $oid, $name, $value, implode(' ', $attributes)); ?>
 				<?php echo $option->text; ?>
 			</label>
