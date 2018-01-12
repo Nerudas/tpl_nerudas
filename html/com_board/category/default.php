@@ -16,7 +16,14 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 
 HTMLHelper::_('formbehavior.chosen', 'select');
-
+$showAdvansedFiler = (
+		!empty($this->filterForm->getValue('for_when', 'filter')) ||
+		!empty($this->filterForm->getValue('price', 'filter')) ||
+		!empty($this->filterForm->getValue('payment_method', 'filter')) ||
+		!empty($this->filterForm->getValue('prepayment', 'filter')) ||
+		!empty($this->filterForm->getValue('allregion', 'filter')) ||
+		!empty($this->filterForm->getValue('onlymy', 'filter'))
+);
 ?>
 
 <div id="board" class="itemlist">
@@ -26,12 +33,20 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 			  class="uk-form filter">
 			<div class="uk-form-row">
 				<div class="uk-grid uk-grid-small" data-uk-margin>
-					<div class="uk-width-small-1-2 uk-width-medium-3-5">
+					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-flex uk-flex-space-between">
 						<?php
 						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
 						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
-						$this->filterForm->setFieldAttribute('search', 'onchange', 'this.form.submit();', 'filter');
 						echo $this->filterForm->getInput('search', 'filter'); ?>
+						<div class="uk-button-group left-input advanced-fiter
+							<?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
+							<a href=" <?php echo $this->category->link; ?>"
+							   class="uk-button uk-text-danger uk-icon-times">
+							</a>
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
+									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
+							</button>
+						</div>
 					</div>
 					<div class="uk-width-small-1-2 uk-width-medium-2-5">
 						<?php
@@ -41,15 +56,15 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 					</div>
 				</div>
 			</div>
-			<div class="uk-form-row advanced-fiter uk-text-right">
+			<div class="uk-form-row advanced-fiter uk-text-right <?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
 				<a data-uk-toggle="{target:'.advanced-fiter'}">
 					<?php echo Text::_('TPL_NERUDAS_ADVANCED_FITER'); ?>
 				</a>
 			</div>
-			<div class="uk-form-row uk-hidden advanced-fiter">
+			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
 				<?php echo $this->filterForm->getInput('price', 'filter'); ?>
 			</div>
-			<div class="uk-hidden advanced-fiter">
+			<div class="advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
 				<div class="uk-grid uk-grid-small" data-uk-margin>
 					<div class="uk-width-medium-1-3">
 						<?php echo $this->filterForm->renderField('payment_method', 'filter'); ?>
@@ -62,7 +77,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 					</div>
 				</div>
 			</div>
-			<div class="uk-form-row uk-hidden advanced-fiter">
+			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
 				<div class="uk-flex uk-flex-wrap uk-flex-space-between uk-flex-middle">
 					<div class="">
 						<div class="uk-flex-inline uk-margin-right uk-margin-top">
@@ -114,14 +129,14 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 									  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
 							</div>
 							<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
-								<a href="<?php echo $item->link; ?>"
-								   class="uk-badge uk-badge-white uk-margin-small-left">
+								<span href="<?php echo $item->link; ?>"
+									  class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
-								</a>
-								<a href="<?php echo $item->link; ?>"
-								   class="uk-badge uk-badge-white uk-margin-small-left">
+								</span>
+								<span href="<?php echo $item->link; ?>"
+									  class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-comment-o uk-margin-small-right"></i>0
-								</a>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -148,7 +163,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							<?php if (!empty($item->price) ||
 								$item->payment_method == 'cashless' || $item->payment_method == 'cash' ||
 								$item->prepayment == 'required' || $item->prepayment == 'no') : ?>
-								<a href="<?php echo $item->link; ?>" class="uk-price uk-text-right">
+								<div href="<?php echo $item->link; ?>" class="uk-price uk-text-right">
 									<?php if (!empty($item->price)) : ?>
 										<div class="text">
 											<?php echo ($item->price == '-0') ? Text::_('JGLOBAL_FIELD_PRICE_CONTRACT_PRICE') :
@@ -181,7 +196,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 												Text::_('COM_BOARD_ITEM_PREPAYMENT_NO'), '', true);
 										} ?>
 									</div>
-								</a>
+								</div>
 							<?php endif; ?>
 						</div>
 					</div>

@@ -275,10 +275,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	line-height: 18px;
 	white-space: nowrap;
 }
-/*..uk-badge-notification {*/
-	/*font-size: 13px;*/
-	/*line-height: 18px;*/
-/*}*/
 .uk-badge.uk-badge-white,
 .uk-badge.uk-badge-white:hover {
 	background:  #FFF;
@@ -291,16 +287,11 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	font-size: 15px;
 	border: none;
 	text-transform: uppercase;
-	/*padding: 5px 10px;*/
 	padding: 5px 0;
-	/*white-space: nowrap;*/
 	align-items: center;
-	/*display: inline-flex;*/
 }
 .uk-price:hover {
 	color: #333;
-}
-.uk-price .text {
 }
 .uk-price img {
 	margin-left: 5px;
@@ -599,7 +590,12 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	color: #fff;
 	text-shadow: none;
 }
-
+.uk-form .uk-flex-space-between input.uk-width-1-1 {
+	min-width: auto;
+}
+.uk-form .uk-button-group.left-input .uk-button:first-child {
+	margin-left: -1px;
+}
 /* Form Icon */
 .uk-form-icon > [class*=uk-icon-] {
 	position: absolute;
