@@ -24,6 +24,7 @@ $showAdvansedFiler = (
 		!empty($this->filterForm->getValue('allregion', 'filter')) ||
 		!empty($this->filterForm->getValue('onlymy', 'filter'))
 );
+
 ?>
 
 <div id="board" class="itemlist">
@@ -40,7 +41,7 @@ $showAdvansedFiler = (
 						echo $this->filterForm->getInput('search', 'filter'); ?>
 						<div class="uk-button-group left-input advanced-fiter
 							<?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
-							<a href=" <?php echo $this->category->link; ?>"
+							<a href="<?php echo $this->category->link; ?>"
 							   class="uk-button uk-text-danger uk-icon-times">
 							</a>
 							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
