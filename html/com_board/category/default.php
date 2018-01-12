@@ -15,16 +15,11 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 
-HTMLHelper::_('formbehavior.chosen', 'select');
-$showAdvansedFiler = (
-		!empty($this->filterForm->getValue('for_when', 'filter')) ||
-		!empty($this->filterForm->getValue('price', 'filter')) ||
-		!empty($this->filterForm->getValue('payment_method', 'filter')) ||
-		!empty($this->filterForm->getValue('prepayment', 'filter')) ||
-		!empty($this->filterForm->getValue('allregion', 'filter')) ||
-		!empty($this->filterForm->getValue('onlymy', 'filter'))
-);
+require_once JPATH_THEMES . '/nerudas/helper.php';
+$showAdvansedFiler = tplNerudasHelper::checkAdvansedFilterActivity($this->filterForm,
+	array('for_when', 'price', 'payment_method', 'prepayment', 'allregion', 'onlymy'));
 
+HTMLHelper::_('formbehavior.chosen', 'select');
 ?>
 
 <div id="board" class="itemlist">

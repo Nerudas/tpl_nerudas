@@ -194,7 +194,38 @@ class tplNerudasHelper
 	}
 
 	/**
-	 * Get middle layout
+	 * Check advansed filter activity
+	 *
+	 * @param JForm  $form   \Joomla\CMS\Form\Form
+	 * @param array  $fields Fields names
+	 * @param string $group  Fields group
+	 *
+	 * @return bool
+	 *
+	 * @since   4.9.3
+	 */
+	public static function checkAdvansedFilterActivity($form, $fields, $group = 'filter')
+	{
+		foreach ($fields as $field)
+		{
+			$value = $form->getValue($field, $group);
+			if (!empty($value) && !is_array($value))
+			{
+				return true;
+			}
+			elseif (!empty($value)) {
+				foreach ($value as $key => $val) {
+					if (!empty($val)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Ge tMenuActiveItems
 	 *
 	 * @param int   $active_id menu items;
 	 * @param       $path
@@ -373,8 +404,9 @@ class tplNerudasHelper
 		}
 
 		// Right
-		$header->panel->right = ($template->countModules('toppanel-right'))?
-			'<jdoc:include type="modules" name="toppanel-right" style="toppanel_right"/>': false;
+		$header->panel->right = ($template->countModules('toppanel-right')) ?
+			'<jdoc:include type="modules" name="toppanel-right" style="toppanel_right"/>' : false;
+
 		return $header;
 	}
 }
