@@ -251,42 +251,11 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 				</div>
 			<?php endforeach; ?>
 		</div>
+		<div>
+			<?php echo $this->pagination->getPagesLinks(); ?>
+		</div>
 	<?php endif; ?>
 </div>
 
-<? /*
- <?php echo ($count > 1) ? 'uk-width-small-1-' . $count : 'uk-width-small-1-2'; ?>">
- <?php echo HTMLHelper::image($image['src'], $item->title, '', false); ?>
- <span class="image uk-thumbnail uk-display-block uk-cover-background"
-										  style="background-image: url('<?php echo $item->image; ?>')"
-										  data-ratio-height="[166,125]"></span>
- 				<div class="uk-position-top-right">
-										<?php if (!empty($item->price)) : ?>
-											<div class="price uk-text-medium uk-badge uk-badge-white uk-widht-1-1">
-												<?php echo $item->price; ?>
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
-											</div>
-										<?php else: ?>
-										<?php endif; ?>
-									</div>
-<?php echo '<pre>', print_r($this->category, true), '</pre>'; ?>
-<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm">
-	<?php foreach ($filters as $filter): ?>
-		<?php echo $this->filterForm->renderField(str_replace('filter_', '', $filter), 'filter'); ?>
-	<?php endforeach; ?>
-	<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-	<a href="<?php echo $this->category->link; ?>"><?php echo Text::_('JCLEAR'); ?></a>
-</form>
-<?php if (!empty($this->items))
-{
-	foreach ($this->items as $item)
-	{
-		echo '<pre>', print_r($item, true), '</pre>';
-	}
-}; ?>
-
-
-<?php echo $this->pagination->getListFooter(); ?>
-*/ ?>
 
 
