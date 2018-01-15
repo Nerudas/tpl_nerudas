@@ -576,6 +576,10 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	height: auto;
 }
 
+.uk-form input::placeholder {
+	font-style: italic;
+}
+
 /* Radio Buttons */
 .uk-form .uk-form-controls.uk-button-group {
 	display: inherit;
