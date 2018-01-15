@@ -170,26 +170,38 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 										<?php if ($item->payment_method == 'cashless')
 										{
 											echo HTMLHelper::image('icons/payment_method_cashless.png',
-												Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASHLESS'), '', true);
+												Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASHLESS'),
+												array('title'           => Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASHLESS'),
+												      'data-uk-tooltip' => ''),
+												true);
 
 										}
 										elseif ($item->payment_method == 'cash')
 										{
 											echo HTMLHelper::image('icons/payment_method_cash.png',
-												Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASH'), '', true);
+												Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASH'),
+												array('title'           => Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASH'),
+												      'data-uk-tooltip' => ''),
+												true);
 										} ?>
 
 
 										<?php if ($item->prepayment == 'required')
 										{
 											echo HTMLHelper::image('icons/prepayment_required.png',
-												Text::_('COM_BOARD_ITEM_PREPAYMENT_REQUIRED'), '', true);
+												Text::_('COM_BOARD_ITEM_PREPAYMENT_REQUIRED'),
+												array('title'           => Text::_('COM_BOARD_ITEM_PREPAYMENT_REQUIRED'),
+												      'data-uk-tooltip' => ''),
+												true);
 
 										}
 										elseif ($item->prepayment == 'no')
 										{
 											echo HTMLHelper::image('icons/prepayment_no.png',
-												Text::_('COM_BOARD_ITEM_PREPAYMENT_NO'), '', true);
+												Text::_('COM_BOARD_ITEM_PREPAYMENT_NO'),
+												array('title'           => Text::_('COM_BOARD_ITEM_PREPAYMENT_NO'),
+												      'data-uk-tooltip' => ''),
+												true);
 										} ?>
 									</div>
 								</div>
@@ -215,7 +227,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							<?php
 							$item->region = ($item->region == '*') ? 100 : $item->region;
 							echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
-								'', true); ?>
+								array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
 						</div>
 					</div>
 					<?php if ($item->image) : ?>
