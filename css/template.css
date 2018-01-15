@@ -275,14 +275,15 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	line-height: 18px;
 	white-space: nowrap;
 }
+
 .uk-badge.uk-badge-white,
 .uk-badge.uk-badge-white:hover {
-	background:  #FFF;
+	background: #FFF;
 	color: #222;
 }
 
 .uk-price {
-	background:  #FFF;
+	background: #FFF;
 	color: #333;
 	font-size: 15px;
 	border: none;
@@ -290,12 +291,15 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	padding: 5px 0;
 	align-items: center;
 }
+
 .uk-price:hover {
 	color: #333;
 }
+
 .uk-price img {
 	margin-left: 5px;
 }
+
 /* Map
 ========================================================================== */
 #map.full {
@@ -594,12 +598,15 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	color: #fff;
 	text-shadow: none;
 }
+
 .uk-form .uk-flex-space-between input.uk-width-1-1 {
 	min-width: auto;
 }
+
 .uk-form .uk-button-group.left-input .uk-button:first-child {
 	margin-left: -1px;
 }
+
 /* Form Icon */
 .uk-form-icon > [class*=uk-icon-] {
 	position: absolute;
@@ -2669,4 +2676,21 @@ svg[data-name="Nerudas"] .dots .background {
 	bottom: 10px;
 	left: 10px;
 	z-index: 9999;
+}
+
+#modalmap.uk-modal #modalmap_map .uk-modal-close {
+	color: #FFF;
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	margin: 0 0;
+	float: none;
+	opacity: 1;
+	z-index: 9999;
+}
+
+#modalmap.uk-modal #modalmap_map {
+	padding: 0;
+	border-radius: 0;
+	border: none;
 }

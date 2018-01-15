@@ -114,8 +114,8 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 			<?php
 			$count = count($this->items);
 			$half  = round($count / 2);
-			$i = 1;
-			foreach ($this->items as $id => $item):?>
+			$i     = 1;
+			foreach ($this->items as $id => $item): ?>
 				<?php if ($i == $half): ?>
 
 				<?php endif; ?>
@@ -234,9 +234,12 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							$item->region = ($item->region == '*') ? 100 : $item->region;
 							echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
 								array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
-							<?php if ($item->map): ?>
+
+							<?php if ($item->map):
+								Factory::getDocument()->addScriptOptions('board_' . $item->id, $item->map->toArray());
+								?>
 								<a data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
-								   data-map-modal="board_<?php echo $item->id; ?>">
+								   data-modalmap="board_<?php echo $item->id; ?>">
 									<?php echo HTMLHelper::image('icons/map_30.png', Text::_('TPL_NERUDAS_ON_MAP'),
 										'', true); ?>
 								</a>
@@ -279,6 +282,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
+		<?php echo LayoutHelper::render('content.modalmap'); ?>
 	<?php endif; ?>
 </div>
 
