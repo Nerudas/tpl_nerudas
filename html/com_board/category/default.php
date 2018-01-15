@@ -111,9 +111,15 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 
 	<?php if ($this->items) : ?>
 		<div class="items">
-			<?php foreach ($this->items as $id => $item):
-				//echo '<pre>', print_r($item, true), '</pre>';
-				?>
+			<?php
+			$count = count($this->items);
+			$half  = round($count / 2);
+			$i = 1;
+			foreach ($this->items as $id => $item):?>
+				<?php if ($i == $half): ?>
+
+				<?php endif; ?>
+
 				<div class="uk-panel uk-panel-box uk-margin-bottom">
 					<div class="uk-flex uk-flex-space-between">
 						<?php echo LayoutHelper::render('content.author.horizontal', $item->created_by); ?>
@@ -228,6 +234,13 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							$item->region = ($item->region == '*') ? 100 : $item->region;
 							echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
 								array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
+							<?php if ($item->map): ?>
+								<a data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
+								   data-map-modal="board_<?php echo $item->id; ?>">
+									<?php echo HTMLHelper::image('icons/map_30.png', Text::_('TPL_NERUDAS_ON_MAP'),
+										'', true); ?>
+								</a>
+							<?php endif; ?>
 						</div>
 					</div>
 					<?php if ($item->image) : ?>
@@ -261,7 +274,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 						</div>
 					<?php endif; ?>
 				</div>
-			<?php endforeach; ?>
+				<?php $i++; endforeach; ?>
 		</div>
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
