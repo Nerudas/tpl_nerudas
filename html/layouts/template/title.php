@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package    Nerudas Template
+ * @version    4.9.5
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
 
 defined('_JEXEC') or die;
 
@@ -72,6 +80,23 @@ unset($revers[0]);
 		</div>
 	</div>
 	<div class="actions uk-button-group">
+		<?php if (!empty($layouts)) : ?>
+			<div class="uk-margin-right">
+				<?php if (!empty($layouts['list'])) : ?>
+					<a href="<?php echo $layouts['list']; ?>"
+					   class="add uk-icon-list-ul uk-button
+				   <?php echo (!empty($layouts['active']) && $layouts['active'] == 'list') ? ' uk-active' : ''; ?>"
+					   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_LIST'); ?>"></a>
+				<?php endif; ?>
+				<?php if (!empty($layouts['map'])) : ?>
+					<a href="<?php echo $layouts['map']; ?>"
+					   class="add uk-icon-map-marker uk-button
+				   <?php echo (!empty($layouts['active']) && $layouts['active'] == 'map') ? ' uk-active' : ''; ?>"
+					   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"></a>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+
 		<?php if (!empty($add)) : ?>
 			<a href="<?php echo $add; ?>" class="add uk-icon-plus uk-button uk-text-success" data-uk-tooltip
 			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>"></a>

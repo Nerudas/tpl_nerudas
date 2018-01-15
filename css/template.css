@@ -550,6 +550,9 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	border-radius: 2px;
 }
 
+.uk-button:active, .uk-button.uk-active {
+	background-color: #e6e6e6;
+}
 /* Form
 ========================================================================== */
 .uk-form select, .uk-form textarea, .uk-form input:not([type]), .uk-form input[type="text"], .uk-form input[type="password"], .uk-form input[type="datetime"], .uk-form input[type="datetime-local"], .uk-form input[type="date"], .uk-form input[type="month"], .uk-form input[type="time"], .uk-form input[type="week"], .uk-form input[type="number"], .uk-form input[type="email"], .uk-form input[type="url"], .uk-form input[type="search"], .uk-form input[type="tel"], .uk-form input[type="color"] {
