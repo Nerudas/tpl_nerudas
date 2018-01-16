@@ -152,10 +152,23 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 									<?php echo $item->title; ?>
 									<?php if ($item->for_when == 'today'): ?>
 										<sup class="uk-badge uk-badge-success uk-margin-small-left">
-											<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TODAY'); ?></sup>
+											<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TODAY'); ?>
+										</sup>
 									<?php elseif ($item->for_when == 'tomorrow'): ?>
 										<sup class="uk-badge uk-badge-notification uk-margin-small-left">
-											<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TOMORROW'); ?></sup>
+											<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TOMORROW'); ?>
+										</sup>
+									<?php endif; ?>
+									<?php if (!$item->state): ?>
+										<sup class="uk-badge uk-badge-warning uk-margin-small-left">
+											<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+										</sup>
+									<?php endif; ?>
+									<?php if ($item->publish_down !== '0000-00-00 00:00:00' &&
+										$item->publish_down < Factory::getDate()->toSql()): ?>
+										<sup class="uk-badge uk-badge-danger uk-margin-small-left">
+											<?php echo Text::_('TPL_NERUDAS_PUBLISH_TIMEOUT'); ?>
+										</sup>
 									<?php endif; ?>
 								</a>
 							</h2>
