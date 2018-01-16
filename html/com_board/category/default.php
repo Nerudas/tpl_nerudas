@@ -19,7 +19,10 @@ require_once JPATH_THEMES . '/nerudas/helper.php';
 $showAdvansedFiler = tplNerudasHelper::checkAdvansedFilterActivity($this->filterForm,
 	array('for_when', 'price', 'payment_method', 'prepayment', 'allregion', 'onlymy'));
 
+HTMLHelper::_('jquery.framework');
 HTMLHelper::_('formbehavior.chosen', 'select');
+HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative' => true));
 
 ?>
 
@@ -297,7 +300,6 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
-		<?php echo LayoutHelper::render('content.modalmap'); ?>
 	<?php endif; ?>
 </div>
 
