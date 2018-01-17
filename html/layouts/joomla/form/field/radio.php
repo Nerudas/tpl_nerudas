@@ -24,7 +24,7 @@ $btn_group = (preg_match('/btn-group/', $class));
 if ($btn_group)
 {
 	$class = str_replace('btn-group-yesno', '', $class);
-	$class = str_replace('btn-group', 'uk-button-group', $class);
+	$class = str_replace('btn-group', 'uk-button-group uk-flex uk-flex-wrap', $class);
 }
 
 

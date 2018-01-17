@@ -61,7 +61,7 @@ $show = ($model->getState('item.id', 0) && !empty($actives)) ? '' : 'show';
 ?>
 <div class="uk-form-row " data-input-boardcategories="<?php echo $show; ?>">
 	<div class="uk-form-row field">
-		<div class="uk-flex uk-flex-space-between uk-flex-top">
+		<div class="uk-flex uk-flex-space-between uk-flex-top uk-flex-wrap">
 			<ul class="actives uk-list uk-flex-inline">
 				<?php foreach ($actives as $active): ?>
 					<li class="item">
@@ -84,8 +84,8 @@ $show = ($model->getState('item.id', 0) && !empty($actives)) ? '' : 'show';
 			</div>
 			<div class="uk-modal-contnet-large">
 				<div class="uk-grid uk-grid-small">
-					<div class="uk-width-xsmall-1-1 uk-width-small-2-5 uk-width-medium-1-3 uk-width-large-1-4 uk-width-xlarge-1-4 uk-hidden-xsmall">
-						<ul id="categoriesSelectFilter" class="uk-nav uk-nav-side"
+					<div class=" uk-width-medium-1-4">
+						<ul id="categoriesSelectFilter" class="uk-tab uk-tab-left"
 							data-uk-tab="{connect:'#categoriesTabs'}">
 							<?php foreach ($root as $item): ?>
 								<li><a href=""><?php echo $item->title; ?></a></li>
@@ -93,7 +93,7 @@ $show = ($model->getState('item.id', 0) && !empty($actives)) ? '' : 'show';
 							<li><a href=""><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?></a></li>
 						</ul>
 					</div>
-					<div class="uk-width-xsmall-1-1 uk-width-small-3-5 uk-width-medium-2-3 uk-width-large-3-4 uk-width-xlarge-3-4">
+					<div class="uk-width-medium-3-4">
 						<div id="categoriesTabs" class="uk-switcher">
 							<?php foreach ($root as $item): ?>
 								<div class="categories ">
