@@ -553,6 +553,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-button:active, .uk-button.uk-active {
 	background-color: #e6e6e6;
 }
+
 /* Form
 ========================================================================== */
 .uk-form select, .uk-form textarea, .uk-form input:not([type]), .uk-form input[type="text"], .uk-form input[type="password"], .uk-form input[type="datetime"], .uk-form input[type="datetime-local"], .uk-form input[type="date"], .uk-form input[type="month"], .uk-form input[type="time"], .uk-form input[type="week"], .uk-form input[type="number"], .uk-form input[type="email"], .uk-form input[type="url"], .uk-form input[type="search"], .uk-form input[type="tel"], .uk-form input[type="color"] {
@@ -596,7 +597,8 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	display: none;
 }
 
-.uk-form .uk-button-group .radio.uk-button.uk-active, .uk-form .uk-button-group .radio.uk-button.isChecked {
+.uk-form .uk-button-group .uk-button.uk-active,
+.uk-form .uk-button-group .radio.uk-button.isChecked {
 	background-color: #8ec73b;
 	color: #fff;
 	text-shadow: none;
@@ -1137,6 +1139,9 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-form .mce-tinymce .mce-statusbar,
 .js-editor-tinymce .toggle-editor {
 	display: none;
+}
+.uk-form .js-editor-tinymce iframe {
+	max-height: 250px !important;
 }
 
 .uk-form .mce-tinymce .mce-edit-area {
@@ -1720,6 +1725,37 @@ html.new .tm-title .uk-h1 {
 	color: #d85030;
 	border-color: rgba(216, 80, 48, 0.3);
 }
+
+.uk-form p.label {
+	display: none;
+}
+
+[data-input-boardcategories] .actives .item {
+	font-size: 14px;
+	white-space: nowrap;
+	padding: 5px 10px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #333;
+	color: #fff;
+
+}
+
+[data-input-boardcategories] .uk-modal .actives .item {
+	display: inline-block;
+	padding: 2px 4px;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 14px;
+	color: #fff;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #333;
+	margin: 5px;
+}
+
 
 /* Avatar
 ========================================================================== */
