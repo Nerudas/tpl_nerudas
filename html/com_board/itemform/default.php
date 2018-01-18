@@ -34,7 +34,7 @@ $doc->addScriptDeclaration('
 ');
 ?>
 <form action="<?php echo Route::_('index.php?option=com_board&view=items&id=' . $this->item->id); ?>"
-	  method="post" name="adminForm" id="board" class="supplier form form-validate uk-form uk-margin-bottom"
+	  method="post" name="adminForm" id="board" class="itemform form form-validate uk-form uk-margin-bottom"
 	  enctype="multipart/form-data">
 
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
@@ -56,6 +56,7 @@ $doc->addScriptDeclaration('
 			<?php echo $this->form->renderFieldSet('contacts'); ?>
 		</div>
 	</div>
+
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
 		<div class="uk-panel-title uk-h3">
 			<?php echo Text::_('COM_BOARD_ITEM_PAYMENT'); ?>
@@ -81,7 +82,6 @@ $doc->addScriptDeclaration('
 			<?php echo $this->form->getInput('map'); ?>
 		</div>
 	</div>
-
 
 	<?php echo $this->form->renderFieldSet('hidden'); ?>
 

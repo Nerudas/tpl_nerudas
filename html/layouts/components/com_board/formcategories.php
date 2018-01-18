@@ -56,10 +56,8 @@ if (empty($first))
 	$first = 'extd';
 }
 
-
-$show = ($model->getState('item.id', 0) && !empty($actives)) ? '' : 'show';
 ?>
-<div class="uk-form-row " data-input-boardcategories="<?php echo $show; ?>">
+<div class="uk-form-row " data-input-boardcategories="<?php echo  (!empty($actives)) ? '' : 'show'; ?>">
 	<div class="uk-form-row field">
 		<div class="uk-flex uk-flex-space-between uk-flex-top uk-flex-wrap">
 			<ul class="actives uk-list uk-flex-inline">

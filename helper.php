@@ -96,6 +96,7 @@ class tplNerudasHelper
 		HTMLHelper::_('stylesheet', 'uikit/placeholder' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('stylesheet', 'uikit/sticky' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('stylesheet', 'uikit/tooltip' . $minified . '.css', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('stylesheet', 'uikit/progress' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 
 		HTMLHelper::_('script', 'uikit' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('script', 'uikit/accordion' . $minified . '.js', array('version' => 'auto', 'relative' => true));

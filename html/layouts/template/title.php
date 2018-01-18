@@ -105,6 +105,10 @@ unset($revers[0]);
 			<a href="<?php echo $edit; ?>" class="edit uk-icon-pencil uk-button uk-text-success" data-uk-tooltip
 			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>"></a>
 		<?php endif; ?>
+		<?php if (!empty($cancel)): ?>
+			<a href="<?php echo $cancel; ?>" class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
+			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"></a>
+		<?php endif; ?>
 		<?php if (!empty($form)): ?>
 			<button class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
 					title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"

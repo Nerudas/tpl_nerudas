@@ -3,7 +3,7 @@
  * @package    Nerudas Template
  * @version    4.9.5
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
@@ -18,9 +18,9 @@ defined('_JEXEC') or die;
 			<?php if ($item->type == 'heading'): ?>
 				<div id="item-<?php echo $item->id; ?>" class="anchor item uk-invisible uk-width-1-1">
 					<div class="uk-deviver-linetext uk-text-center ">
-				<span class="uk-text-mlarge">
-					<?php echo $item->title; ?>
-				</span>
+					<span class="uk-text-mlarge">
+						<?php echo $item->title; ?>
+					</span>
 					</div>
 				</div>
 			<?php endif; ?>
