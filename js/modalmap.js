@@ -10,8 +10,6 @@
 (function ($) {
 	$(document).ready(function () {
 
-
-
 		// Create modal
 		if ($('#modalmap').length == 0) {
 			var modalHTML = '<div id="modalmap" class="uk-modal">\n' +
@@ -22,10 +20,8 @@
 			$('body').append($(modalHTML));
 		}
 
-
 		var modal = UIkit.modal('#modalmap'),
 			map = false;
-
 
 		$('[data-modalmap]').each(function () {
 			var link = $(this),
@@ -74,27 +70,9 @@
 					options.iconImageOffset = [-24, -48];
 				}
 
-
 				var placemark = new ymaps.Placemark(coordinates, {}, options);
 				map.geoObjects.add(placemark);
-				//
-				//
-				// console.log();
-				//
-				// function getplacemarkOptions() {
-				// 	var options = {};
-				//
-				//
-				// 	return options;
-				// }
-				//
-				// placemark.geometry.setCoordinates(coordinates);
-
-
 			});
-
-
-			//map.setCenter(data.params.center, data.params.zoom());
 		}
 
 		function checkMap(callback) {
@@ -105,7 +83,6 @@
 				}
 			}, 3);
 		}
-
 
 		// Map initialization
 		function initializeMap() {
