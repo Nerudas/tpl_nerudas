@@ -461,6 +461,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-link-muted a:hover, .uk-link-muted:hover {
 	color: #000;
 }
+
 .uk-link-muted {
 	cursor: pointer;
 }
@@ -1152,6 +1153,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-form [data-input-ajaximage="multiple"] .maximum {
 	display: none;
 }
+
 .uk-form [data-input-ajaximage="multiple"] .result .item .block {
 	display: inline-block;
 	position: relative;
@@ -1187,7 +1189,6 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	text-align: right;
 	z-index: 1;
 }
-
 
 /* TimyMce */
 .uk-form .mce-tinymce .mce-menubar,
@@ -1812,13 +1813,14 @@ html.new .tm-title .uk-h1 {
 	background-color: #333;
 	margin: 5px;
 }
+
 .uk-form [data-input-boardcategories] .uk-modal .active {
 	opacity: 0.5;
 	cursor: inherit;
 }
 
-	/* Avatar
-	========================================================================== */
+/* Avatar
+========================================================================== */
 [class*="uk-avatar-"] {
 	display: inline-block;
 	position: relative;
@@ -2812,4 +2814,77 @@ svg[data-name="Nerudas"] .dots .background {
 	content: "\f0d7";
 	font-family: FontAwesome;
 	margin-left: 5px;
+}
+
+.uk-tab-new {
+	display: flex;
+
+	flex-wrap: wrap;
+
+	margin-left: -20px;
+
+	padding: 0;
+	list-style: none;
+	position: relative;
+}
+
+.uk-tab-new::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 20px;
+	right: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.uk-tab-new > * {
+	/* 1 */
+	flex: none;
+	/* 2 */
+	padding-left: 20px;
+	/* 3 */
+	position: relative;
+}
+
+.uk-tab-new > * > a {
+	/* 1 */
+	display: block;
+	text-align: center;
+	/* 2 */
+	padding: 5px 10px;
+	color: #999;
+	border-bottom: 1px solid transparent;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	transition: color 0.1s ease-in-out;
+}
+
+.uk-tab-new > * > a:hover,
+.uk-tab-new > * > a:focus {
+	color: #666;
+	text-decoration: none;
+}
+
+.uk-tab-new > .uk-active > a {
+	color: #333;
+	border-color: #1e87f0;
+}
+
+.uk-tab-new > .uk-disabled > a {
+	color: #999;
+}
+
+.uk-header-slideshow,
+.uk-header-slideshow .uk-slideshow .image {
+	height: 280px;
+	background-color: #e5e5e5;
+}
+
+.uk-header-slideshow .navigation .image{
+	height: 48px;
+	width: 48px;
+	background-color: #e5e5e5;
+}
+[data-tabmap] {
+	max-height: 90vh;
 }

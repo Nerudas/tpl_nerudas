@@ -43,6 +43,9 @@
 			items.removeClass('active');
 			$(currents).html('');
 
+			var notextd = field.find('.actives.not-extd'),
+				extd = field.find('.actives.extd');
+
 			var values = [];
 			$(tags).each(function (i, input) {
 				if ($(input).prop('checked')) {
@@ -61,13 +64,19 @@
 				if (active) {
 					$(item).addClass('active');
 					var itemHTML = '<li class="item">' + $(item).data('title') + '</li>';
-					$(itemHTML).appendTo($(currents));
-					if ($(titleField).val() == '') {
-						$(titleField).val($(item).data('title'));
+					if (values.length == itemTags.length) {
+						$(itemHTML).appendTo($(notextd));
+						if ($(titleField).val() == '') {
+							$(titleField).val($(item).data('title'));
+						}
 					}
+					$(itemHTML).appendTo($(extd));
 				}
 			});
+			if ($(notextd).find('.item').length == 0) {
+				var itemHTML = '<li class="item">' + $(notextd).data('title-extd') + '</li>';
+				$(itemHTML).appendTo($(notextd));
+			}
 		}
-
 	});
 })(jQuery);

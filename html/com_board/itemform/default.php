@@ -74,13 +74,14 @@ $doc->addScriptDeclaration('
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
 
 	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
+		<?php echo LayoutHelper::render('components.com_board.formcategories', $this); ?>
 		<?php echo $this->form->renderField('title'); ?>
 		<?php echo $this->form->renderField('for_when'); ?>
 		<?php echo $this->form->renderField('actual'); ?>
 		<div class="uk-form-row">
 			<?php echo $this->form->getInput('text'); ?>
 		</div>
-		<?php echo LayoutHelper::render('components.com_board.formcategories', $this); ?>
+
 	</div>
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
 		<div class="uk-panel-title uk-h3">

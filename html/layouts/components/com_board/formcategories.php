@@ -15,15 +15,16 @@ use Joomla\CMS\Language\Text;
 
 HTMLHelper::_('jquery.framework');
 
-HTMLHelper::_('script', 'com_board/formcategories.min.js', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('script', 'com_board/formcategories.js', array('version' => 'auto', 'relative' => true));
 
 $form       = $displayData->getForm();
 $categories = $displayData->getCategories();
 $model      = $displayData->getModel();
 
-$children = array();
-$actives  = array();
-$root     = array();
+$children     = array();
+$actives      = array();
+$actives_full = array();
+$root         = array();
 
 $i = 0;
 foreach ($categories as $category)
@@ -37,6 +38,12 @@ foreach ($categories as $category)
 	{
 		$actives[$category->id] = $category->title;
 	}
+
+	if ($category->active && $category->active_full)
+	{
+		$actives_full[$category->id] = $category->title;
+	}
+
 
 	if ($category->level == 1)
 	{
@@ -59,13 +66,17 @@ if (empty($first))
 ?>
 <div class="uk-form-row " data-input-boardcategories="<?php echo (!empty($actives)) ? '' : 'show'; ?>">
 	<div class="uk-form-row field">
-		<div class="uk-flex uk-flex-space-between uk-flex-top uk-flex-wrap">
-			<ul class="actives uk-list uk-flex-inline">
-				<?php foreach ($actives as $active): ?>
-					<li class="item">
-						<?php echo $active; ?>
-					</li>
+		<div class="uk-flex uk-flex-top uk-flex-wrap">
+			<ul class="actives uk-list uk-flex-inline uk-margin-bottom-remove not-extd"
+				data-title-extd="<?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?>">
+				<?php foreach ($actives_full as $active): ?>
+					<li class="item"><?php echo $active; ?></li>
 				<?php endforeach; ?>
+				<?php if (empty($actives_full)) : ?>
+					<li class="item">
+						<?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?>
+					</li>
+				<?php endif; ?>
 			</ul>
 			<div class="uk-display-inline-block">
 				<a href="#categorySelect" role="button" class="uk-button change" data-uk-modal>
@@ -120,7 +131,7 @@ if (empty($first))
 							<?php endforeach; ?>
 							<div>
 								<div>
-									<ul class="actives uk-list inline">
+									<ul class="actives extd uk-list inline">
 										<?php foreach ($actives as $active): ?>
 											<li class="item">
 												<?php echo $active; ?>
