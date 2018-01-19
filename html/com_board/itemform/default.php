@@ -23,6 +23,38 @@ HTMLHelper::_('behavior.formvalidator');
 HTMLHelper::_('behavior.keepalive');
 HTMLHelper::_('formbehavior.chosen', 'select');
 
+if (empty($this->item->id))
+{
+	$profile = NerudasProfilesHelper::getProfile(Factory::getUser()->id);
+	if (!empty($profile->phone))
+	{
+		$phone = array(
+			'phone_1' => array(
+				'code'    => '+7',
+				'number'  => $profile->phone->sysnumber,
+				'display' => '+7' . $profile->phone->sysnumber,
+			)
+		);
+		$this->form->setValue('phones', 'contacts', $phone);
+	}
+	if (!empty($profile->email))
+	{
+		$this->form->setValue('email', 'contacts', $profile->email);
+	}
+	if (!empty($profile->site))
+	{
+		$this->form->setValue('site', 'contacts', $profile->site);
+	}
+	if (!empty($profile->vk))
+	{
+		$this->form->setValue('vk', 'contacts', $profile->vk);
+	}
+	if (!empty($profile->fb))
+	{
+		$this->form->setValue('facebook', 'contacts', $profile->fb);
+	}
+}
+
 $doc->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
@@ -32,6 +64,8 @@ $doc->addScriptDeclaration('
 		}
 	};
 ');
+
+
 ?>
 <form action="<?php echo Route::_('index.php?option=com_board&view=items&id=' . $this->item->id); ?>"
 	  method="post" name="adminForm" id="board" class="itemform form form-validate uk-form uk-margin-bottom"
