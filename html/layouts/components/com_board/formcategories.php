@@ -57,7 +57,7 @@ if (empty($first))
 }
 
 ?>
-<div class="uk-form-row " data-input-boardcategories="<?php echo  (!empty($actives)) ? '' : 'show'; ?>">
+<div class="uk-form-row " data-input-boardcategories="<?php echo (!empty($actives)) ? '' : 'show'; ?>">
 	<div class="uk-form-row field">
 		<div class="uk-flex uk-flex-space-between uk-flex-top uk-flex-wrap">
 			<ul class="actives uk-list uk-flex-inline">
@@ -99,16 +99,18 @@ if (empty($first))
 										<div class="uk-grid uk-grid-collapse uk-margin-small-top">
 											<?php foreach ($children[$item->id] as $child) : ?>
 												<div class="uk-width-1-2 uk-width-small-1-4 uk-width-medium-1-5">
-													<a class="uk-display-block uk-margin-small-bottom uk-margin-small-right
-													 item <?php if ($child->active) echo 'active'; ?> uk-text-center uk-link-muted"
+													<a class="uk-flex uk-height-1-1 uk-width-1-1 uk-flex-bottom uk-link-muted
+													 item <?php if ($child->active) echo 'active'; ?> uk-text-center"
 													   data-tags="[<?php echo implode(',', $child->tags); ?>]"
 													   data-title="<?php echo $child->title; ?>">
-														<?php if (!empty($child->icon))
-														{
-															echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
-														}
-														?>
-														<div class="title"><?php echo $child->title; ?></div>
+														<div>
+															<?php if (!empty($child->icon))
+															{
+																echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
+															}
+															?>
+															<div class="title"><?php echo $child->title; ?></div>
+														</div>
 													</a>
 												</div>
 											<?php endforeach; ?>
