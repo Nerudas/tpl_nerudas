@@ -2,7 +2,7 @@
  * @package    Nerudas Template
  * @version    4.9.5
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
@@ -71,6 +71,21 @@
 	}
 
 	$(document).ready(function () {
+		$('[ data-uk-switcher-tabs]').each(function () {
+			var items = $(this).find('li'),
+				max = 0;
+			$(items).each(function (i, item) {
+				$(item).css('display', 'block');
+				if ($(item).height() > max) {
+					max = $(item).height();
+				}
+				$(item).css('display', '');
+			});
+			$(items).height(max);
+		});
+	});
+
+	$(document).ready(function () {
 		$('#navigation').on({
 			'show.uk.offcanvas': function () {
 				$('body').css('overflow', 'hidden');
@@ -79,6 +94,7 @@
 				$('body').css('overflow', '');
 			}
 		});
+
 		$(window).scroll(function () {
 			if ($(this).scrollTop() > 100) {
 				$('#backToTop').fadeIn();

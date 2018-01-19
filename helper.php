@@ -97,6 +97,8 @@ class tplNerudasHelper
 		HTMLHelper::_('stylesheet', 'uikit/sticky' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('stylesheet', 'uikit/tooltip' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('stylesheet', 'uikit/progress' . $minified . '.css', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('stylesheet', 'uikit/slideshow' . $minified . '.css', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('stylesheet', 'uikit/slidenav' . $minified . '.css', array('version' => 'auto', 'relative' => true));
 
 		HTMLHelper::_('script', 'uikit' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('script', 'uikit/accordion' . $minified . '.js', array('version' => 'auto', 'relative' => true));
@@ -107,7 +109,7 @@ class tplNerudasHelper
 		HTMLHelper::_('script', 'uikit/pagination' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('script', 'uikit/sticky' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 		HTMLHelper::_('script', 'uikit/tooltip' . $minified . '.js', array('version' => 'auto', 'relative' => true));
-
+		HTMLHelper::_('script', 'uikit/slideshow' . $minified . '.js', array('version' => 'auto', 'relative' => true));
 
 	}
 

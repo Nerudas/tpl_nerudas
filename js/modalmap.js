@@ -96,7 +96,6 @@
 						mapParams.zoom = 0;
 
 						var storageParams = localStorage.getItem('map');
-						console.log(storageParams);
 						if (storageParams) {
 							storageParams = $.parseJSON(storageParams);
 							if (storageParams.center) {
