@@ -15,6 +15,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 
+
 require_once JPATH_THEMES . '/nerudas/helper.php';
 $showAdvansedFiler = tplNerudasHelper::checkAdvansedFilterActivity($this->filterForm,
 	array('for_when', 'price', 'payment_method', 'prepayment', 'allregion', 'onlymy'));
@@ -147,46 +148,45 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 							</div>
 						</div>
 					</div>
-
-					<div class="uk-margin-top uk-grid uk-grid-small">
-						<div class="uk-width-small-2-3">
-							<h2 class="uk-h4 uk-link-muted uk-margin-small-bottom">
-								<a class="uk-display-block" href="<?php echo $item->link; ?>">
-									<?php echo $item->title; ?>
-									<?php if ($item->for_when == 'today'): ?>
-										<sup class="uk-badge uk-badge-success uk-margin-small-left">
-											<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TODAY'); ?>
-										</sup>
-									<?php elseif ($item->for_when == 'tomorrow'): ?>
-										<sup class="uk-badge uk-badge-notification uk-margin-small-left">
-											<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TOMORROW'); ?>
-										</sup>
-									<?php endif; ?>
-									<?php if (!$item->state): ?>
-										<sup class="uk-badge uk-badge-warning uk-margin-small-left">
-											<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
-										</sup>
-									<?php endif; ?>
-									<?php if ($item->publish_down !== '0000-00-00 00:00:00' &&
-										$item->publish_down < Factory::getDate()->toSql()): ?>
-										<sup class="uk-badge uk-badge-danger uk-margin-small-left">
-											<?php echo Text::_('TPL_NERUDAS_PUBLISH_TIMEOUT'); ?>
-										</sup>
-									<?php endif; ?>
-								</a>
+					<a class="uk-margin-top uk-grid uk-grid-small uk-link-muted" href="<?php echo $item->link; ?>">
+						<div class="uk-width-small-3-4">
+							<h2 class="uk-h4 uk-margin-small-bottom">
+								<?php echo $item->title; ?>
+								<?php if ($item->for_when == 'today'): ?>
+									<sup class="uk-badge uk-badge-success uk-margin-small-left">
+										<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TODAY'); ?>
+									</sup>
+								<?php elseif ($item->for_when == 'tomorrow'): ?>
+									<sup class="uk-badge uk-badge-notification uk-margin-small-left">
+										<?php echo Text::_('COM_BOARD_ITEM_FOR_WHEN_TOMORROW'); ?>
+									</sup>
+								<?php endif; ?>
+								<?php if (!$item->state): ?>
+									<sup class="uk-badge uk-badge-warning uk-margin-small-left">
+										<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+									</sup>
+								<?php endif; ?>
+								<?php if ($item->publish_down !== '0000-00-00 00:00:00' &&
+									$item->publish_down < Factory::getDate()->toSql()): ?>
+									<sup class="uk-badge uk-badge-danger uk-margin-small-left">
+										<?php echo Text::_('TPL_NERUDAS_PUBLISH_TIMEOUT'); ?>
+									</sup>
+								<?php endif; ?>
 							</h2>
-							<div class="uk-text-small">
-								<a class="uk-display-block uk-link-reset" href="<?php echo $item->link; ?>">
-									<?php echo HTMLHelper::_('string.truncate', (strip_tags($item->text)), 100).' '.
-									Text::_('TPL_NERUDAS_READMORE'); ?>
-								</a>
+							<div>
+								<?php
+								$text = JHtmlString::truncate($item->text, 100, false, false);
+								$text = str_replace('...', '', $text);
+								?>
+								<span class="uk-text-small"><?php echo !empty($text) ? $text . '... ' : ''; ?></span>
+								<span class="uk-link"><?php echo Text::_('TPL_NERUDAS_READMORE'); ?></span>
 							</div>
 						</div>
-						<div class="uk-width-small-1-3 uk-flex uk-flex-top uk-flex-right">
+						<div class="uk-width-small-1-4 uk-flex uk-flex-top uk-flex-right">
 							<?php if (!empty($item->price) ||
 								$item->payment_method == 'cashless' || $item->payment_method == 'cash' ||
 								$item->prepayment == 'required' || $item->prepayment == 'no') : ?>
-								<a href="<?php echo $item->link; ?>" class="uk-price uk-text-right">
+								<div class="uk-price uk-text-right">
 									<?php if (!empty($item->price)) : ?>
 										<div class="text">
 											<?php echo ($item->price == '-0') ? Text::_('JGLOBAL_FIELD_PRICE_CONTRACT_PRICE') :
@@ -210,10 +210,9 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 												array('title'           => Text::_('COM_BOARD_ITEM_PAYMENT_METHOD_CASH'),
 												      'data-uk-tooltip' => ''),
 												true);
-										} ?>
+										}
 
-
-										<?php if ($item->prepayment == 'required')
+										if ($item->prepayment == 'required')
 										{
 											echo HTMLHelper::image('icons/prepayment_required.png',
 												Text::_('COM_BOARD_ITEM_PREPAYMENT_REQUIRED'),
@@ -231,10 +230,10 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 												true);
 										} ?>
 									</div>
-								</a>
+								</div>
 							<?php endif; ?>
 						</div>
-					</div>
+					</a>
 					<div class="uk-margin-top uk-grid uk-grid-small">
 						<div class="uk-width-small-2-3 uk-flex uk-flex-bottom">
 							<?php if ($item->contacts->get('phones', false)) : ?>
