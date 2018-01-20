@@ -91,65 +91,57 @@ if (empty($first))
 			<div class="uk-h4 uk-modal-header">
 				<h3><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES'); ?></h3>
 			</div>
-			<div class="uk-modal-contnet-large">
-				<div class="uk-grid uk-grid-small">
-					<div class=" uk-width-medium-1-4">
-						<ul id="categoriesSelectFilter" class="uk-tab uk-tab-left"
-							data-uk-tab="{connect:'#categoriesTabs'}">
-							<?php foreach ($root as $item): ?>
-								<li><a href=""><?php echo $item->title; ?></a></li>
+			<ul id="categoriesSelectFilter" class="uk-tab-new"
+				data-uk-tab="{connect:'#categoriesTabs'}">
+				<?php foreach ($root as $item): ?>
+					<li><a href=""><?php echo $item->title; ?></a></li>
+				<?php endforeach; ?>
+				<li><a href=""><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?></a></li>
+			</ul>
+			<div id="categoriesTabs" class="uk-switcher">
+				<?php foreach ($root as $item): ?>
+					<div class="categories ">
+						<?php if (!empty($children[$item->id])): ?>
+							<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
+								<?php foreach ($children[$item->id] as $child) : ?>
+									<div class="uk-text-center uk-width-xsmall-1-3 uk-width-small-1-4 uk-width-medium-1-5 uk-width-large-1-5 uk-width-xlarge-1-5">
+										<a class="uk-display-block uk-link-muted item <?php if ($child->active) echo 'active'; ?>"
+										   data-tags="[<?php echo implode(',', $child->tags); ?>]"
+										   data-title="<?php echo $child->title; ?>">
+											<div>
+												<?php if (!empty($child->icon))
+												{
+													echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
+												}
+												?>
+												<div class="uk-text-small"><?php echo $child->title; ?></div>
+											</div>
+										</a>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
+				<div>
+					<div>
+						<ul class="actives extd uk-list inline">
+							<?php foreach ($actives as $active): ?>
+								<li class="item">
+									<?php echo $active; ?>
+								</li>
 							<?php endforeach; ?>
-							<li><a href=""><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?></a></li>
 						</ul>
 					</div>
-					<div class="uk-width-medium-3-4">
-						<div id="categoriesTabs" class="uk-switcher">
-							<?php foreach ($root as $item): ?>
-								<div class="categories ">
-									<?php if (!empty($children[$item->id])): ?>
-										<div class="uk-grid uk-grid-collapse uk-margin-small-top">
-											<?php foreach ($children[$item->id] as $child) : ?>
-												<div class="uk-width-1-2 uk-width-small-1-4 uk-width-medium-1-5">
-													<a class="uk-flex uk-height-1-1 uk-width-1-1 uk-flex-bottom uk-link-muted
-													 item <?php if ($child->active) echo 'active'; ?> uk-text-center"
-													   data-tags="[<?php echo implode(',', $child->tags); ?>]"
-													   data-title="<?php echo $child->title; ?>">
-														<div>
-															<?php if (!empty($child->icon))
-															{
-																echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
-															}
-															?>
-															<div class="title"><?php echo $child->title; ?></div>
-														</div>
-													</a>
-												</div>
-											<?php endforeach; ?>
-										</div>
-									<?php endif; ?>
-								</div>
-							<?php endforeach; ?>
-							<div>
-								<div>
-									<ul class="actives extd uk-list inline">
-										<?php foreach ($actives as $active): ?>
-											<li class="item">
-												<?php echo $active; ?>
-											</li>
-										<?php endforeach; ?>
-									</ul>
-								</div>
-								<?php echo $form->getInput('tags'); ?>
-								<div class="uk-margin-top uk-text-right uk-margin-right">
-									<button class="uk-button uk-button-primary uk-modal-close">
-										<?php echo Text::_('JSAVE'); ?>
-									</button>
-								</div>
-							</div>
-						</div>
+					<?php echo $form->getInput('tags'); ?>
+					<div class="uk-margin-top uk-text-right uk-margin-right">
+						<button class="uk-button uk-button-primary uk-modal-close">
+							<?php echo Text::_('JSAVE'); ?>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
