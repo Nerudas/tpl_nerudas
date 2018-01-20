@@ -84,18 +84,20 @@ if ($this->item->map)
 			</div>
 		</div>
 	</div>
-	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-tab="{connect:'#my-id'}">
-		<li><a href=""><?php echo Text::_('COM_BOARD_ITEM'); ?></a></li>
-		<li><a href=""><?php echo Text::_('COM_BOARD_ITEM_CONTACTS'); ?></a></li>
-		<li><a href=""><?php echo Text::_('COM_BOARD_ITEM_IMAGES'); ?></a></li>
-		<?php if ($this->item->map): ?>
-			<li><a href=""><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
+	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-tab="{connect:'#boardTabs'}">
+		<li><a href="#text"><?php echo Text::_('COM_BOARD_ITEM'); ?></a></li>
+		<li><a href="#contacts"><?php echo Text::_('COM_BOARD_ITEM_CONTACTS'); ?></a></li>
+		<?php if ($this->item->image) : ?>
+			<li><a href="#images"><?php echo Text::_('COM_BOARD_ITEM_IMAGES'); ?></a></li>
 		<?php endif; ?>
-		<li><a href=""><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
+		<?php if ($this->item->map): ?>
+			<li><a href="#map"><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
+		<?php endif; ?>
+		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
 	</ul>
 
-	<ul id="my-id" class="uk-switcher" data-uk-switcher-tabs="">
-		<li class="uk-panel uk-panel-box">
+	<ul id="boardTabs" class="uk-switcher" data-uk-switcher-tabs="">
+		<li data-tab="text" class="uk-panel uk-panel-box">
 			<div>
 				<div class="uk-grid uk-grid-small">
 					<div class="uk-width-small-2-3">
@@ -167,11 +169,11 @@ if ($this->item->map)
 				</div>
 			<?php endif; ?>
 		</li>
-		<li class="uk-panel uk-panel-box">
+		<li data-tab="contacts" class="uk-panel uk-panel-box">
 
 		</li>
 		<?php if ($this->item->image) : ?>
-			<li class="uk-panel uk-panel-box">
+			<li data-tab="images" class="uk-panel uk-panel-box">
 				<div class="uk-grid uk-grid-small image">
 					<?php $count = count($this->item->images);
 					foreach ($this->item->images as $image): ?>
@@ -186,11 +188,11 @@ if ($this->item->map)
 			</li>
 		<?php endif; ?>
 		<?php if ($this->item->map): ?>
-			<li id="mapTab" class="uk-panel uk-panel-box uk-padding-remove"
+			<li data-tab="map" id="mapTab" class="uk-panel uk-panel-box uk-padding-remove"
 				data-tabmap="<?php echo 'board_' . $this->item->id; ?>">
 			</li>
 		<?php endif; ?>
-		<li class="uk-panel uk-panel-box">
+		<li data-tab="comments" class="uk-panel uk-panel-box">
 
 		</li>
 	</ul>
