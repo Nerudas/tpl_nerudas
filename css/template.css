@@ -612,7 +612,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	min-width: auto;
 }
 
-.uk-form .uk-button-group {
+.uk-button-group.wrap {
 	white-space: normal;
 }
 .uk-form .uk-button-group.left-input .uk-button:first-child {

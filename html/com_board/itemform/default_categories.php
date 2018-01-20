@@ -46,7 +46,7 @@ foreach ($this->categories as $category)
 							<?php foreach ($children[$item->id] as $child) : ?>
 								<div class="uk-text-center uk-width-xsmall-1-3 uk-width-small-1-4 uk-width-medium-1-5 uk-width-large-1-5 uk-width-xlarge-1-5">
 									<label for="category_<?php echo $child->id; ?>"
-										   class="uk-flex uk-height-1-1 uk-width-1-1 uk-flex-bottom uk-link-muted">
+										   class="uk-display-block uk-link-muted">
 										<div>
 											<input id="category_<?php echo $child->id; ?>" type="radio" name="category"
 												   value="<?php echo $child->id; ?>" onchange="this.form.submit();"
