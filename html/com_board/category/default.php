@@ -137,11 +137,11 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 							</div>
 							<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
 								<a href="<?php echo $item->link; ?>"
-									  class="uk-badge uk-badge-white uk-margin-small-left">
+								   class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
 								</a>
 								<a href="<?php echo $item->link; ?>#comments"
-									  class="uk-badge uk-badge-white uk-margin-small-left">
+								   class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-comment-o uk-margin-small-right"></i>0
 								</a>
 							</div>
@@ -176,14 +176,17 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 								</a>
 							</h2>
 							<div class="uk-text-small">
-								<?php echo HTMLHelper::_('string.truncate', (strip_tags($item->text)), 100); ?>
+								<a class="uk-display-block uk-link-reset" href="<?php echo $item->link; ?>">
+									<?php echo HTMLHelper::_('string.truncate', (strip_tags($item->text)), 100).' '.
+									Text::_('TPL_NERUDAS_READMORE'); ?>
+								</a>
 							</div>
 						</div>
 						<div class="uk-width-small-1-3 uk-flex uk-flex-top uk-flex-right">
 							<?php if (!empty($item->price) ||
 								$item->payment_method == 'cashless' || $item->payment_method == 'cash' ||
 								$item->prepayment == 'required' || $item->prepayment == 'no') : ?>
-								<div href="<?php echo $item->link; ?>" class="uk-price uk-text-right">
+								<a href="<?php echo $item->link; ?>" class="uk-price uk-text-right">
 									<?php if (!empty($item->price)) : ?>
 										<div class="text">
 											<?php echo ($item->price == '-0') ? Text::_('JGLOBAL_FIELD_PRICE_CONTRACT_PRICE') :
@@ -228,7 +231,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 												true);
 										} ?>
 									</div>
-								</div>
+								</a>
 							<?php endif; ?>
 						</div>
 					</div>
