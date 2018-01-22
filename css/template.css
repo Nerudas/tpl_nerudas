@@ -615,6 +615,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-button-group.wrap {
 	white-space: normal;
 }
+
 .uk-form .uk-button-group.left-input .uk-button:first-child {
 	margin-left: -1px;
 }
@@ -2821,11 +2822,8 @@ svg[data-name="Nerudas"] .dots .background {
 
 .uk-tab-new {
 	display: flex;
-
 	flex-wrap: wrap;
-
 	margin-left: -20px;
-
 	padding: 0;
 	list-style: none;
 	position: relative;
@@ -2841,19 +2839,14 @@ svg[data-name="Nerudas"] .dots .background {
 }
 
 .uk-tab-new > * {
-	/* 1 */
 	flex: none;
-	/* 2 */
 	padding-left: 20px;
-	/* 3 */
 	position: relative;
 }
 
 .uk-tab-new > * > a {
-	/* 1 */
 	display: block;
 	text-align: center;
-	/* 2 */
 	padding: 5px 10px;
 	color: #999;
 	border-bottom: 1px solid transparent;
@@ -2883,11 +2876,27 @@ svg[data-name="Nerudas"] .dots .background {
 	background-color: #e5e5e5;
 }
 
-.uk-header-slideshow .navigation .image{
-	height: 48px;
-	width: 48px;
+.uk-header-slideshow .navigation li {
+	border-top: 1px solid #b4b4b4;
+	border-left: 1px solid #b4b4b4;
 	background-color: #e5e5e5;
 }
+
+.uk-header-slideshow .navigation li > a {
+	display: block;
+	height: 48px;
+	width: 48px;
+}
+
+.uk-header-slideshow .navigation li > a .image {
+	width: 100%;
+	height: 100%;
+}
+
+.uk-header-slideshow .navigation li.uk-active > a {
+	opacity: 0.3;
+}
+
 [data-tabmap] {
 	max-height: 90vh;
 	min-height: 50vh;
