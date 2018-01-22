@@ -86,7 +86,9 @@ if ($this->item->map)
 	</div>
 	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-tab="{connect:'#boardTabs'}">
 		<li><a href="#text"><?php echo Text::_('COM_BOARD_ITEM'); ?></a></li>
-		<li><a href="#contacts"><?php echo Text::_('COM_BOARD_ITEM_CONTACTS'); ?></a></li>
+		<?php if ($this->item->contacts) : ?>
+			<li><a href="#contacts"><?php echo Text::_('COM_BOARD_ITEM_CONTACTS'); ?></a></li>
+		<?php endif; ?>
 		<?php if ($this->item->image) : ?>
 			<li><a href="#images"><?php echo Text::_('COM_BOARD_ITEM_IMAGES'); ?></a></li>
 		<?php endif; ?>
@@ -169,9 +171,76 @@ if ($this->item->map)
 				</div>
 			<?php endif; ?>
 		</li>
-		<li data-tab="contacts" class="uk-panel uk-panel-box">
+		<?php if ($this->item->contacts) : ?>
+			<li data-tab="contacts" class="uk-panel uk-panel-box">
+				<dl class="uk-description-list-horizontal">
+					<?php if ($this->item->contacts->get('phones', false)) : ?>
+						<dt><?php echo Text::_('JGLOBAL_FIELD_PHONES_LABEL'); ?></dt>
+						<dd class="uk-margin-bottom">
+							<?php foreach ($this->item->contacts->get('phones') as $phone): ?>
+								<a class="uk-text-xlarge uk-display-block uk-margin-small-bottom"
+								   href="tel:<?php echo $phone->code . $phone->number; ?>">
+									<?php $phone->display = (!empty($phone->display)) ?
+										$phone->display : $phone->code . $phone->number;
 
-		</li>
+									$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
+									$subst   = '$1($2)$3-$4-$5';
+									echo preg_replace($regular, $subst, $phone->display); ?>
+								</a>
+
+							<?php endforeach; ?>
+						</dd>
+					<?php endif; ?>
+					<?php if (!empty($this->item->contacts->get('email', ''))) : ?>
+						<dt><?php echo Text::_('JGLOBAL_EMAIL'); ?></dt>
+						<dd class="uk-margin-bottom">
+							<a class="uk-margin-small-bottom"
+							   href="mailto:<?php echo $this->item->contacts->get('email'); ?>">
+								<?php echo $this->item->contacts->get('email'); ?>
+							</a>
+						</dd>
+					<?php endif; ?>
+					<?php if (!empty($this->item->contacts->get('site', ''))) : ?>
+						<dt><?php echo Text::_('COM_BOARD_ITEM_SITE'); ?></dt>
+						<dd class="uk-margin-bottom">
+							<a class="uk-margin-small-bottom" href="<?php echo $this->item->contacts->get('site'); ?>">
+								<?php echo trim(str_replace(array('http://', 'https://'), '', $this->item->contacts->get('site')), '/'); ?>
+							</a>
+						</dd>
+					<?php endif; ?>
+					<?php if (!empty($this->item->contacts->get('vk', ''))) : ?>
+						<dt><?php echo Text::_('JGLOBAL_FIELD_SOCIAL_LABEL_VK'); ?></dt>
+						<dd class="uk-margin-bottom">
+							<a class="uk-margin-small-bottom"
+							   href="https://vk.com/<?php echo $this->item->contacts->get('vk'); ?>"
+							   target="_blank">
+								vk.com/<?php echo $this->item->contacts->get('vk'); ?>
+							</a>
+						</dd>
+					<?php endif; ?>
+					<?php if (!empty($this->item->contacts->get('facebook', ''))) : ?>
+						<dt><?php echo Text::_('JGLOBAL_FIELD_SOCIAL_LABEL_FB'); ?></dt>
+						<dd class="uk-margin-bottom">
+							<a class="uk-margin-small-bottom"
+							   href="https://facebook.com/<?php echo $this->item->contacts->get('facebook'); ?>"
+							   target="_blank">
+								facebook.com/<?php echo $this->item->contacts->get('facebook'); ?>
+							</a>
+						</dd>
+					<?php endif; ?>
+					<?php if (!empty($this->item->contacts->get('instagram', ''))) : ?>
+						<dt><?php echo Text::_('JGLOBAL_FIELD_SOCIAL_LABEL_INST'); ?></dt>
+						<dd class="uk-margin-bottom">
+							<a class="uk-margin-small-bottom"
+							   href="https://instagram.com/<?php echo $this->item->contacts->get('instagram'); ?>"
+							   target="_blank">
+								instagram.com/<?php echo $this->item->contacts->get('instagram'); ?>
+							</a>
+						</dd>
+					<?php endif; ?>
+				</dl>
+			</li>
+		<?php endif; ?>
 		<?php if ($this->item->image) : ?>
 			<li data-tab="images" class="uk-panel uk-panel-box">
 				<div class="uk-grid uk-grid-small image">
@@ -197,4 +266,3 @@ if ($this->item->map)
 		</li>
 	</ul>
 </div>
-<?php //echo '<pre>', print_r($this->item, true), '</pre>'; ?>
