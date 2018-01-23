@@ -184,13 +184,30 @@ class tplNerudasHelper
 	 */
 	public function getMiddleLayot($template)
 	{
-		$app    = Factory::getApplication();
-		$params = $template->params;
+		$app       = Factory::getApplication();
+		$params    = $template->params;
+		$component = $app->input->get('option');
+		$view      = $app->input->get('view');
+
 		// Columns
 		$layout = '1column';
 		if ($template->countModules('sidebar'))
 		{
 			$layout = '2columns';
+		}
+
+		// Maps layots
+		$mapLayouts = array(
+			'com_board' => 'map'
+		);
+
+		foreach ($mapLayouts as $c => $v)
+		{
+			if ($component == $c && $view == $v)
+			{
+				$layout = 'map';
+				break;
+			}
 		}
 
 		return 'template.middle.' . $layout;
@@ -216,14 +233,18 @@ class tplNerudasHelper
 			{
 				return true;
 			}
-			elseif (!empty($value)) {
-				foreach ($value as $key => $val) {
-					if (!empty($val)) {
+			elseif (!empty($value))
+			{
+				foreach ($value as $key => $val)
+				{
+					if (!empty($val))
+					{
 						return true;
 					}
 				}
 			}
 		}
+
 		return false;
 	}
 

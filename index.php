@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_URI'] == '/index.php?option=com_k2&view=itemlist')
 	JError::raiseError(404);
 }
 
-$newComponents     = array('com_remzona' , 'com_jzpages', 'com_board');
+$newComponents     = array('com_remzona', 'com_jzpages', 'com_board');
 if (in_array($app->input->get('option', ''), $newComponents)):
 
 	// Get Header
@@ -57,8 +57,9 @@ if (in_array($app->input->get('option', ''), $newComponents)):
 	<jdoc:include type="message"/>
 	<?php echo LayoutHelper::render('template.header', $this); ?>
 	<?php echo LayoutHelper::render($this->middleLayout, $this); ?>
-
-	<?php echo LayoutHelper::render('template.footer', $this); ?>
+	<?php if ($this->middleLayout !== 'template.middle.map'): ?>
+		<?php echo LayoutHelper::render('template.footer', $this); ?>
+	<?php endif; ?>
 	<jdoc:include type="modules" name="modal"/>
 	<jdoc:include type="modules" name="scripts"/>
 	</body>
