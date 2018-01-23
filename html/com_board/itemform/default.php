@@ -77,7 +77,8 @@ $doc->addScriptDeclaration('
 		<?php echo LayoutHelper::render('components.com_board.formcategories', $this); ?>
 		<?php echo $this->form->renderField('title'); ?>
 		<?php echo $this->form->renderField('for_when'); ?>
-		<?php $class = $this->form->getFieldAttribute('actual', 'class', '', '') . ' wrap';
+		<?php
+		$class = $this->form->getFieldAttribute('actual', 'class', '', '') . ' wrap';
 		$this->form->setFieldAttribute('actual', 'class', $class, '');
 		echo $this->form->renderField('actual'); ?>
 		<div class="uk-form-row">
