@@ -47,9 +47,12 @@ if (in_array($app->input->get('option', ''), $newComponents)):
 	// Get Footer
 	$this->footer = $this->helper->getFooter($this);
 
+	$this->map = ($this->middleLayout == 'template.middle.map');
+
 	?>
 	<html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>"
-		  lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" class="new">
+		  lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>"
+		  class="new <?php echo ($this->map) ? 'map' : ''; ?>">
 	<head>
 		<jdoc:include type="head"/>
 	</head>
@@ -57,7 +60,7 @@ if (in_array($app->input->get('option', ''), $newComponents)):
 	<jdoc:include type="message"/>
 	<?php echo LayoutHelper::render('template.header', $this); ?>
 	<?php echo LayoutHelper::render($this->middleLayout, $this); ?>
-	<?php if ($this->middleLayout !== 'template.middle.map'): ?>
+	<?php if (!$this->map): ?>
 		<?php echo LayoutHelper::render('template.footer', $this); ?>
 	<?php endif; ?>
 	<jdoc:include type="modules" name="modal"/>
