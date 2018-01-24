@@ -10,18 +10,22 @@
 
 defined('_JEXEC') or die;
 
-$author = NerudasProfilesHelper::getProfile($displayData);
+extract($displayData);
+
+$link_target  = (!empty($author_link)) ? '' : ' target="_blank"';
+$author       = NerudasProfilesHelper::getProfile($author_id);
+$author->link = (!empty($author_link)) ? $author_link : $author->link;
 ?>
 <div class="author uk-clearfix uk-width-1-1">
 	<div class="avatar uk-position-relative uk-display-inline-block uk-align-left  uk-margin-bottom-remove">
 		<a class="image uk-avatar-48 "
 		   style="background-image: url('<?php echo $author->avatar->small; ?>');"
-		   href="<?php echo $author->link; ?>" target="_blank">
+		   href="<?php echo $author->link; ?>"<?php echo $link_target; ?>>
 		</a>
 	</div>
 	<div class="text uk-text-ellipsis">
 		<div class="name">
-			<a class="" href="<?php echo $author->link; ?>" target="_blank">
+			<a class="" href="<?php echo $author->link; ?>" <?php echo $link_target; ?>>
 				<?php echo $author->name; ?>
 			</a>
 		</div>

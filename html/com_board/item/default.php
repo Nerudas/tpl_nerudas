@@ -64,7 +64,7 @@ if ($this->item->map)
 	<?php endif; ?>
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
 		<div class="uk-flex uk-flex-space-between">
-			<?php echo LayoutHelper::render('content.author.horizontal', $this->item->created_by); ?>
+			<?php echo LayoutHelper::render('content.author.horizontal', array('author_id' => $this->item->created_by)); ?>
 			<div class="uk-text-right">
 				<div class="uk-text-nowrap">
 					<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
