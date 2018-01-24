@@ -84,7 +84,7 @@ if ($this->item->map)
 			</div>
 		</div>
 	</div>
-	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-tab="{connect:'#boardTabs'}">
+	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#boardTabs', swiping: false}">
 		<li><a href="#text"><?php echo Text::_('COM_BOARD_ITEM'); ?></a></li>
 		<?php if ($this->item->contacts) : ?>
 			<li><a href="#contacts"><?php echo Text::_('COM_BOARD_ITEM_CONTACTS'); ?></a></li>
@@ -203,7 +203,8 @@ if ($this->item->map)
 					<?php if (!empty($this->item->contacts->get('site', ''))) : ?>
 						<dt><?php echo Text::_('COM_BOARD_ITEM_SITE'); ?></dt>
 						<dd class="uk-margin-bottom">
-							<a class="uk-margin-small-bottom" href="<?php echo $this->item->contacts->get('site'); ?>">
+							<a class="uk-margin-small-bottom" href="<?php echo $this->item->contacts->get('site'); ?>"
+							   target="_blank">
 								<?php echo trim(str_replace(array('http://', 'https://'), '', $this->item->contacts->get('site')), '/'); ?>
 							</a>
 						</dd>

@@ -26,54 +26,55 @@
 		$('[data-modalmap]').each(function () {
 			var link = $(this),
 				selector = link.data('modalmap'),
-				params = Joomla.getOptions(selector, '');
-			if (params !== '') {
+				data = Joomla.getOptions(selector, '');
+			if (data !== '') {
 				$(link).on('click', function () {
 					modal.show();
-					setPalaceMark(params);
+					if (!map) {
+						initializeMap();
+					}
+					checkMap(function (map) {
+
+						// Set Center
+						var center = $.parseJSON(data.params.center),
+							zoom = data.params.zoom * 1;
+
+						map.setCenter(center, zoom, {
+							checkZoomRange: true
+						});
+
+						// Placemark
+						map.geoObjects.removeAll();
+						var coordinates = $.parseJSON(data.placemark.coordinates),
+							options = {};
+						if (data.placemark.options) {
+							$.each(data.placemark.options, function (key, value) {
+								if (key == 'customLayout') {
+									key = 'iconLayout';
+									value = ymaps.templateLayoutFactory.createClass(value);
+								}
+								options[key] = value;
+							});
+						}
+						else {
+							options.iconLayout = 'default#image';
+							options.iconImageHref = '/media/plg_fieldtypes_map/images/placemark.png';
+							options.iconImageSize = [48, 48];
+							options.iconImageOffset = [-24, -48];
+						}
+
+						var placemark = new ymaps.Placemark(coordinates, {}, options);
+						map.geoObjects.add(placemark);
+
+						if (data.link) {
+							placemark.events.add('click', function () {
+								window.location.href = data.link;
+							});
+						}
+					});
 				});
 			}
 		});
-
-		// Set Palacemarl
-		function setPalaceMark(data) {
-			if (!map) {
-				initializeMap();
-			}
-			checkMap(function (map) {
-
-				// Set Center
-				var center = $.parseJSON(data.params.center),
-					zoom = data.params.zoom * 1;
-
-				map.setCenter(center, zoom, {
-					checkZoomRange: true
-				});
-
-				// Placemark
-				map.geoObjects.removeAll();
-				var coordinates = $.parseJSON(data.placemark.coordinates),
-					options = {};
-				if (data.placemark.options) {
-					$.each(data.placemark.options, function (key, value) {
-						if (key == 'customLayout') {
-							key = 'iconLayout';
-							value = ymaps.templateLayoutFactory.createClass(value);
-						}
-						options[key] = value;
-					});
-				}
-				else {
-					options.iconLayout = 'default#image';
-					options.iconImageHref = '/media/plg_fieldtypes_map/images/placemark.png';
-					options.iconImageSize = [48, 48];
-					options.iconImageOffset = [-24, -48];
-				}
-
-				var placemark = new ymaps.Placemark(coordinates, {}, options);
-				map.geoObjects.add(placemark);
-			});
-		}
 
 		function checkMap(callback) {
 			var test = setInterval(function () {

@@ -256,7 +256,9 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 								array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
 
 							<?php if ($item->map):
-								Factory::getDocument()->addScriptOptions('board_' . $item->id, $item->map->toArray());
+								$item->map = $item->map->toArray();
+								$item->map['link'] = $item->link;
+								Factory::getDocument()->addScriptOptions('board_' . $item->id, $item->map);
 								?>
 								<a data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
 								   data-modalmap="board_<?php echo $item->id; ?>">
