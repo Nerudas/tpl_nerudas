@@ -26,7 +26,7 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 		<div class="zoom " data-afterInit="show">
 			<a data-board-map-zoom="plus"
 			   class="uk-flex uk-flex-middle uk-flex-center uk-icon-small uk-icon-plus uk-text-success"></a>
-			<span data-board-map-zoom="current" class="uk-flex uk-flex-middle uk-flex-center"></span>
+			<span data-board-map-zoom="current" class="uk-flex uk-flex-middle uk-flex-center uk-hidden-small"></span>
 			<a data-board-map-zoom="minus"
 			   class="uk-flex uk-flex-middle uk-flex-center uk-icon-small uk-icon-minus uk-text-danger"></a>
 		</div>
