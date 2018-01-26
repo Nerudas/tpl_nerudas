@@ -22,6 +22,7 @@ html.map {
 	min-height: 100%;
 	max-height: 100%;
 }
+
 #pageLoading {
 	display: none;
 	position: fixed;
@@ -2905,4 +2906,90 @@ svg[data-name="Nerudas"] .dots .background {
 [data-tabmap] {
 	max-height: 90vh;
 	min-height: 50vh;
+}
+
+.tm-middle.map {
+	background: #e5e5e5;
+}
+
+/* Board Map */
+#board.map {
+	display: flex;
+	height: 100%;
+}
+
+#board.map [data-board-map] {
+	display: inline-flex;
+	position: relative;
+	flex: 1;
+}
+
+#board.map .zoom {
+	position: absolute;
+	top: 50%;
+	margin-top: -60px;
+	left: 0;
+	z-index: 24;
+	border: 1px solid #e5e5e5;
+}
+
+#board.map .zoom [data-board-map-zoo="current"] {
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+#board.map .zoom [data-board-map-zoom] {
+	width: 40px;
+	height: 40px;
+	background: #fff;
+}
+
+#board.map .zoom [data-board-map-zoom][disabled="disabled"] {
+	background-color: #f0f0f0 !important;
+	color: #999 !important;
+}
+
+#board.map [data-board-itemlist="container"] {
+	width: 310px;
+	box-sizing: border-box;
+	height: 100%;
+	overflow-y: scroll;
+	padding-bottom: 70px !important;
+}
+@media (max-width: 767px) {
+	#board.map [data-board-itemlist="container"] {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 9999;
+	}
+}
+
+#board.map [data-board-itemlist="items"] .item[data-show="true"] .ifnotshow,
+#board.map [data-board-itemlist="items"] .item[data-show="false"] .ifshow {
+	display: none;
+}
+
+#board.map [data-board-itemlist="items"] .item[data-show="false"]:hover {
+	background: #f0f0f0 !important;
+}
+
+#board.map [data-board-itemlist="items"] .item[data-show="false"]:nth-of-type(2n+1) {
+	background: #fafafa;
+}
+
+#board.map [data-board-itemlist="items"] .item {
+	border-bottom: 1px solid #E5E5E5;
+}
+#board.map [data-board-itemlist="items"] .item:last-child {
+	border-bottom: none;
+}
+
+#board.map [data-board-itemlist="back"] {
+	display: none;
+	margin-bottom: 70px;
 }

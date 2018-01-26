@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package    Nerudas Template
+ * @version    4.9.5
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
 
 defined('_JEXEC') or die;
 
@@ -45,7 +53,7 @@ use Joomla\CMS\Language\Text;
 			</div>
 		</div>
 	</nav>
-	<?php if ($panel->mobile): ?>
+	<?php if ($panel->mobile && !$template->map): ?>
 		<nav class="tm-toppanel-mobile uk-container uk-container-center uk-margin-top uk-hidden-large">
 			<div class="modules uk-accordion uk-grid uk-grid uk-grid-width-medium-1-2 uk-panel uk-panel-box"
 				 data-uk-grid-match

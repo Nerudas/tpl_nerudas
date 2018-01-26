@@ -85,7 +85,13 @@
 		});
 	});
 
+	function newMapHeight() {
+		var newMap = $('html.new .tm-middle.map'),
+			newMapHight = $(window).outerHeight() - $(newMap).offset().top;
+		$(newMap).outerHeight(newMapHight);
+	}
 	$(document).ready(function () {
+		newMapHeight();
 		$('#navigation').on({
 			'show.uk.offcanvas': function () {
 				$('body').css('overflow', 'hidden');
@@ -217,6 +223,7 @@
 		setMiddleMinHeight();
 		setRatioHeight();
 		headerBreadcrumb();
+		newMapHeight();
 	});
 })(jQuery);
 
