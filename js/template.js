@@ -86,9 +86,11 @@
 	});
 
 	function newMapHeight() {
-		var newMap = $('html.new .tm-middle.map'),
-			newMapHight = $(window).outerHeight() - $(newMap).offset().top;
-		$(newMap).outerHeight(newMapHight);
+		var newMap = $('html.new .tm-middle.map');
+		if (newMap.length > 0) {
+			$(newMap).outerHeight($(window).outerHeight() - $(newMap).offset().top);
+		}
+
 	}
 	$(document).ready(function () {
 		newMapHeight();
