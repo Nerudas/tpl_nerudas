@@ -42,8 +42,10 @@ $revers  = array_reverse($items);
 $current = $revers[0];
 unset($revers[0]);
 
+$margin = (!isset($margin)) ? true : $margin;
+
 ?>
-<div class="tm-title uk-panel uk-panel-box uk-flex-middle uk-margin-bottom">
+<div class="tm-title uk-panel uk-panel-box uk-flex-middle<?php echo ($margin) ? ' uk-margin-bottom' : ''; ?>">
 	<ul class="uk-breadcrumb uk-margin-remove uk-hidden-small">
 		<?php foreach ($items as $item): ?>
 			<?php if ($i !== $count) : ?>
@@ -81,16 +83,16 @@ unset($revers[0]);
 	</div>
 	<div class="actions uk-button-group">
 		<?php if (!empty($layouts)) : ?>
-			<div class="uk-margin-right">
+			<div class="uk-margin-right uk-margin-left">
 				<?php if (!empty($layouts['list'])) : ?>
 					<a href="<?php echo $layouts['list']; ?>"
-					   class="add uk-icon-list-ul uk-button
+					   class="list uk-icon-list-ul uk-button
 				   <?php echo (!empty($layouts['active']) && $layouts['active'] == 'list') ? ' uk-active' : ''; ?>"
 					   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_LIST'); ?>"></a>
 				<?php endif; ?>
 				<?php if (!empty($layouts['map'])) : ?>
 					<a href="<?php echo $layouts['map']; ?>"
-					   class="add uk-icon-map-marker uk-button
+					   class="map uk-icon-map-marker uk-button
 				   <?php echo (!empty($layouts['active']) && $layouts['active'] == 'map') ? ' uk-active' : ''; ?>"
 					   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"></a>
 				<?php endif; ?>

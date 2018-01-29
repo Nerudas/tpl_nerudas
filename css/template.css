@@ -535,6 +535,9 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	font-style: normal;
 	border-radius: 1px;
 }
+.uk-button-white {
+	background: #fff;
+}
 
 .uk-button-mini {
 	min-height: 1.429rem;
@@ -2918,8 +2921,13 @@ svg[data-name="Nerudas"] .dots .background {
 	height: 100%;
 }
 
+#board.map .map-block {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
 #board.map [data-board-map] {
-	display: inline-flex;
 	position: relative;
 	flex: 1;
 }
@@ -2956,18 +2964,7 @@ svg[data-name="Nerudas"] .dots .background {
 	overflow-y: scroll;
 	padding-bottom: 70px !important;
 }
-@media (max-width: 767px) {
-	#board.map [data-board-itemlist="container"] {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-	}
-}
+
 
 #board.map [data-board-itemlist="items"] .item[data-show="true"] .ifnotshow,
 #board.map [data-board-itemlist="items"] .item[data-show="false"] .ifshow {
@@ -2985,11 +2982,57 @@ svg[data-name="Nerudas"] .dots .background {
 #board.map [data-board-itemlist="items"] .item {
 	border-bottom: 1px solid #E5E5E5;
 }
+
 #board.map [data-board-itemlist="items"] .item:last-child {
 	border-bottom: none;
 }
 
 #board.map [data-board-itemlist="back"] {
 	display: none;
-	margin-bottom: 70px;
+}
+
+#board.map .geo {
+	display: none;
+	position: absolute;
+	bottom: 31px;
+	left: 7px;
+	z-index: 24;
+}
+
+#board.map .filter {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 25;
+}
+
+
+
+
+@media (max-width: 767px) {
+	#board.map [data-board-itemlist="container"] {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 9999;
+	}
+	#board.map [data-board-filter]  .advanced-fiter .submits{
+		margin-bottom: 70px;
+	}
+	#board.map [data-board-filter] {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 9999;
+		height: 100%;
+		overflow-y: scroll;
+		box-sizing: border-box;
+	}
 }

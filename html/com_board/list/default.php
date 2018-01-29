@@ -35,6 +35,12 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 			  class="uk-form filter">
 			<div class="uk-form-row">
 				<div class="uk-grid uk-grid-small" data-uk-margin>
+					<div class="uk-width-small-1-2 uk-width-medium-2-5">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('category', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('category', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('category', 'filter'); ?>
+					</div>
 					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-flex uk-flex-space-between">
 						<?php
 						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
@@ -42,19 +48,13 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 						echo $this->filterForm->getInput('search', 'filter'); ?>
 						<div class="uk-button-group left-input advanced-fiter
 							<?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
-							<a href="<?php echo $this->category->link; ?>"
+							<a href="<?php echo $this->link; ?>"
 							   class="uk-button uk-text-danger uk-icon-times">
 							</a>
 							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
 									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
 							</button>
 						</div>
-					</div>
-					<div class="uk-width-small-1-2 uk-width-medium-2-5">
-						<?php
-						$class = $this->filterForm->getFieldAttribute('category', 'class', '', 'filter') . ' uk-width-1-1';
-						$this->filterForm->setFieldAttribute('category', 'class', $class, 'filter');
-						echo $this->filterForm->getInput('category', 'filter'); ?>
 					</div>
 				</div>
 			</div>
@@ -102,7 +102,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 					</div>
 					<div class="uk-flex-inline uk-margin-top">
 						<div class="uk-button-group">
-							<a href="<?php echo $this->category->link; ?>" class="uk-button uk-button-danger">
+							<a href="<?php echo $this->link; ?>" class="uk-button uk-button-danger">
 								<?php echo Text::_('JCLEAR'); ?>
 							</a>
 							<button type="submit" class="uk-button uk-button-primary">
