@@ -35,7 +35,7 @@ foreach ($this->categories as $category)
 <div id="add" class="itemlist uk-margin-large-bottom">
 	<form action="<?php echo Route::_(BoardHelperRoute::getFormRoute()); ?>"
 		  id="board" class="form-cartegories form form-validate"  method="get">
-		<?php echo LayoutHelper::render('template.title', array('cancel' => Route::_(BoardHelperRoute::getCategoryRoute()))); ?>
+		<?php echo LayoutHelper::render('template.title', array('cancel' => Route::_(BoardHelperRoute::getListRoute()))); ?>
 		<div class="itemlist uk-panel uk-panel-box uk-margin-bottom">
 			<?php foreach ($root as $item): ?>
 				<div class="item uk-margin-large-bottom">
