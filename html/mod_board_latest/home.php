@@ -19,6 +19,8 @@ HTMLHelper::_('jquery.framework');
 HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
 HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative' => true));
 
+$module->title = trim(preg_replace('~\[(.?)*\]~', '', $module->title));
+
 ?>
 <div class="board-lastes-module">
 	<div class="title uk-margin-bottom uk-flex uk-flex-middle uk-flex-wrap">
