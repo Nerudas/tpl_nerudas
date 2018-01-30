@@ -3,7 +3,7 @@
  * @package    Nerudas Template
  * @version    4.9.5
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2017 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
@@ -97,7 +97,7 @@ foreach ($list as $i => &$item)
 	endswitch;
 	if ($item->deeper)
 	{
-		echo '<ul class="submenu uk-nav-sub level-' . ($item->level + 1) . $item->submenuClass . ' ">';
+		echo '<ul class="submenu uk-nav-sub level-' . ($item->level + 1) . ' ">';
 	}
 	elseif ($item->shallower)
 	{
