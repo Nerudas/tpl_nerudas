@@ -123,7 +123,6 @@ $doc->addScriptDeclaration('
 
 	<?php echo $this->form->renderFieldSet('hidden'); ?>
 
-	<?php echo $this->form->getInput('imagefolder'); ?>
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>"/>
 	<?php echo HTMLHelper::_('form.token'); ?>
