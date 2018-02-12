@@ -17,7 +17,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 extract($displayData);
 
 HTMLHelper::_('jquery.framework');
-HTMLHelper::_('script', 'media/plg_fieldtypes_ajaxiamge/field.min.js', array('version' => 'auto'));
+HTMLHelper::_('script', 'media/plg_fieldtypes_ajaximage/js/ajaximage.min.js', array('version' => 'auto'));
 HTMLHelper::_('jquery.ui');
 HTMLHelper::_('jquery.ui', array('sortable'));
 ?>
