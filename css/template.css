@@ -279,37 +279,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 
 }
 
-@media (max-width: 767px) {
-	#profiles.itemlist .items .item > .avatar {
-		position: static;
-		margin-bottom: 10px;
-		width: 100%;
-	}
-
-	#profiles.itemlist .items .item > .avatar > .image {
-		margin: 0 auto;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	}
-
-	#profiles.itemlist .items .item > .content {
-		padding: 0;
-		box-shadow: none;
-		margin: 0;
-	}
-
-	#profiles.itemlist .items .item > .content > h2 {
-		text-align: center;
-	}
-
-	#profiles.itemlist .items .item {
-		display: block;
-		background: #fff;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-		color: #444;
-		padding: 10px;
-	}
-}
-
 #profiles.item > .header {
 	position: relative;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -318,12 +287,11 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 #profiles.item > .header .bg {
 	display: block;
 	width: 100%;
-	height: 280px;
+	height: 236px;
 	background-color: #e5e5e5;
 }
 
 #profiles.item > .header .info {
-	position: absolute;
 	background: #fff;
 	left: 0;
 	right: 0;
@@ -372,12 +340,55 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	border-radius: 50%;
 	box-sizing: border-box;
 }
+
 #profiles.item > .header .info .job {
 	color: #999 !important;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
 
+@media (max-width: 767px) {
+	#profiles.item > .header .info .avatar {
+		top: 38px;
+		width: 100%;
+	}
+	#profiles.item > .header .info .content {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	#profiles.item > .header .info .avatar .image {
+		margin: 0 auto;
+	}
+
+	#profiles.itemlist .items .item > .avatar {
+		position: static;
+		margin-bottom: 10px;
+		width: 100%;
+	}
+
+	#profiles.itemlist .items .item > .avatar > .image {
+		margin: 0 auto;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	}
+
+	#profiles.itemlist .items .item > .content {
+		padding: 0;
+		box-shadow: none;
+		margin: 0;
+	}
+
+	#profiles.itemlist .items .item > .content > h2 {
+		text-align: center;
+	}
+
+	#profiles.itemlist .items .item {
+		display: block;
+		background: #fff;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+		color: #444;
+		padding: 10px;
+	}
+}
 
 /* news
 ========================================================================== */

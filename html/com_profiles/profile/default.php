@@ -56,7 +56,7 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 			</div>
 			<div class="uk-width-1-1">
 				<div class="content uk-grid uk-grid-small">
-					<div class="author uk-width-medium-3-4">
+					<div class="author  uk-width-1-2 uk-width-medium-3-4">
 						<div class="uk-text-large">
 							<?php echo $this->item->name; ?>
 						</div>
@@ -64,7 +64,7 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 
 						</div>
 					</div>
-					<div class="uk-width-medium-1-4 uk-text-right">
+					<div class="uk-width-1-2 uk-width-medium-1-4 uk-text-right">
 						<div class="uk-text-nowrap">
 							<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
 								  data-uk-tooltip
