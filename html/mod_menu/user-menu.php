@@ -1,20 +1,19 @@
 <?php
+/**
+ * @package    Nerudas Template
+ * @version    4.9.6
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
 
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
-use Joomla\CMS\HTML\HTMLHelper;
-
+use Joomla\CMS\Uri\Uri;
 
 $user = Factory::getUser();
-
-///
-//NerudasProfilesHelper::getProfile($this->item-
-
-//echo '<pre>', print_r('aaa', true), '</pre>';
-//<div class="uk-avatar-30"  style="background-image: url('/templates/nerudas/images/noimages/10.jpg');">
-//
-//	</div>
 ?>
 
 
@@ -25,23 +24,29 @@ $user = Factory::getUser();
 		</div>
 	</a>
 <?php else:
-	$profile = NerudasProfilesHelper::getProfile($user->id); ?>
+	jimport('joomla.filesystem.folder');
+	$folder = 'images/profiles/' . $user->id;
+	$files  = JFolder::files(JPATH_ROOT . '/' . $folder, 'avatar', false);
+	$avatar = (!empty($files[0])) ? $folder . '/' . $files[0] : 'media/com_profiles/images/noavatar.jpg';
+	$avatar = Uri::root(true) . '/' . $avatar;
+	?>
 	<a>
-		<div class="uk-avatar-30" style="background-image: url('<?php echo $profile->avatar->small; ?>');">
+		<div class="uk-avatar-30" style="background-image: url('<?php echo $avatar; ?>');">
 		</div>
+		<i class="uk-icon-caret-down uk-margin-small-left"></i>
 	</a>
 	<div class="uk-dropdown uk-dropdown-navbar">
 		<ul class="uk-nav uk-nav-navbar new">
 			<?php
 			foreach ($list as $i => &$item)
 			{
-				if ($item->level == 1 && $item->type !== 'separator')
+				if ($item->type !== 'separator')
 				{
 					echo '<li>';
 					echo '<a href="' . htmlspecialchars($item->flink) . '">' . $item->title . '</a>';
 					echo '</li>';
 				}
-				elseif ($item->level == 1 && $item->type == 'separator')
+				else
 				{
 					echo '<li class="uk-nav-divider"></li>';
 				}
@@ -49,5 +54,4 @@ $user = Factory::getUser();
 			?>
 		</ul>
 	</div>
-
 <?php endif; ?>
