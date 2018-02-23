@@ -173,21 +173,27 @@ if ($this->item->map)
 		</li>
 		<?php if ($this->item->contacts) : ?>
 			<li data-tab="contacts" class="uk-panel uk-panel-box">
+				<div class="uk-text-right">
+					<span class="uk-badge uk-badge-white uk-margin-small-left">
+								</i><?php echo $this->item->region_name; ?>
+							</span>
+				</div>
 				<dl class="uk-description-list-horizontal">
 					<?php if ($this->item->contacts->get('phones', false)) : ?>
 						<dt><?php echo Text::_('JGLOBAL_FIELD_PHONES_LABEL'); ?></dt>
 						<dd class="uk-margin-bottom">
 							<?php foreach ($this->item->contacts->get('phones') as $phone): ?>
-								<a class="uk-text-xlarge uk-display-block uk-margin-small-bottom"
-								   href="tel:<?php echo $phone->code . $phone->number; ?>">
-									<?php $phone->display = (!empty($phone->display)) ?
-										$phone->display : $phone->code . $phone->number;
+								<div class="uk-margin-small-bottom uk-display-block">
+									<a class="uk-text-xlarge "
+									   href="tel:<?php echo $phone->code . $phone->number; ?>">
+										<?php $phone->display = (!empty($phone->display)) ?
+											$phone->display : $phone->code . $phone->number;
 
-									$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
-									$subst   = '$1($2)$3-$4-$5';
-									echo preg_replace($regular, $subst, $phone->display); ?>
-								</a>
-
+										$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
+										$subst   = '$1($2)$3-$4-$5';
+										echo preg_replace($regular, $subst, $phone->display); ?>
+									</a>
+								</div>
 							<?php endforeach; ?>
 						</dd>
 					<?php endif; ?>
@@ -201,7 +207,7 @@ if ($this->item->map)
 						</dd>
 					<?php endif; ?>
 					<?php if (!empty($this->item->contacts->get('site', ''))) : ?>
-						<dt><?php echo Text::_('COM_BOARD_ITEM_SITE'); ?></dt>
+						<dt><?php echo Text::_('COM_PROFILES_PROFILE_SITE'); ?></dt>
 						<dd class="uk-margin-bottom">
 							<a class="uk-margin-small-bottom" href="<?php echo $this->item->contacts->get('site'); ?>"
 							   target="_blank">

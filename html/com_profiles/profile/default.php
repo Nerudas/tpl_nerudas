@@ -72,9 +72,9 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 								  title="<?php echo HTMLHelper::date($this->item->created, 'd.m.Y H:i'); ?>"></time>
 						</div>
 						<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
-					<span class="uk-badge uk-badge-white uk-margin-small-left">
-						<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
-					</span>
+							<span class="uk-badge uk-badge-white uk-margin-small-left">
+								<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
+							</span>
 							<a href="<?php echo $this->item->link; ?>#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
 								<i class="uk-icon-comment-o uk-margin-small-right"></i>0
@@ -90,9 +90,9 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 		<?php if ($this->item->contacts) : ?>
 			<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<?php endif; ?>
-		<?php if (!empty($this->item->about)) : ?>
-			<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
-		<?php endif; ?>
+
+		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
+
 		<li><a href="#board"><?php echo Text::_('MOD_BOARD_LATEST_ITEMS'); ?></a></li>
 		<li><a href="#map"><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
 		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
@@ -101,21 +101,27 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 	<ul id="profilesTabs" class="uk-switcher" data-uk-switcher-tabs="">
 		<?php if ($this->item->contacts) : ?>
 			<li data-tab="contacts" class="uk-panel uk-panel-box">
+				<div class="uk-text-right">
+					<span class="uk-badge uk-badge-white uk-margin-small-left">
+								</i><?php echo $this->item->region_name; ?>
+							</span>
+				</div>
 				<dl class="uk-description-list-horizontal">
 					<?php if ($this->item->contacts->get('phones', false)) : ?>
 						<dt><?php echo Text::_('JGLOBAL_FIELD_PHONES_LABEL'); ?></dt>
 						<dd class="uk-margin-bottom">
 							<?php foreach ($this->item->contacts->get('phones') as $phone): ?>
-								<a class="uk-text-xlarge uk-display-block uk-margin-small-bottom"
-								   href="tel:<?php echo $phone->code . $phone->number; ?>">
-									<?php $phone->display = (!empty($phone->display)) ?
-										$phone->display : $phone->code . $phone->number;
+								<div class="uk-margin-small-bottom uk-display-block">
+									<a class="uk-text-xlarge "
+									   href="tel:<?php echo $phone->code . $phone->number; ?>">
+										<?php $phone->display = (!empty($phone->display)) ?
+											$phone->display : $phone->code . $phone->number;
 
-									$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
-									$subst   = '$1($2)$3-$4-$5';
-									echo preg_replace($regular, $subst, $phone->display); ?>
-								</a>
-
+										$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
+										$subst   = '$1($2)$3-$4-$5';
+										echo preg_replace($regular, $subst, $phone->display); ?>
+									</a>
+								</div>
 							<?php endforeach; ?>
 						</dd>
 					<?php endif; ?>
@@ -170,13 +176,25 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 				</dl>
 			</li>
 		<?php endif; ?>
-		<?php if (!empty($this->item->about)) : ?>
-			<li data-tab="about" class="uk-panel uk-panel-box">
+
+		<li data-tab="about" class="uk-panel uk-panel-box">
+			<div>
 				<div>
 					<?php echo $this->item->about; ?>
 				</div>
-			</li>
-		<?php endif; ?>
+				<?php if (!empty($this->item->tags->itemTags)): ?>
+					<hr>
+					<div class="uk-margin-small-top tags">
+						<?php if ($this->item->tags): ?>
+							<?php foreach ($this->item->tags->itemTags as $tag): ?>
+								<span class="uk-tag"><?php echo $tag->title; ?></span>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		</li>
+
 		<li data-tab="board" class="uk-panel uk-panel-box">
 			<div>
 				<?php echo $boardModule; ?>
