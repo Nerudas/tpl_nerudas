@@ -128,8 +128,10 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 
 				<div class="item uk-panel uk-panel-box uk-margin-bottom">
 					<div class="title uk-flex uk-flex-space-between">
-						<?php echo LayoutHelper::render('content.author.horizontal',
-							array('author_id' => $item->created_by, 'author_link' => $item->link)); ?>
+						<?php
+//						echo LayoutHelper::render('content.author.horizontal',
+//							array('author_id' => $item->created_by, 'author_link' => $item->link));
+						?>
 						<div class="uk-text-right">
 
 							<div class="uk-text-nowrap">

@@ -226,15 +226,158 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 
 /* Profiles
 ========================================================================== */
-#profiles.itemlist > .item.category h1 {
-	line-height: 1;
+#profiles.itemlist .items .item {
+	position: relative;
+	min-height: 128px;
+	display: flex;
+	align-items: center;
 }
 
-#profiles.itemlist > .item.category .title {
-	font-size: 1.125rem;
-	letter-spacing: 0.1rem;
-	text-transform: uppercase;
+#profiles.itemlist .items .item > .avatar {
+	width: 128px;
+	height: 128px;
+	display: block;
+	position: absolute;
+	left: 0;
+	z-index: 1;
 }
+
+#profiles.itemlist .items .item > .avatar .image {
+	display: block;
+	width: 128px;
+	height: 128px;
+	position: relative;
+	border-radius: 50%;
+	background: no-repeat 50% 50%;
+	background-size: cover;
+	box-sizing: border-box;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+}
+
+#profiles.itemlist .items .item > .avatar.online .image::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	right: 0;
+	bottom: 0;
+	background: #659f13;
+	border: 2px solid #FFF;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+
+#profiles.itemlist .items .item > .content {
+	background: #fff;
+	width: 100%;
+	margin-left: 64px;
+	padding: 15px 15px 15px 85px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	color: #444;
+
+}
+
+@media (max-width: 767px) {
+	#profiles.itemlist .items .item > .avatar {
+		position: static;
+		margin-bottom: 10px;
+		width: 100%;
+	}
+
+	#profiles.itemlist .items .item > .avatar > .image {
+		margin: 0 auto;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	}
+
+	#profiles.itemlist .items .item > .content {
+		padding: 0;
+		box-shadow: none;
+		margin: 0;
+	}
+
+	#profiles.itemlist .items .item > .content > h2 {
+		text-align: center;
+	}
+
+	#profiles.itemlist .items .item {
+		display: block;
+		background: #fff;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+		color: #444;
+		padding: 10px;
+	}
+}
+
+#profiles.item > .header {
+	position: relative;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#profiles.item > .header .bg {
+	display: block;
+	width: 100%;
+	height: 280px;
+	background-color: #e5e5e5;
+}
+
+#profiles.item > .header .info {
+	position: absolute;
+	background: #fff;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	min-height: 64px;
+	display: flex;
+	align-items: center;
+}
+
+#profiles.item > .header .info .content {
+	padding-left: 150px;
+	padding-right: 10px;
+}
+
+#profiles.item > .header .info .avatar {
+	width: 128px;
+	height: 128px;
+	bottom: 5px;
+	position: absolute;
+	left: 5px;
+}
+
+#profiles.item > .header .info .avatar .image {
+	display: block;
+	width: 128px;
+	height: 128px;
+	position: relative;
+	background: no-repeat 50% 50%;
+	background-size: cover;
+	box-sizing: border-box;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	border: 2px solid #DDD;
+
+}
+
+#profiles.item > .header .info .avatar.online .image::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	right: 0;
+	bottom: 0;
+	background: #659f13;
+	border: 2px solid #FFF;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+#profiles.item > .header .info .job {
+	color: #999 !important;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
 
 /* news
 ========================================================================== */
@@ -535,6 +678,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	font-style: normal;
 	border-radius: 1px;
 }
+
 .uk-button-white {
 	background: #fff;
 }
@@ -2964,7 +3108,6 @@ svg[data-name="Nerudas"] .dots .background {
 	padding-bottom: 70px !important;
 }
 
-
 #board.map [data-board-itemlist="items"] .item[data-show="true"] .ifnotshow,
 #board.map [data-board-itemlist="items"] .item[data-show="false"] .ifshow {
 	display: none;
@@ -3000,13 +3143,10 @@ svg[data-name="Nerudas"] .dots .background {
 
 #board.map .filter {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	z-index: 25;
 }
-
-
-
 
 @media (max-width: 767px) {
 	#board.map [data-board-itemlist="container"] {
@@ -3019,9 +3159,11 @@ svg[data-name="Nerudas"] .dots .background {
 		width: 100%;
 		z-index: 9999;
 	}
-	#board.map [data-board-filter]  .advanced-fiter .submits{
+
+	#board.map [data-board-filter]  .advanced-fiter .submits {
 		margin-bottom: 70px;
 	}
+
 	#board.map [data-board-filter] {
 		position: fixed;
 		top: 0;

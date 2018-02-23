@@ -16,7 +16,6 @@ use Joomla\CMS\Uri\Uri;
 $user = Factory::getUser();
 ?>
 
-
 <?php if ($user->guest): ?>
 	<a href="#login" data-uk-modal="{center:true}">
 		<div class="uk-avatar-30 uk-flex uk-flex-middle uk-flex-center">
