@@ -23,7 +23,6 @@ $this->helper->checkSiteVersion($this->params);
 // Set Head
 $this->helper->setHead($this->params);
 
-
 /* General 
 ========================================================================== */
 $app    = Factory::getApplication();
