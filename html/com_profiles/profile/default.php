@@ -103,8 +103,8 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 			<li data-tab="contacts" class="uk-panel uk-panel-box">
 				<div class="uk-text-right">
 					<span class="uk-badge uk-badge-white uk-margin-small-left">
-								</i><?php echo $this->item->region_name; ?>
-							</span>
+						<?php echo $this->item->region_name; ?>
+					</span>
 				</div>
 				<dl class="uk-description-list-horizontal">
 					<?php if ($this->item->contacts->get('phones', false)) : ?>
