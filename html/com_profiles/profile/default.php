@@ -32,6 +32,15 @@ $boardModule->params = (string) $boardModule->params;
 $boardModule->style  = 'blank';
 $boardModule         = ModuleHelper::renderModule($boardModule);
 
+HTMLHelper::_('script', 'profilemap.min.js', array('version' => 'auto', 'relative' => true));
+$mapParams              = array();
+$mapParams['selector']  = 'profileMap';
+$mapParams['latitude']  = $this->item->region_latitude;
+$mapParams['longitude'] = $this->item->region_longitude;
+$mapParams['center']    = array($this->item->region_latitude, $this->item->region_longitude);
+$mapParams['zoom']      = $this->item->region_zoom;
+$mapParams['author_id'] = $this->item->id;
+Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 
 ?>
 <div id="profiles" class="item">
@@ -200,7 +209,8 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 				<?php echo $boardModule; ?>
 			</div>
 		</li>
-		<li data-tab="map" id="mapTab" class="uk-panel uk-panel-box uk-padding-remove">
+		<li data-tab="map" class="uk-panel uk-panel-box uk-padding-remove">
+			<div id="profileMap"></div>
 		</li>
 		<li data-tab="comments" class="uk-panel uk-panel-box">
 		</li>

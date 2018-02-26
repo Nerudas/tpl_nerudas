@@ -121,7 +121,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	height: 30px;
 }
 
-
 /* Microdata
 ========================================================================== */
 .microdata {
@@ -142,7 +141,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	letter-spacing: 0.1rem;
 	text-transform: uppercase;
 }
-
 
 /* Profiles
 ========================================================================== */
@@ -272,10 +270,12 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 		top: 38px;
 		width: 100%;
 	}
+
 	#profiles.item > .header .info .content {
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+
 	#profiles.item > .header .info .avatar .image {
 		margin: 0 auto;
 	}
@@ -308,6 +308,12 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 		color: #444;
 		padding: 10px;
 	}
+}
+
+#profiles.item #profileMap {
+	max-height: 90vh;
+	min-height: 50vh;
+	background: #e5e5e5;
 }
 
 /* news

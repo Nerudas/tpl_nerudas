@@ -27,7 +27,8 @@ $module->title = trim(preg_replace('~\[(.?)*\]~', '', $module->title));
 		<div class="items">
 			<?php foreach ($items as $id => $item): ?>
 				<div class="item uk-margin-bottom">
-					<a class="uk-margin-top uk-grid uk-grid-small uk-link-muted" href="<?php echo $item->link; ?>">
+					<a class="uk-margin-top uk-grid uk-grid-small uk-link-muted" href="<?php echo $item->link; ?>"
+					   target="_blank">
 						<div class="uk-width-small-3-4">
 							<h2 class="uk-h4 uk-margin-small-bottom">
 								<?php echo $item->title; ?>
@@ -133,14 +134,13 @@ $module->title = trim(preg_replace('~\[(.?)*\]~', '', $module->title));
 									  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
 							</div>
 							<div class="uk-text-left uk-text-nowrap">
-								<a href="<?php echo $item->link; ?>"
-								   class="uk-badge uk-badge-white uk-margin-small-left">
+								<span
+										class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
-								</a>
-								<a href="<?php echo $item->link; ?>#comments"
-								   class="uk-badge uk-badge-white uk-margin-small-left">
+								</span>
+								<span class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-comment-o uk-margin-small-right"></i>0
-								</a>
+								</span>
 							</div>
 						</div>
 						<div class="uk-width-small-1-3 uk-flex uk-flex-right uk-flex-bottom">
