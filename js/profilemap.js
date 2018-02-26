@@ -69,7 +69,7 @@
 							itemsRequest = $.ajax({
 								type: 'GET',
 								dataType: 'json',
-								url: '/index.php?option=com_board&task=map.getItems&v=' + Math.random(),
+								url: '/index.php?option=com_board&task=map.getItems',
 								data: ajaxData,
 								success: function (response) {
 									if (response.success) {
