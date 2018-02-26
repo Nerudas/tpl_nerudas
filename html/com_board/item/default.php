@@ -23,7 +23,7 @@ HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' 
 if ($this->item->map)
 {
 	HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
-	HTMLHelper::_('script', 'tabsmap.js', array('version' => 'auto', 'relative' => true));
+	HTMLHelper::_('script', 'tabsmap.min.js', array('version' => 'auto', 'relative' => true));
 	$map                        = $this->item->map->toArray();
 	$map['params']['container'] = 'mapTab';
 	Factory::getDocument()->addScriptOptions('board_' . $this->item->id, $map);
