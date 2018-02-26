@@ -95,7 +95,6 @@
 											}
 											var object = new ymaps.Placemark(coordinates, {}, options);
 											map.geoObjects.add(object);
-											console.log(placemark);
 											if (placemark.link) {
 												object.events.add('click', function () {
 													window.open(placemark.link, '_blank');
