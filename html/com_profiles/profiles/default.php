@@ -91,9 +91,9 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 			<?php endif; ?>
 			<div class="item uk-margin-large-bottom ">
 				<div class="avatar <?php echo ($item->online) ? ' online' : '' ?>">
-					<div class="image"
-						 style="background-image: url('<?php echo $item->avatar; ?>')">
-					</div>
+					<a href="<?php echo $item->link; ?>" class="image"
+					   style="background-image: url('<?php echo $item->avatar; ?>')">
+					</a>
 				</div>
 				<div class="content">
 					<h2 class="uk-text-large">
