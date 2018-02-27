@@ -49,6 +49,7 @@
 					function getBoard() {
 						var ajaxData = [];
 						ajaxData.push({name: 'filter[author_id]', value: params.author_id});
+						ajaxData.push({name: 'filter[allregions]', value: 1});
 						if (boardTotal == 0) {
 							$.ajax({
 								type: 'GET',
