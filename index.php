@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_URI'] == '/index.php?option=com_k2&view=itemlist')
 	JError::raiseError(404);
 }
 
-$newComponents     = array('com_jzpages', 'com_board', 'com_profiles');
+$newComponents = array('com_jzpages', 'com_board', 'com_profiles', 'com_users');
 if (in_array($app->input->get('option', ''), $newComponents)):
 
 	// Get Header

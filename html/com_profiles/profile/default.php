@@ -45,15 +45,6 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 ?>
 <div id="profiles" class="item">
 	<?php echo LayoutHelper::render('template.title', array('edit' => $this->editLink)); ?>
-	<?php if (!empty($this->item->status)): ?>
-		<div class="uk-panel-box uk-panel uk-padding-remove uk-margin-bottom">
-			<blockquote>
-				<div class="uk-padding">
-					<?php echo $this->item->status; ?>
-				</div>
-			</blockquote>
-		</div>
-	<?php endif; ?>
 	<div class="header uk-margin-bottom">
 		<div class="bg uk-display-block uk-cover-background"
 			 style="background-image: url('<?php echo $this->item->header; ?>');"></div>
@@ -95,17 +86,44 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 		</div>
 	</div>
 
-	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profilesTabs', swiping: false}">
+	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}">
+		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
 		<?php if ($this->item->contacts) : ?>
 			<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<?php endif; ?>
-		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
+
 		<li><a href="#board"><?php echo Text::_('MOD_BOARD_LATEST_ITEMS'); ?></a></li>
 		<li><a href="#map"><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
 		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
 	</ul>
 
-	<ul id="profilesTabs" class="uk-switcher" data-uk-switcher-tabs="">
+	<ul id="profileTabs" class="uk-switcher" data-uk-switcher-tabs="">
+		<li data-tab="about" class="uk-panel uk-panel-box">
+			<div>
+				<?php if (!empty($this->item->status)): ?>
+					<div class="uk-margin-bottom">
+						<blockquote>
+							<div class="uk-padding">
+								<?php echo $this->item->status; ?>
+							</div>
+						</blockquote>
+					</div>
+				<?php endif; ?>
+				<div>
+					<?php echo $this->item->about; ?>
+				</div>
+				<?php if (!empty($this->item->tags->itemTags)): ?>
+					<hr>
+					<div class="uk-margin-small-top tags">
+						<?php if ($this->item->tags): ?>
+							<?php foreach ($this->item->tags->itemTags as $tag): ?>
+								<span class="uk-tag"><?php echo $tag->title; ?></span>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		</li>
 		<?php if ($this->item->contacts) : ?>
 			<li data-tab="contacts" class="uk-panel uk-panel-box">
 				<div class="uk-text-right">
@@ -184,23 +202,7 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 			</li>
 		<?php endif; ?>
 
-		<li data-tab="about" class="uk-panel uk-panel-box">
-			<div>
-				<div>
-					<?php echo $this->item->about; ?>
-				</div>
-				<?php if (!empty($this->item->tags->itemTags)): ?>
-					<hr>
-					<div class="uk-margin-small-top tags">
-						<?php if ($this->item->tags): ?>
-							<?php foreach ($this->item->tags->itemTags as $tag): ?>
-								<span class="uk-tag"><?php echo $tag->title; ?></span>
-							<?php endforeach; ?>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
-			</div>
-		</li>
+
 
 		<li data-tab="board" class="uk-panel uk-panel-box">
 			<div>

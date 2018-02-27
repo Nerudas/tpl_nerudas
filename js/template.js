@@ -71,17 +71,19 @@
 	}
 
 	$(document).ready(function () {
-		$('[ data-uk-switcher-tabs]').each(function () {
-			var items = $(this).find('li'),
-				max = 0;
-			$(items).each(function (i, item) {
-				$(item).css('display', 'block');
-				if ($(item).height() > max) {
-					max = $(item).height();
-				}
-				$(item).css('display', '');
+		setInterval(function () {
+			$('[ data-uk-switcher-tabs]').each(function () {
+				var items = $(this).find('> li'),
+					max = 0;
+				$(items).each(function (i, item) {
+					$(item).css('display', 'block');
+					if ($(item).height() > max) {
+						max = $(item).height();
+					}
+					$(item).css('display', '');
+				});
+				$(items).height(max);
 			});
-			$(items).height(max);
 		});
 	});
 
@@ -92,6 +94,7 @@
 		}
 
 	}
+
 	$(document).ready(function () {
 		newMapHeight();
 		$('#navigation').on({
