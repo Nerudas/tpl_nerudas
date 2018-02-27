@@ -41,7 +41,7 @@ $doc->addScriptDeclaration('
 	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}">
 		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
 		<li><a href="#tags"><?php echo Text::_('JTAG'); ?></a></li>
-		<li><a href="#images"><?php echo Text::_('COM_PROFILES_PROFILE_IMAGES'); ?></a></li>
+		<li><a href="#images"><?php echo Text::_('COM_PROFILES_PROFILE_AVATAR'); ?></a></li>
 		<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<li><a href="#site_access"><?php echo Text::_('COM_PROFILES_PROFILE_SITE_ACCESS'); ?></a></li>
 		<li><a href="#settings"><?php echo Text::_('TPL_NERUDAS_SETTINGS'); ?></a></li>
@@ -51,11 +51,11 @@ $doc->addScriptDeclaration('
 		<li data-tab="about" class="uk-panel uk-panel-box">
 			<div class="uk-form-horizontal uk-margin-bottom">
 				<?php echo $this->form->renderField('name'); ?>
-				<?php echo $this->form->renderField('alias'); ?>
 				<?php
 				$class = $this->form->getFieldAttribute('status', 'class', '', '') . ' wrap';
 				$class .= ' uk-width-1-1';
 				$this->form->setFieldAttribute('status', 'class', $class, '');
+				$this->form->setFieldAttribute('status', 'hint', Text::sprintf('TPL_NERUDAS_TEXT_MAXIMUМ', 100));
 				echo $this->form->renderField('status');
 				?>
 			</div>
@@ -83,6 +83,7 @@ $doc->addScriptDeclaration('
 			<?php echo $this->form->renderFieldset('site_access'); ?>
 		</li>
 		<li data-tab="settings" class="uk-panel uk-panel-box uk-form-horizontal">
+			<?php echo $this->form->renderField('alias'); ?>
 			<?php echo $this->form->renderFieldset('settings'); ?>
 		</li>
 	</ul>
