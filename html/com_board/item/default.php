@@ -269,7 +269,9 @@ if ($this->item->map)
 			</li>
 		<?php endif; ?>
 		<li data-tab="comments" class="uk-panel uk-panel-box">
-
+			<div class="uk-text-muted uk-text-large uk-text-center">
+				<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
+			</div>
 		</li>
 	</ul>
 </div>
