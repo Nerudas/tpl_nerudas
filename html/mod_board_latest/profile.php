@@ -167,7 +167,7 @@ $module->title = trim(preg_replace('~\[(.?)*\]~', '', $module->title));
 				<hr>
 			<?php endforeach; ?>
 			<div class="more uk-text-center">
-				<a href="<?php echo $categoryLink; ?>?&filter[profile_id]"
+				<a href="<?php echo $categoryLink; ?>"
 				   class="uk-button uk-button-large uk-width-1-1 uk-text-center">
 					<?php echo Text::_('TPL_NERUDAS_SHOWMORE'); ?>
 				</a>

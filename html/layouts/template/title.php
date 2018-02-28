@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Language\Text;
 
+$displayData = (empty($displayData)) ? array() : $displayData;
 extract($displayData);
 
 
@@ -106,6 +107,10 @@ $margin = (!isset($margin)) ? true : $margin;
 		<?php if (!empty($edit)) : ?>
 			<a href="<?php echo $edit; ?>" class="edit uk-icon-pencil uk-button uk-text-success" data-uk-tooltip
 			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>"></a>
+		<?php endif; ?>
+		<?php if (!empty($settings)) : ?>
+			<a href="<?php echo $settings; ?>" class="edit uk-icon-cog uk-button" data-uk-tooltip
+			   title="<?php echo Text::_('TPL_NERUDAS_SETTINGS'); ?>"></a>
 		<?php endif; ?>
 		<?php if (!empty($cancel)): ?>
 			<a href="<?php echo $cancel; ?>" class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
