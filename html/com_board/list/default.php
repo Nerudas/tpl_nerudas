@@ -82,6 +82,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
 				<div class="uk-flex uk-flex-wrap uk-flex-space-between uk-flex-middle">
 					<div class="">
+						<?php /*
 						<div class="uk-flex-inline uk-margin-right uk-margin-top">
 							<?php $allregions = $this->filterForm->getField('allregions', 'filter'); ?>
 							<label for="<?php echo $allregions->id; ?>">
@@ -89,6 +90,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 								<?php echo Text::_($allregions->label); ?>
 							</label>
 						</div>
+  						*/ ?>
 						<?php if (!Factory::getUser()->guest):
 							$onlymy = $this->filterForm->getField('onlymy', 'filter');
 							?>
@@ -129,8 +131,8 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 				<div class="item uk-panel uk-panel-box uk-margin-bottom">
 					<div class="title uk-flex uk-flex-space-between">
 						<?php
-//						echo LayoutHelper::render('content.author.horizontal',
-//							array('author_id' => $item->created_by, 'author_link' => $item->link));
+						//						echo LayoutHelper::render('content.author.horizontal',
+						//							array('author_id' => $item->created_by, 'author_link' => $item->link));
 						?>
 						<div class="uk-text-right">
 
