@@ -15,6 +15,11 @@ use Joomla\CMS\Language\Text;
 
 ?>
 <div class="board-lastes-module uk-margin-small-top">
+	<div class="uk-margin-bottom uk-text-right">
+		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
+			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+		</a>
+	</div>
 	<?php if ($items) : ?>
 		<div class="items">
 			<?php foreach ($items as $id => $item): ?>

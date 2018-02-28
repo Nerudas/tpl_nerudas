@@ -117,9 +117,15 @@ $margin = (!isset($margin)) ? true : $margin;
 			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"></a>
 		<?php endif; ?>
 		<?php if (!empty($form)): ?>
-			<button class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
-					title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"
-					onclick="Joomla.submitbutton('<?php echo $form; ?>.cancel');"></button>
+			<?php if (empty($cancelLink)): ?>
+				<button class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
+						title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"
+						onclick="Joomla.submitbutton('<?php echo $form; ?>.cancel');"></button>
+			<?php else: ?>
+				<a class="cancel uk-icon-times uk-button uk-text-danger" data-uk-tooltip
+				   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>"
+				   href="<?php echo $cancelLink; ?>"></a>
+			<?php endif; ?>
 			<button class="save uk-icon-check uk-button uk-text-success" data-uk-tooltip
 					title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>"
 					onclick="Joomla.submitbutton('<?php echo $form; ?>.save');"></button>

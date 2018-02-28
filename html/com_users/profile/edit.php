@@ -32,12 +32,13 @@ $doc->addScriptDeclaration('
 		}
 	};
 ');
+$cancelLink = Route::_('index.php?option=com_users&view=profile');
 
 ?>
 
 <form id="profile" action="<?php echo Route::_('index.php?option=com_users'); ?>"
 	  method="post" class="form form-validate uk-form  uk-margin-bottom" enctype="multipart/form-data">
-	<?php echo LayoutHelper::render('template.title', array('form' => 'profile')); ?>
+	<?php echo LayoutHelper::render('template.title', array('form' => 'profile', 'cancelLink' => $cancelLink)); ?>
 	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}">
 		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
 		<li><a href="#tags"><?php echo Text::_('JTAG'); ?></a></li>
@@ -94,10 +95,9 @@ $doc->addScriptDeclaration('
 	<?php echo HTMLHelper::_('form.token'); ?>
 
 	<div class="uk-form-row uk-text-center">
-		<button onclick="Joomla.submitbutton('profile.cancel');"
-				class="uk-button uk-button-danger">
+		<a href="<?php echo $cancelLink; ?>" class="uk-button uk-button-danger">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
-		</button>
+		</a>
 		<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
 		</button>
