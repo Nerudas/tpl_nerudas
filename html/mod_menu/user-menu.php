@@ -17,7 +17,7 @@ $user = Factory::getUser();
 ?>
 
 <?php if ($user->guest): ?>
-	<a href="#login" data-uk-modal="{center:true}">
+	<a href="#mdoalLogin" data-uk-modal="{center:true}">
 		<div class="uk-avatar-30 uk-flex uk-flex-middle uk-flex-center">
 			<i class="uk-icon-sign-in uk-icon-small"></i>
 		</div>

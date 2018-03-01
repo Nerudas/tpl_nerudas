@@ -74,7 +74,7 @@ HTMLHelper::_('behavior.formvalidator');
 				<hr>
 
 				<div class="uk-text-center uk-text-medium uk-link-muted">
-					<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
+					<a href="<?php echo Route::_('index.php?option=com_users&view=registration'); ?>">
 						<?php echo Text::_('COM_USERS_LOGIN_REGISTER'); ?>
 					</a>
 				</div>

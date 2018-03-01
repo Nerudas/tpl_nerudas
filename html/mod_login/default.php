@@ -10,130 +10,80 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
+Use Joomla\CMS\Router\Route;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
+
 JLoader::register('UsersHelperRoute', JPATH_SITE . '/components/com_users/helpers/route.php');
 
-JHtml::_('behavior.keepalive');
-JHtml::_('bootstrap.tooltip');
+Factory::getLanguage()->load('com_users', JPATH_SITE);
+
+$module->title = trim(preg_replace('~\[(.?)*\]~', '', $module->title));
 
 ?>
-<div id="login" class="uk-modal login jlslogin">
-	<div class="uk-modal-dialog">
-		<a class="uk-modal-close uk-close">
-		</a>
-		<h4 class="uk-modal-header">
-		</h4>
-		<form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post"
-			  id="login-form" class="form-inline">
+<div id="mdoalLogin" class="uk-modal login">
+	<div class="uk-modal-dialog uk-padding-remove">
 
-			<div class="userdata">
-				<div id="form-login-username" class="control-group">
-					<div class="controls">
-						<?php if (!$params->get('usetext')) : ?>
-							<div class="input-prepend">
-						<span class="add-on">
-							<span class="icon-user hasTooltip"
-								  title="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?>"></span>
-							<label for="modlgn-username"
-								   class="element-invisible"><?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?></label>
-						</span>
-								<input id="modlgn-username" type="text" name="username" class="input-small" tabindex="0"
-									   size="18" placeholder="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?>"/>
+		<div class="uk-modal-body">
+			<ul class="uk-tab-new uk-margin-bottom-remove"
+				data-uk-switcher="{connect:'#mdoalLoginTabs', swiping: false}">
+				<li class="uk-padding-top ">
+					<a href="#social"><?php echo Text::_('TPL_NERUDAS_LOGIN_SOCIAL'); ?></a></li>
+				<li class="uk-padding-top ">
+					<a href="#password"><?php echo Text::_('TPL_NERUDAS_LOGIN_PASSWORD'); ?></a></li>
+			</ul>
+			<ul id="mdoalLoginTabs" class="uk-switcher">
+				<li data-tab="social" class="uk-padding-large uk-text-center">
+					<?php echo LayoutHelper::render('components.com_profiles.sociallogin', array()); ?>
+				</li>
+				<li data-tab="password" class="uk-padding">
+					<form action="<?php echo Route::_('index.php', true, $params->get('usesecure')); ?>"
+						  method="post" id="modlal-login-form" class="uk-form">
+						<div class="uk-form-row">
+							<div class="uk-form-icon uk-width-1-1">
+								<i class="uk-icon-user uk-form-large"></i>
+								<input type="text" name="username" class="uk-width-1-1 uk-form-large" size="18"
+									   placeholder="<?php echo Text::_('COM_PROFILES_LOGIN_USERNAME_HINT'); ?>"/>
 							</div>
-						<?php else : ?>
-							<label for="modlgn-username"><?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?></label>
-							<input id="modlgn-username" type="text" name="username" class="input-small" tabindex="0"
-								   size="18" placeholder="<?php echo JText::_('MOD_LOGIN_VALUE_USERNAME'); ?>"/>
-						<?php endif; ?>
-					</div>
-				</div>
-				<div id="form-login-password" class="control-group">
-					<div class="controls">
-						<?php if (!$params->get('usetext')) : ?>
-							<div class="input-prepend">
-						<span class="add-on">
-							<span class="icon-lock hasTooltip" title="<?php echo JText::_('JGLOBAL_PASSWORD'); ?>">
-							</span>
-								<label for="modlgn-passwd"
-									   class="element-invisible"><?php echo JText::_('JGLOBAL_PASSWORD'); ?>
-							</label>
-						</span>
-								<input id="modlgn-passwd" type="password" name="password" class="input-small"
-									   tabindex="0" size="18"
-									   placeholder="<?php echo JText::_('JGLOBAL_PASSWORD'); ?>"/>
+						</div>
+						<div class="uk-form-row uk-form-password uk-width-1-1">
+							<div class="uk-form-icon uk-width-1-1">
+								<i class="uk-icon-lock uk-form-large"></i>
+								<input type="password" name="password"
+									   placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>"
+									   class="uk-form-large uk-width-1-1">
 							</div>
-						<?php else : ?>
-							<label for="modlgn-passwd"><?php echo JText::_('JGLOBAL_PASSWORD'); ?></label>
-							<input id="modlgn-passwd" type="password" name="password" class="input-small" tabindex="0"
-								   size="18" placeholder="<?php echo JText::_('JGLOBAL_PASSWORD'); ?>"/>
-						<?php endif; ?>
-					</div>
-				</div>
-				<?php if (count($twofactormethods) > 1) : ?>
-					<div id="form-login-secretkey" class="control-group">
-						<div class="controls">
-							<?php if (!$params->get('usetext')) : ?>
-								<div class="input-prepend input-append">
-						<span class="add-on">
-							<span class="icon-star hasTooltip" title="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>">
-							</span>
-								<label for="modlgn-secretkey"
-									   class="element-invisible"><?php echo JText::_('JGLOBAL_SECRETKEY'); ?>
-							</label>
-						</span>
-									<input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey"
-										   class="input-small" tabindex="0" size="18"
-										   placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>"/>
-									<span class="btn width-auto hasTooltip"
-										  title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
-							<span class="icon-help"></span>
-						</span>
-								</div>
-							<?php else : ?>
-								<label for="modlgn-secretkey"><?php echo JText::_('JGLOBAL_SECRETKEY'); ?></label>
-								<input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey"
-									   class="input-small" tabindex="0" size="18"
-									   placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY'); ?>"/>
-								<span class="btn width-auto hasTooltip"
-									  title="<?php echo JText::_('JGLOBAL_SECRETKEY_HELP'); ?>">
-						<span class="icon-help"></span>
-					</span>
-							<?php endif; ?>
 
 						</div>
-					</div>
-				<?php endif; ?>
-				<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
-					<div id="form-login-remember" class="control-group checkbox">
-						<label for="modlgn-remember"
-							   class="control-label"><?php echo JText::_('MOD_LOGIN_REMEMBER_ME'); ?></label> <input
-								id="modlgn-remember" type="checkbox" name="remember" class="inputbox" value="yes"/>
-					</div>
-				<?php endif; ?>
-				<div id="form-login-submit" class="control-group">
-					<div class="controls">
-						<button type="submit" tabindex="0" name="Submit"
-								class="btn btn-primary login-button"><?php echo JText::_('JLOGIN'); ?></button>
-					</div>
-				</div>
-				<?php
-				$usersConfig = JComponentHelper::getParams('com_users'); ?>
-				<ul class="unstyled">
-					<?php if ($usersConfig->get('allowUserRegistration')) : ?>
-						<li>
-							<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-								<?php echo JText::_('MOD_LOGIN_REGISTER'); ?> <span class="icon-arrow-right"></span></a>
-						</li>
-					<?php endif; ?>
-					<li>
-						<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-							<?php echo JText::_('MOD_LOGIN_FORGOT_YOUR_PASSWORD'); ?></a>
-					</li>
-				</ul>
-				<input type="hidden" name="option" value="com_users"/>
-				<input type="hidden" name="task" value="user.login"/>
-				<input type="hidden" name="return" value="<?php echo $return; ?>"/>
-				<?php echo JHtml::_('form.token'); ?>
-			</div>
-		</form>
+						<div class="uk-form-row">
+							<a href="<?php echo Route::_('index.php?option=com_users&view=reset'); ?>">
+								<?php echo Text::_('COM_USERS_LOGIN_RESET'); ?>
+							</a>
+						</div>
+						<div class="uk-form-row  uk-text-right">
+							<button  name="Submit" type="submit" class="uk-button uk-button-primary">
+								<?php echo Text::_('JLOGIN'); ?>
+							</button>
+						</div>
+						<?php if (ComponentHelper::getParams('com_users')->get('allowUserRegistration')) : ?>
+							<hr>
 
+							<div class="uk-text-center uk-text-medium uk-link-muted">
+								<a href="<?php echo Route::_('index.php?option=com_users&view=registration'); ?>">
+									<?php echo Text::_('COM_USERS_LOGIN_REGISTER'); ?>
+								</a>
+							</div>
+						<?php endif; ?>
+
+						<input type="hidden" name="option" value="com_users"/>
+						<input type="hidden" name="task" value="user.login"/>
+						<input type="hidden" name="return" value="<?php echo $return; ?>"/>
+						<?php echo JHtml::_('form.token'); ?>
+					</form>
+				</li>
+			</ul>
+		</div>
 	</div>
+</div>
