@@ -31,5 +31,5 @@ $attributes['class'] = 'class="' . implode(' ', $classes) . '"';
 
 ?>
 <label <?php echo implode(' ', $attributes); ?>>
-	<?php echo $text; ?><?php if ($required) : ?><sup class="uk-text-danger"> *</sup><?php endif; ?>
+	<?php echo $text; ?>
 </label>
