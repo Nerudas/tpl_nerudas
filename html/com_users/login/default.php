@@ -83,5 +83,5 @@ HTMLHelper::_('behavior.formvalidator');
 	</ul>
 	<?php $return = $this->form->getValue('return', '', $this->params->get('login_redirect_url', $this->params->get('login_redirect_menuitem'))); ?>
 	<input type="hidden" name="return" value="<?php echo base64_encode($return); ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>

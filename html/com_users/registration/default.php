@@ -50,9 +50,7 @@ HTMLHelper::_('behavior.formvalidator');
 		<?php echo $this->form->renderField('password2'); ?>
 		<?php echo $this->form->renderField('captcha'); ?>
 		<div class="uk-form-row">
-			<div class="uk-form-label">
-
-			</div>
+			<div class="uk-form-label"></div>
 			<div class="uk-form-controls">
 				<a class="uk-button uk-button-danger"
 				   href="<?php echo Route::_('index.php?option=com_users&view=login'); ?>">
@@ -62,7 +60,6 @@ HTMLHelper::_('behavior.formvalidator');
 					<?php echo Text::_('JREGISTER'); ?>
 				</button>
 			</div>
-
 		</div>
 	</div>
 	<div class="uk-hidden">
