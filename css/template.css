@@ -54,64 +54,23 @@ html.map {
 
 /* Navigation - Profile */
 #navigation .profile {
-	display: block;
-	position: relative;
-	height: 7rem;
+	background: #f9f9f9;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	margin-bottom: 5px;
 }
-
-#navigation .profile > .bg {
+#navigation .profile > .avatar {
+	width: 48px;
+	height: 48px;
 	position: relative;
-	height: 100%;
-	width: 100%;
-}
-
-#navigation .profile > .bg > .image {
-	display: block;
-	width: 100%;
-	height: 100%;
 	background: no-repeat 50% 50%;
 	background-size: cover;
-	filter: blur(1px);
-	-webkit-filter: blur(1px);
-	-moz-filter: blur(1px);
-	-o-filter: blur(1px);
-	-ms-filter: blur(1px);
+	box-sizing: border-box;
+	margin-right: 7px;
 }
-
-#navigation .profile > .bg > .mask {
-	display: block;
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0, 0, 0, 0.5);
-}
-
-#navigation .profile > .user {
-	display: block;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	padding: 0.588rem 0.588rem;
-}
-
-#navigation .profile > .user > .image {
-	float: left;
-	margin-right: 1rem;
-}
-
-#navigation .profile > .user a {
-	display: block;
-	max-width: 100%;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	color: #fff
+#navigation .profile > .info .job {
+	color: #999 !important;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 /* Header
