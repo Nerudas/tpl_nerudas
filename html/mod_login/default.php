@@ -20,7 +20,7 @@ JLoader::register('UsersHelperRoute', JPATH_SITE . '/components/com_users/helper
 
 Factory::getLanguage()->load('com_users', JPATH_SITE);
 
-$module->title = trim(preg_replace('~\[(.?)*\]~', '', $module->title));
+
 
 ?>
 <div id="mdoalLogin" class="uk-modal login">
