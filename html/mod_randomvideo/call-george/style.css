@@ -62,9 +62,9 @@
 }
 
 .call-george-module .on_play video {
-	display: 0;
-	width: 254px !important;
-	height: 369px !important;
+	display: block;
+	width: 254px;
+	height: 369px;
 	margin: 0;
 	padding: 0;
 	object-fit: fill;
