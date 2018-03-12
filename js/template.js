@@ -85,6 +85,15 @@
 				$(items).height(max);
 			});
 		});
+		$('[data-save-tabs]').each(function () {
+			var storage = localStorage.getItem('tab-href');
+			if (storage) {
+				$(this).find('a[href="' + storage + '"]').closest('li').addClass('uk-active');
+			}
+			$(this).find('a').on('click', function () {
+				localStorage.setItem('tab-href', $(this).attr('href'));
+			});
+		});
 	});
 
 	function newMapHeight() {
