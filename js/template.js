@@ -86,12 +86,13 @@
 			});
 		});
 		$('[data-save-tabs]').each(function () {
-			var storage = localStorage.getItem('tab-href');
+			var key = window.location.href + '#' + $(this).data('save-tabs'),
+				storage = sessionStorage.getItem(key);
 			if (storage) {
 				$(this).find('a[href="' + storage + '"]').closest('li').addClass('uk-active');
 			}
 			$(this).find('a').on('click', function () {
-				localStorage.setItem('tab-href', $(this).attr('href'));
+				sessionStorage.setItem(key, $(this).attr('href'));
 			});
 		});
 	});

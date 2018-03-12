@@ -40,7 +40,7 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 	  method="post" class="form form-validate uk-form  uk-margin-bottom" enctype="multipart/form-data">
 	<?php echo LayoutHelper::render('template.title', array('form' => 'profile', 'cancelLink' => $cancelLink)); ?>
 	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}"
-		data-save-tabs="">
+		data-save-tabs="profileTabs">
 		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
 		<li><a href="#tags"><?php echo Text::_('JTAG'); ?></a></li>
 		<li><a href="#images"><?php echo Text::_('COM_PROFILES_PROFILE_AVATAR'); ?></a></li>
