@@ -1,0 +1,96 @@
+/*
+ * @package    Nerudas Template
+ * @version    4.9.6
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+.call-george-module .phone {
+	display: inline-block;
+	position: relative;
+	width: 300px;
+	height: 552px;
+	background: url('/templates/nerudas/html/mod_randomvideo/call-george/phone.png');
+}
+
+.call-george-module .phone > .display {
+	position: absolute;
+	top: 92px;
+	left: 25px;
+}
+
+.call-george-module .phone > .display > .inner {
+	display: none;
+	position: relative;
+	width: 254px;
+	height: 369px;
+}
+
+.call-george-module .page_ready {
+	background: url('/templates/nerudas/html/mod_randomvideo/call-george/page_ready.png');
+}
+
+.call-george-module .page_ready .get_video {
+	display: block;
+	width: 155px;
+	height: 31px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 53px;
+	left: 52px;
+}
+
+.call-george-module .before_play {
+	background: url('/templates/nerudas/html/mod_randomvideo/call-george/before_play.png');
+}
+
+.call-george-module .before_play .stop_load {
+	display: block;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 39px;
+	left: 101px;
+	border-radius: 50%;
+}
+
+.call-george-module .on_play {
+	background: url('/templates/nerudas/html/mod_randomvideo/call-george/on_play.png');
+}
+
+.call-george-module .on_play video {
+	display: 0;
+	width: 254px !important;
+	height: 369px !important;
+	margin: 0;
+	padding: 0;
+	object-fit: fill;
+}
+
+.call-george-module .on_play .stop_video {
+	display: block;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 39px;
+	left: 101px;
+	border-radius: 50%;
+}
+
+.call-george-module .after_play {
+	background: url('/templates/nerudas/html/mod_randomvideo/call-george/after_play.png');
+}
+
+.call-george-module .after_play .get_video {
+	display: block;
+	width: 155px;
+	height: 31px;
+	cursor: pointer;
+	position: absolute;
+	bottom: 53px;
+	left: 52px;
+}
