@@ -13,23 +13,25 @@
 	width: 300px;
 	height: 552px;
 	background: url('/templates/nerudas/html/mod_randomvideo/call-george/phone.png');
+	background-size: 100%;
 }
 
 .call-george-module .phone > .display {
 	position: absolute;
 	top: 92px;
-	left: 25px;
+	left: 24px;
 }
 
 .call-george-module .phone > .display > .inner {
 	display: none;
 	position: relative;
-	width: 254px;
+	width: 255px;
 	height: 369px;
 }
 
 .call-george-module .page_ready {
 	background: url('/templates/nerudas/html/mod_randomvideo/call-george/page_ready.png');
+	background-size: 100%;
 }
 
 .call-george-module .page_ready .get_video {
@@ -44,6 +46,7 @@
 
 .call-george-module .before_play {
 	background: url('/templates/nerudas/html/mod_randomvideo/call-george/before_play.png');
+	background-size: 100%;
 }
 
 .call-george-module .before_play .stop_load {
@@ -59,12 +62,13 @@
 
 .call-george-module .on_play {
 	background: url('/templates/nerudas/html/mod_randomvideo/call-george/on_play.png');
+	background-size: 100%;
 }
 
 .call-george-module .on_play video {
 	display: block;
-	width: 254px;
-	height: 369px;
+	width: 100%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	object-fit: fill;
@@ -83,6 +87,7 @@
 
 .call-george-module .after_play {
 	background: url('/templates/nerudas/html/mod_randomvideo/call-george/after_play.png');
+	background-size: 100%;
 }
 
 .call-george-module .after_play .get_video {
