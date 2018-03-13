@@ -23,7 +23,8 @@ HTMLHelper::_('behavior.formvalidator');
 <form action="<?php echo Route::_('index.php?option=com_users&task=registration.register'); ?>" method="post"
 	  class="form-validate uk-form uk-form-horizontal">
 	<?php echo LayoutHelper::render('template.title', array()); ?>
-	<ul id="#registation_as" class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#registationTabs', swiping: false}">
+	<ul id="#registation_as" class="uk-tab-new uk-margin-bottom-remove"
+		data-uk-switcher="{connect:'#registationTabs', swiping: false}" data-save-tabs="registationTabs">
 		<li>
 			<a href="#user" onclick="document.getElementById('jform_register_as0').click();">
 				<?php echo Text::_('COM_PROFILES_REGISTRATION_AS_USER'); ?>

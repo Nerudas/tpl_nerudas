@@ -36,7 +36,8 @@ HTMLHelper::_('behavior.formvalidator');
 <form action="<?php echo Route::_('index.php?option=com_users&task=user.login'); ?>" method="post"
 	  class="form-validate uk-form uk-form-horizontal">
 	<?php echo LayoutHelper::render('template.title', array()); ?>
-	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#loginTabs', swiping: false}">
+	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#loginTabs', swiping: false}"
+		data-save-tabs="loginTabs">
 		<li><a href="#social"><?php echo Text::_('TPL_NERUDAS_LOGIN_SOCIAL'); ?></a></li>
 		<li><a href="#password"><?php echo Text::_('TPL_NERUDAS_LOGIN_PASSWORD'); ?></a></li>
 	</ul>
