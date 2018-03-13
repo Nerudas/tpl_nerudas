@@ -80,35 +80,36 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 	</div>
 
 	<?php if ($this->items) : ?>
-	<div class="items">
-		<?php
-		$count = count($this->items);
-		$half  = round($count / 2);
-		$i     = 1;
-		foreach ($this->items as $id => $item): ?>
-			<?php if ($i == $half): ?>
+		<div class="items">
+			<?php
+			$count = count($this->items);
+			$half  = round($count / 2);
+			$i     = 1;
+			foreach ($this->items as $id => $item): ?>
+				<?php if ($i == $half): ?>
 
-			<?php endif; ?>
-			<div class="item uk-margin-large-bottom ">
-				<div class="avatar <?php echo ($item->online) ? ' online' : '' ?>">
-					<a href="<?php echo $item->link; ?>" class="image"
-					   style="background-image: url('<?php echo $item->avatar; ?>')">
-					</a>
+				<?php endif; ?>
+				<div class="item uk-margin-large-bottom ">
+					<div class="avatar <?php echo ($item->online) ? ' online' : '' ?>">
+						<a href="<?php echo $item->link; ?>" class="image"
+						   style="background-image: url('<?php echo $item->avatar; ?>')">
+						</a>
+					</div>
+					<div class="content">
+						<h2 class="uk-text-large">
+							<a href="<?php echo $item->link; ?>" class="uk-link-muted uk-display-block">
+								<?php echo $item->name; ?></a>
+						</h2>
+						<blockquote>
+							<?php echo $item->status; ?>
+						</blockquote>
+					</div>
 				</div>
-				<div class="content">
-					<h2 class="uk-text-large">
-						<a href="<?php echo $item->link; ?>" class="uk-link-muted uk-display-block">
-							<?php echo $item->name; ?></a>
-					</h2>
-					<blockquote>
-						<?php echo $item->status; ?>
-					</blockquote>
-				</div>
-			</div>
-		<?php endforeach; ?>
+			<?php endforeach; ?>
+		</div>
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
-		<?php endif; ?>
-	</div>
+	<?php endif; ?>
+
 </div>
