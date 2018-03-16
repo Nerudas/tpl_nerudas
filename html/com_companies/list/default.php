@@ -89,7 +89,65 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 				<?php if ($i == $half): ?>
 
 				<?php endif; ?>
-				<?php echo '<pre>', print_r($item, true), '</pre>'; ?>
+				<div class="item uk-margin-bottom uk-panel uk-panel-box">
+					<div class="uk-grid uk-grid-small">
+						<div class="uk-width-small-3-4">
+							<div>
+								<h2 class="uk-h3 uk-margin-small-bottom">
+									<a class="uk-display-block uk-link-muted" href="<?php echo $item->link; ?>">
+										<?php echo $item->title; ?>
+										<?php if ($item->logo): ?>
+											<img class="logo" src="<?php echo $item->logo; ?>"
+												 alt="<?php echo $item->title; ?>">
+										<?php endif; ?>
+									</a>
+								</h2>
+							</div>
+
+							<div class="uk-text-muted">
+								<?php echo HTMLHelper::_('string.truncate', (strip_tags($item->about)), 100); ?>
+							</div>
+
+						</div>
+						<div class="uk-width-small-1-4">
+							<div class="uk-text-right">
+								<div class="uk-text-nowrap">
+									<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
+										  data-uk-tooltip
+										  datetime="<?php echo HTMLHelper::date($item->created, 'c'); ?>"
+										  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
+								</div>
+								<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
+									<a href="<?php echo $item->link; ?>"
+									   class="uk-badge uk-badge-white uk-margin-small-left">
+										<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+									</a>
+									<a href="<?php echo $item->link; ?>#comments"
+									   class="uk-badge uk-badge-white uk-margin-small-left">
+										<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+									</a>
+									<div class="region uk-margin-top uk-text-small">
+										<?php
+										echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
+											array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php if (!empty($item->tags->itemTags)): ?>
+						<div class="uk-margin-small-top tags">
+							<?php if ($item->tags): ?>
+								<?php foreach ($item->tags->itemTags as $tag): ?>
+									<span class="uk-tag">
+											<?php echo $tag->title; ?>
+										</span>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+
 			<?php endforeach; ?>
 		</div>
 		<div>
