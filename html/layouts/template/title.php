@@ -28,7 +28,6 @@ extract($displayData);
 
 $app     = Factory::getApplication();
 $pathway = $app->getPathway();
-echo '<pre>', print_r($pathway, true), '</pre>';
 $items   = $pathway->getPathWay();
 $menu    = $app->getMenu();
 
@@ -41,7 +40,6 @@ $count = count($items);
 $i     = 1;
 
 $revers  = array_reverse($items);
-echo '<pre>', print_r($revers, true), '</pre>';
 $current = $revers[0];
 unset($revers[0]);
 
