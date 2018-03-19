@@ -23,8 +23,10 @@ use Joomla\CMS\Language\Text;
 	<div class="header uk-margin-bottom">
 		<div class="bg uk-cover-background uk-flex uk-flex-middle uk-flex-center"
 			 style="background-image: url('<?php echo $this->item->header; ?>');">
-			<img class="logo" src="<?php echo $this->item->logo; ?>"
-				 alt="<?php echo $this->item->title; ?>">
+			<?php if (!empty($this->item->logo)): ?>
+				<img class="logo" src="<?php echo $this->item->logo; ?>"
+					 alt="<?php echo $this->item->title; ?>">
+			<?php endif; ?>
 		</div>
 		<div class="info uk-flex uk-flex-middle uk-padding-small">
 			<div class="content uk-grid uk-grid-small uk-width-1-1" data-uk-grid-match>
@@ -124,7 +126,7 @@ use Joomla\CMS\Language\Text;
 						</dd>
 					<?php endif; ?>
 					<?php if (!empty($this->item->contacts->get('site', ''))) : ?>
-						<dt><?php echo Text::_('COM_COMOANIES_COMPANY_SITE'); ?></dt>
+						<dt><?php echo Text::_('COM_COMPANIES_COMPANY_SITE'); ?></dt>
 						<dd class="uk-margin-bottom">
 							<a class="uk-margin-small-bottom" href="<?php echo $this->item->contacts->get('site'); ?>"
 							   target="_blank">
@@ -241,9 +243,11 @@ use Joomla\CMS\Language\Text;
 									<a class="uk-link-muted"
 									   href="<?php echo $employee->link; ?>"><?php echo $employee->name; ?></a>
 								</div>
-								<div class="position uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
-									<?php echo $employee->position; ?>
-								</div>
+								<?php if (!empty($employee->position)): ?>
+									<div class="position uk-text-small uk-text-ellipsis">
+										<i>(<?php echo $employee->position; ?>)</i>
+									</div>
+								<?php endif; ?>
 							</div>
 						</div>
 					<?php endforeach; ?>
