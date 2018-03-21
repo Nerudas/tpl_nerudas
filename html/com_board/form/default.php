@@ -74,7 +74,7 @@ $doc->addScriptDeclaration('
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
 
 	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
-		<?php echo LayoutHelper::render('components.com_board.formcategories', $this); ?>
+		<?php echo LayoutHelper::render('components.com_board.form.categories', $this); ?>
 		<?php echo $this->form->renderField('title'); ?>
 		<?php echo $this->form->renderField('for_when'); ?>
 		<?php
