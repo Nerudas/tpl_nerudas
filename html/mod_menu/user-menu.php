@@ -26,7 +26,7 @@ $user = Factory::getUser();
 	jimport('joomla.filesystem.folder');
 	$folder = 'images/profiles/' . $user->id;
 	$files  = JFolder::files(JPATH_ROOT . '/' . $folder, 'avatar', false);
-	$avatar = (!empty($files[0])) ? $folder . '/' . $files[0] : 'media/com_profiles/images/noavatar.jpg';
+	$avatar = (!empty($files[0])) ? $folder . '/' . $files[0] : 'media/com_profiles/images/no-avatar.jpg';
 	$avatar = Uri::root(true) . '/' . $avatar;
 	?>
 	<a>

@@ -38,7 +38,7 @@ $myBoardModule         = ModuleHelper::renderModule($myBoardModule);
 
 $this->data->contacts = new Registry($this->data->contacts);
 
-$this->data->avatar = (!empty($this->data->avatar))? $this->data->avatar : 'media/com_profiles/images/noavatar.jpg'
+$this->data->avatar = (!empty($this->data->avatar))? $this->data->avatar : 'media/com_profiles/images/no-avatar.jpg'
 ?>
 <div id="office" class="home">
 	<div class="uk-grid" data-uk-grid-match="" data-uk-grid-margin="">
