@@ -32,5 +32,5 @@ $value = (!empty($value)) ? $value : '';
 		<span class="add-on status error uk-button uk-flex-inline uk-flex-middle">
 			<i class="uk-icon-close uk-text-danger"></i></span>
 	</div>
-	<div class="error description status  uk-alert uk-alert-danger  uk-form-help-block">AAA</div>
+	<div class="error description status  uk-alert uk-alert-danger uk-form-help-block"></div>
 </div>
