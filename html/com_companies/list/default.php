@@ -24,7 +24,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 
 ?>
 <div id="companies" class="itemlist">
-	<?php echo LayoutHelper::render('template.title', array()); ?>
+	<?php echo LayoutHelper::render('template.title', array('add' => $this->addLink)); ?>
 	<div class="uk-panel uk-panel-box uk-margin-bottom uk-panel-box-secondary">
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 			  class="uk-form filter">
