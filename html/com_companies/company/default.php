@@ -66,6 +66,9 @@ use Joomla\CMS\Language\Text;
 		<?php if ($this->item->requisites) : ?>
 			<li><a href="#requisites"><?php echo Text::_('COM_COMPANIES_COMPANY_REQUISITES'); ?></a></li>
 		<?php endif; ?>
+		<?php if ($this->item->portfolio) : ?>
+			<li><a href="#portfolio"><?php echo Text::_('COM_COMPANIES_COMPANY_portfolio'); ?></a></li>
+		<?php endif; ?>
 		<?php if (!empty($this->employees)) : ?>
 			<li><a href="#employees"><?php echo Text::_('COM_COMPANIES_EMPLOYEES'); ?></a></li>
 		<?php endif; ?>
@@ -226,6 +229,26 @@ use Joomla\CMS\Language\Text;
 					<?php endif; ?>
 				</dl>
 			</li>
+		<?php endif; ?>
+		<?php if ($this->item->portfolio) : ?>
+			<li data-tab="portfolio" class="uk-panel uk-panel-box">
+				<div class="portfolio uk-grid uk-grid-small image" data-uk-grid-match data-uk-grid-margin>
+					<?php $count = count($this->item->portfolio);
+					foreach ($this->item->portfolio as $image): ?>
+						<div class="uk-width-small-1-<?php echo ($count > 1) ? 3 : 1; ?> uk-flex uk-flex-center uk-flex-top">
+							<a class="uk-position-relative uk-display-inline-block" href="/<?php echo $image['src']; ?>"
+							   data-uk-lightbox="{group:'company_<?php echo $this->item->id; ?>'}"
+							   title="<?php echo $image['text']; ?>">
+								<?php echo HTMLHelper::image($image['src'], '', 'class="uk-thumbnail"'); ?>
+								<div class="uk-text-center uk-text-muted uk-margin-small-top uk-margin-small-bottom">
+									<?php echo $image['text']; ?>
+								</div>
+							</a>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</li>
+
 		<?php endif; ?>
 		<?php if (!empty($this->employees)) : ?>
 			<li data-tab="employees" class="uk-panel uk-panel-box">
