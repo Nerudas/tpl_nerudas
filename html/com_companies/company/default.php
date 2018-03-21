@@ -67,7 +67,7 @@ use Joomla\CMS\Language\Text;
 			<li><a href="#requisites"><?php echo Text::_('COM_COMPANIES_COMPANY_REQUISITES'); ?></a></li>
 		<?php endif; ?>
 		<?php if ($this->item->portfolio) : ?>
-			<li><a href="#portfolio"><?php echo Text::_('COM_COMPANIES_COMPANY_portfolio'); ?></a></li>
+			<li><a href="#portfolio"><?php echo Text::_('COM_COMPANIES_COMPANY_PORTFOLIO'); ?></a></li>
 		<?php endif; ?>
 		<?php if (!empty($this->employees)) : ?>
 			<li><a href="#employees"><?php echo Text::_('COM_COMPANIES_EMPLOYEES'); ?></a></li>

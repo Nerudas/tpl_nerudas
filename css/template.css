@@ -140,8 +140,23 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	box-sizing: border-box;
 }
 
-#companies.item .employees > .item {
+#companies.form #jform_header {
+	width: 100%;
+}
 
+#companies.form #jform_header .form {
+	width: 100%;
+	max-height: 300px;
+	padding: 0;
+	overflow: hidden;
+	position: static;
+	margin-bottom: 52px;
+}
+
+#companies.form #jform_header .form label a {
+	right: 0;
+	left: 0;
+	bottom: -43px;
 }
 
 /* Profiles
@@ -1449,6 +1464,12 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 .uk-form [data-input-ajaximage="multiple"] .result .item .image img {
 	max-width: 100%;
 	max-height: 100%;
+}
+
+.uk-form [data-input-ajaximage="multiple"] .result .item textarea {
+	max-width: 100%;
+	min-width: 100%;
+	width: 100%;
 }
 
 .uk-form [data-input-ajaximage="multiple"] .result .item .actions {
@@ -3093,7 +3114,7 @@ svg[data-name="Nerudas"] .dots .background {
 .uk-tab-new {
 	display: flex;
 	flex-wrap: wrap;
-	margin-left: -20px;
+	margin-left: -12px;
 	padding: 0;
 	list-style: none;
 	position: relative;
@@ -3117,7 +3138,7 @@ svg[data-name="Nerudas"] .dots .background {
 .uk-tab-new > * > a {
 	display: block;
 	text-align: center;
-	padding: 5px 10px;
+	padding: 5px 9px;
 	color: #999;
 	border-bottom: 1px solid transparent;
 	font-size: 0.875rem;

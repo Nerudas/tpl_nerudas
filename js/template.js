@@ -84,7 +84,7 @@
 				});
 				$(items).height(max);
 			});
-		});
+		}, 3);
 		$('[data-save-tabs]').each(function () {
 			var key = window.location.href + '#' + $(this).data('save-tabs'),
 				storage = sessionStorage.getItem(key);
