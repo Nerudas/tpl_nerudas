@@ -39,7 +39,7 @@ HTMLHelper::_('script', 'media/com_companies/js/form-employees.min.js', array('v
 									   placeholder="<?php echo Text::_('COM_COMPANIES_EMPLOYEES_POSITION'); ?>"
 									   class="uk-width-1-1" <?php echo ($employee->confirm !== 'confirm') ? ' readonly' : ''; ?>>
 							</div>
-							<div class="as_company">
+							<div class="as_company uk-hidden">
 								<label for="<?php echo $id; ?>_<?php echo $employee->id; ?>_as_company"
 									   class="checkbox">
 									<input type="checkbox"
