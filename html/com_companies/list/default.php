@@ -95,10 +95,10 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							<div>
 								<h2 class="uk-h3 uk-margin-small-bottom">
 									<a class="uk-display-block uk-link-muted" href="<?php echo $item->link; ?>">
-										<?php echo $item->title; ?>
+										<?php echo $item->name; ?>
 										<?php if ($item->logo): ?>
 											<img class="logo" src="<?php echo $item->logo; ?>"
-												 alt="<?php echo $item->title; ?>">
+												 alt="<?php echo $item->name; ?>">
 										<?php endif; ?>
 									</a>
 								</h2>

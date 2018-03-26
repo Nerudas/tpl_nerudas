@@ -53,7 +53,7 @@ $doc->addScriptDeclaration('
 
 	<ul id="companyTabs" class="uk-switcher" data-uk-switcher-tabs="">
 		<li data-tab="about" class="uk-panel uk-panel-box uk-form-horizontal ">
-			<?php echo $this->form->renderField('title'); ?>
+			<?php echo $this->form->renderField('name'); ?>
 			<?php echo $this->form->renderField('alias'); ?>
 			<div class="uk-form-row">
 				<div class="uk-text-large"><?php echo Text::_('COM_COMPANIES_COMPANY_ABOUT'); ?></div>

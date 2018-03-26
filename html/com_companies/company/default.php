@@ -25,13 +25,13 @@ use Joomla\CMS\Language\Text;
 			 style="background-image: url('<?php echo $this->item->header; ?>');">
 			<?php if (!empty($this->item->logo)): ?>
 				<img class="logo" src="<?php echo $this->item->logo; ?>"
-					 alt="<?php echo $this->item->title; ?>">
+					 alt="<?php echo $this->item->name; ?>">
 			<?php endif; ?>
 		</div>
 		<div class="info uk-flex uk-flex-middle uk-padding-small">
 			<div class="content uk-grid uk-grid-small uk-width-1-1" data-uk-grid-match>
 				<div class="uk-width-1-2 uk-width-medium-3-4 uk-text-large uk-text-uppercase-letter uk-flex uk-flex-middle">
-					<div class="uk-padding-left"><?php echo $this->item->title; ?></div>
+					<div class="uk-padding-left"><?php echo $this->item->name; ?></div>
 				</div>
 				<div class="uk-width-1-2 uk-width-medium-1-4 uk-flex uk-flex-middle uk-flex-right">
 					<div class="uk-width-1-1 uk-text-right">
