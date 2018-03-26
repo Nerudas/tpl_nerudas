@@ -49,6 +49,12 @@ HTMLHelper::_('behavior.formvalidator');
 		<?php echo $this->form->renderField('email'); ?>
 		<?php echo $this->form->renderField('password1'); ?>
 		<?php echo $this->form->renderField('password2'); ?>
+		<div class="uk-form-row">
+			<div class="uk-form-label"></div>
+			<div class="uk-form-controls">
+				<?php echo $this->form->getInput('personaldata'); ?>
+			</div>
+		</div>
 		<?php echo $this->form->renderField('captcha'); ?>
 		<div class="uk-form-row">
 			<div class="uk-form-label"></div>
