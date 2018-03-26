@@ -46,7 +46,9 @@ $doc->addScriptDeclaration('
 		<li><a href="#requisites"><?php echo Text::_('COM_COMPANIES_COMPANY_REQUISITES'); ?></a></li>
 		<li><a href="#tags"><?php echo Text::_('COM_COMPANIES_COMPANY_TAGS'); ?></a></li>
 		<li><a href="#portfolio"><?php echo Text::_('COM_COMPANIES_COMPANY_PORTFOLIO'); ?></a></li>
-		<li><a href="#employees"><?php echo Text::_('COM_COMPANIES_EMPLOYEES'); ?></a></li>
+		<?php if (!empty($this->item->id)): ?>
+			<li><a href="#employees"><?php echo Text::_('COM_COMPANIES_EMPLOYEES'); ?></a></li>
+		<?php endif; ?>
 	</ul>
 
 	<ul id="companyTabs" class="uk-switcher" data-uk-switcher-tabs="">
@@ -73,8 +75,11 @@ $doc->addScriptDeclaration('
 		<li data-tab="portfolio" class="uk-panel uk-panel-box">
 			<?php echo $this->form->getInput('portfolio'); ?>
 		</li>
-		<li data-tab="employees" class="uk-panel uk-panel-box">
-		</li>
+		<?php if (!empty($this->item->id)): ?>
+			<li data-tab="employees" class="uk-padding-small-top">
+				<?php echo $this->form->getInput('employees'); ?>
+			</li>
+		<?php endif; ?>
 	</ul>
 
 	<?php echo $this->form->renderFieldSet('hidden'); ?>
