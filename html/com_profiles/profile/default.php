@@ -60,9 +60,15 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 						<div class="uk-text-large">
 							<?php echo $this->item->name; ?>
 						</div>
-						<div class="job">
+						<?php if ($this->item->job) : ?>
+							<div class="job">
+								<a href="<?php echo $this->item->job_link; ?>"><?php echo $this->item->job_name; ?></a>
+								<?php if (!empty($this->item->position)): ?>
+									<i class="uk-margin-left uk-text-muted">(<?php echo $this->item->position; ?>)</i>
+								<?php endif; ?>
+							</div>
 
-						</div>
+						<?php endif; ?>
 					</div>
 					<div class="uk-width-1-2 uk-width-medium-1-4 uk-text-right">
 						<div class="uk-text-nowrap">
@@ -201,7 +207,6 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 				</dl>
 			</li>
 		<?php endif; ?>
-
 
 
 		<li data-tab="board" class="uk-panel uk-panel-box">
