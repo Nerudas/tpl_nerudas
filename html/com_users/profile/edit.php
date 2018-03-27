@@ -87,6 +87,18 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 			<?php echo $this->form->getInput('jobs'); ?>
 			<?php echo $this->form->renderField('company_name', 'job'); ?>
 			<?php echo $this->form->renderField('position', 'job'); ?>
+			<div class="uk-hidden">
+				<?php echo $this->form->renderField('as_company', 'job'); ?>
+			</div>
+			<?php if (empty($this->data->jobs)): ?>
+				<div class="uk-margin-top uk-text-right">
+
+					<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
+						<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
+					</button>
+
+				</div>
+			<?php endif; ?>
 		</li>
 		<li data-tab="site_access" class="uk-panel uk-panel-box uk-form-horizontal">
 			<?php echo $this->form->renderFieldset('site_access'); ?>

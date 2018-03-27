@@ -25,9 +25,11 @@ $link = ($profile->get('guest')) ? 'href="#mdoalLogin" data-uk-modal="{center:tr
 			<div class="">
 				<?php echo $profile->get('name'); ?>
 			</div>
-			<div class="job uk-text-small">
-				Nerudas
-			</div>
+			<?php if ($profile->get('job')): ?>
+				<div class="job uk-text-small">
+					<?php echo $profile->get('job_name'); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</a>
 </div>
