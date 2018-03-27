@@ -16,14 +16,21 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Registry\Registry;
+use Joomla\CMS\HTML\HTMLHelper;
 
 if (Factory::getUser()->id != $this->data->id)
 {
 	Factory::getApplication()->redirect(Route::_('index.php?option=com_users&view=profile'));
 }
+
+HTMLHelper::_('jquery.framework');
+
 JLoader::register('ProfilesHelperRoute', JPATH_SITE . '/components/com_profiles/helpers/route.php');
 $profileLink = Route::_(ProfilesHelperRoute::getProfileRoute($this->data->id));
 $editLink    = Route::_('index.php?option=com_users&task=profile.edit&user_id=' . $this->data->id);
+
+JLoader::register('CompaniesHelperRoute', JPATH_SITE . '/components/com_companies/helpers/route.php');
+$companyAddLink = Route::_(CompaniesHelperRoute::getFormRoute());
 
 $myBoardModule           = ModuleHelper::getModule('mod_board_latest', Text::_('MOD_BOARD_LATEST_ITEMS'));
 $myBoardModule->position = '';
@@ -38,7 +45,7 @@ $myBoardModule         = ModuleHelper::renderModule($myBoardModule);
 
 $this->data->contacts = new Registry($this->data->contacts);
 
-$this->data->avatar = (!empty($this->data->avatar))? $this->data->avatar : 'media/com_profiles/images/no-avatar.jpg'
+$this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'media/com_profiles/images/no-avatar.jpg'
 ?>
 <div id="office" class="home">
 	<div class="uk-grid" data-uk-grid-match="" data-uk-grid-margin="">
@@ -46,12 +53,11 @@ $this->data->avatar = (!empty($this->data->avatar))? $this->data->avatar : 'medi
 			<?php echo LayoutHelper::render('template.title', array('settings' => $editLink)); ?>
 		</div>
 		<div class="uk-width-medium-1-4 uk-flex uk-flex-middle">
-			<a   class="uk-button uk-button-large  uk-width-1-1 uk-margin-bottom">
-			0 <i class="uk-icon-rub"></i></a>
+			<a class="uk-button uk-button-large  uk-width-1-1 uk-margin-bottom">
+				0 <i class="uk-icon-rub"></i></a>
 		</div>
 	</div>
 	<div class="uk-margin-bottom">
-
 		<div class="profile uk-width-1-1">
 			<div class="avatar">
 				<a href="<?php echo $profileLink; ?>" class="image"
@@ -81,6 +87,7 @@ $this->data->avatar = (!empty($this->data->avatar))? $this->data->avatar : 'medi
 		<div class="uk-width-medium-1-2">
 			<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#leftTabs', swiping: false}">
 				<li><a href="#profile"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROFILE'); ?></a></li>
+				<li><a href="#company"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY'); ?></a></li>
 				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD_ITEMS'); ?></a></li>
 			</ul>
 			<ul id="leftTabs" class="uk-switcher" data-uk-switcher-tabs="">
@@ -163,6 +170,79 @@ $this->data->avatar = (!empty($this->data->avatar))? $this->data->avatar : 'medi
 							<?php echo Text::_('COM_PROFILES_PROFILE_CHANGE_PASSWORD'); ?>
 						</a>
 					</div>
+				</li>
+				<li data-tab="company" class="uk-panel uk-panel-box">
+					<?php if (empty($this->data->jobs)): ?>
+						<div class="uk-margin-bottom uk-text-right">
+							<a href="<?php echo $companyAddLink; ?>" class="uk-button uk-button uk-button-success">
+								<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+							</a>
+						</div>
+					<?php else: ?>
+						<div id="<?php echo $jobs_id; ?>" data-input-jobs="<?php echo $jobs_id; ?>" class="jobs">
+							<?php foreach ($this->data->jobs as $company):
+								$seeLink = Route::_(CompaniesHelperRoute::getCompanyRoute($company->id));
+								$editLink = ($company->confirm != 'confirm') ? false
+									: Route::_(CompaniesHelperRoute::getFormRoute($company->id));
+								$deleteLink = Route::_(CompaniesHelperRoute::getEmployeesDeleteRoute($company->id, $this->data->id));
+								$confirmLink = Route::_(CompaniesHelperRoute::getEmployeesConfirmRoute($company->id, $this->data->id));
+								?>
+
+								<div class="item uk-margin-large-bottom" data->
+									<div class="uk-h3 uk-margin-small-bottom">
+										<a class="uk-display-block uk-link-muted" href="<?php echo $seeLink; ?>">
+											<?php echo $company->name; ?>
+											<?php if ($company->logo): ?>
+												<img class="logo" src="<?php echo $company->logo; ?>"
+													 alt="<?php echo $company->name; ?>">
+											<?php endif; ?>
+										</a>
+									</div>
+									<div class="position">
+										<?php if (!empty($company->position)): ?>
+											<i>(<?php echo $company->position; ?>)</i>
+										<?php endif; ?>
+									</div>
+									<?php if ($company->confirm !== 'confirm'): ?>
+										<div class="confirm uk-margin-top">
+											<?php if ($company->confirm == 'user'): ?>
+												<div class="uk-text-warning uk-text-small">
+													<?php echo Text::_('COM_PROFILES_PROFILE_JOBS_CONFIRM_NEED_USER'); ?>
+												</div>
+											<?php elseif ($company->confirm == 'company'): ?>
+												<div class="uk-text-warning uk-text-small">
+													<?php echo Text::_('COM_PROFILES_PROFILE_JOBS_CONFIRM_NEED_COMPANY'); ?>
+												</div>
+											<?php elseif ($company->confirm == 'error'): ?>
+												<div class="uk-text-danger uk-text-small">
+													<?php echo Text::_('COM_COMPANIES_ERROR_EMPLOYEES_KEY'); ?>
+												</div>
+											<?php endif; ?>
+										</div>
+									<?php endif; ?>
+									<div class="actions uk-margin-top">
+										<a href="<?php echo $deleteLink; ?>"
+										   class="delete uk-button uk-button-small uk-button-danger"
+										   title="<?php echo Text::sprintf('COM_PROFILES_PROFILE_JOBS_DELETE_LABEL', $company->name); ?>">
+											<?php echo Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY_DELETE'); ?>
+										</a>
+										<?php if ($company->confirm == 'user'): ?>
+											<a href="<?php echo $confirmLink; ?>"
+											   class="confirm uk-button uk-button-small uk-button-success">
+												<?php echo Text::_('COM_PROFILES_PROFILE_JOBS_CONFIRM_SUBMIT'); ?>
+											</a>
+										<?php endif; ?>
+										<?php if ($company->confirm == 'confirm'): ?>
+											<a href="<?php echo $editLink; ?>"
+											   class="uk-button uk-button-small  uk-button-primary">
+												<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 				</li>
 				<li data-tab="board" class="">
 					<?php echo $myBoardModule; ?>

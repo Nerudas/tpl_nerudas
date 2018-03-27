@@ -97,8 +97,8 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 									<a class="uk-display-block uk-link-muted" href="<?php echo $item->link; ?>">
 										<?php echo $item->name; ?>
 										<?php if ($item->logo): ?>
-											<img class="logo" src="<?php echo $item->logo; ?>"
-												 alt="<?php echo $item->name; ?>">
+											<sup><img class="logo" src="<?php echo $item->logo; ?>"
+													  alt="<?php echo $item->name; ?>"></sup>
 										<?php endif; ?>
 									</a>
 								</h2>

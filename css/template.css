@@ -107,7 +107,7 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 ========================================================================== */
 
 #companies.itemlist .items .item .logo {
-	height: 30px;
+	height: 20px;
 }
 
 #companies.itemlist .items .item .region img {
@@ -434,7 +434,10 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	padding: 15px 15px 15px 85px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 	color: #444;
+}
 
+#office.home .jobs .item img {
+	height: 20px;
 }
 
 @media (max-width: 767px) {
