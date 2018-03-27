@@ -45,6 +45,7 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 		<li><a href="#tags"><?php echo Text::_('JTAG'); ?></a></li>
 		<li><a href="#images"><?php echo Text::_('COM_PROFILES_PROFILE_AVATAR'); ?></a></li>
 		<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
+		<li><a href="#jobs"><?php echo Text::_('COM_PROFILES_PROFILE_JOBS'); ?></a></li>
 		<li><a href="#site_access"><?php echo Text::_('COM_PROFILES_PROFILE_SITE_ACCESS'); ?></a></li>
 		<li><a href="#settings"><?php echo Text::_('TPL_NERUDAS_SETTINGS'); ?></a></li>
 	</ul>
@@ -80,6 +81,12 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 		</li>
 		<li data-tab="contacts" class="uk-panel uk-panel-box uk-form-horizontal">
 			<?php echo $this->form->renderFieldset('contacts'); ?>
+		</li>
+		<li data-tab="jobs" class="<?php echo (empty($this->data->jobs)) ? 'uk-form-horizontal uk-panel uk-panel-box'
+			: 'uk-padding-small-top'; ?>">
+			<?php echo $this->form->getInput('jobs'); ?>
+			<?php echo $this->form->renderField('company_name', 'job'); ?>
+			<?php echo $this->form->renderField('position', 'job'); ?>
 		</li>
 		<li data-tab="site_access" class="uk-panel uk-panel-box uk-form-horizontal">
 			<?php echo $this->form->renderFieldset('site_access'); ?>
