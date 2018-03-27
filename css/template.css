@@ -280,12 +280,20 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	border-radius: 50%;
 	box-sizing: border-box;
 }
-
 #profiles.item > .header .info .job a {
 	color: #999 !important;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
+#profiles.item .jobs .item .logo {
+	height: 20px;
+}
+
+#profiles.item .jobs .item .region img {
+	height: 25px;
+	opacity: 0.7;
+}
+
 
 @media (max-width: 767px) {
 	#profiles.item > .header .info .avatar {

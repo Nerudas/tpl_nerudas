@@ -67,7 +67,6 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 									<i class="uk-margin-left uk-text-muted">(<?php echo $this->item->position; ?>)</i>
 								<?php endif; ?>
 							</div>
-
 						<?php endif; ?>
 					</div>
 					<div class="uk-width-1-2 uk-width-medium-1-4 uk-text-right">
@@ -97,7 +96,9 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 		<?php if ($this->item->contacts) : ?>
 			<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<?php endif; ?>
-
+		<?php if (!empty($this->jobs)) : ?>
+			<li><a href="#jobs"><?php echo Text::_('COM_PROFILES_PROFILE_JOBS'); ?></a></li>
+		<?php endif; ?>
 		<li><a href="#board"><?php echo Text::_('MOD_BOARD_LATEST_ITEMS'); ?></a></li>
 		<li><a href="#map"><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
 		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
@@ -207,8 +208,63 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 				</dl>
 			</li>
 		<?php endif; ?>
+		<?php if (!empty($this->jobs)) : ?>
+			<li data-tab="jobs" class="uk-panel uk-panel-box">
+				<div class="jobs">
+					<?php foreach ($this->jobs as $company): ?>
+						<div class="item uk-margin-bottom">
+							<div class="uk-grid uk-grid-small">
+								<div class="uk-width-small-3-4">
+									<div>
+										<div class="uk-h3 uk-margin-small-bottom">
+											<a class="uk-display-block uk-link-muted"
+											   href="<?php echo $company->link; ?>">
+												<?php echo $company->name; ?>
+												<?php if ($company->logo): ?>
+													<sup><img class="logo" src="<?php echo $company->logo; ?>"
+															  alt="<?php echo $company->name; ?>"></sup>
+												<?php endif; ?>
+											</a>
+										</div>
+									</div>
 
+									<div class="uk-text-muted">
+										<?php echo HTMLHelper::_('string.truncate', (strip_tags($company->about)), 100); ?>
+									</div>
 
+								</div>
+								<div class="uk-width-small-1-4">
+									<div class="uk-text-right">
+										<div class="uk-text-nowrap">
+											<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
+												  data-uk-tooltip
+												  datetime="<?php echo HTMLHelper::date($company->created, 'c'); ?>"
+												  title="<?php echo HTMLHelper::date($company->created, 'd.m.Y H:i'); ?>"></time>
+										</div>
+										<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
+											<a href="<?php echo $company->link; ?>"
+											   class="uk-badge uk-badge-white uk-margin-small-left">
+												<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $company->hits; ?>
+											</a>
+											<a href="<?php echo $company->link; ?>#comments"
+											   class="uk-badge uk-badge-white uk-margin-small-left">
+												<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+											</a>
+											<div class="region uk-margin-top uk-text-small">
+												<?php
+												echo HTMLHelper::image('regions/' . $company->region . '.png', $company->region_name,
+													array('title' => $company->region_name, 'data-uk-tooltip' => ''), true); ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr>
+					<?php endforeach; ?>
+				</div>
+			</li>
+		<?php endif; ?>
 		<li data-tab="board" class="uk-panel uk-panel-box">
 			<div>
 				<?php echo $boardModule; ?>
