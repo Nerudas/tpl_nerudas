@@ -96,10 +96,20 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 						</a>
 					</div>
 					<div class="content">
-						<h2 class="uk-text-large">
+						<h2 class="uk-text-large uk-margin-small-bottom">
 							<a href="<?php echo $item->link; ?>" class="uk-link-muted uk-display-block">
 								<?php echo $item->name; ?></a>
 						</h2>
+						<?php if ($item->job) : ?>
+							<div class="job">
+								<a href="<?php echo $item->job_link; ?>"><?php echo $item->job_name; ?></a>
+							</div>
+							<?php if (!empty($item->position)): ?>
+								<div class="position">
+									<i>(<?php echo $item->position; ?>)</i>
+								</div>
+							<?php endif; ?>
+						<?php endif; ?>
 						<blockquote>
 							<?php echo $item->status; ?>
 						</blockquote>

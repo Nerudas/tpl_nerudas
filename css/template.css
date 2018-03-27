@@ -211,7 +211,12 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	padding: 15px 15px 15px 85px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 	color: #444;
+}
 
+#profiles.itemlist .items .item .job a {
+	color: #999 !important;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 #profiles.item > .header {
@@ -1623,6 +1628,7 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 [data-input-jobs] .item.wait-user .avatar, [data-input-jobs] .item.wait-company .content {
 	opacity: 0.5
 }
+
 [data-input-jobs] .item .inner .logo {
 	margin-bottom: 5px;
 	height: 60px;
