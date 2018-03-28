@@ -42,9 +42,6 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}"
 		data-save-tabs="profileTabs">
 		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
-		<li><a href="#tags"><?php echo Text::_('JTAG'); ?></a></li>
-		<li><a href="#images"><?php echo Text::_('COM_PROFILES_PROFILE_AVATAR'); ?></a></li>
-		<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<li><a href="#jobs"><?php echo Text::_('COM_PROFILES_PROFILE_JOBS'); ?></a></li>
 		<li><a href="#site_access"><?php echo Text::_('COM_PROFILES_PROFILE_SITE_ACCESS'); ?></a></li>
 		<li><a href="#settings"><?php echo Text::_('TPL_NERUDAS_SETTINGS'); ?></a></li>
@@ -70,17 +67,31 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 					<?php echo $this->form->getInput('about'); ?>
 				</div>
 			</div>
-
-		</li>
-		<li data-tab="tags" class="uk-panel uk-panel-box uk-form-horizontal">
-			<?php echo $this->form->getInput('tags'); ?>
-			<div class="uk-clearfix uk-margin-large-bottom"></div>
-		</li>
-		<li data-tab="images" class="uk-panel uk-panel-box uk-form-horizontal">
-			<?php echo $this->form->renderFieldset('images'); ?>
-		</li>
-		<li data-tab="contacts" class="uk-panel uk-panel-box uk-form-horizontal">
-			<?php echo $this->form->renderFieldset('contacts'); ?>
+			<div class="uk-form-horizontal">
+				<?php echo $this->form->renderFieldset('images'); ?>
+			</div>
+			<div class="uk-margin-top">
+				<div class="uk-h2">
+					<?php echo Text::_('JTAG'); ?>
+				</div>
+				<?php echo $this->form->getInput('tags'); ?>
+				<div class="uk-clearfix uk-margin-large-bottom"></div>
+			</div>
+			<div class="uk-margin-large-top uk-form-horizontal">
+				<div class="uk-h2">
+					<?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?>
+				</div>
+				<?php echo $this->form->renderFieldset('contacts'); ?>
+			</div>
+			<div class="uk-margin-top uk-text-right">
+				<a href="<?php echo $cancelLink; ?>" class="uk-button uk-button-danger">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
+				</a>
+				<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
+				</button>
+			</div>
+			<div class="uk-margin-large-bottom"></div>
 		</li>
 		<li data-tab="jobs" class="<?php echo (empty($this->data->jobs)) ? 'uk-form-horizontal uk-panel uk-panel-box'
 			: 'uk-padding-small-top'; ?>">
@@ -92,20 +103,34 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 			</div>
 			<?php if (empty($this->data->jobs)): ?>
 				<div class="uk-margin-top uk-text-right">
-
 					<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
 						<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
 					</button>
-
 				</div>
 			<?php endif; ?>
 		</li>
 		<li data-tab="site_access" class="uk-panel uk-panel-box uk-form-horizontal">
 			<?php echo $this->form->renderFieldset('site_access'); ?>
+			<div class="uk-margin-top uk-text-right">
+				<a href="<?php echo $cancelLink; ?>" class="uk-button uk-button-danger">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
+				</a>
+				<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
+				</button>
+			</div>
 		</li>
 		<li data-tab="settings" class="uk-panel uk-panel-box uk-form-horizontal">
 			<?php echo $this->form->renderField('alias'); ?>
 			<?php echo $this->form->renderFieldset('settings'); ?>
+			<div class="uk-margin-top uk-text-right">
+				<a href="<?php echo $cancelLink; ?>" class="uk-button uk-button-danger">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
+				</a>
+				<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
+				</button>
+			</div>
 		</li>
 	</ul>
 
@@ -113,15 +138,6 @@ $cancelLink = Route::_('index.php?option=com_users&view=profile');
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>"/>
 	<?php echo HTMLHelper::_('form.token'); ?>
-
-	<div class="uk-form-row uk-text-center">
-		<a href="<?php echo $cancelLink; ?>" class="uk-button uk-button-danger">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
-		</a>
-		<button onclick="Joomla.submitbutton('profile.save');" class="uk-button uk-button-success">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
-		</button>
-	</div>
 </form>
 
 
