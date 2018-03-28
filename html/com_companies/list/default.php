@@ -107,7 +107,6 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							<div class="uk-text-muted">
 								<?php echo HTMLHelper::_('string.truncate', (strip_tags($item->about)), 100); ?>
 							</div>
-
 						</div>
 						<div class="uk-width-small-1-4">
 							<div class="uk-text-right">
