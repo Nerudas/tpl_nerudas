@@ -2227,6 +2227,7 @@ html.new .tm-title .uk-h1 {
 	width: 48px;
 	height: 48px;
 }
+.uk-avatar-48
 
 .uk-avatar-30 {
 	width: 30px;
@@ -2285,23 +2286,13 @@ h6.uk-accordion-title, .uk-h6.uk-accordion-title {
 }
 
 .uk-icon-profile-state-online::before {
-	content: "\f058";
+	content: '\f111';
 	color: #659f13;
 }
 
-.uk-icon-profile-state-away::before {
-	content: "\f017";
-	color: #e28327;
-}
-
-.uk-icon-profile-state-busy::before {
-	content: "\f056";
-	color: #d85030;
-}
-
-.uk-icon-profile-state-invisible::before, .uk-icon-profile-state-offline::before {
+.uk-icon-profile-state-offline::before {
 	content: "\f10c";
-	color: #659f13;
+	color: #d85030;
 }
 
 .uk-icon-accordion::before {

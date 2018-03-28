@@ -27,8 +27,8 @@ use Joomla\CMS\Factory;
 				</a>
 			</div>
 			<div class="ifshow uk-padding">
-				<?php echo LayoutHelper::render('content.author.horizontal',
-					array('author_id' => $item->created_by, 'author_link' => $item->link)); ?>
+				<?php $item->author_link = $item->link;
+				echo LayoutHelper::render('content.author.horizontal', $item); ?>
 				<div class="uk-margin-top">
 					<div class="">
 						<div class="uk-text-nowrap">
