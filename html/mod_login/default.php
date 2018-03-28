@@ -21,7 +21,6 @@ JLoader::register('UsersHelperRoute', JPATH_SITE . '/components/com_users/helper
 Factory::getLanguage()->load('com_users', JPATH_SITE);
 
 
-
 ?>
 <div id="mdoalLogin" class="uk-modal login">
 	<div class="uk-modal-dialog uk-padding-remove">
@@ -33,6 +32,12 @@ Factory::getLanguage()->load('com_users', JPATH_SITE);
 					<a href="#social"><?php echo Text::_('TPL_NERUDAS_LOGIN_SOCIAL'); ?></a></li>
 				<li class="uk-padding-top ">
 					<a href="#password"><?php echo Text::_('TPL_NERUDAS_LOGIN_PASSWORD'); ?></a></li>
+				<?php if (ComponentHelper::getParams('com_users')->get('allowUserRegistration')) : ?>
+					<li class="uk-padding-top ">
+						<a onclick="location.href='<?php echo Route::_('index.php?option=com_users&view=registration'); ?>'">
+							<?php echo Text::_('MOD_LOGIN_REGISTER'); ?></a>
+					</li>
+				<?php endif; ?>
 			</ul>
 			<ul id="mdoalLoginTabs" class="uk-switcher">
 				<li data-tab="social" class="uk-padding-large uk-text-center">
@@ -63,13 +68,12 @@ Factory::getLanguage()->load('com_users', JPATH_SITE);
 							</a>
 						</div>
 						<div class="uk-form-row  uk-text-right">
-							<button  name="Submit" type="submit" class="uk-button uk-button-primary">
+							<button name="Submit" type="submit" class="uk-button uk-button-primary">
 								<?php echo Text::_('JLOGIN'); ?>
 							</button>
 						</div>
 						<?php if (ComponentHelper::getParams('com_users')->get('allowUserRegistration')) : ?>
 							<hr>
-
 							<div class="uk-text-center uk-text-medium uk-link-muted">
 								<a href="<?php echo Route::_('index.php?option=com_users&view=registration'); ?>">
 									<?php echo Text::_('COM_USERS_LOGIN_REGISTER'); ?>

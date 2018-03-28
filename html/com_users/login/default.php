@@ -40,6 +40,10 @@ HTMLHelper::_('behavior.formvalidator');
 		data-save-tabs="loginTabs">
 		<li><a href="#social"><?php echo Text::_('TPL_NERUDAS_LOGIN_SOCIAL'); ?></a></li>
 		<li><a href="#password"><?php echo Text::_('TPL_NERUDAS_LOGIN_PASSWORD'); ?></a></li>
+		<?php if (ComponentHelper::getParams('com_users')->get('allowUserRegistration')) : ?>
+			<li><a onclick="location.href='<?php echo Route::_('index.php?option=com_users&view=registration'); ?>'">
+					<?php echo Text::_('TPL_NERUDAS_REGISTRATION'); ?></a></li>
+		<?php endif; ?>
 	</ul>
 	<ul id="loginTabs" class="uk-switcher uk-margin-bottom" data-uk-switcher-tabs="">
 		<li data-tab="social" class="uk-panel uk-panel-box uk-flex uk-flex-center uk-flex-middle">
