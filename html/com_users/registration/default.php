@@ -39,9 +39,13 @@ HTMLHelper::_('behavior.formvalidator');
 	<div class="uk-panel uk-panel-box">
 		<ul id="registationTabs" class="uk-switcher uk-margin-bottom">
 			<li data-tab="user">
+				<div class="uk-h2 uk-margin-bottom"><?php echo Text::_('COM_PROFILES_REGISTRATION_AS') . ' ' .
+						Text::_('COM_PROFILES_REGISTRATION_AS_USER'); ?></div>
 				<?php echo $this->form->renderField('name'); ?>
 			</li>
 			<li data-tab="company">
+				<div class="uk-h2 uk-margin-bottom"><?php echo Text::_('COM_PROFILES_REGISTRATION_AS') . ' ' .
+						Text::_('COM_PROFILES_REGISTRATION_AS_COMPANY'); ?></div>
 				<?php echo $this->form->renderField('company_name'); ?>
 				<?php echo $this->form->renderField('company_position'); ?>
 			</li>
