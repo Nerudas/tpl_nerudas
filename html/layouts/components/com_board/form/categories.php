@@ -79,8 +79,8 @@ if (empty($first))
 				<?php endif; ?>
 			</ul>
 			<div class="uk-display-inline-block">
-				<a href="#categorySelect" role="button" class="uk-button change" data-uk-modal>
-					<?php echo Text::_('JACTION_EDIT'); ?>
+				<a href="#categorySelect" class="uk-button change" data-uk-modal>
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_CLARIFY'); ?>
 				</a>
 			</div>
 		</div>
@@ -96,7 +96,9 @@ if (empty($first))
 				<?php foreach ($root as $item): ?>
 					<li><a href=""><?php echo $item->title; ?></a></li>
 				<?php endforeach; ?>
-				<li><a href=""><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?></a></li>
+				<li class="uk-active">
+					<a href=""><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?></a>
+				</li>
 			</ul>
 			<div id="categoriesTabs" class="uk-switcher">
 				<?php foreach ($root as $item): ?>
