@@ -96,23 +96,52 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 						</a>
 					</div>
 					<div class="content">
-						<h2 class="uk-text-large uk-margin-small-bottom">
-							<a href="<?php echo $item->link; ?>" class="uk-link-muted uk-display-block">
-								<?php echo $item->name; ?></a>
-						</h2>
-						<?php if ($item->job) : ?>
-							<div class="job">
-								<a href="<?php echo $item->job_link; ?>"><?php echo $item->job_name; ?></a>
+						<div class="uk-grid uk-grid-small">
+							<div class="uk-width-small-3-4">
+								<h2 class="uk-text-large uk-margin-small-bottom">
+									<a href="<?php echo $item->link; ?>" class="uk-link-muted uk-display-block">
+										<?php echo $item->name; ?></a>
+								</h2>
+								<?php if ($item->job) : ?>
+									<div class="job">
+										<a href="<?php echo $item->job_link; ?>"><?php echo $item->job_name; ?></a>
+									</div>
+									<?php if (!empty($item->position)): ?>
+										<div class="position">
+											<i>(<?php echo $item->position; ?>)</i>
+										</div>
+									<?php endif; ?>
+								<?php endif; ?>
+								<blockquote>
+									<?php echo $item->status; ?>
+								</blockquote>
 							</div>
-							<?php if (!empty($item->position)): ?>
-								<div class="position">
-									<i>(<?php echo $item->position; ?>)</i>
+							<div class="uk-width-small-1-4">
+								<div class="uk-text-right">
+									<div class="uk-text-nowrap">
+										<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
+											  data-uk-tooltip
+											  datetime="<?php echo HTMLHelper::date($item->created, 'c'); ?>"
+											  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
+									</div>
+									<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
+										<a href="<?php echo $item->link; ?>"
+										   class="uk-badge uk-badge-white uk-margin-small-left">
+											<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+										</a>
+										<a href="<?php echo $item->link; ?>#comments"
+										   class="uk-badge uk-badge-white uk-margin-small-left">
+											<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+										</a>
+										<div class="region uk-margin-top uk-text-small">
+											<?php
+											echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
+												array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
+										</div>
+									</div>
 								</div>
-							<?php endif; ?>
-						<?php endif; ?>
-						<blockquote>
-							<?php echo $item->status; ?>
-						</blockquote>
+							</div>
+						</div>
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -121,5 +150,4 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
 	<?php endif; ?>
-
 </div>
