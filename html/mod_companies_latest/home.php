@@ -34,7 +34,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 					<?php if ($item->logo): ?>
 						<sup>
 							<img src="<?php echo $item->logo; ?>"
-								 alt="<?php echo str_replace('"', '', $item->title); ?>"
+								 alt="<?php echo str_replace('"', '', $item->name); ?>"
 								 style="height: 20px !important;"/>
 						</sup>
 					<?php endif; ?>
