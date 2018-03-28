@@ -87,7 +87,9 @@ $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'med
 		<div class="uk-width-medium-1-2">
 			<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#leftTabs', swiping: false}">
 				<li><a href="#profile"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROFILE'); ?></a></li>
-				<li><a href="#company"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY'); ?></a></li>
+				<li><a href="#company"><?php echo empty($this->data->jobs) ?
+							Text::_('TPL_NERUDAS_NO_COMPANY') :
+							Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY'); ?></a></li>
 				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD_ITEMS'); ?></a></li>
 			</ul>
 			<ul id="leftTabs" class="uk-switcher" data-uk-switcher-tabs="">
