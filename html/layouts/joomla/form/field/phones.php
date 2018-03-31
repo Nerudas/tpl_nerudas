@@ -89,7 +89,7 @@ HTMLHelper::_('jquery.ui', array('sortable'));
 				<?php endif; ?>
 				<input type="hidden" name="<?php echo $name; ?>[<?php echo $key; ?>][display]" class="display"
 					   id="<?php echo $id; ?>_<?php echo $key; ?>_display"
-					   value="<?php echo $val['display']; ?>"
+					   value="<?php echo (!empty($val['display'])) ? $val['display'] : $val['code'] . $val['number']; ?>"
 					   placeholder="<?php echo Text::_($text_placeholder); ?>">
 				<?php if ($limit !== 1): ?>
 					<div class="actions uk-button-group">
