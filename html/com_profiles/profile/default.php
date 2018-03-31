@@ -235,12 +235,6 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 								</div>
 								<div class="uk-width-small-1-4">
 									<div class="uk-text-right">
-										<div class="uk-text-nowrap">
-											<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
-												  data-uk-tooltip
-												  datetime="<?php echo HTMLHelper::date($company->created, 'c'); ?>"
-												  title="<?php echo HTMLHelper::date($company->created, 'd.m.Y H:i'); ?>"></time>
-										</div>
 										<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
 											<a href="<?php echo $company->link; ?>"
 											   class="uk-badge uk-badge-white uk-margin-small-left">
