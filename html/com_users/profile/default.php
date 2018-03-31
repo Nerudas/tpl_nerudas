@@ -181,7 +181,7 @@ $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'med
 							</a>
 						</div>
 					<?php else: ?>
-						<div id="<?php echo $jobs_id; ?>" data-input-jobs="<?php echo $jobs_id; ?>" class="jobs">
+						<div id="profileJobs" data-input-jobs="profileJobs" class="jobs">
 							<?php foreach ($this->data->jobs as $company):
 								$seeLink = Route::_(CompaniesHelperRoute::getCompanyRoute($company->id));
 								$editLink = ($company->confirm != 'confirm') ? false
