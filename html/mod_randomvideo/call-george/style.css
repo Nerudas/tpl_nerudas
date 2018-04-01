@@ -14,6 +14,11 @@
 	height: 571px;
 	background-size: 100%;
 }
+
+.call-george-module img {
+	max-width: inherit;
+}
+
 .call-george-module .phone > .display {
 	position: absolute;
 	top: 97px;
@@ -26,7 +31,8 @@
 	width: 256px;
 	height: 384px;
 }
-.call-george-module .phone.not-mac > .display > .inner  img {
+
+.call-george-module .phone.not-mac > .display > .inner img {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -35,7 +41,7 @@
 	z-index: 1;
 }
 
-.call-george-module .phone.not-mac > .display > .inner  video {
+.call-george-module .phone.not-mac > .display > .inner video {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -49,6 +55,7 @@
 	bottom: 0;
 	z-index: 3;
 }
+
 .call-george-module .phone.not-mac > .display > .inner {
 	display: none;
 }
