@@ -14,9 +14,6 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 
 use Joomla\CMS\Language\Text;
-
-//echo '<pre>', print_r($this->item, true), '</pre>';
-
 ?>
 <div id="companies" class="item">
 	<?php echo LayoutHelper::render('template.title', array('edit' => $this->editLink)); ?>

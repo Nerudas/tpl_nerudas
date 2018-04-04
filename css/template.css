@@ -280,11 +280,13 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	border-radius: 50%;
 	box-sizing: border-box;
 }
+
 #profiles.item > .header .info .job a {
 	color: #999 !important;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
+
 #profiles.item .jobs .item .logo {
 	height: 20px;
 }
@@ -293,7 +295,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	height: 25px;
 	opacity: 0.7;
 }
-
 
 @media (max-width: 767px) {
 	#profiles.item > .header .info .avatar {
@@ -3359,7 +3360,7 @@ svg[data-name="Nerudas"] .dots .background {
 		z-index: 9999;
 	}
 
-	#board.map [data-board-filter]  .advanced-fiter .submits {
+	#board.map [data-board-filter] .advanced-fiter .submits {
 		margin-bottom: 70px;
 	}
 
@@ -3375,4 +3376,17 @@ svg[data-name="Nerudas"] .dots .background {
 		overflow-y: scroll;
 		box-sizing: border-box;
 	}
+}
+
+/* Pages
+========================================================================== */
+#pages .item-header {
+	display: block;
+	background: #fff no-repeat 50% 50%;
+	background-size: cover;
+	height: 290px;
+}
+
+#pages .item-content {
+	position: static;
 }
