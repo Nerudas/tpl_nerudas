@@ -210,6 +210,13 @@ class tplNerudasHelper
 			}
 		}
 
+		// HomePage
+		$menu = Factory::getApplication()->getMenu();
+		if ($menu->getActive() === $menu->getDefault(Factory::getLanguage()->getTag()))
+		{
+			$layout = 'home';
+		}
+
 		return 'template.middle.' . $layout;
 	}
 

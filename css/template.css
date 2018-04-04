@@ -3390,3 +3390,19 @@ svg[data-name="Nerudas"] .dots .background {
 #pages .item-content {
 	position: static;
 }
+
+/* Home
+========================================================================== */
+#home > .header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 400px;
+	background: #e5e5e5;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+#home .uk-container {
+	max-width: 1380px;
+}

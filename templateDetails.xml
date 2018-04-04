@@ -40,6 +40,10 @@
 		<position>footer-top</position>
 		<position>footer-bottom</position>
 		<position>mapmenu</position>
+		<position>home-filter</position>
+		<position>home-left</position>
+		<position>home-center</position>
+		<position>home-right</position>
 	</positions>
 	<config>
 		<fields name="params">

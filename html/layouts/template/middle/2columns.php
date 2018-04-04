@@ -14,7 +14,7 @@ $template = $displayData;
 
 ?>
 <div class="tm-middle uk-container uk-container-center uk-margin-top uk-margin-bottom">
-	<div class="uk-grid">
+	<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
 		<main class="tm-center uk-width-medium-1-1 uk-width-large-2-3">
 			<jdoc:include type="component"/>
 		</main>
