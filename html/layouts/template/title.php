@@ -84,7 +84,7 @@ $margin = (!isset($margin)) ? true : $margin;
 	</div>
 	<div class="actions uk-button-group">
 		<?php if (!empty($layouts)) : ?>
-			<div class="uk-margin-right uk-margin-left">
+			<div class="uk-margin-right uk-margin-left uk-hidden">
 				<?php if (!empty($layouts['list'])) : ?>
 					<a href="<?php echo $layouts['list']; ?>"
 					   class="list uk-icon-list-ul uk-button
@@ -101,8 +101,10 @@ $margin = (!isset($margin)) ? true : $margin;
 		<?php endif; ?>
 
 		<?php if (!empty($add)) : ?>
-			<a href="<?php echo $add; ?>" class="add uk-icon-plus uk-button uk-text-success" data-uk-tooltip
-			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>"></a>
+			<a href="<?php echo $add; ?>" class="add uk-button uk-button-success" data-uk-tooltip
+			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>">
+				<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+			</a>
 		<?php endif; ?>
 		<?php if (!empty($edit)) : ?>
 			<a href="<?php echo $edit; ?>" class="edit uk-icon-pencil uk-button uk-text-success" data-uk-tooltip
