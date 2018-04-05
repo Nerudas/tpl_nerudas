@@ -71,20 +71,6 @@
 	}
 
 	$(document).ready(function () {
-		setInterval(function () {
-			$('[ data-uk-switcher-tabs]').each(function () {
-				var items = $(this).find('> li'),
-					max = 0;
-				$(items).each(function (i, item) {
-					$(item).css('display', 'block');
-					if ($(item).height() > max) {
-						max = $(item).height();
-					}
-					$(item).css('display', '');
-				});
-				$(items).height(max);
-			});
-		}, 3);
 		$('[data-save-tabs]').each(function () {
 			var key = window.location.href + '#' + $(this).data('save-tabs'),
 				storage = sessionStorage.getItem(key);

@@ -3406,3 +3406,7 @@ svg[data-name="Nerudas"] .dots .background {
 #home .uk-container {
 	max-width: 1380px;
 }
+
+[data-uk-switcher-tabs] > li {
+	min-height: 500px;
+}
