@@ -91,18 +91,10 @@ if (empty($first))
 			<div class="uk-h4 uk-modal-header">
 				<h3><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES'); ?></h3>
 			</div>
-			<ul id="categoriesSelectFilter" class="uk-tab-new"
-				data-uk-tab="{connect:'#categoriesTabs'}">
+
+			<div id="categoriesTabs">
 				<?php foreach ($root as $item): ?>
-					<li><a href=""><?php echo $item->title; ?></a></li>
-				<?php endforeach; ?>
-				<li class="uk-active">
-					<a href=""><?php echo Text::_('COM_BOARD_ITEM_CATEGORIES_EXTENDED'); ?></a>
-				</li>
-			</ul>
-			<div id="categoriesTabs" class="uk-switcher">
-				<?php foreach ($root as $item): ?>
-					<div class="categories ">
+					<div class="categories uk-hidden">
 						<?php if (!empty($children[$item->id])): ?>
 							<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
 								<?php foreach ($children[$item->id] as $child) : ?>
