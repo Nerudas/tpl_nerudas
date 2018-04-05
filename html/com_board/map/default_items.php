@@ -162,7 +162,7 @@ use Joomla\CMS\Factory;
 	<?php endforeach; ?>
 <?php endif; ?>
 <script>
-		jQuery('time.timeago').timeago();
+	jQuery('time.timeago').timeago();
 </script>
 
 

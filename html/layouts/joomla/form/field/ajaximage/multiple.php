@@ -35,10 +35,13 @@ HTMLHelper::_('jquery.ui', array('sortable'));
 		</div>
 	<?php endif; ?>
 	<div id="<?php echo $id; ?>_progress" class="uk-progress uk-progress-success">
-		<div class="bar uk-progress-bar"><div class="text"></div></div>
+		<div class="bar uk-progress-bar">
+			<div class="text"></div>
+		</div>
 	</div>
 
-	<div id="<?php echo $id; ?>_result" class="result uk-grid uk-grid-small uk-margin" data-uk-grid-match data-uk-grid-margin>
+	<div id="<?php echo $id; ?>_result" class="result uk-grid uk-grid-small uk-margin" data-uk-grid-match
+		 data-uk-grid-margin>
 		<?php if ($value && is_array($value)): ?>
 			<?php foreach ($value as $key => $val)
 			{

@@ -1,596 +1,603 @@
 /*! UIkit 2.27.4 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
-(function(addon) {
+(function (addon) {
 
-    var component;
+	var component;
 
-    if (window.UIkit2) {
-        component = addon(UIkit2);
-    }
+	if (window.UIkit2) {
+		component = addon(UIkit2);
+	}
 
-    if (typeof define == 'function' && define.amd) {
-        define('uikit-slideshow', ['uikit'], function() {
-            return component || addon(UIkit2);
-        });
-    }
+	if (typeof define == 'function' && define.amd) {
+		define('uikit-slideshow', ['uikit'], function () {
+			return component || addon(UIkit2);
+		});
+	}
 
-})(function(UI) {
+})(function (UI) {
 
-    "use strict";
+	"use strict";
 
-    var Animations, playerId = 0;
+	var Animations, playerId = 0;
 
-    UI.component('slideshow', {
+	UI.component('slideshow', {
 
-        defaults: {
-            animation          : 'fade',
-            duration           : 500,
-            height             : 'auto',
-            start              : 0,
-            autoplay           : false,
-            autoplayInterval   : 7000,
-            videoautoplay      : true,
-            videomute          : true,
-            slices             : 15,
-            pauseOnHover       : true,
-            kenburns           : false,
-            kenburnsanimations : [
-                'uk-animation-middle-left',
-                'uk-animation-top-right',
-                'uk-animation-bottom-left',
-                'uk-animation-top-center',
-                '', // middle-center
-                'uk-animation-bottom-right'
-            ]
-        },
+		defaults: {
+			animation: 'fade',
+			duration: 500,
+			height: 'auto',
+			start: 0,
+			autoplay: false,
+			autoplayInterval: 7000,
+			videoautoplay: true,
+			videomute: true,
+			slices: 15,
+			pauseOnHover: true,
+			kenburns: false,
+			kenburnsanimations: [
+				'uk-animation-middle-left',
+				'uk-animation-top-right',
+				'uk-animation-bottom-left',
+				'uk-animation-top-center',
+				'', // middle-center
+				'uk-animation-bottom-right'
+			]
+		},
 
-        current  : false,
-        interval : null,
-        hovering : false,
+		current: false,
+		interval: null,
+		hovering: false,
 
-        boot: function() {
+		boot: function () {
 
-            // init code
-            UI.ready(function(context) {
+			// init code
+			UI.ready(function (context) {
 
-                UI.$('[data-uk-slideshow]', context).each(function() {
+				UI.$('[data-uk-slideshow]', context).each(function () {
 
-                    var slideshow = UI.$(this);
+					var slideshow = UI.$(this);
 
-                    if (!slideshow.data('slideshow')) {
-                        UI.slideshow(slideshow, UI.Utils.options(slideshow.attr('data-uk-slideshow')));
-                    }
-                });
-            });
-        },
+					if (!slideshow.data('slideshow')) {
+						UI.slideshow(slideshow, UI.Utils.options(slideshow.attr('data-uk-slideshow')));
+					}
+				});
+			});
+		},
 
-        init: function() {
+		init: function () {
+
+			var $this = this;
+
+			this.container = this.element.hasClass('uk-slideshow') ? this.element : UI.$(this.find('.uk-slideshow:first'));
+			this.current = this.options.start;
+			this.animating = false;
 
-            var $this = this;
+			this.fixFullscreen = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) && this.container.hasClass('uk-slideshow-fullscreen'); // viewport unit fix for height:100vh - should be fixed in iOS 8
 
-            this.container     = this.element.hasClass('uk-slideshow') ? this.element : UI.$(this.find('.uk-slideshow:first'));
-            this.current       = this.options.start;
-            this.animating     = false;
+			if (this.options.kenburns) {
 
-            this.fixFullscreen = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) && this.container.hasClass('uk-slideshow-fullscreen'); // viewport unit fix for height:100vh - should be fixed in iOS 8
+				this.kbanimduration = this.options.kenburns === true ? '15s' : this.options.kenburns;
 
-            if (this.options.kenburns) {
+				if (!String(this.kbanimduration).match(/(ms|s)$/)) {
+					this.kbanimduration += 'ms';
+				}
 
-                this.kbanimduration = this.options.kenburns === true ? '15s': this.options.kenburns;
+				if (typeof(this.options.kenburnsanimations) == 'string') {
+					this.options.kenburnsanimations = this.options.kenburnsanimations.split(',');
+				}
+			}
 
-                if (!String(this.kbanimduration).match(/(ms|s)$/)) {
-                    this.kbanimduration += 'ms';
-                }
+			this.update();
 
-                if (typeof(this.options.kenburnsanimations) == 'string') {
-                    this.options.kenburnsanimations = this.options.kenburnsanimations.split(',');
-                }
-            }
+			this.on('click.uk.slideshow', '[data-uk-slideshow-item]', function (e) {
 
-            this.update();
+				e.preventDefault();
 
-            this.on('click.uk.slideshow', '[data-uk-slideshow-item]', function(e) {
+				var slide = UI.$(this).attr('data-uk-slideshow-item');
 
-                e.preventDefault();
+				if ($this.current == slide) return;
 
-                var slide = UI.$(this).attr('data-uk-slideshow-item');
+				switch (slide) {
+					case 'next':
+					case 'previous':
+						$this[slide == 'next' ? 'next' : 'previous']();
+						break;
+					default:
+						$this.show(parseInt(slide, 10));
+				}
 
-                if ($this.current == slide) return;
+				$this.stop();
+			});
 
-                switch(slide) {
-                    case 'next':
-                    case 'previous':
-                        $this[slide=='next' ? 'next':'previous']();
-                        break;
-                    default:
-                        $this.show(parseInt(slide, 10));
-                }
+			UI.$win.on("resize load", UI.Utils.debounce(function () {
+				$this.resize();
 
-                $this.stop();
-            });
+				if ($this.fixFullscreen) {
+					$this.container.css('height', window.innerHeight);
+					$this.slides.css('height', window.innerHeight);
+				}
+			}, 100));
 
-            UI.$win.on("resize load", UI.Utils.debounce(function() {
-                $this.resize();
+			// chrome image load fix
+			setTimeout(function () {
+				$this.resize();
+			}, 80);
 
-                if ($this.fixFullscreen) {
-                    $this.container.css('height', window.innerHeight);
-                    $this.slides.css('height', window.innerHeight);
-                }
-            }, 100));
+			// Set autoplay
+			if (this.options.autoplay) {
+				this.start();
+			}
 
-            // chrome image load fix
-            setTimeout(function(){
-                $this.resize();
-            }, 80);
+			if (this.options.videoautoplay && this.slides.eq(this.current).data('media')) {
+				this.playmedia(this.slides.eq(this.current).data('media'));
+			}
 
-            // Set autoplay
-            if (this.options.autoplay) {
-                this.start();
-            }
+			if (this.options.kenburns) {
+				this.applyKenBurns(this.slides.eq(this.current));
+			}
 
-            if (this.options.videoautoplay && this.slides.eq(this.current).data('media')) {
-                this.playmedia(this.slides.eq(this.current).data('media'));
-            }
+			this.container.on({
+				mouseenter: function () {
+					if ($this.options.pauseOnHover) $this.hovering = true;
+				},
+				mouseleave: function () {
+					$this.hovering = false;
+				}
+			});
 
-            if (this.options.kenburns) {
-                this.applyKenBurns(this.slides.eq(this.current));
-            }
+			this.on('swipeRight swipeLeft', function (e) {
+				$this[e.type == 'swipeLeft' ? 'next' : 'previous']();
+			});
 
-            this.container.on({
-                mouseenter: function() { if ($this.options.pauseOnHover) $this.hovering = true;  },
-                mouseleave: function() { $this.hovering = false; }
-            });
+			this.on('display.uk.check', function () {
+				if ($this.element.is(':visible')) {
 
-            this.on('swipeRight swipeLeft', function(e) {
-                $this[e.type=='swipeLeft' ? 'next' : 'previous']();
-            });
+					$this.resize();
 
-            this.on('display.uk.check', function(){
-                if ($this.element.is(':visible')) {
+					if ($this.fixFullscreen) {
+						$this.container.css('height', window.innerHeight);
+						$this.slides.css('height', window.innerHeight);
+					}
+				}
+			});
 
-                    $this.resize();
+			UI.domObserve(this.element, function (e) {
+				if ($this.container.children(':not([data-slideshow-slide])').not('.uk-slideshow-ghost').length) {
+					$this.update(true);
+				}
+			});
+		},
 
-                    if ($this.fixFullscreen) {
-                        $this.container.css('height', window.innerHeight);
-                        $this.slides.css('height', window.innerHeight);
-                    }
-                }
-            });
+		update: function (resize) {
 
-            UI.domObserve(this.element, function(e) {
-                if ($this.container.children(':not([data-slideshow-slide])').not('.uk-slideshow-ghost').length) {
-                    $this.update(true);
-                }
-            });
-        },
+			var $this = this, canvas, processed = 0;
 
-        update: function(resize) {
+			this.slides = this.container.children();
+			this.slidesCount = this.slides.length;
 
-            var $this = this, canvas, processed = 0;
+			if (!this.slides.eq(this.current).length) {
+				this.current = 0;
+			}
 
-            this.slides        = this.container.children();
-            this.slidesCount   = this.slides.length;
+			this.slides.each(function (index) {
 
-            if (!this.slides.eq(this.current).length) {
-                this.current = 0;
-            }
+				var slide = UI.$(this);
 
-            this.slides.each(function(index) {
+				if (slide.data('processed')) {
+					return;
+				}
 
-                var slide = UI.$(this);
+				var media = slide.children('img,video,iframe').eq(0), type = 'html';
 
-                if (slide.data('processed')) {
-                    return;
-                }
+				slide.data('media', media);
+				slide.data('sizer', media);
 
-                var media = slide.children('img,video,iframe').eq(0), type = 'html';
+				if (media.length) {
 
-                slide.data('media', media);
-                slide.data('sizer', media);
+					var placeholder;
 
-                if (media.length) {
+					type = media[0].nodeName.toLowerCase();
 
-                    var placeholder;
+					switch (media[0].nodeName) {
+						case 'IMG':
 
-                    type = media[0].nodeName.toLowerCase();
+							var cover = UI.$('<div class="uk-cover-background uk-position-cover"></div>').css({'background-image': 'url(' + media.attr('src') + ')'});
 
-                    switch(media[0].nodeName) {
-                        case 'IMG':
+							if (media.attr('width') && media.attr('height')) {
+								placeholder = UI.$('<canvas></canvas>').attr({
+									width: media.attr('width'),
+									height: media.attr('height')
+								});
+								media.replaceWith(placeholder);
+								media = placeholder;
+								placeholder = undefined;
+							}
 
-                            var cover = UI.$('<div class="uk-cover-background uk-position-cover"></div>').css({'background-image':'url('+ media.attr('src') + ')'});
+							media.css({width: '100%', height: 'auto', opacity: 0});
+							slide.prepend(cover).data('cover', cover);
+							break;
 
-                            if (media.attr('width') && media.attr('height')) {
-                                placeholder = UI.$('<canvas></canvas>').attr({width:media.attr('width'), height:media.attr('height')});
-                                media.replaceWith(placeholder);
-                                media = placeholder;
-                                placeholder = undefined;
-                            }
+						case 'IFRAME':
 
-                            media.css({width: '100%',height: 'auto', opacity:0});
-                            slide.prepend(cover).data('cover', cover);
-                            break;
+							var src = media[0].src, iframeId = 'sw-' + (++playerId);
 
-                        case 'IFRAME':
+							media
+								.attr('src', '').on('load', function () {
 
-                            var src = media[0].src, iframeId = 'sw-'+(++playerId);
+								if (index !== $this.current || (index == $this.current && !$this.options.videoautoplay)) {
+									$this.pausemedia(media);
+								}
 
-                            media
-                                .attr('src', '').on('load', function(){
+								if ($this.options.videomute) {
 
-                                    if (index !== $this.current || (index == $this.current && !$this.options.videoautoplay)) {
-                                        $this.pausemedia(media);
-                                    }
+									$this.mutemedia(media);
 
-                                    if ($this.options.videomute) {
+									var inv = setInterval((function (ic) {
+										return function () {
+											$this.mutemedia(media);
+											if (++ic >= 4) clearInterval(inv);
+										}
+									})(0), 250);
+								}
 
-                                        $this.mutemedia(media);
+							})
+								.data('slideshow', $this)  // add self-reference for the vimeo-ready listener
+								.attr('data-player-id', iframeId)  // add frameId for the vimeo-ready listener
+								.attr('src', [src, (src.indexOf('?') > -1 ? '&' : '?'), 'enablejsapi=1&api=1&player_id=' + iframeId].join(''))
+								.addClass('uk-position-absolute');
 
-                                        var inv = setInterval((function(ic) {
-                                            return function() {
-                                                $this.mutemedia(media);
-                                                if (++ic >= 4) clearInterval(inv);
-                                            }
-                                        })(0), 250);
-                                    }
+							// disable pointer events
+							if (!UI.support.touch) media.css('pointer-events', 'none');
 
-                                })
-                                .data('slideshow', $this)  // add self-reference for the vimeo-ready listener
-                                .attr('data-player-id', iframeId)  // add frameId for the vimeo-ready listener
-                                .attr('src', [src, (src.indexOf('?') > -1 ? '&':'?'), 'enablejsapi=1&api=1&player_id='+iframeId].join(''))
-                                .addClass('uk-position-absolute');
+							placeholder = true;
 
-                            // disable pointer events
-                            if(!UI.support.touch) media.css('pointer-events', 'none');
+							if (UI.cover) {
+								UI.cover(media);
+								media.attr('data-uk-cover', '{}');
+							}
 
-                            placeholder = true;
+							break;
 
-                            if (UI.cover) {
-                                UI.cover(media);
-                                media.attr('data-uk-cover', '{}');
-                            }
+						case 'VIDEO':
+							media.addClass('uk-cover-object uk-position-absolute');
+							placeholder = true;
 
-                            break;
+							if ($this.options.videomute) $this.mutemedia(media);
+					}
 
-                        case 'VIDEO':
-                            media.addClass('uk-cover-object uk-position-absolute');
-                            placeholder = true;
+					if (placeholder) {
 
-                            if ($this.options.videomute) $this.mutemedia(media);
-                    }
+						canvas = UI.$('<canvas></canvas>').attr({'width': media[0].width, 'height': media[0].height});
+						var img = UI.$('<img style="width:100%;height:auto;">').attr('src', canvas[0].toDataURL());
 
-                    if (placeholder) {
+						slide.prepend(img);
+						slide.data('sizer', img);
+					}
 
-                        canvas  = UI.$('<canvas></canvas>').attr({'width': media[0].width, 'height': media[0].height});
-                        var img = UI.$('<img style="width:100%;height:auto;">').attr('src', canvas[0].toDataURL());
+				} else {
+					slide.data('sizer', slide);
+				}
 
-                        slide.prepend(img);
-                        slide.data('sizer', img);
-                    }
+				if ($this.hasKenBurns(slide)) {
 
-                } else {
-                    slide.data('sizer', slide);
-                }
+					slide.data('cover').css({
+						'-webkit-animation-duration': $this.kbanimduration,
+						'animation-duration': $this.kbanimduration
+					});
+				}
 
-                if ($this.hasKenBurns(slide)) {
+				slide.data('processed', ++processed);
+				slide.attr('data-slideshow-slide', type);
+			});
 
-                    slide.data('cover').css({
-                        '-webkit-animation-duration': $this.kbanimduration,
-                        'animation-duration': $this.kbanimduration
-                    });
-                }
+			if (processed) {
 
-                slide.data('processed', ++processed);
-                slide.attr('data-slideshow-slide', type);
-            });
+				this.triggers = this.find('[data-uk-slideshow-item]');
 
-            if (processed) {
+				// Set start slide
+				this.slides.attr('aria-hidden', 'true').removeClass('uk-active').eq(this.current).addClass('uk-active').attr('aria-hidden', 'false');
+				this.triggers.filter('[data-uk-slideshow-item="' + this.current + '"]').addClass('uk-active');
+			}
 
-                this.triggers = this.find('[data-uk-slideshow-item]');
+			if (resize && processed) {
+				this.resize();
+			}
+		},
 
-                // Set start slide
-                this.slides.attr('aria-hidden', 'true').removeClass('uk-active').eq(this.current).addClass('uk-active').attr('aria-hidden', 'false');
-                this.triggers.filter('[data-uk-slideshow-item="'+this.current+'"]').addClass('uk-active');
-            }
+		resize: function () {
 
-            if (resize && processed) {
-                this.resize();
-            }
-        },
+			if (this.container.hasClass('uk-slideshow-fullscreen')) return;
 
-        resize: function() {
+			var height = this.options.height;
 
-            if (this.container.hasClass('uk-slideshow-fullscreen')) return;
+			if (this.options.height === 'auto') {
 
-            var height = this.options.height;
+				height = 0;
 
-            if (this.options.height === 'auto') {
+				this.slides.css('height', '').each(function () {
+					height = Math.max(height, UI.$(this).height());
+				});
+			}
 
-                height = 0;
+			this.container.css('height', height);
+			this.slides.css('height', height);
+		},
 
-                this.slides.css('height', '').each(function() {
-                    height = Math.max(height, UI.$(this).height());
-                });
-            }
+		show: function (index, direction) {
 
-            this.container.css('height', height);
-            this.slides.css('height', height);
-        },
+			if (this.animating || this.current == index) return;
 
-        show: function(index, direction) {
+			this.animating = true;
 
-            if (this.animating || this.current == index) return;
+			var $this = this,
+				current = this.slides.eq(this.current),
+				next = this.slides.eq(index),
+				dir = direction ? direction : this.current < index ? 1 : -1,
+				currentmedia = current.data('media'),
+				animation = Animations[this.options.animation] ? this.options.animation : 'fade',
+				nextmedia = next.data('media'),
+				finalize = function () {
 
-            this.animating = true;
+					if (!$this.animating) return;
 
-            var $this        = this,
-                current      = this.slides.eq(this.current),
-                next         = this.slides.eq(index),
-                dir          = direction ? direction : this.current < index ? 1 : -1,
-                currentmedia = current.data('media'),
-                animation    = Animations[this.options.animation] ? this.options.animation : 'fade',
-                nextmedia    = next.data('media'),
-                finalize     = function() {
+					if (currentmedia && currentmedia.is('video,iframe')) {
+						$this.pausemedia(currentmedia);
+					}
 
-                    if (!$this.animating) return;
+					if (nextmedia && nextmedia.is('video,iframe')) {
+						$this.playmedia(nextmedia);
+					}
 
-                    if (currentmedia && currentmedia.is('video,iframe')) {
-                        $this.pausemedia(currentmedia);
-                    }
+					next.addClass('uk-active').attr('aria-hidden', 'false');
+					current.removeClass('uk-active').attr('aria-hidden', 'true');
 
-                    if (nextmedia && nextmedia.is('video,iframe')) {
-                        $this.playmedia(nextmedia);
-                    }
+					$this.animating = false;
+					$this.current = index;
 
-                    next.addClass('uk-active').attr('aria-hidden', 'false');
-                    current.removeClass('uk-active').attr('aria-hidden', 'true');
+					UI.Utils.checkDisplay(next, '[class*="uk-animation-"]:not(.uk-cover-background.uk-position-cover)');
 
-                    $this.animating = false;
-                    $this.current   = index;
+					$this.trigger('show.uk.slideshow', [next, current, $this]);
+				};
 
-                    UI.Utils.checkDisplay(next, '[class*="uk-animation-"]:not(.uk-cover-background.uk-position-cover)');
+			$this.applyKenBurns(next);
 
-                    $this.trigger('show.uk.slideshow', [next, current, $this]);
-                };
+			// animation fallback
+			if (!UI.support.animation) {
+				animation = 'none';
+			}
 
-            $this.applyKenBurns(next);
+			current = UI.$(current);
+			next = UI.$(next);
 
-            // animation fallback
-            if (!UI.support.animation) {
-                animation = 'none';
-            }
+			$this.trigger('beforeshow.uk.slideshow', [next, current, $this]);
 
-            current = UI.$(current);
-            next    = UI.$(next);
+			Animations[animation].apply(this, [current, next, dir]).then(finalize);
 
-            $this.trigger('beforeshow.uk.slideshow', [next, current, $this]);
+			$this.triggers.removeClass('uk-active');
+			$this.triggers.filter('[data-uk-slideshow-item="' + index + '"]').addClass('uk-active');
+		},
 
-            Animations[animation].apply(this, [current, next, dir]).then(finalize);
+		applyKenBurns: function (slide) {
 
-            $this.triggers.removeClass('uk-active');
-            $this.triggers.filter('[data-uk-slideshow-item="'+index+'"]').addClass('uk-active');
-        },
+			if (!this.hasKenBurns(slide)) {
+				return;
+			}
 
-        applyKenBurns: function(slide) {
+			var animations = this.options.kenburnsanimations,
+				index = this.kbindex || 0;
 
-            if (!this.hasKenBurns(slide)) {
-                return;
-            }
 
-            var animations = this.options.kenburnsanimations,
-                index      = this.kbindex || 0;
+			slide.data('cover').attr('class', 'uk-cover-background uk-position-cover').width();
+			slide.data('cover').addClass(['uk-animation-scale', 'uk-animation-reverse', animations[index].trim()].join(' '));
 
+			this.kbindex = animations[index + 1] ? (index + 1) : 0;
+		},
 
-            slide.data('cover').attr('class', 'uk-cover-background uk-position-cover').width();
-            slide.data('cover').addClass(['uk-animation-scale', 'uk-animation-reverse', animations[index].trim()].join(' '));
+		hasKenBurns: function (slide) {
+			return (this.options.kenburns && slide.data('cover'));
+		},
 
-            this.kbindex = animations[index + 1] ? (index+1):0;
-        },
+		next: function () {
+			this.show(this.slides[this.current + 1] ? (this.current + 1) : 0, 1);
+		},
 
-        hasKenBurns: function(slide) {
-            return (this.options.kenburns && slide.data('cover'));
-        },
+		previous: function () {
+			this.show(this.slides[this.current - 1] ? (this.current - 1) : (this.slides.length - 1), -1);
+		},
 
-        next: function() {
-            this.show(this.slides[this.current + 1] ? (this.current + 1) : 0, 1);
-        },
+		start: function () {
 
-        previous: function() {
-            this.show(this.slides[this.current - 1] ? (this.current - 1) : (this.slides.length - 1), -1);
-        },
+			this.stop();
 
-        start: function() {
+			var $this = this;
 
-            this.stop();
+			this.interval = setInterval(function () {
+				if (!$this.hovering) $this.next();
+			}, this.options.autoplayInterval);
 
-            var $this = this;
+		},
 
-            this.interval = setInterval(function() {
-                if (!$this.hovering) $this.next();
-            }, this.options.autoplayInterval);
+		stop: function () {
+			if (this.interval) clearInterval(this.interval);
+		},
 
-        },
+		playmedia: function (media) {
 
-        stop: function() {
-            if (this.interval) clearInterval(this.interval);
-        },
+			if (!(media && media[0])) return;
 
-        playmedia: function(media) {
+			switch (media[0].nodeName) {
+				case 'VIDEO':
 
-            if (!(media && media[0])) return;
+					if (!this.options.videomute) {
+						media[0].muted = false;
+					}
 
-            switch(media[0].nodeName) {
-                case 'VIDEO':
+					media[0].play();
+					break;
+				case 'IFRAME':
 
-                    if (!this.options.videomute) {
-                        media[0].muted = false;
-                    }
+					if (!this.options.videomute) {
+						media[0].contentWindow.postMessage('{ "event": "command", "func": "unmute", "method":"setVolume", "value":1}', '*');
+					}
 
-                    media[0].play();
-                    break;
-                case 'IFRAME':
+					media[0].contentWindow.postMessage('{ "event": "command", "func": "playVideo", "method":"play"}', '*');
+					break;
+			}
+		},
 
-                    if (!this.options.videomute) {
-                        media[0].contentWindow.postMessage('{ "event": "command", "func": "unmute", "method":"setVolume", "value":1}', '*');
-                    }
+		pausemedia: function (media) {
 
-                    media[0].contentWindow.postMessage('{ "event": "command", "func": "playVideo", "method":"play"}', '*');
-                    break;
-            }
-        },
+			switch (media[0].nodeName) {
+				case 'VIDEO':
+					media[0].pause();
+					break;
+				case 'IFRAME':
+					media[0].contentWindow.postMessage('{ "event": "command", "func": "pauseVideo", "method":"pause"}', '*');
+					break;
+			}
+		},
 
-        pausemedia: function(media) {
+		mutemedia: function (media) {
 
-            switch(media[0].nodeName) {
-                case 'VIDEO':
-                    media[0].pause();
-                    break;
-                case 'IFRAME':
-                    media[0].contentWindow.postMessage('{ "event": "command", "func": "pauseVideo", "method":"pause"}', '*');
-                    break;
-            }
-        },
+			switch (media[0].nodeName) {
+				case 'VIDEO':
+					media[0].muted = true;
+					break;
+				case 'IFRAME':
+					media[0].contentWindow.postMessage('{ "event": "command", "func": "mute", "method":"setVolume", "value":0}', '*');
+					break;
+			}
+		}
+	});
 
-        mutemedia: function(media) {
+	Animations = {
 
-            switch(media[0].nodeName) {
-                case 'VIDEO':
-                    media[0].muted = true;
-                    break;
-                case 'IFRAME':
-                    media[0].contentWindow.postMessage('{ "event": "command", "func": "mute", "method":"setVolume", "value":0}', '*');
-                    break;
-            }
-        }
-    });
+		'none': function () {
 
-    Animations = {
+			var d = UI.$.Deferred();
+			d.resolve();
+			return d.promise();
+		},
 
-        'none': function() {
+		'scroll': function (current, next, dir) {
 
-            var d = UI.$.Deferred();
-            d.resolve();
-            return d.promise();
-        },
+			var d = UI.$.Deferred();
 
-        'scroll': function(current, next, dir) {
+			current.css('animation-duration', this.options.duration + 'ms');
+			next.css('animation-duration', this.options.duration + 'ms');
 
-            var d = UI.$.Deferred();
+			next.css('opacity', 1).one(UI.support.animation.end, function () {
 
-            current.css('animation-duration', this.options.duration+'ms');
-            next.css('animation-duration', this.options.duration+'ms');
+				current.css('opacity', 0).removeClass(dir == -1 ? 'uk-slideshow-scroll-backward-out' : 'uk-slideshow-scroll-forward-out');
+				next.removeClass(dir == -1 ? 'uk-slideshow-scroll-backward-in' : 'uk-slideshow-scroll-forward-in');
+				d.resolve();
 
-            next.css('opacity', 1).one(UI.support.animation.end, function() {
+			}.bind(this));
 
-                current.css('opacity', 0).removeClass(dir == -1 ? 'uk-slideshow-scroll-backward-out' : 'uk-slideshow-scroll-forward-out');
-                next.removeClass(dir == -1 ? 'uk-slideshow-scroll-backward-in' : 'uk-slideshow-scroll-forward-in');
-                d.resolve();
+			current.addClass(dir == -1 ? 'uk-slideshow-scroll-backward-out' : 'uk-slideshow-scroll-forward-out');
+			next.addClass(dir == -1 ? 'uk-slideshow-scroll-backward-in' : 'uk-slideshow-scroll-forward-in');
+			next.width(); // force redraw
 
-            }.bind(this));
+			return d.promise();
+		},
 
-            current.addClass(dir == -1 ? 'uk-slideshow-scroll-backward-out' : 'uk-slideshow-scroll-forward-out');
-            next.addClass(dir == -1 ? 'uk-slideshow-scroll-backward-in' : 'uk-slideshow-scroll-forward-in');
-            next.width(); // force redraw
+		'swipe': function (current, next, dir) {
 
-            return d.promise();
-        },
+			var d = UI.$.Deferred();
 
-        'swipe': function(current, next, dir) {
+			current.css('animation-duration', this.options.duration + 'ms');
+			next.css('animation-duration', this.options.duration + 'ms');
 
-            var d = UI.$.Deferred();
+			next.css('opacity', 1).one(UI.support.animation.end, function () {
 
-            current.css('animation-duration', this.options.duration+'ms');
-            next.css('animation-duration', this.options.duration+'ms');
+				current.css('opacity', 0).removeClass(dir === -1 ? 'uk-slideshow-swipe-backward-out' : 'uk-slideshow-swipe-forward-out');
+				next.removeClass(dir === -1 ? 'uk-slideshow-swipe-backward-in' : 'uk-slideshow-swipe-forward-in');
+				d.resolve();
 
-            next.css('opacity', 1).one(UI.support.animation.end, function() {
+			}.bind(this));
 
-                current.css('opacity', 0).removeClass(dir === -1 ? 'uk-slideshow-swipe-backward-out' : 'uk-slideshow-swipe-forward-out');
-                next.removeClass(dir === -1 ? 'uk-slideshow-swipe-backward-in' : 'uk-slideshow-swipe-forward-in');
-                d.resolve();
+			current.addClass(dir == -1 ? 'uk-slideshow-swipe-backward-out' : 'uk-slideshow-swipe-forward-out');
+			next.addClass(dir == -1 ? 'uk-slideshow-swipe-backward-in' : 'uk-slideshow-swipe-forward-in');
+			next.width(); // force redraw
 
-            }.bind(this));
+			return d.promise();
+		},
 
-            current.addClass(dir == -1 ? 'uk-slideshow-swipe-backward-out' : 'uk-slideshow-swipe-forward-out');
-            next.addClass(dir == -1 ? 'uk-slideshow-swipe-backward-in' : 'uk-slideshow-swipe-forward-in');
-            next.width(); // force redraw
+		'scale': function (current, next, dir) {
 
-            return d.promise();
-        },
+			var d = UI.$.Deferred();
 
-        'scale': function(current, next, dir) {
+			current.css('animation-duration', this.options.duration + 'ms');
+			next.css('animation-duration', this.options.duration + 'ms');
 
-            var d = UI.$.Deferred();
+			next.css('opacity', 1);
 
-            current.css('animation-duration', this.options.duration+'ms');
-            next.css('animation-duration', this.options.duration+'ms');
+			current.one(UI.support.animation.end, function () {
 
-            next.css('opacity', 1);
+				current.css('opacity', 0).removeClass('uk-slideshow-scale-out');
+				d.resolve();
 
-            current.one(UI.support.animation.end, function() {
+			}.bind(this));
 
-                current.css('opacity', 0).removeClass('uk-slideshow-scale-out');
-                d.resolve();
+			current.addClass('uk-slideshow-scale-out');
+			current.width(); // force redraw
 
-            }.bind(this));
+			return d.promise();
+		},
 
-            current.addClass('uk-slideshow-scale-out');
-            current.width(); // force redraw
+		'fade': function (current, next, dir) {
 
-            return d.promise();
-        },
+			var d = UI.$.Deferred();
 
-        'fade': function(current, next, dir) {
+			current.css('animation-duration', this.options.duration + 'ms');
+			next.css('animation-duration', this.options.duration + 'ms');
 
-            var d = UI.$.Deferred();
+			next.css('opacity', 1);
 
-            current.css('animation-duration', this.options.duration+'ms');
-            next.css('animation-duration', this.options.duration+'ms');
+			// for plain text content slides - looks smoother
+			if (!(next.data('cover') || next.data('placeholder'))) {
 
-            next.css('opacity', 1);
+				next.css('opacity', 1).one(UI.support.animation.end, function () {
+					next.removeClass('uk-slideshow-fade-in');
+				}).addClass('uk-slideshow-fade-in');
+			}
 
-            // for plain text content slides - looks smoother
-            if (!(next.data('cover') || next.data('placeholder'))) {
+			current.one(UI.support.animation.end, function () {
 
-                next.css('opacity', 1).one(UI.support.animation.end, function() {
-                    next.removeClass('uk-slideshow-fade-in');
-                }).addClass('uk-slideshow-fade-in');
-            }
+				current.css('opacity', 0).removeClass('uk-slideshow-fade-out');
+				d.resolve();
 
-            current.one(UI.support.animation.end, function() {
+			}.bind(this));
 
-                current.css('opacity', 0).removeClass('uk-slideshow-fade-out');
-                d.resolve();
+			current.addClass('uk-slideshow-fade-out');
+			current.width(); // force redraw
 
-            }.bind(this));
+			return d.promise();
+		}
+	};
 
-            current.addClass('uk-slideshow-fade-out');
-            current.width(); // force redraw
+	UI.slideshow.animations = Animations;
 
-            return d.promise();
-        }
-    };
+	// Listen for messages from the vimeo player
+	window.addEventListener('message', function onMessageReceived(e) {
 
-    UI.slideshow.animations = Animations;
+		var data = e.data, iframe;
 
-    // Listen for messages from the vimeo player
-    window.addEventListener('message', function onMessageReceived(e) {
+		if (typeof(data) == 'string') {
 
-        var data = e.data, iframe;
+			try {
+				data = JSON.parse(data);
+			} catch (err) {
+				data = {};
+			}
+		}
 
-        if (typeof(data) == 'string') {
+		if (e.origin && e.origin.indexOf('vimeo') > -1 && data.event == 'ready' && data.player_id) {
+			iframe = UI.$('[data-player-id="' + data.player_id + '"]');
 
-            try {
-                data = JSON.parse(data);
-            } catch(err) {
-                data = {};
-            }
-        }
-
-        if (e.origin && e.origin.indexOf('vimeo') > -1 && data.event == 'ready' && data.player_id) {
-            iframe = UI.$('[data-player-id="'+ data.player_id+'"]');
-
-            if (iframe.length) {
-                iframe.data('slideshow').mutemedia(iframe);
-            }
-        }
-    }, false);
+			if (iframe.length) {
+				iframe.data('slideshow').mutemedia(iframe);
+			}
+		}
+	}, false);
 
 });

@@ -45,11 +45,14 @@ class nerudasInstallerScript
 	 *
 	 * @since    4.9.6
 	 */
-	function preflight( $type, $parent ) {
+	function preflight($type, $parent)
+	{
 		$path = JPATH_SITE . '/templates/nerudas';
-		if (JFolder::exists($path)) {
+		if (JFolder::exists($path))
+		{
 			JFolder::delete($path);
 		}
+
 		return true;
 	}
 

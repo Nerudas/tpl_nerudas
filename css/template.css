@@ -189,6 +189,7 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
 }
+
 #profiles.itemlist .items .item .region img {
 	height: 25px;
 	opacity: 0.7;
@@ -3407,6 +3408,7 @@ svg[data-name="Nerudas"] .dots .background {
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+
 #home .uk-container {
 	max-width: 1380px;
 }

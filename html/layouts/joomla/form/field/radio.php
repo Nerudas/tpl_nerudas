@@ -54,7 +54,7 @@ if ($btn_group)
 				}
 			}
 			$optionClass = 'class="' . $optionClass . '"';
-			$attributes = array_filter(array($checked, $optionClass, $disabled, $onchange, $onclick));
+			$attributes  = array_filter(array($checked, $optionClass, $disabled, $onchange, $onclick));
 			if ($required)
 			{
 				$attributes[] = 'required aria-required="true"';

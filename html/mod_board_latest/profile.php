@@ -20,7 +20,6 @@ HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' 
 HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative' => true));
 
 
-
 ?>
 <div class="board-lastes-module">
 	<?php if ($items) : ?>
