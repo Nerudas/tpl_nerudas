@@ -111,20 +111,11 @@ $this->item->company             = NerudasK2Helper::getRelatedItem($this->item->
 						<?php echo $this->item->title; ?>
 					</h1>
 					<?php if (isset($this->item->editLink)): ?>
-						<div class="uk-float-right uk-margin-left uk-position-relative"
-							 data-uk-dropdown="{mode:'click'}">
-							<a class="uk-icon-ellipsis-h uk-icon-small uk-icon-hover  uk-text-muted">
+						<div class="uk-float-right uk-margin-left">
+							<a href="<?php echo $this->item->editLink; ?>">
+								<i class="uk-icon-pencil uk-margin-small-right"></i>
+								<?php echo JText::_('NERUDAS_EDIT'); ?>
 							</a>
-							<div class="uk-dropdown">
-								<ul class="uk-nav uk-nav-dropdown">
-									<li>
-										<a href="<?php echo $this->item->editLink; ?>">
-											<i class="uk-icon-pencil uk-margin-small-right"></i>
-											<?php echo JText::_('NERUDAS_EDIT'); ?>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</div>
 					<?php endif; ?>
 				</div>
