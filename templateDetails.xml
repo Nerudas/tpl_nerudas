@@ -2,12 +2,12 @@
 <extension type="template" version="3.5" method="upgrade" client="site">
 	<name>nerudas</name>
 	<author>Nerudas</author>
-	<creationDate>April 2018</creationDate>
+	<creationDate>May 2018</creationDate>
 	<copyright>Copyright (c) 2015 - 2018 Nerudas. All rights reserved.</copyright>
 	<license>>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@nerudas.ru</authorEmail>
 	<authorUrl>nerudas.ru</authorUrl>
-	<version>4.9.8</version>
+	<version>4.9.9</version>
 	<description>TPL_NERUDAS_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<files>
