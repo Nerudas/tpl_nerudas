@@ -91,21 +91,8 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	overflow: hidden;
 }
 
-/* Articles
-========================================================================== */
-#articles.itemlist > .item.category h1 {
-	line-height: 1;
-}
-
-#articles.itemlist > .item.category .title {
-	font-size: 1.125rem;
-	letter-spacing: 0.1rem;
-	text-transform: uppercase;
-}
-
 /* Companies
 ========================================================================== */
-
 #companies.itemlist .items .item .logo {
 	height: 20px;
 }
