@@ -15,26 +15,58 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Layout\LayoutHelper;
 
+HTMLHelper::_('jquery.framework');
 HTMLHelper::_('formbehavior.chosen', 'select');
 
-$filters = array_keys($this->filterForm->getGroup('filter'));
 ?>
-<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm">
-	<?php foreach ($filters as $filter): ?>
-		<?php echo $this->filterForm->renderField(str_replace('filter_', '', $filter), 'filter'); ?>
-	<?php endforeach; ?>
-	<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-	<a href="<?php echo $this->link; ?>"><?php echo Text::_('JCLEAR'); ?></a>
-</form>
-<?php if (!empty($this->items))
-{
-	foreach ($this->items as $item)
-	{
-		echo LayoutHelper::render($item->layout, $item);
-	}
-}; ?>
+<div id="info" class="itemlist">
+	<?php echo LayoutHelper::render('template.title', array()); ?>
 
+	<div class="uk-panel uk-panel-box uk-margin-bottom uk-panel-box-secondary">
+		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
+			  class="uk-form filter">
+			<div class="uk-form-row">
+				<div class="uk-grid uk-grid-small" data-uk-margin>
+					<div class="uk-width-small-1-2 uk-width-medium-2-5">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('tag', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('tag', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('tag', 'filter'); ?>
+					</div>
+					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-flex uk-flex-space-between">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('search', 'filter'); ?>
+						<div class="uk-button-group left-input advanced-fiter">
+							<a href="<?php echo $this->link; ?>"
+							   class="uk-button uk-text-danger uk-icon-times">
+							</a>
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
+									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 
-<?php echo $this->pagination->getListFooter(); ?>
+	<?php if ($this->items) : ?>
+		<div class="items">
+			<?php
+			$count = count($this->items);
+			$half  = round($count / 2);
+			$i     = 1;
+			foreach ($this->items as $id => $item): ?>
+				<?php if ($i == $half): ?>
 
-
+				<?php endif; ?>
+				<?php echo LayoutHelper::render($item->layout, $item); ?>
+			<?php endforeach; ?>
+		</div>
+		<div>
+			<?php echo $this->pagination->getPagesLinks(); ?>
+		</div>
+	<?php endif; ?>
+</div>
