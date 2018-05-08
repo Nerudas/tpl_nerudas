@@ -490,21 +490,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	}
 }
 
-/* news
-========================================================================== */
-#news.category > .item.category h1 {
-	line-height: 1;
-}
-
-#news.category > .item.category .title {
-	font-size: 1.125rem;
-	letter-spacing: 0.1rem;
-	text-transform: uppercase;
-}
-
-#news.category > .item.rabotaem {
-	background: #FDFDFD;
-}
 
 /*  Yandex Share
 ========================================================================== */
