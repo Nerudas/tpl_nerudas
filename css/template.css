@@ -3388,3 +3388,8 @@ svg[data-name="Nerudas"] .dots .background {
 [data-uk-switcher-tabs] > li {
 	min-height: 500px;
 }
+
+.uk-flex-space-between-vertical {
+	justify-content: space-between;
+	flex-direction: column;
+}

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @package    Nerudas Template
  * @version    4.9.9
@@ -10,4 +10,50 @@
 
 defined('_JEXEC') or die;
 
-echo '<pre>', print_r('image', true), '</pre>';
+use Joomla\CMS\HTML\HTMLHelper;
+
+$item = $displayData;
+
+?>
+
+<div class="item image  uk-margin-bottom">
+	<a class="uk-overlay uk-overlay-hover uk-display-block uk-container-center uk-width-medium-1-2"
+	   href="<?php echo $item->link; ?>">
+		<div class="uk-text-center">
+			<img src="<?php echo $item->introimage; ?>" alt="<?php echo $item->title; ?>">
+		</div>
+		<div class="uk-overlay-panel uk-overlay-panel-small uk-overlay-background uk-contras uk-flex uk-flex-space-between-vertical">
+			<div class="meta-info uk-flex uk-flex-space-between uk-margin-bottom">
+				<div class="uk-text-right">
+					<div class="uk-text-nowrap">
+						<time class="timeago uk-badge uk-badge-white uk-text-nowrap"
+							  data-uk-tooltip
+							  datetime="<?php echo HTMLHelper::date($item->created, 'c'); ?>"
+							  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
+					</div>
+				</div>
+				<div class="uk-text-left uk-margin-small-bottom uk-text-nowrap">
+						<span class="uk-badge uk-badge-white uk-margin-small-left">
+							<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+						</span>
+					<span class="uk-badge uk-badge-white uk-margin-small-left">
+							<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+						</span>
+				</div>
+			</div>
+			<h2 class="title uk-text-medium">
+				<?php echo $item->title; ?>
+			</h2>
+			<div class="text uk-text-small uk-margin-small-bottom"><?php echo $item->introtext; ?></div>
+			<?php if (!empty($item->tags->itemTags)): ?>
+				<div class="tags uk-margin-small-bottom">
+					<?php foreach ($item->tags->itemTags as $tag): ?>
+						<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+							<?php echo $tag->title; ?>
+						</span>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+	</a>
+</div>

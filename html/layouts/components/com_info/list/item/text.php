@@ -10,4 +10,52 @@
 
 defined('_JEXEC') or die;
 
-echo '<pre>', print_r('text', true), '</pre>';
+use Joomla\CMS\HTML\HTMLHelper;
+
+$item = $displayData;
+
+?>
+
+<div class="item text uk-panel uk-panel-box uk-margin-bottom">
+	<div class="uk-grid uk-grid-small" data-uk-grid-match data-uk-grid-margin>
+		<div class="uk-width-medium-1-5 uk-flex uk-flex-middle">
+			<div class="uk-text-nowrap">
+				<time class="timeago uk-text-nowrap "
+					  data-uk-tooltip
+					  datetime="<?php echo HTMLHelper::date($item->created, 'c'); ?>"
+					  title="<?php echo HTMLHelper::date($item->created, 'd.m.Y H:i'); ?>"></time>
+			</div>
+		</div>
+		<div class="uk-width-medium-4-5">
+			<h2 class="title uk-margin-small-bottom uk-text-medium">
+				<a href="<?php echo $item->link; ?>" class="uk-link-muted">
+					<?php echo $item->title; ?>
+				</a>
+			</h2>
+			<div class="text uk-margin-small-bottom"><?php echo $item->introtext; ?></div>
+		</div>
+	</div>
+	<div class="meta-info uk-flex uk-flex-space-between">
+		<div>
+			<?php if (!empty($item->tags->itemTags)): ?>
+				<div class="tags">
+					<?php foreach ($item->tags->itemTags as $tag): ?>
+						<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+							<?php echo $tag->title; ?>
+						</span>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+		<div class="uk-text-left uk-margin-small-bottom uk-text-nowrap">
+			<a href="<?php echo $item->link; ?>"
+			   class="uk-badge uk-badge-white uk-margin-small-left">
+				<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+			</a>
+			<a href="<?php echo $item->link; ?>#comments"
+			   class="uk-badge uk-badge-white uk-margin-small-left">
+				<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+			</a>
+		</div>
+	</div>
+</div>
