@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 $item = $displayData;
 
@@ -31,6 +32,11 @@ $item = $displayData;
 				<a href="<?php echo $item->link; ?>" class="uk-link-muted">
 					<?php echo $item->title; ?>
 				</a>
+				<?php if ($item->in_work): ?>
+					<sup class="uk-badge uk-badge-danger uk-margin-small-left">
+						<?php echo Text::_('COM_INFO_ITEM_IN_WORK'); ?>
+					</sup>
+				<?php endif; ?>
 			</h2>
 			<div class="text uk-margin-small-bottom"><?php echo $item->introtext; ?></div>
 		</div>

@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 $item = $displayData;
 
@@ -33,16 +34,21 @@ $item = $displayData;
 					</div>
 				</div>
 				<div class="uk-text-left uk-margin-small-bottom uk-text-nowrap">
-						<span class="uk-badge uk-badge-white uk-margin-small-left">
-							<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
-						</span>
 					<span class="uk-badge uk-badge-white uk-margin-small-left">
-							<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+						<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+					</span>
+					<span class="uk-badge uk-badge-white uk-margin-small-left">
+						<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+					</span>
+					<?php if ($item->in_work): ?>
+						<span class="uk-badge uk-badge-danger uk-margin-small-left">
+							<?php echo Text::_('COM_INFO_ITEM_IN_WORK'); ?>
 						</span>
+					<?php endif; ?>
 				</div>
 			</div>
 			<h2 class="title uk-text-medium">
-				<?php echo $item->title; ?>
+				<span><?php echo $item->title; ?></span>
 			</h2>
 			<div class="text uk-text-small uk-margin-small-bottom"><?php echo $item->introtext; ?></div>
 			<?php if (!empty($item->tags->itemTags)): ?>
