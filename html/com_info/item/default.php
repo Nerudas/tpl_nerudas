@@ -17,9 +17,6 @@ use Joomla\CMS\Language\Text;
 HTMLHelper::_('script', '//yastatic.net/es5-shims/0.0.2/es5-shims.min.js', array('version' => 'auto', 'relative' => true));
 HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'auto', 'relative' => true));
 
-//echo '<pre>', print_r($this->item, true), '</pre>';
-//echo '<pre>', print_r($this->related, true), '</pre>';
-
 ?>
 <div id="info" class="item">
 	<?php echo LayoutHelper::render('template.title'); ?>
