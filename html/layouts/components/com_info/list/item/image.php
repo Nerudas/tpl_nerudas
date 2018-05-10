@@ -47,9 +47,9 @@ $item = $displayData;
 					<?php endif; ?>
 				</div>
 			</div>
-			<h2 class="title uk-text-medium">
+			<div class="uk-h2title uk-text-medium">
 				<span><?php echo $item->title; ?></span>
-			</h2>
+			</div>
 			<div class="text uk-text-small uk-margin-small-bottom"><?php echo $item->introtext; ?></div>
 			<?php if (!empty($item->tags->itemTags)): ?>
 				<div class="tags uk-margin-small-bottom">

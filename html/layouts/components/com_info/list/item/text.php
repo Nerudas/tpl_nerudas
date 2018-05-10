@@ -28,7 +28,7 @@ $item = $displayData;
 			</div>
 		</div>
 		<div class="uk-width-medium-4-5">
-			<h2 class="title uk-margin-small-bottom uk-text-medium">
+			<div class="uk-h2 title uk-margin-small-bottom uk-text-medium">
 				<a href="<?php echo $item->link; ?>" class="uk-link-muted">
 					<?php echo $item->title; ?>
 				</a>
@@ -37,7 +37,7 @@ $item = $displayData;
 						<?php echo Text::_('COM_INFO_ITEM_IN_WORK'); ?>
 					</sup>
 				<?php endif; ?>
-			</h2>
+			</div>
 			<div class="text uk-margin-small-bottom"><?php echo $item->introtext; ?></div>
 		</div>
 	</div>

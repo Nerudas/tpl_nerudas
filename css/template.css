@@ -477,7 +477,6 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	}
 }
 
-
 /*  Yandex Share
 ========================================================================== */
 .ya-share2__container_size_m .ya-share2__icon {
@@ -3366,6 +3365,34 @@ svg[data-name="Nerudas"] .dots .background {
 
 #pages .item-content {
 	position: static;
+}
+
+/* Info
+========================================================================== */
+
+#info.item > .header {
+	position: relative;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#info.item > .header .bg {
+	width: 100%;
+	height: 236px;
+	background-color: #e5e5e5;
+}
+
+#info.item > .header .bg .logo {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	max-height: 50%;
+	max-width: 50%;
+}
+
+#info.item > .header .info {
+	background: #fff;
+	min-height: 64px;
+	box-sizing: border-box;
 }
 
 /* Home
