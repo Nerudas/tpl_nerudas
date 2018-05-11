@@ -2374,7 +2374,11 @@ a.uk-thumbnail:focus, a.uk-thumbnail:hover, a.uk-thumbnail-border:focus, a.uk-th
 	text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.uk-pagination > .uk-active > span {
+.uk-pagination > .uk-active > span,
+.uk-pagination > .uk-active > a,
+.uk-pagination > .uk-active > a:active,
+.uk-pagination > .uk-active > a:hover,
+.uk-pagination > .uk-active > a:focus {
 	border: 1px solid rgba(0, 0, 0, 0.06);
 	background: #ffcc00;
 	color: #000;
