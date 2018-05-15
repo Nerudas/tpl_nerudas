@@ -23,9 +23,6 @@ HTMLHelper::_('behavior.formvalidator');
 	  class="form-validate uk-form uk-form-horizontal">
 	<?php echo LayoutHelper::render('template.title', array()); ?>
 	<div class="uk-panel uk-panel-box">
-		<div class="uk-form-row">
-			<?php echo Text::_('COM_USERS_RESET_CONFIRM_LABEL'); ?>
-		</div>
 		<?php echo $this->form->renderField('username'); ?>
 		<?php echo $this->form->renderField('token'); ?>
 		<div class="uk-form-row">
