@@ -29,7 +29,9 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 		<div class="info uk-flex uk-flex-middle uk-padding-small">
 			<div class="content uk-grid uk-grid-small uk-width-1-1" data-uk-grid-match>
 				<div class="uk-width-1-2 uk-width-medium-3-4 uk-text-large uk-text-uppercase-letter uk-flex uk-flex-middle">
-					<div class="uk-padding-left"><?php echo $this->item->title; ?></div>
+					<div class="uk-padding-left">
+						<?php echo $this->item->params->get('alternative_title', $this->item->title); ?>
+					</div>
 				</div>
 				<div class="uk-width-1-2 uk-width-medium-1-4 uk-flex uk-flex-middle uk-flex-right">
 					<div class="uk-width-1-1 uk-text-right">
@@ -96,7 +98,7 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 			<?php echo $this->item->params->get('comments_title', Text::_('COM_INFO_ITEM_COMMENTS')); ?>
 		</h2>
 		<div class="uk-text-muted uk-text-large uk-text-center">
-			<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
+			<?php echo Text::_('TPL_NERUDAS_COMMENTS_IN_DEVELOPING'); ?>
 		</div>
 	</div>
 </div>
