@@ -22,8 +22,8 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 	<?php echo LayoutHelper::render('template.title'); ?>
 	<div class="header uk-margin-bottom">
 		<?php if ($this->item->header): ?>
-			<div class="bg uk-cover-background uk-flex uk-flex-middle uk-flex-center"
-				 style="background-image: url('<?php echo $this->item->header; ?>');">
+			<div class="bg uk-flex uk-flex-middle uk-flex-center">
+				<img src="<?php echo $this->item->header; ?>" alt="<?php echo $this->item->title; ?>">
 			</div>
 		<?php endif; ?>
 		<div class="info uk-flex uk-flex-middle uk-padding-small">
@@ -84,10 +84,9 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 			<h2>
 				<?php echo $this->item->params->get('related_title', Text::_('COM_INFO_ITEM_RELATED')); ?>
 			</h2>
-			<div class="">
+			<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
 				<?php foreach ($this->related as $item): ?>
-					<?php echo LayoutHelper::render('components.com_info.list.item.related', $item); ?>
-
+					<?php echo LayoutHelper::render('components.com_info.item.related', $item); ?>
 				<?php endforeach; ?>
 			</div>
 		</div>

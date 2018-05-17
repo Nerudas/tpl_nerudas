@@ -3380,8 +3380,9 @@ svg[data-name="Nerudas"] .dots .background {
 
 #info.item > .header .bg {
 	width: 100%;
-	height: 236px;
+	max-height: 236px;
 	background-color: #e5e5e5;
+	overflow: hidden;
 }
 
 #info.item > .header .bg .logo {
