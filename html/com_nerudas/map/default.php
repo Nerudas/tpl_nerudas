@@ -158,9 +158,6 @@ echo $this->loadTemplate('script')
 <div id="baloon" class="uk-modal">
 	<div class="uk-modal-dialog uk-modal-dialog-large">
 		<button class="uk-modal-close uk-close" type="button"></button>
-		<h4 class="uk-modal-header">
-			<?php echo JText::_('NERUDAS_MAP_OBJECTS_LIST'); ?>
-		</h4>
 		<div class="loading">
 			<i class="uk-icon-spinner uk-icon-spin uk-margin-small-right"></i>
 			<?php echo JText::_('NERUDAS_LOADING_DATA'); ?>

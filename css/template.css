@@ -554,7 +554,7 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 #map-sidebar {
 	float: left;
 	width: 310px;
-	padding: 0;
+	padding: 0 10px 0;
 	border-right: 1px solid #E5E5E5;
 	overflow-y: auto;
 	box-sizing: border-box;

@@ -26,7 +26,7 @@ $doc = JFactory::getDocument();
 						   placeholder="<?php echo JText::_('NERUDAS_TITLE'); ?>">
 				</div>
 			</div>
-			<div class="uk-form-row">
+			<div class="uk-form-row uk-hidden">
 				<label class="uk-form-label"><?php echo JText::_('NERUDAS_CATEGORY'); ?></label>
 				<div class="uk-form-controls">
 					<?php echo $this->get('params')->form->categories; ?>
