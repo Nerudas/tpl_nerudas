@@ -49,6 +49,13 @@ $item = $displayData;
 		<?php endif; ?>
 	</div>
 	<div class="text uk-margin-small-bottom uk-text-muted"><?php echo $item->introtext; ?></div>
+	<?php if ($item->introimage): ?>
+	<div>
+		<a href="<?php echo $item->link; ?>">
+			<img src="<?php echo $item->introimage; ?>" alt="<?php echo $item->title; ?>" class="uk-width-1-1">
+		</a>
+	</div>
+	<?php endif; ?>
 	<div class="uk-margin-small-top">
 		<?php if (!empty($item->tags->itemTags)): ?>
 			<div class="tags">
