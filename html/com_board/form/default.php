@@ -35,8 +35,8 @@ $doc->addScriptDeclaration('
 
 
 ?>
-<form action="<?php echo Route::_('index.php?option=com_board&view=items&id=' . $this->item->id); ?>"
-	  method="post" name="adminForm" id="board" class="form form-validate uk-form uk-margin-bottom"
+<form action="<?php echo Route::_(BoardHelperRoute::getFormRoute($this->item->id)); ?>" method="post"
+	  name="adminForm" id="board" class="form form-validate uk-form uk-margin-bottom"
 	  enctype="multipart/form-data">
 
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
