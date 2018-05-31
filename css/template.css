@@ -3424,3 +3424,8 @@ svg[data-name="Nerudas"] .dots .background {
 	justify-content: space-between;
 	flex-direction: column;
 }
+
+.uk-text-normal {
+	font-size: 1rem;
+	line-height: 1.429rem;
+}
