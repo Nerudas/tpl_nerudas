@@ -11,6 +11,8 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $children = array();
 $actives  = array();
@@ -30,36 +32,40 @@ foreach ($this->categories as $category)
 	$children[$category->parent_id][$category->id] = $category;
 }
 ?>
+<div id="add" class="itemlist uk-margin-large-bottom">
+	<form action="<?php echo Route::_(DiscussionsHelperRoute::getTopicFormRoute()); ?>"
+		  id="board" class="form-cartegories form form-validate" method="get">
+		<?php echo LayoutHelper::render('template.title', array('cancel' => Route::_(DiscussionsHelperRoute::getTopicsRoute()))); ?>
+		<div class="itemlist uk-panel uk-panel-box uk-margin-bottom">
+			<?php foreach ($root as $item): ?>
+				<div class="item uk-margin-large-bottom">
+					<h2><?php echo $item->title; ?></h2>
 
-<form action="<?php echo Route::_(DiscussionsHelperRoute::getTopicFormRoute()); ?>"
-	  method="get">
-	<ul>
-		<?php foreach ($root as $item): ?>
-			<li>
-				<div>
-					<label for="category_<?php echo $item->id; ?>">
-						<input id="category_<?php echo $item->id; ?>" type="radio" name="category"
-							   value="<?php echo $item->id; ?>" onchange="this.form.submit();" style="display: none;">
-						<?php echo $item->title; ?>
-					</label>
-				</div>
-				<?php if (!empty($children[$item->id])): ?>
-					<ul>
-						<?php foreach ($children[$item->id] as $child) : ?>
-							<li>
-								<div>
-									<label for="category_<?php echo $child->id; ?>">
-										<input id="category_<?php echo $child->id; ?>" type="radio" name="category"
-											   value="<?php echo $child->id; ?>" onchange="this.form.submit();"
-											   style="display: none;">
-										<?php echo $child->title; ?>
+					<?php if (!empty($children[$item->id])): ?>
+						<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
+							<?php foreach ($children[$item->id] as $child) : ?>
+								<div class="uk-text-center uk-width-xsmall-1-3 uk-width-small-1-4 uk-width-medium-1-5 uk-width-large-1-5 uk-width-xlarge-1-5">
+									<label for="category_<?php echo $child->id; ?>"
+										   class="uk-display-block uk-link-muted">
+										<div>
+											<input id="category_<?php echo $child->id; ?>" type="radio" name="category"
+												   value="<?php echo $child->id; ?>" onchange="this.form.submit();"
+												   class="uk-hidden">
+											<?php if (!empty($child->icon))
+											{
+												echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
+											}
+											?>
+											<div class="uk-text-small"><?php echo $child->title; ?></div>
+										</div>
 									</label>
 								</div>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-			</li>
-		<?php endforeach; ?>
-	</ul>
-</form>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+				</div>
+			<?php endforeach; ?>
+		</div>
+	</form>
+</div>

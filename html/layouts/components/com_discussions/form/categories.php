@@ -53,52 +53,45 @@ foreach ($categories as $category)
 
 	$i++;
 }
-if (empty($first))
-{
-	$first = 'extd';
-}
-
 
 ?>
+
 <div data-input-discussionscategories="">
-	<div class="currents">
-		<ul class="actives">
-			<?php foreach ($actives as $active): ?>
-				<li class="item">
-					<?php echo $active; ?>
-				</li>
-			<?php endforeach; ?>
-		</ul>
+	<div class="uk-flex uk-flex-wrap uk-flex-space-between">
+		<div class="uk-h3">
+			<?php echo Text::_('JTAG'); ?>
+		</div>
+		<div class="currents">
+			<ul class="actives">
+				<?php foreach ($actives as $active): ?>
+					<li class="item">
+						<?php echo $active; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
 	</div>
 	<div id="categorySelect" class="">
-		<div class="tabbable tabs-left">
-			<?php echo HTMLHelper::_('bootstrap.startTabSet', 'categories', array('active' => $first, 'class' => ' tabs-left')); ?>
-			<?php foreach ($root as $item): ?>
-				<?php echo HTMLHelper::_('bootstrap.addTab', 'categories', $item->id, $item->title); ?>
-				<div class="categories">
-					<?php if (!empty($children[$item->id])): ?>
-						<?php foreach ($children[$item->id] as $child) : ?>
-							<a class="item <?php if ($child->active) echo 'active'; ?>"
-							   data-tags="[<?php echo implode(',', $child->tags); ?>]"
-							   data-title="<?php echo $child->title; ?>">
-								<?php if (!empty($child->icon))
-								{
-									echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
-								}
-								?>
-								<span class="title"><?php echo $child->title; ?></span>
-							</a>
-						<?php endforeach; ?>
-					<?php endif; ?>
-				</div>
-				<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
-			<?php endforeach; ?>
-
-			<?php echo HTMLHelper::_('bootstrap.addTab', 'categories', 'extd', Text::_('COM_DISCUSSIONS_TOPIC_CATEGORIES_EXTENDED')); ?>
+		<?php foreach ($root as $item): ?>
+			<div class="categories uk-hidden">
+				<?php if (!empty($children[$item->id])): ?>
+					<?php foreach ($children[$item->id] as $child) : ?>
+						<a class="item <?php if ($child->active) echo 'active'; ?>"
+						   data-tags="[<?php echo implode(',', $child->tags); ?>]"
+						   data-title="<?php echo $child->title; ?>">
+							<?php if (!empty($child->icon))
+							{
+								echo HTMLHelper::_('image', $child->icon, $child->title, array('title' => $child->title));
+							}
+							?>
+							<span class="title"><?php echo $child->title; ?></span>
+						</a>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+		<?php endforeach; ?>
+		<div>
 			<?php echo $form->getInput('tags'); ?>
-			<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
-
-			<?php echo HTMLHelper::_('bootstrap.endTabSet'); ?>
 		</div>
 	</div>
 </div>

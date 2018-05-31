@@ -26,27 +26,43 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 $doc->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
-		if (task == "topic.cancel" || document.formvalidator.isValid(document.getElementById("item-form")))
+		if (task == "topic.cancel" || document.formvalidator.isValid(document.getElementById("discussions")))
 		{
 			Joomla.submitform(task, document.getElementById("item-form"));
 		}
 	};
 ');
 ?>
-<form action="<?php echo Route::_(DiscussionsHelperRoute::getTopicFormRoute($this->item->id)); ?>"
-	  method="post"
-	  name="adminForm" id="item-form" class="form-validate" enctype="multipart/form-data">
-	<?php echo $this->form->renderField('title'); ?>
-	<?php echo LayoutHelper::render('components.com_discussions.form.categories', $this); ?>
-	<?php echo $this->form->renderField('text'); ?>
-
-	<?php echo $this->form->renderField('images'); ?>
-
+<form action="<?php echo Route::_(DiscussionsHelperRoute::getTopicFormRoute($this->item->id)); ?>" method="post"
+	  name="adminForm" id="discussions" class="form form-validate uk-form uk-margin-bottom"
+	  enctype="multipart/form-data">
+	<?php echo LayoutHelper::render('template.title', array('form' => 'topic')); ?>
+	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
+		<?php echo $this->form->renderField('title'); ?>
+		<?php
+		$class = $this->form->getFieldAttribute('actual', 'class', '', '') . ' wrap';
+		$this->form->setFieldAttribute('actual', 'class', $class, '');
+		echo $this->form->renderField('actual'); ?>
+		<div class="uk-form-row">
+			<?php echo $this->form->getInput('text'); ?>
+		</div>
+	</div>
+	<div class="uk-panel uk-panel-box uk-margin-bottom">
+		<?php echo LayoutHelper::render('components.com_discussions.form.categories', $this); ?>
+	</div>
 	<?php echo $this->form->renderFieldSet('hidden'); ?>
+
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>"/>
 	<?php echo HTMLHelper::_('form.token'); ?>
 
-	<button onclick="Joomla.submitbutton('topic.save');"><?php echo Text::_('JAPPLY'); ?></button>
-	<button onclick="Joomla.submitbutton('topic.cancel');"><?php echo Text::_('JCANCEL'); ?></button>
+	<div class="uk-form-row uk-text-center">
+		<button onclick="Joomla.submitbutton('topic.cancel');"
+				class="uk-button uk-button-danger">
+			<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
+		</button>
+		<button onclick="Joomla.submitbutton('topic.save');" class="uk-button uk-button-success">
+			<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
+		</button>
+	</div>
 </form>
