@@ -506,6 +506,9 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	line-height: 18px;
 	white-space: nowrap;
 }
+.uk-badge.uk-text-small {
+	font-size: 12px !important;
+}
 
 .uk-badge.uk-badge-white,
 .uk-badge.uk-badge-white:hover {
@@ -3428,4 +3431,7 @@ svg[data-name="Nerudas"] .dots .background {
 .uk-text-normal {
 	font-size: 1rem;
 	line-height: 1.429rem;
+}
+hr.mutted {
+	border-color: #f0f0f0;
 }

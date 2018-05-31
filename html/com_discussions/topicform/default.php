@@ -26,16 +26,16 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 $doc->addScriptDeclaration('
 	Joomla.submitbutton = function(task)
 	{
-		if (task == "topic.cancel" || document.formvalidator.isValid(document.getElementById("discussions")))
+		if (task == "topic.cancel" || document.formvalidator.isValid(document.getElementById("item-form")))
 		{
 			Joomla.submitform(task, document.getElementById("item-form"));
 		}
 	};
 ');
 ?>
-<form action="<?php echo Route::_(DiscussionsHelperRoute::getTopicFormRoute($this->item->id)); ?>" method="post"
-	  name="adminForm" id="discussions" class="form form-validate uk-form uk-margin-bottom"
-	  enctype="multipart/form-data">
+<form action="<?php echo Route::_(DiscussionsHelperRoute::getTopicFormRoute($this->item->id)); ?>"
+	  method="post"
+	  name="adminForm" id="item-form" class="form-validate uk-form" enctype="multipart/form-data">
 	<?php echo LayoutHelper::render('template.title', array('form' => 'topic')); ?>
 	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
 		<?php echo $this->form->renderField('title'); ?>
@@ -45,6 +45,14 @@ $doc->addScriptDeclaration('
 		echo $this->form->renderField('actual'); ?>
 		<div class="uk-form-row">
 			<?php echo $this->form->getInput('text'); ?>
+		</div>
+	</div>
+	<div class="uk-panel uk-panel-box uk-margin-bottom">
+		<div class="uk-panel-title uk-h3">
+			<?php echo Text::_('COM_DISCUSSIONS_TOPIC_IMAGES'); ?>
+		</div>
+		<div>
+			<?php echo $this->form->getInput('images'); ?>
 		</div>
 	</div>
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
