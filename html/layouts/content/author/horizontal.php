@@ -10,6 +10,8 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
+
 $item = $displayData;
 ?>
 <div class="author uk-clearfix uk-width-1-1">
@@ -28,13 +30,17 @@ $item = $displayData;
 				<?php echo $item->author_name; ?>
 			</a>
 		</div>
-		<?php if ($item->author_job): ?>
-			<div class="job uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
+		<div class="job uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
+			<?php if ($item->author_job): ?>
 				<a class="uk-text-muted" href="<?php echo $item->author_job_link; ?>"
 				   target="_blank">
 					<?php echo $item->author_job_name; ?>
 				</a>
-			</div>
-		<?php endif; ?>
+			<?php else: ?>
+				<span class="uk-text-small uk-text-muted">
+					[<?php echo Text::_('TPL_NERUDAS_NO_COMPANY'); ?>]
+				</span>
+			<?php endif; ?>
+		</div>
 	</div>
 </div>

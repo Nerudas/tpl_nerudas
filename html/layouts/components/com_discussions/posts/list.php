@@ -11,15 +11,40 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Factory;
 
 extract($displayData);
 
+Factory::getDocument()->addScriptDeclaration("(function ($) { $(document).ready(function () {
+			var results = new RegExp('[\?&]post_id=([^&#]*)').exec(window.location.href);
+			if (results != null && decodeURI(results[1]) != '0') {
+				var selector = '#discussion-post-" . $topic_id . "_' + decodeURI(results[1]),
+					top = $(selector).offset().top;
+				$('html, body').animate({
+					scrollTop: top
+				}, 0);
+			}
+		});	})(jQuery);");
 if (!empty($items))
 {
+	$i = 0;
 	foreach ($items as $item)
 	{
+		if ($i > 0) echo '<hr>';
 		echo LayoutHelper::render('components.com_discussions.posts.item', $item);
+		$i++;
 	}
-	echo $pagination->getListFooter();
+	if (!empty($pagination->getPagesLinks()))
+	{
+		echo '<hr>';
+		echo $pagination->getListFooter();
+	}
+
 }
-echo LayoutHelper::render('components.com_discussions.posts.form', $addForm);
+?>
+<?php if (!empty($addForm['form'])): ?>
+	<?php if (!empty($items)) echo '<hr>'; ?>
+	<div id="discussion-post-add-<?php echo $topic_id; ?>" class="form uk-anchor">
+		<?php echo LayoutHelper::render('components.com_discussions.posts.form', $addForm); ?>
+	</div>
+<?php endif; ?>

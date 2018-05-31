@@ -103,6 +103,7 @@ HTMLHelper::_('jquery.framework');
 		<hr>
 		<?php
 		$data               = array();
+		$data['topic_id']   = $this->topic->id;
 		$data['items']      = $this->items;
 		$data['total']      = $this->total;
 		$data['pagination'] = $this->pagination;
