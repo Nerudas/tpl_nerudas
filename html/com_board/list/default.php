@@ -35,7 +35,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 			  class="uk-form filter">
 			<div class="uk-form-row">
 				<div class="uk-grid uk-grid-small" data-uk-margin>
-					<div class="uk-width-small-1-2 uk-width-medium-2-5">
+					<div class="uk-width-small-1-2 uk-width-medium-2-5 uk-hidden-large">
 						<?php
 						$class = $this->filterForm->getFieldAttribute('category', 'class', '', 'filter') . ' uk-width-1-1';
 						$this->filterForm->setFieldAttribute('category', 'class', $class, 'filter');
@@ -133,7 +133,6 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 						<?php $item->author_link = $item->link;
 						echo LayoutHelper::render('content.author.horizontal', $item); ?>
 						<div class="uk-text-right">
-
 							<div class="uk-text-nowrap">
 								<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
 									  data-uk-tooltip
