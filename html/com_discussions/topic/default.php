@@ -94,7 +94,8 @@ HTMLHelper::_('jquery.framework');
 							</span>
 						<a href="<?php echo $this->topic->link; ?>#comments"
 						   class="uk-badge uk-badge-white uk-margin-small-left">
-							<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+							<i class="uk-icon-comment-o uk-margin-small-right"></i>
+							<?php echo $this->total; ?>
 						</a>
 					</div>
 				</div>
