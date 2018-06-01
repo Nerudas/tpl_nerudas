@@ -94,7 +94,7 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 	<?php endif; ?>
 
 	<?php if ($this->comments): ?>
-		<div class="uk-panel uk-panel-box uk-margin-large-bottom">
+		<div id="comments" class="uk-panel uk-panel-box uk-margin-large-bottom uk-anchor">
 			<h2>
 				<?php echo $this->item->params->get('comments_title', Text::_('COM_INFO_ITEM_COMMENTS')); ?>
 			</h2>
