@@ -47,7 +47,8 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 						</span>
 							<a href="#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
-								<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+								<i class="uk-icon-comment-o uk-margin-small-right"></i>
+								<?php echo ($this->comments) ? $this->comments->total : 0; ?>
 							</a>
 						</div>
 					</div>
@@ -124,12 +125,12 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 		</div>
 	<?php endif; ?>
 
-	<div class="uk-panel uk-panel-box uk-margin-large-bottom">
-		<h2>
-			<?php echo $this->item->params->get('comments_title', Text::_('COM_INFO_ITEM_COMMENTS')); ?>
-		</h2>
-		<div class="uk-text-muted uk-text-large uk-text-center">
-			<?php echo Text::_('TPL_NERUDAS_COMMENTS_IN_DEVELOPING'); ?>
+	<?php if ($this->comments): ?>
+		<div class="uk-panel uk-panel-box uk-margin-large-bottom">
+			<h2>
+				<?php echo $this->item->params->get('comments_title', Text::_('COM_INFO_ITEM_COMMENTS')); ?>
+			</h2>
+			<?php echo $this->comments->render; ?>
 		</div>
-	</div>
+	<?php endif; ?>
 </div>

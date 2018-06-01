@@ -54,7 +54,7 @@ $item = $displayData;
 					</a>
 					<a href="<?php echo $item->link; ?>#comments"
 					   class="uk-badge uk-badge-white uk-margin-small-left">
-						<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+						<i class="uk-icon-comment-o uk-margin-small-right"></i><?php echo $item->commentsCount;?>
 					</a>
 				</div>
 			</div>
