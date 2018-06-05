@@ -12,49 +12,18 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Factory;
-use Joomla\CMS\Layout\LayoutHelper;
 
-HTMLHelper::_('jquery.framework');
-HTMLHelper::_('formbehavior.chosen', 'select');
-
-$filters = array_keys($this->filterForm->getGroup('filter'));
 ?>
-<div id="discussions" class="list">
-	<?php echo LayoutHelper::render('template.title', array('add' => $this->addLink)); ?>
-	<div class="uk-panel uk-panel-box uk-margin-bottom uk-panel-box-secondary">
-		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
-			  class="uk-form filter">
-			<div class="uk-form-row">
-				<div class="uk-grid uk-grid-small" data-uk-margin>
-					<div class="uk-width-small-1-2 uk-width-medium-2-5 uk-hidden-large">
-						<?php
-						$class = $this->filterForm->getFieldAttribute('category', 'class', '', 'filter') . ' uk-width-1-1';
-						$this->filterForm->setFieldAttribute('category', 'class', $class, 'filter');
-						echo $this->filterForm->getInput('category', 'filter'); ?>
-					</div>
-					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-width-large-1-1 uk-flex uk-flex-space-between">
-						<?php
-						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
-						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
-						echo $this->filterForm->getInput('search', 'filter'); ?>
-						<div class="uk-button-group left-input">
-							<a href="<?php echo $this->link; ?>"
-							   class="uk-button uk-text-danger uk-icon-times">
-							</a>
-							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
-									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
+<div class="discussions-lastes-topics-module uk-margin-small-top uk-panel uk-panel-box uk-margin-bottom">
+	<div class="uk-margin-bottom uk-text-right">
+		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
+			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+		</a>
 	</div>
-	<?php if ($this->items) : ?>
-		<div class="items uk-panel uk-panel-box uk-margin-bottom">
+	<?php if ($items) : ?>
+		<div class="items uk-margin-bottom">
 			<?php $i = 0;
-			foreach ($this->items as $item):
+			foreach ($items as $item):
 				if ($i > 0) echo '<hr>';
 				?>
 				<div class="item">
@@ -65,7 +34,8 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 									<a href="<?php echo $item->link; ?>">
 										<?php echo $item->title; ?>
 										<?php if ($item->postsCount > 0): ?>
-											<sup class="uk-text-muted uk-hidden">[<?php echo $item->postsCount; ?>]</sup>
+											<sup class="uk-text-muted uk-hidden">[<?php echo $item->postsCount; ?>
+												]</sup>
 										<?php endif; ?>
 									</a>
 								</h2>
@@ -152,10 +122,12 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 				</div>
 				<?php $i++;
 			endforeach; ?>
-			<?php if (!empty($this->pagination->getPagesLinks())): ?>
-				<hr>
-				<?php echo $this->pagination->getListFooter(); ?>
-			<?php endif; ?>
+		</div>
+		<div class="more uk-text-center">
+			<a href="<?php echo $categoryLink; ?>"
+			   class="uk-button uk-button-large uk-width-1-1 uk-text-center">
+				<?php echo Text::_('TPL_NERUDAS_SHOWMORE'); ?>
+			</a>
 		</div>
 	<?php endif; ?>
 </div>

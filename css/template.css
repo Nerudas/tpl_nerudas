@@ -506,6 +506,7 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	line-height: 18px;
 	white-space: nowrap;
 }
+
 .uk-badge.uk-text-small {
 	font-size: 12px !important;
 }
@@ -2207,6 +2208,14 @@ html.new .tm-title .uk-h1 {
 	width: 48px;
 	height: 48px;
 }
+.uk-avatar-42 {
+	width: 42px;
+	height: 42px;
+}
+.uk-avatar-36 {
+	width: 36px;
+	height: 36px;
+}
 
 .uk-avatar-30 {
 	width: 30px;
@@ -3432,6 +3441,7 @@ svg[data-name="Nerudas"] .dots .background {
 	font-size: 1rem;
 	line-height: 1.429rem;
 }
+
 hr.mutted {
 	border-color: #f0f0f0;
 }

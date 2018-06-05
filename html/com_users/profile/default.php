@@ -43,6 +43,18 @@ $myBoardModule->params = (string) $myBoardModule->params;
 $myBoardModule->style  = 'blank';
 $myBoardModule         = ModuleHelper::renderModule($myBoardModule);
 
+
+$myTopicsModule          = ModuleHelper::getModule('mod_discussions_latest_topics', Text::_('mod_discussions_latest_topics'));
+$myTopicsModule->position = '';
+$myTopicsModule->params   = new Registry($myTopicsModule->params);
+$myTopicsModule->params->set('layout', 'nerudas:my');
+$myTopicsModule->params->set('style', 'blank');
+$myTopicsModule->params->set('onlymy', 1);
+$myTopicsModule->params = (string) $myTopicsModule->params;
+$myTopicsModule->style  = 'blank';
+$myTopicsModule        = ModuleHelper::renderModule($myTopicsModule);
+
+
 $this->data->contacts = new Registry($this->data->contacts);
 
 $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'media/com_profiles/images/no-avatar.jpg'
@@ -91,6 +103,7 @@ $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'med
 							Text::_('TPL_NERUDAS_NO_COMPANY') :
 							Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY'); ?></a></li>
 				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD_ITEMS'); ?></a></li>
+				<li><a href="#discussion"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS'); ?></a></li>
 			</ul>
 			<ul id="leftTabs" class="uk-switcher" data-uk-switcher-tabs="">
 				<li data-tab="profile" class="uk-panel uk-panel-box">
@@ -249,19 +262,15 @@ $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'med
 				<li data-tab="board" class="">
 					<?php echo $myBoardModule; ?>
 				</li>
+				<li data-tab="discussions" class="">
+					<?php echo $myTopicsModule ; ?>
+				</li>
 			</ul>
 		</div>
 		<div class="uk-width-medium-1-2">
 			<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#rightTabs', swiping: false}">
-				<li><a href="#comments-me"><?php echo Text::_('TPL_NERUDAS_OFFICE_COMMENTS_ME'); ?></a></li>
-				<li><a href="#my-discussions"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS'); ?></a></li>
 			</ul>
 			<ul id="rightTabs" class="uk-switcher" data-uk-switcher-tabs="">
-				<li data-tab="comments-me" class="uk-panel uk-panel-box">
-					<div class="uk-text-muted uk-text-large uk-text-center">
-						<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
-					</div>
-				</li>
 				<li data-tab="items-discussions" class="uk-panel uk-panel-box">
 					<div class="uk-text-muted uk-text-large uk-text-center">
 						<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
