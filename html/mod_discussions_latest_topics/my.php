@@ -124,7 +124,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 			endforeach; ?>
 		</div>
 		<div class="more uk-text-center">
-			<a href="<?php echo $categoryLink; ?>"
+			<a href="<?php echo $tagLink; ?>"
 			   class="uk-button uk-button-large uk-width-1-1 uk-text-center">
 				<?php echo Text::_('TPL_NERUDAS_SHOWMORE'); ?>
 			</a>

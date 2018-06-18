@@ -13,14 +13,10 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\HTML\HTMLHelper;
-
-//echo '<pre>', print_r($addLink, true), '</pre>';
-//echo '<pre>', print_r($categoryLink, true), '</pre>';
-//echo '<pre>', print_r($items, true), '</pre>';
 ?>
 <?php if (!$module->showtitle): ?>
 	<div class="uk-h2 uk-clearfix">
-		<a href="<?php echo $categoryLink; ?>" class="uk-link-muted">
+		<a href="<?php echo $tagLink; ?>" class="uk-link-muted">
 			<?php echo $module->title; ?>
 		</a>
 		<a href="<?php echo $addLink; ?>"

@@ -29,9 +29,9 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 				<div class="uk-grid uk-grid-small" data-uk-margin>
 					<div class="uk-width-small-1-2 uk-width-medium-2-5 uk-hidden-large">
 						<?php
-						$class = $this->filterForm->getFieldAttribute('category', 'class', '', 'filter') . ' uk-width-1-1';
-						$this->filterForm->setFieldAttribute('category', 'class', $class, 'filter');
-						echo $this->filterForm->getInput('category', 'filter'); ?>
+						$class = $this->filterForm->getFieldAttribute('tag', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('tag', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('tag', 'filter'); ?>
 					</div>
 					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-width-large-1-1 uk-flex uk-flex-space-between">
 						<?php
