@@ -56,7 +56,12 @@ $doc->addScriptDeclaration('
 		</div>
 	</div>
 	<div class="uk-panel uk-panel-box uk-margin-bottom">
-		<?php echo LayoutHelper::render('components.com_discussions.form.categories', $this); ?>
+		<div class="uk-h3">
+			<?php echo Text::_('JTAG'); ?>
+		</div>
+		<div>
+			<?php echo $this->form->getInput('tags'); ?>
+		</div>
 	</div>
 	<?php echo $this->form->renderFieldSet('hidden'); ?>
 
