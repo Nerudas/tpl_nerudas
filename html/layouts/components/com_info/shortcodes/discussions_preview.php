@@ -12,4 +12,4 @@ defined('_JEXEC') or die;
 
 $item = $displayData;
 
-echo JHtmlString::truncate($item->introtext, 100, false, false);
+echo JHtmlString::truncate($item->introtext, 150, false, false);

@@ -21,7 +21,8 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 $filters = array_keys($this->filterForm->getGroup('filter'));
 ?>
 <div id="discussions" class="list">
-	<?php echo LayoutHelper::render('template.title', array('add' => $this->addLink)); ?>
+	<?php echo LayoutHelper::render('template.title',
+		array('add' => $this->addLink, 'addText' => 'TPL_NERUDAS_ACTION_NEW_TOPIC')); ?>
 	<div class="uk-panel uk-panel-box uk-margin-bottom uk-panel-box-secondary">
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 			  class="uk-form filter">
@@ -52,110 +53,75 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 		</form>
 	</div>
 	<?php if ($this->items) : ?>
-		<div class="items uk-panel uk-panel-box uk-margin-bottom">
-			<?php $i = 0;
-			foreach ($this->items as $item):
-				if ($i > 0) echo '<hr>';
-				?>
-				<div class="item">
-					<div class="uk-grid uk-grid-small" data-uk-grid-match data-uk-grid-margin>
-						<div class="uk-width-medium-2-3 uk-flex uk-flex-middle">
-							<div>
-								<h2 class="uk-text-normal uk-margin-small-bottom">
-									<a href="<?php echo $item->link; ?>">
-										<?php echo $item->title; ?>
-										<?php if ($item->postsCount > 0): ?>
-											<sup class="uk-text-muted uk-hidden">[<?php echo $item->postsCount; ?>]</sup>
-										<?php endif; ?>
-									</a>
-								</h2>
-								<div class="uk-text-small">
-									<?php echo JHtmlString::truncate($item->text, 100, false, false); ?>
-								</div>
-								<?php if (!empty($item->images)): ?>
-									<div class="uk-margin-small-top uk-grid uk-grid-small">
-										<?php foreach ($item->images as $image): ?>
-											<div class="uk-width-1-3 uk-width-medium-1-5">
+		<div class="items">
+			<?php foreach ($this->items as $item):
+				//echo '<pre>', print_r($item, true), '</pre>'; ?>
+				<div class="item uk-panel uk-panel-box uk-margin-bottom">
+					<div class="title uk-flex uk-flex-space-between">
+						<?php $authorData            = new stdClass();
+						$authorData->author_link     = $item->last_post_link;
+						$authorData->author_name     = $item->last_post_author->name;
+						$authorData->author_avatar   = $item->last_post_author->avatar;
+						$authorData->author_online   = $item->last_post_author->online;
+						$authorData->author_job      = $item->last_post_author->job;
+						$authorData->author_job_link = $item->last_post_author->job_link;
+						$authorData->author_job_name = $item->last_post_author->job_name;
+						echo LayoutHelper::render('content.author.horizontal', $authorData); ?>
 
-												<div class="image uk-display-block uk-cover-background"
-													 data-ratio-height="[4,3]"
-													 style="background-image: url('<?php echo $image['src']; ?>');"></div>
-
-											</div>
-										<?php endforeach; ?>
-									</div>
-								<?php endif; ?>
-								<?php if (!empty($item->tags->itemTags)): ?>
-									<div class="uk-margin-small-top tags uk-text-small uk-text-muted uk-hidden">
-										<?php if ($item->tags): ?>
-											<?php foreach ($item->tags->itemTags as $tag): ?>
-												<span class="uk-margin-small-right uk-text-nowrap">#<?php echo $tag->title; ?></span>
-											<?php endforeach; ?>
-										<?php endif; ?>
-									</div>
-								<?php endif; ?>
-								<div class="uk-text-small uk-text-muted uk-margin-small-top uk-flex uk-flex-wrap uk-flex-middle">
-									<a href="<?php echo $item->link; ?>"
-									   class="uk-text-nowrap uk-text-small uk-text-muted">
-										<?php echo $item->author->name; ?>
-									</a>
-
-									<a href="<?php echo $item->link; ?>"
-									   class="uk-margin-small-left uk-text-nowrap uk-text-small uk-text-muted">
-										<?php echo HTMLHelper::date($item->created, 'd.m.y'); ?>
-									</a>
-
-									<a href="<?php echo $item->link; ?>"
-									   class="uk-badge uk-badge-white uk-margin-small-left uk-text-nowrap uk-text-small uk-text-muted">
-										<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
-									</a>
-									<a href="<?php echo $item->last_post_link; ?>"
-									   class="uk-badge uk-badge-white uk-margin-small-left uk-text-nowrap uk-text-small uk-text-muted">
-										<i class="uk-icon-comment-o uk-margin-small-right"></i>
-										<?php echo $item->postsCount; ?>
-									</a>
-
-								</div>
+						<div class="uk-text-right">
+							<div class="uk-text-nowrap">
+								<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
+									  data-uk-tooltip
+									  datetime="<?php echo HTMLHelper::date($item->last_post_created, 'c'); ?>"
+									  title="<?php echo HTMLHelper::date($item->last_post_created, 'd.m.Y H:i'); ?>"></time>
 							</div>
-						</div>
-						<div class="uk-width-medium-1-3 uk-flex uk-flex-top">
-							<div class="last_post uk-clearfix uk-width-1-1 uk-text-small">
-								<div class="avatar uk-position-relative uk-display-inline-block uk-align-left
-								uk-margin-small-top  uk-margin-bottom-remove">
-									<a class="image uk-avatar-36"
-									   style="background-image: url('<?php echo $item->last_post_author->avatar; ?>');"
-									   href="<?php echo $item->last_post_link; ?>">
-									</a>
-									<?php if ($item->last_post_author->online): ?>
-										<i class="uk-position-bottom-right uk-icon-profile-state-online"></i>
-									<?php endif; ?>
-								</div>
-								<div class="text uk-text-ellipsis">
-									<div class="name">
-										<a href="<?php echo $item->last_post_link; ?>" class="uk-link-muted">
-											<?php echo $item->last_post_author->name; ?>
-										</a>
-									</div>
-									<div class="uk-text-muted uk-text-small uk-text-nowrap uk-text-lowercase">
-										<time class="timeago"
-											  data-uk-tooltip
-											  datetime="<?php echo HTMLHelper::date($item->last_post_created, 'c'); ?>"
-											  title="<?php echo HTMLHelper::date($item->last_post_created, 'd.m.Y H:i'); ?>"></time>
-										<a href="<?php echo $item->last_post_link; ?>" class="uk-text-muted">
-											...
-										</a>
-									</div>
-								</div>
+							<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
+								<a href="<?php echo $item->link; ?>"
+								   class="uk-badge uk-badge-white uk-margin-small-left">
+									<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+								</a>
+								<a href="<?php echo $item->link; ?>"
+								   class="uk-badge uk-badge-white uk-margin-small-left">
+									<i class="uk-icon-comment-o uk-margin-small-right"></i><?php echo $item->postsCount; ?>
+								</a>
 							</div>
 						</div>
 					</div>
+					<div class="uk-margin-top">
+
+						<h2 class="uk-h4 uk-margin-small-bottom">
+							<a class="uk-display-block uk-link-muted" href="<?php echo $item->link; ?>">
+								<?php echo $item->title; ?>
+								<?php if (!$item->state): ?>
+									<sup class="uk-badge uk-badge-warning uk-margin-small-left">
+										<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+									</sup>
+								<?php endif; ?>
+							</a>
+						</h2>
+						<a class="uk-display-block uk-link-muted" href="<?php echo $item->last_post_link; ?>">
+							<?php
+							$text = JHtmlString::truncate($item->last_post_text, 150, false, false);
+							$text = str_replace('...', '', $text);
+							?>
+							<span class="uk-text-small"><?php echo !empty($text) ? $text . '... ' : ''; ?></span>
+							<span class="uk-link"><?php echo Text::_('TPL_NERUDAS_READMORE'); ?></span>
+						</a>
+					</div>
+					<?php if (!empty($item->tags->itemTags)): ?>
+						<div class="tags uk-margin-top">
+							<?php foreach ($item->tags->itemTags as $tag): ?>
+								<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+									<?php echo $tag->title; ?>
+								</span>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 				</div>
-				<?php $i++;
-			endforeach; ?>
-			<?php if (!empty($this->pagination->getPagesLinks())): ?>
-				<hr>
-				<?php echo $this->pagination->getListFooter(); ?>
-			<?php endif; ?>
+			<?php endforeach; ?>
 		</div>
+		<?php if (!empty($this->pagination->getPagesLinks())): ?>
+			<?php echo $this->pagination->getListFooter(); ?>
+		<?php endif; ?>
 	<?php endif; ?>
 </div>
