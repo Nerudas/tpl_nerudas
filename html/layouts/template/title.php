@@ -100,10 +100,12 @@ $margin = (!isset($margin)) ? true : $margin;
 			</div>
 		<?php endif; ?>
 
-		<?php if (!empty($add)) : ?>
+		<?php if (!empty($add)) :
+			$addText = (!empty($addText)) ? $addText : 'TPL_NERUDAS_ACTIONS_ADD';
+			?>
 			<a href="<?php echo $add; ?>" class="add uk-button uk-button-success" data-uk-tooltip
-			   title="<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>">
-				<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+			   title="<?php echo Text::_($addText); ?>">
+				<?php echo Text::_($addText); ?>
 			</a>
 		<?php endif; ?>
 		<?php if (!empty($edit)) : ?>
