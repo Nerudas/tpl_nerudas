@@ -198,7 +198,8 @@ class tplNerudasHelper
 
 		// Maps layots
 		$mapLayouts = array(
-			'com_board' => 'map'
+			'com_board' => 'map',
+			'com_prototype' => 'map',
 		);
 
 		foreach ($mapLayouts as $c => $v)
