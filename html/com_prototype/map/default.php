@@ -1,0 +1,98 @@
+<?php
+/**
+ * @package    Nerudas Template
+ * @version    4.9.15
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
+
+HTMLHelper::_('formbehavior.chosen', 'select');
+HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
+HTMLHelper::_('script', 'media/com_prototype/js/map.min.js', array('version' => 'auto'));
+
+$filters = array_keys($this->filterForm->getGroup('filter'));
+?>
+<div id="prototype" class="map">
+	<div class="map-block">
+		<div class="uk-hidden-medium uk-hidden-large">
+			<div class="uk-button-group uk-width-1-1">
+				<a class="uk-button uk-width-1-3 uk-button-white"
+				   data-uk-toggle="{target:'[data-prototype-mobileFilter]', cls:'uk-hidden-small'}">
+					<?php echo Text::_('TPL_NERUDAS_FILTER'); ?>
+				</a>
+				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->listLink; ?>">
+					<?php echo Text::_('TPL_NERUDAS_ON_LIST'); ?>
+				</a>
+				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->addLink; ?>">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+				</a>
+			</div>
+		</div>
+		<div class="uk-hidden-small">
+			<?php $layouts = array('list' => $this->listLink, 'map' => $this->mapLink, 'active' => 'map');
+			$subitems      = array();
+			foreach ($this->children as $child)
+			{
+				$object       = new stdClass();
+				$object->name = $child->title;
+				$object->link = $child->mapLink;
+				$subitems[]   = $object;
+			}
+			echo LayoutHelper::render('template.title', array(
+				'add'      => $this->addLink,
+				'layouts'  => $layouts,
+				'subitems' => $subitems,
+				'margin'   => false)); ?>
+		</div>
+		<div id="map" data-prototype-map>
+			<div class="zoom" data-afterInit="show">
+				<a data-prototype-map-zoom="plus"
+				   class="uk-flex uk-flex-middle uk-flex-center uk-icon-small uk-icon-plus uk-text-success"></a>
+				<span data-prototype-map-zoom="current"
+					  class="uk-flex uk-flex-middle uk-flex-center uk-hidden-small"></span>
+				<a data-prototype-map-zoom="minus"
+				   class="uk-flex uk-flex-middle uk-flex-center uk-icon-small uk-icon-minus uk-text-danger"></a>
+			</div>
+			<div class="geo" data-afterInit="show">
+				<a class="uk-button uk-icon-location-arrow" data-prototype-map-geo></a>
+			</div>
+		</div>
+	</div>
+	<div data-prototype-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove">
+		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
+			  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
+			  data-prototype-filter>
+			<div>
+				<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
+					<div class="uk-margin-right uk-flex">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
+						$this->filterForm->setFieldAttribute('search', 'id', 'filter_search_desktop');
+						echo $this->filterForm->getInput('search', 'filter'); ?>
+						<div class="uk-button-group left-input">
+							<a href="<?php echo $this->link; ?>"
+							   class="uk-button uk-text-danger uk-icon-times uk-hidden-small">
+							</a>
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search uk-hidden-small"
+									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div data-prototype-itemlist="items"></div>
+		<div class="uk-margin-large-bottom"></div>
+	</div>
+</div>
+

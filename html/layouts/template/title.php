@@ -47,24 +47,37 @@ $margin = (!isset($margin)) ? true : $margin;
 
 ?>
 <div class="tm-title uk-panel uk-panel-box uk-flex-middle<?php echo ($margin) ? ' uk-margin-bottom' : ''; ?>">
-	<ul class="uk-breadcrumb uk-margin-remove uk-hidden-small">
-		<?php foreach ($items as $item): ?>
-			<?php if ($i !== $count) : ?>
-				<li class="item">
-					<a href="<?php echo Route::_($item->link); ?>">
-						<?php echo $item->name; ?>
-					</a>
-				</li>
-			<?php else: ?>
-				<li class="item">
-					<h1>
-						<?php echo $item->name; ?>
-					</h1>
-				</li>
-			<?php endif; ?>
-			<?php $i++; ?>
-		<?php endforeach; ?>
-	</ul>
+	<div>
+		<ul class="uk-breadcrumb uk-margin-remove uk-hidden-small">
+			<?php foreach ($items as $item): ?>
+				<?php if ($i !== $count) : ?>
+					<li class="item">
+						<a href="<?php echo Route::_($item->link); ?>">
+							<?php echo $item->name; ?>
+						</a>
+					</li>
+				<?php else: ?>
+					<li class="item">
+						<h1>
+							<?php echo $item->name; ?>
+						</h1>
+					</li>
+				<?php endif; ?>
+				<?php $i++; ?>
+			<?php endforeach; ?>
+		</ul>
+		<?php if ($subitems): ?>
+			<ul class="uk-breadcrumb subitems uk-margin-small-top uk-margin-bottom-remove uk-hidden-small">
+				<?php foreach ($subitems as $subitem): ?>
+					<li class="item">
+						<a href="<?php echo Route::_($subitem->link); ?>">
+							<?php echo $subitem->name; ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	</div>
 	<div class="uk-hidden-medium uk-hidden-large" data-uk-dropdown="{mode:'click'}">
 		<a class="uk-h1 uk-flex uk-flex-middle uk-link-muted">
 			<span><?php echo $current->name; ?></span>
