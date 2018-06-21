@@ -66,8 +66,25 @@ $margin = (!isset($margin)) ? true : $margin;
 				<?php $i++; ?>
 			<?php endforeach; ?>
 		</ul>
+		<div class="uk-hidden-medium uk-hidden-large" data-uk-dropdown="{mode:'click'}">
+			<a class="uk-h1 uk-flex uk-flex-middle uk-link-muted">
+				<span><?php echo $current->name; ?></span>
+				<i class="uk-icon-caret-down uk-margin-small-left"></i>
+			</a>
+			<div class="uk-dropdown">
+				<ul class="uk-nav uk-nav-dropdown">
+					<?php foreach ($revers as $item): ?>
+						<li class="item">
+							<a href="<?php echo Route::_($item->link); ?>">
+								<?php echo $item->name; ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
 		<?php if (!empty($subitems)): ?>
-			<ul class="uk-breadcrumb subitems uk-margin-small-top uk-margin-bottom-remove uk-hidden-small">
+			<ul class="uk-breadcrumb subitems uk-margin-small-top uk-margin-bottom-remove">
 				<?php foreach ($subitems as $subitem): ?>
 					<li class="item">
 						<a href="<?php echo Route::_($subitem->link); ?>">
@@ -78,23 +95,7 @@ $margin = (!isset($margin)) ? true : $margin;
 			</ul>
 		<?php endif; ?>
 	</div>
-	<div class="uk-hidden-medium uk-hidden-large" data-uk-dropdown="{mode:'click'}">
-		<a class="uk-h1 uk-flex uk-flex-middle uk-link-muted">
-			<span><?php echo $current->name; ?></span>
-			<i class="uk-icon-caret-down uk-margin-small-left"></i>
-		</a>
-		<div class="uk-dropdown">
-			<ul class="uk-nav uk-nav-dropdown">
-				<?php foreach ($revers as $item): ?>
-					<li class="item">
-						<a href="<?php echo Route::_($item->link); ?>">
-							<?php echo $item->name; ?>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-	</div>
+
 	<div class="actions uk-button-group">
 		<?php if (!empty($layouts)) : ?>
 			<div class="uk-margin-right uk-margin-left uk-hidden">

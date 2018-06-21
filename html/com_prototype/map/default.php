@@ -26,17 +26,17 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 <div id="prototype" class="map">
 	<div class="map-block">
 		<div class="uk-hidden-medium uk-hidden-large">
-			<div class="uk-button-group uk-width-1-1">
-				<a class="uk-button uk-width-1-3 uk-button-white"
+			<div class="uk-button-group uk-width-1-1 ">
+				<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?>2 uk-button-white"
 				   data-title-mobilefilter-action="open">
 					<?php echo Text::_('TPL_NERUDAS_FILTER'); ?>
 				</a>
-				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->listLink; ?>">
-					<?php echo Text::_('TPL_NERUDAS_ON_LIST'); ?>
-				</a>
-				<a class="uk-button uk-width-1-3 uk-button-success" href="<?php echo $this->addLink; ?>">
-					<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
-				</a>
+				<?php if ($this->addLink): ?>
+					<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?>2 uk-button-success"
+					   href="<?php echo $this->addLink; ?>">
+						<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php $layouts = array('list' => $this->listLink, 'map' => $this->mapLink, 'active' => 'map');
@@ -64,11 +64,11 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 			}
 		} ?>
 
-			<?php echo LayoutHelper::render('template.title.mobilefilter', array(
-				'add'      => $this->addLink,
-				'layouts'  => $layouts,
-				'subitems' => $subitems,
-				'margin'   => false)); ?>
+		<?php echo LayoutHelper::render('template.title.mobilefilter', array(
+			'add'      => $this->addLink,
+			'layouts'  => $layouts,
+			'subitems' => $subitems,
+			'margin'   => false)); ?>
 
 		<div class="uk-hidden-small">
 			<?php echo LayoutHelper::render('template.title', array(

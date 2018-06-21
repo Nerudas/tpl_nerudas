@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Nerudas Template
- * @version    4.9.14
+ * @version    4.9.15
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -25,14 +25,11 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 	<div class="map-block">
 		<div class="uk-hidden-medium uk-hidden-large">
 			<div class="uk-button-group uk-width-1-1">
-				<a class="uk-button uk-width-1-3 uk-button-white"
+				<a class="uk-button uk-width-1-2 uk-button-white"
 				   data-uk-toggle="{target:'[data-board-filter]', cls:'uk-hidden-small'}">
 					<?php echo Text::_('TPL_NERUDAS_FILTER'); ?>
 				</a>
-				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->listLink; ?>">
-					<?php echo Text::_('TPL_NERUDAS_ON_LIST'); ?>
-				</a>
-				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->addLink; ?>">
+				<a class="uk-button uk-width-1-2 uk-button-white" href="<?php echo $this->addLink; ?>">
 					<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
 				</a>
 			</div>
