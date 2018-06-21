@@ -2087,13 +2087,13 @@ html.new .tm-title .uk-h1 {
 [data-title-mobilefilter] {
 	display: none;
 	position: fixed;
-	top: 41px;
+	top: 40px;
 	left: 0;
 	right: 0;
 	width: 100%;
 	z-index: 77;
 	overflow-y: scroll;
-	max-height: calc(100% - 41px);
+	max-height: calc(100% - 40px);
 	box-sizing: border-box;
 	padding: 10px;
 	background: #fff;
@@ -3308,6 +3308,9 @@ svg[data-name="Nerudas"] .dots .background {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+	display: -webkit-flex;
+	-webkit-flex: 1;
+	-webkit-flex-direction: column;
 }
 
 #board.map [data-board-map] {
@@ -3423,6 +3426,7 @@ svg[data-name="Nerudas"] .dots .background {
 /* MAP */
 #prototype.map {
 	display: flex;
+	display: -webkit-flex;
 	height: 100%;
 }
 
@@ -3430,11 +3434,15 @@ svg[data-name="Nerudas"] .dots .background {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+	display: -webkit-flex;
+	-webkit-flex: 1;
+	-webkit-flex-direction: column;
 }
 
 #prototype.map [data-prototype-map] {
 	position: relative;
 	flex: 1;
+	-webkit-flex: 1;
 }
 
 #prototype.map .zoom {
