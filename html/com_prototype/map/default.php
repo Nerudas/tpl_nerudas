@@ -15,9 +15,11 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
+$app = Factory::getApplication();
 HTMLHelper::_('formbehavior.chosen', 'select');
 HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
 HTMLHelper::_('script', 'media/com_prototype/js/map.min.js', array('version' => 'auto'));
+
 
 $filters = array_keys($this->filterForm->getGroup('filter'));
 ?>
@@ -32,20 +34,35 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->listLink; ?>">
 					<?php echo Text::_('TPL_NERUDAS_ON_LIST'); ?>
 				</a>
-				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->addLink; ?>">
+				<a class="uk-button uk-width-1-3 uk-button-success" href="<?php echo $this->addLink; ?>">
 					<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
 				</a>
 			</div>
 		</div>
 		<div class="uk-hidden-small">
 			<?php $layouts = array('list' => $this->listLink, 'map' => $this->mapLink, 'active' => 'map');
+			$menus         = $app->getMenu();
+			$menu          = $menus->getActive();
 			$subitems      = array();
-			foreach ($this->children as $child)
+			if ($menu->level > 1 && !empty($this->children))
 			{
-				$object       = new stdClass();
-				$object->name = $child->title;
-				$object->link = $child->mapLink;
-				$subitems[]   = $object;
+				foreach ($this->children as $child)
+				{
+					$object       = new stdClass();
+					$object->name = $child->title;
+					$object->link = $child->mapLink;
+					$subitems[]   = $object;
+				}
+			}
+			else
+			{
+				foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
+				{
+					$object       = new stdClass();
+					$object->name = $menuItem->title;
+					$object->link = $menuItem->link;
+					$subitems[]   = $object;
+				}
 			}
 			echo LayoutHelper::render('template.title', array(
 				'add'      => $this->addLink,
@@ -68,29 +85,28 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 		</div>
 	</div>
 	<div data-prototype-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove">
-		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
-			  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
-			  data-prototype-filter>
-			<div>
-				<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
-					<div class="uk-margin-right uk-flex">
-						<?php
-						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
-						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
-						$this->filterForm->setFieldAttribute('search', 'id', 'filter_search_desktop');
-						echo $this->filterForm->getInput('search', 'filter'); ?>
-						<div class="uk-button-group left-input">
-							<a href="<?php echo $this->link; ?>"
-							   class="uk-button uk-text-danger uk-icon-times uk-hidden-small">
-							</a>
-							<button type="submit" class="uk-button uk-text-primary uk-icon-search uk-hidden-small"
-									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
-							</button>
+		<?php if ($menu->level > 1): ?>
+			<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
+				  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
+				  data-prototype-filter>
+				<div>
+					<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
+						<div class="uk-margin-right uk-flex">
+							<?php
+							$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
+							$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
+							$this->filterForm->setFieldAttribute('search', 'id', 'filter_search_desktop');
+							echo $this->filterForm->getInput('search', 'filter'); ?>
+							<div class="uk-button-group left-input">
+								<button type="submit" class="uk-button uk-text-primary uk-icon-search uk-hidden-small"
+										title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		<?php endif; ?>
 		<div data-prototype-itemlist="items"></div>
 		<div class="uk-margin-large-bottom"></div>
 	</div>

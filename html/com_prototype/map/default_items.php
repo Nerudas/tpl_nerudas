@@ -22,12 +22,17 @@ use Joomla\CMS\Language\Text;
 				<div class="uk-text-medium"><?php echo $item->title; ?></div>
 				<?php if (!empty($item->extra->get('price'))): ?>
 					<div class="uk-text-bold">
-						<?php echo $item->extra->get('price'). ' '. Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+						<?php echo $item->extra->get('price') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
 					</div>
 				<?php endif; ?>
 				<?php if (!empty($item->extra->get('why_you'))): ?>
 					<div class="uk-text-muted uk-text-small">
 						<?php echo JHtmlString::truncate($item->extra->get('why_you'), 50, false, false); ?>
+					</div>
+				<?php endif; ?>
+				<?php if (!empty($item->extra->get('comment'))): ?>
+					<div class="uk-text-muted uk-text-small">
+						<?php echo JHtmlString::truncate($item->extra->get('comment'), 50, false, false); ?>
 					</div>
 				<?php endif; ?>
 			</a>

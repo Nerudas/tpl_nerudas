@@ -66,7 +66,7 @@ $margin = (!isset($margin)) ? true : $margin;
 				<?php $i++; ?>
 			<?php endforeach; ?>
 		</ul>
-		<?php if ($subitems): ?>
+		<?php if (!empty($subitems)): ?>
 			<ul class="uk-breadcrumb subitems uk-margin-small-top uk-margin-bottom-remove uk-hidden-small">
 				<?php foreach ($subitems as $subitem): ?>
 					<li class="item">

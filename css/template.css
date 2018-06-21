@@ -3487,6 +3487,7 @@ svg[data-name="Nerudas"] .dots .background {
 
 #prototype.map .desktop-filter input {
 	min-width: auto;
+	width: 240px;
 }
 
 #prototype.map [data-prototype-item][data-viewed="true"] {
