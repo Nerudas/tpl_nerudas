@@ -2084,6 +2084,29 @@ html.new .tm-title .uk-h1 {
 	margin: 0;
 }
 
+[data-title-mobilefilter] {
+	display: none;
+	position: fixed;
+	top: 41px;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 77;
+	overflow-y: scroll;
+	max-height: calc(100% - 41px);
+	box-sizing: border-box;
+	padding: 10px;
+	background: #fff;
+	border: none;
+	border-radius: 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-title-mobilefilter] .uk-breadcrumb li {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
 /* Off-canvas
 ========================================================================== */
 .uk-offcanvas {
@@ -3495,32 +3518,8 @@ svg[data-name="Nerudas"] .dots .background {
 }
 
 @media (max-width: 767px) {
-	#prototype.map [data-prototype-itemlist="container"] {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-	}
-
 	#prototype.map [data-prototype-filter] .advanced-fiter .submits {
 		margin-bottom: 70px;
-	}
-
-	#prototype.map [data-prototype-filter] {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		width: 100%;
-		z-index: 9999;
-		height: 100%;
-		overflow-y: scroll;
-		box-sizing: border-box;
 	}
 }
 

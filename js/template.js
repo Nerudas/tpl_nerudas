@@ -92,6 +92,22 @@
 	}
 
 	$(document).ready(function () {
+
+		if (localStorage.getItem('mobilefilter') == 'open') {
+			$('[data-title-mobilefilter]').show();
+		}
+		$('[data-title-mobilefilter-action]').on('click', function () {
+			var action = $(this).data('title-mobilefilter-action'),
+				elem = $('[data-title-mobilefilter]');
+			if (action == 'open') {
+				$(elem).slideDown();
+				localStorage.setItem('mobilefilter', 'open');
+			}
+			if (action == 'close') {
+				$(elem).slideUp();
+				localStorage.setItem('mobilefilter', 'close');
+			}
+		});
 		newMapHeight();
 		$('#navigation').on({
 			'show.uk.offcanvas': function () {

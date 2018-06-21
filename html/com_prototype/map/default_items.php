@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 ?>
 
@@ -19,7 +20,17 @@ use Joomla\CMS\Language\Text;
 		<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
 			<a class="uk-link-muted uk-display-block  uk-padding"
 			   data-prototype-show="<?php echo $item->id; ?>">
-				<div class="uk-text-medium"><?php echo $item->title; ?></div>
+				<div class="uk-text-medium">
+					<?php echo $item->title; ?>
+				</div>
+				<?php if (!$item->state || ($item->publish_down !== '0000-00-00 00:00:00' &&
+						$item->publish_down < Factory::getDate()->toSql())): ?>
+					<div>
+						<span class="uk-badge uk-badge-danger">
+							<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+						</span>
+					</div>
+				<?php endif; ?>
 				<?php if (!empty($item->extra->get('price'))): ?>
 					<div class="uk-text-bold">
 						<?php echo $item->extra->get('price') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>

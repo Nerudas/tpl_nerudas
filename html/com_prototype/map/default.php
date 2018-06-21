@@ -28,7 +28,7 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 		<div class="uk-hidden-medium uk-hidden-large">
 			<div class="uk-button-group uk-width-1-1">
 				<a class="uk-button uk-width-1-3 uk-button-white"
-				   data-uk-toggle="{target:'[data-prototype-mobileFilter]', cls:'uk-hidden-small'}">
+				   data-title-mobilefilter-action="open">
 					<?php echo Text::_('TPL_NERUDAS_FILTER'); ?>
 				</a>
 				<a class="uk-button uk-width-1-3 uk-button-white" href="<?php echo $this->listLink; ?>">
@@ -39,32 +39,39 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 				</a>
 			</div>
 		</div>
+		<?php $layouts = array('list' => $this->listLink, 'map' => $this->mapLink, 'active' => 'map');
+		$menus         = $app->getMenu();
+		$menu          = $menus->getActive();
+		$subitems      = array();
+		if ($menu->level > 1 && !empty($this->children))
+		{
+			foreach ($this->children as $child)
+			{
+				$object       = new stdClass();
+				$object->name = $child->title;
+				$object->link = $child->mapLink;
+				$subitems[]   = $object;
+			}
+		}
+		else
+		{
+			foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
+			{
+				$object       = new stdClass();
+				$object->name = $menuItem->title;
+				$object->link = $menuItem->link;
+				$subitems[]   = $object;
+			}
+		} ?>
+
+			<?php echo LayoutHelper::render('template.title.mobilefilter', array(
+				'add'      => $this->addLink,
+				'layouts'  => $layouts,
+				'subitems' => $subitems,
+				'margin'   => false)); ?>
+
 		<div class="uk-hidden-small">
-			<?php $layouts = array('list' => $this->listLink, 'map' => $this->mapLink, 'active' => 'map');
-			$menus         = $app->getMenu();
-			$menu          = $menus->getActive();
-			$subitems      = array();
-			if ($menu->level > 1 && !empty($this->children))
-			{
-				foreach ($this->children as $child)
-				{
-					$object       = new stdClass();
-					$object->name = $child->title;
-					$object->link = $child->mapLink;
-					$subitems[]   = $object;
-				}
-			}
-			else
-			{
-				foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
-				{
-					$object       = new stdClass();
-					$object->name = $menuItem->title;
-					$object->link = $menuItem->link;
-					$subitems[]   = $object;
-				}
-			}
-			echo LayoutHelper::render('template.title', array(
+			<?php echo LayoutHelper::render('template.title', array(
 				'add'      => $this->addLink,
 				'layouts'  => $layouts,
 				'subitems' => $subitems,
@@ -84,7 +91,7 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 			</div>
 		</div>
 	</div>
-	<div data-prototype-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove">
+	<div data-prototype-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove uk-hidden-small">
 		<?php if ($menu->level > 1): ?>
 			<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 				  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
