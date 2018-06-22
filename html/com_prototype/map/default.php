@@ -20,9 +20,10 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
 HTMLHelper::_('script', 'media/com_prototype/js/map.min.js', array('version' => 'auto'));
 
-
-$filters = array_keys($this->filterForm->getGroup('filter'));
+Factory::getDocument()->addScriptDeclaration(
+		"function showPrototypeMapBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
 ?>
+
 <div id="prototype" class="map">
 	<div class="map-block">
 		<div class="uk-hidden-medium uk-hidden-large">
@@ -116,6 +117,21 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 		<?php endif; ?>
 		<div data-prototype-itemlist="items"></div>
 		<div class="uk-margin-large-bottom"></div>
+	</div>
+	<div data-prototype-balloon class="uk-modal">
+		<div class="uk-modal-dialog uk-modal-dialog-large">
+			<button class="uk-modal-close uk-close" type="button"></button>
+			<div class="uk-alert uk-alert-danger" data-prototype-balloon-error>
+				<?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
+			</div>
+			<div data-prototype-balloon-loading>
+				<i class="uk-icon-spinner uk-icon-spin uk-margin-small-right"></i>
+				<?php echo JText::_('TPL_NERUDAS_LOADING'); ?>
+			</div>
+			<div data-prototype-balloon-content class="uk-overflow-container">
+			</div>
+		</div>
+
 	</div>
 </div>
 

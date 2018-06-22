@@ -3526,10 +3526,13 @@ svg[data-name="Nerudas"] .dots .background {
 }
 
 @media (max-width: 767px) {
-	#prototype.map [data-prototype-filter] .advanced-fiter .submits {
-		margin-bottom: 70px;
-	}
 }
+
+[data-prototype-balloon-error],
+[data-prototype-balloon-loading] {
+	/*display: none;*/
+}
+
 
 /* Pages
 ========================================================================== */
