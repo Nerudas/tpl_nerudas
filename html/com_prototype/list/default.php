@@ -15,14 +15,25 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 
+$app = Factory::getApplication();
+$doc = Factory::getDocument();
+
+
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('formbehavior.chosen', 'select');
 HTMLHelper::_('script', 'media/com_prototype/js/list.min.js', array('version' => 'auto'));
 
-Factory::getDocument()->addScriptDeclaration(
-	"function showPrototypeListBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}")
+$doc->addScriptDeclaration(
+	"function showPrototypeListBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
 
+if (!empty($app->input->get('item_id')))
+{
+	$doc->addScriptDeclaration('	jQuery(document).ready(function () {
+		jQuery(\'[data-prototype-show="' . $app->input->get('item_id') . '"]\').trigger(\'click\');
+	});');
+}
 ?>
+
 
 <div id="prototype" class="itemlist">
 	<?php
