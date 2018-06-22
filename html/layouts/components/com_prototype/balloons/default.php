@@ -81,7 +81,9 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 					<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
 				</span>
 			</div>
-
+			<?php if ($item->get('editLink')): ?>
+				<a href="<?php echo $item->get('editLink'); ?>"><?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?></a>
+			<?php endif; ?>
 			<?php $authorData            = new stdClass();
 			$authorData->author_link     = $item->get('author_link');
 			$authorData->author_name     = $item->get('author_name');
