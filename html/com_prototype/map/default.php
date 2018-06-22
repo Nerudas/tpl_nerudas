@@ -27,12 +27,12 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 	<div class="map-block">
 		<div class="uk-hidden-medium uk-hidden-large">
 			<div class="uk-button-group uk-width-1-1 ">
-				<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?>2 uk-button-white"
+				<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?> uk-button-white"
 				   data-title-mobilefilter-action="open">
 					<?php echo Text::_('TPL_NERUDAS_FILTER'); ?>
 				</a>
 				<?php if ($this->addLink): ?>
-					<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?>2 uk-button-success"
+					<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?> uk-button-success"
 					   href="<?php echo $this->addLink; ?>">
 						<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
 					</a>

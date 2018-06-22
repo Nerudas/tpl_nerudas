@@ -46,7 +46,7 @@ HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' 
 			  class="uk-form filter">
 			<div>
 				<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
-					<div class="uk-margin-right uk-flex">
+					<div class="uk-margin-right uk-flex uk-width-1-1">
 						<?php
 						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
 						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
