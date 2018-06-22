@@ -131,7 +131,6 @@ Factory::getDocument()->addScriptDeclaration(
 			<div data-prototype-balloon-content class="uk-overflow-container">
 			</div>
 		</div>
-
 	</div>
 </div>
 
