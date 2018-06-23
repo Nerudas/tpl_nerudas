@@ -3308,9 +3308,6 @@ svg[data-name="Nerudas"] .dots .background {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	display: -webkit-flex;
-	-webkit-flex: 1;
-	-webkit-flex-direction: column;
 }
 
 #board.map [data-board-map] {
@@ -3426,7 +3423,6 @@ svg[data-name="Nerudas"] .dots .background {
 /* MAP */
 #prototype.map {
 	display: flex;
-	display: -webkit-flex;
 	height: 100%;
 }
 
@@ -3434,15 +3430,11 @@ svg[data-name="Nerudas"] .dots .background {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	display: -webkit-flex;
-	-webkit-flex: 1;
-	-webkit-flex-direction: column;
 }
 
 #prototype.map [data-prototype-map] {
 	position: relative;
 	flex: 1;
-	-webkit-flex: 1;
 }
 
 #prototype.map .zoom {
