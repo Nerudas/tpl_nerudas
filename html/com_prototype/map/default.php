@@ -21,7 +21,7 @@ HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' 
 HTMLHelper::_('script', 'media/com_prototype/js/map.min.js', array('version' => 'auto'));
 
 Factory::getDocument()->addScriptDeclaration(
-		"function showPrototypeMapBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
+	"function showPrototypeMapBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
 ?>
 
 <div id="prototype" class="map">
@@ -97,7 +97,7 @@ Factory::getDocument()->addScriptDeclaration(
 			<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 				  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
 				  data-prototype-filter>
-				<div>
+				<div class="">
 					<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
 						<div class="uk-margin-right uk-flex">
 							<?php
@@ -112,6 +112,15 @@ Factory::getDocument()->addScriptDeclaration(
 							</div>
 						</div>
 					</div>
+					<?php foreach ($this->filterForm->getFieldset('extra') as $field):
+						$name = $field->getAttribute('name');
+						$class = $field->getAttribute('class');
+						$this->filterForm->setFieldAttribute($name, 'class', $class . ' uk-width-1-1', 'extra');
+						?>
+						<div class="uk-form-row">
+							<?php echo $this->filterForm->getInput($name, 'extra'); ?>
+						</div>
+					<?php endforeach; ?>
 				</div>
 			</form>
 		<?php endif; ?>
