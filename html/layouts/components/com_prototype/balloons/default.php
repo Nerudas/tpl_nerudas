@@ -42,8 +42,6 @@ if ($publish_down)
 }
 
 $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Factory::getDate()->toSql()));
-
-
 ?>
 
 <div class="item uk-margin-large-bottom">
@@ -61,9 +59,16 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 					</span>
 				<?php endif; ?>
 			</div>
-			<?php if (!empty($extra->get('price'))): ?>
+			<?php if (!empty($extra->get('price_m3'))): ?>
 				<div class="uk-text-bold uk-text-medium">
-					<?php echo $extra->get('price') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+					<?php echo Text::_('COM_PROTOTYPE_ITEM_EXTRA_PRICE_M3'). ' ' .$extra->get('price_m3') . ' ' .
+						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+				</div>
+			<?php endif; ?>
+			<?php if (!empty($extra->get('price_t'))): ?>
+				<div class="uk-text-bold uk-text-medium">
+					<?php echo Text::_('COM_PROTOTYPE_ITEM_EXTRA_PRICE_T'). ' ' .$extra->get('price_t') . ' ' .
+						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
 				</div>
 			<?php endif; ?>
 			<?php if (!empty($extra->get('why_you'))): ?>
@@ -84,15 +89,24 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 			<?php if ($item->get('editLink')): ?>
 				<a href="<?php echo $item->get('editLink'); ?>"><?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?></a>
 			<?php endif; ?>
-			<?php $authorData            = new stdClass();
-			$authorData->author_link     = $item->get('author_link');
-			$authorData->author_name     = $item->get('author_name');
-			$authorData->author_avatar   = $item->get('author_avatar');
-			$authorData->author_online   = $item->get('author_online');
-			$authorData->author_job      = $item->get('author_job');
-			$authorData->author_job_link = $item->get('author_job_link');
-			$authorData->author_job_name = $item->get('author_job_name');
-			echo LayoutHelper::render('content.author.horizontal', $authorData); ?>
+			<?php
+			if (!$item->get('author_company'))
+			{
+				$authorData                  = new stdClass();
+				$authorData->author_link     = $item->get('author_link');
+				$authorData->author_name     = $item->get('author_name');
+				$authorData->author_avatar   = $item->get('author_avatar');
+				$authorData->author_online   = $item->get('author_online');
+				$authorData->author_job      = $item->get('author_job');
+				$authorData->author_job_link = $item->get('author_job_link');
+				$authorData->author_job_name = $item->get('author_job_name');
+				echo LayoutHelper::render('content.author.horizontal', $authorData);
+			}
+			else
+			{
+				echo '<div><a href="' . $item->get('author_job_link') . '">' .
+					$item->get('author_job_name') . '</a></div>';
+			} ?>
 		</div>
 	</div>
 </div>
