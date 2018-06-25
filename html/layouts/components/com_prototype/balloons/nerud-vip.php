@@ -102,4 +102,3 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-
