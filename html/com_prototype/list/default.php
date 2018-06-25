@@ -85,11 +85,8 @@ if (!empty($app->input->get('item_id')))
 					<a class="uk-link-muted uk-display-block"
 					   data-prototype-show="<?php echo $item->id; ?>">
 						<div class="uk-grid uk-grid-small">
-							<div class="uk-width-xsmall-1-1 uk-width-small-1-3 uk-width-medium-1-4">
-								<?php echo HTMLHelper::image($item->image, $item->title, array('class' => 'uk-width-1-1')); ?>
-							</div>
-							<div class="uk-width-xsmall-1-1 uk-width-small-2-3 uk-width-medium-3-4">
-								<div class="uk-text-medium">
+							<div class="uk-width-xsmall-1-1 uk-width-small-1-2 uk-width-medium-2-3">
+								<div class="uk-text-large">
 									<?php echo $item->title; ?>
 								</div>
 								<?php if (!$item->state || ($item->publish_down !== '0000-00-00 00:00:00' &&
@@ -98,11 +95,6 @@ if (!empty($app->input->get('item_id')))
 										<span class="uk-badge uk-badge-danger">
 											<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
 										</span>
-									</div>
-								<?php endif; ?>
-								<?php if (!empty($item->extra->get('price'))): ?>
-									<div class="uk-text-bold">
-										<?php echo $item->extra->get('price') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
 									</div>
 								<?php endif; ?>
 								<?php if (!empty($item->extra->get('why_you'))): ?>
@@ -116,10 +108,29 @@ if (!empty($app->input->get('item_id')))
 									</div>
 								<?php endif; ?>
 							</div>
+							<div class="uk-width-xsmall-1-1 uk-width-small-1-2 uk-width-medium-1-3">
+								<div class="uk-grid uk-grid-margin uk-grid-small uk-margin-top-remove">
+									<?php if (!empty($item->extra->get('price_m3'))): ?>
+										<div class="uk-width-medium-1-3">
+											<?php echo Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>:
+										</div>
+										<div class="uk-width-medium-2-3 uk-text-bold uk-text-right">
+											<?php echo $item->extra->get('price_m3') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+										</div>
+									<?php endif; ?>
+									<?php if (!empty($item->extra->get('price_t'))): ?>
+										<div class="uk-width-medium-1-3">
+											<?php echo Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>:
+										</div>
+										<div class="uk-width-medium-2-3 uk-text-bold uk-text-right">
+											<?php echo $item->extra->get('price_t') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+										</div>
+									<?php endif; ?>
+								</div>
+							</div>
 						</div>
 					</a>
 				</div>
-
 			<?php endforeach; ?>
 		</div>
 		<div>
