@@ -144,11 +144,9 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 	}
 
 	[data-prototype-placemark].nerud[data-viewed="true"] img {
-		position: absolute;
 		bottom: 15px;
 		max-width: 49px;
 		max-height: 30px;
-		z-index: 2;
 	}
 
 	[data-prototype-placemark].nerud[data-viewed="true"] .price {
@@ -177,7 +175,6 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 	<div class="price">
 		<?php
 		$price_type = $extra_filter->get('price_m3t', 'm3');
-
 		?>
 		<div class="type"><?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_' . $price_type); ?></div>
 		<div class="number">

@@ -144,11 +144,9 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 	}
 
 	[data-prototype-placemark].nerud-car[data-viewed="true"] img {
-		position: absolute;
 		bottom: 15px;
 		max-width: 56px;
 		max-height: 33px;
-		z-index: 2;
 	}
 
 	[data-prototype-placemark].nerud-car[data-viewed="true"] .price {

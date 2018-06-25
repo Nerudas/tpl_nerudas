@@ -47,10 +47,10 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 	[data-prototype-placemark].no-price {
 		display: block;
 		position: relative;
-		width: 80px;
+		width: 120px;
 		height: 68px;
 		margin-top: -68px;
-		margin-left: -40px;
+		margin-left: -60px;
 		color: inherit
 	}
 
@@ -58,7 +58,7 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: 80px;
+		width: 120px;
 		height: 20px;
 		padding: 1px 5px 3px;
 		line-height: 1;
@@ -85,7 +85,7 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 	[data-prototype-placemark].no-price .image {
 		position: absolute;
 		bottom: 20px;
-		width: 80px;
+		width: 120px;
 		text-align: center;
 		z-index: 2;
 	}
@@ -116,13 +116,14 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 		width: 7px;
 		height: 15px;
 	}
+	[data-prototype-placemark].no-price[data-viewed="true"] .image {
+		bottom: 15px;
+		width: 90px;
+	}
 
 	[data-prototype-placemark].no-price[data-viewed="true"] img {
-		position: absolute;
-		bottom: 15px;
-		max-width: 56px;
-		max-height: 33px;
-		z-index: 2;
+		max-width: 36px;
+		max-height: 36px;
 	}
 
 	[data-prototype-placemark].no-price.onModeration .title {
@@ -132,7 +133,7 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 
 </style>
 <div data-prototype-placemark="<?php echo $item->get('id', 'x'); ?>"
-	 data-placemark-coordinates="[[[-40, -68],[40, -68],[40, 0],[40, 0],[0, 0],[-40, -10],[-40, -10]]]"
+	 data-placemark-coordinates="[[[-60, -68],[60, -68],[60, 0],[60, 0],[0, 0],[-60, -10],[-60, -10]]]"
 	 class="placemark no-price<?php echo ($onModeration) ? ' onModeration' : ''; ?>" data-viewed="false">
 	<div class="image">
 		<?php echo HTMLHelper::image($image, $item->get('title', Text::_('JGLOBAL_TITLE'))); ?>
