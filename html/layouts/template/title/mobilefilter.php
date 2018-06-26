@@ -78,10 +78,11 @@ $margin = (!isset($margin)) ? true : $margin;
 	<?php endif; ?>
 	<hr>
 	<div class="actions uk-margin-small-top uk-text-right">
-		<a class="close uk-button uk-button-danger" data-uk-tooltip
+		<a class="close uk-button uk-button-white" data-uk-tooltip
 		   data-title-mobilefilter-action="close"
-		   title="<?php echo Text::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
-			<?php echo Text::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>
+		   title="<?php echo Text::_('TPL_NERUDAS_COLLAPSE'); ?>">
+			<i class="uk-icon-angle-up"></i>
+			<?php echo Text::_('TPL_NERUDAS_COLLAPSE'); ?>
 		</a>
 		<?php if (!empty($add)) :
 			$addText = (!empty($addText)) ? $addText : 'TPL_NERUDAS_ACTIONS_ADD';

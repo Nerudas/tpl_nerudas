@@ -30,7 +30,7 @@ Factory::getDocument()->addScriptDeclaration(
 			<div class="uk-button-group uk-width-1-1 ">
 				<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?> uk-button-white"
 				   data-title-mobilefilter-action="open">
-					<?php echo Text::_('TPL_NERUDAS_FILTER'); ?>
+					<?php echo Text::_('TPL_NERUDAS_SECTIONS'); ?>
 				</a>
 				<?php if ($this->addLink): ?>
 					<a class="uk-button uk-width-1-<?php echo ($this->addLink) ? '2' : '1' ?> uk-button-success"
