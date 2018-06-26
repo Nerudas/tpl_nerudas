@@ -57,7 +57,7 @@ if (!empty($app->input->get('item_id')))
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 			  class="uk-form filter">
 			<div>
-				<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
+				<div class="uk-flex uk-flex-wrap uk-flex-middle">
 					<div class="uk-margin-right uk-flex uk-width-1-1">
 						<?php
 						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
@@ -71,65 +71,112 @@ if (!empty($app->input->get('item_id')))
 						</div>
 					</div>
 				</div>
+				<div class="uk-form-row">
+					<?php if (!Factory::getUser()->guest):
+						$onlymy = $this->filterForm->getField('onlymy', 'filter');
+						$this->filterForm->setFieldAttribute('onlymy', 'onchange', 'this.form.submit()', 'filter');
+						?>
+
+						<label for="<?php echo $onlymy->id; ?>" class="uk-flex-inline uk-flex-middle uk-margin-top">
+							<?php echo $this->filterForm->getInput('onlymy', 'filter'); ?>
+							<span class="uk-margin-small-left">
+								<?php echo Text::_('COM_PROTOTYPE_ONLYMY_ITEMS'); ?>
+							</span>
+						</label>
+
+					<?php endif; ?>
+				</div>
 			</div>
 		</form>
 	</div>
 
 	<?php if ($this->items) : ?>
-		<div class="items">
+		<div class="items uk-panel uk-panel-box uk-margin-bottom uk-padding-remove">
 			<?php foreach ($this->items as $id => $item):
+				$onModeration = (!$item->state || ($item->publish_down !== '0000-00-00 00:00:00' &&
+						$item->publish_down < Factory::getDate()->toSql()));
 				$item->image = ($item->image) ? $item->image : 'templates/nerudas/images/noimage.jpg'
 				?>
-				<div class="item uk-panel uk-panel-box uk-margin-bottom"
-					 data-show="false" data-prototype-item="<?php echo $item->id; ?>">
-					<a class="uk-link-muted uk-display-block"
-					   data-prototype-show="<?php echo $item->id; ?>">
-						<div class="uk-grid uk-grid-small">
-							<div class="uk-width-xsmall-1-1 uk-width-small-1-2 uk-width-medium-2-3">
-								<div class="uk-text-large">
-									<?php echo $item->title; ?>
+				<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
+					<div class="uk-padding">
+						<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
+							<div class="uk-width-medium-3-4">
+								<h2 class="uk-h3 uk-margin-small-bottom">
+									<a class="uk-link-muted uk-display-block"
+									   data-prototype-show="<?php echo $item->id; ?>">
+										<?php echo $item->title; ?>
+										<?php if ($onModeration): ?>
+											<span class="uk-badge uk-badge-danger">
+											<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?></span>
+										<?php endif; ?>
+									</a>
+								</h2>
+								<a class="uk-flex uk-flex-wrap uk-link-muted uk-margin-small-bottom uk-width-1-1"
+								   data-prototype-show="<?php echo $item->id; ?>">
+									<?php if (!empty($this->category->filters['price_m3t'])): ?>
+										<div>
+											<span class="uk-text-medium uk-text-bold">
+												<?php echo $item->extra->get('price_m3', '...'); ?>
+											</span>
+											<span class="uk-text-muted">
+												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+													. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>
+											</span>
+										</div>
+
+										<div class="uk-margin-left">
+											<span class="uk-text-medium uk-text-bold">
+												<?php echo $item->extra->get('price_t', '...'); ?>
+											</span>
+											<span class="uk-text-muted">
+												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+													. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>
+											</span>
+										</div>
+
+									<?php endif; ?>
+								</a>
+								<a class="uk-display-block uk-text-muted uk-text-small"
+								   data-prototype-show="<?php echo $item->id; ?>">
+									<?php if (!empty($item->extra->get('why_you'))): ?>
+										<div>
+											<?php echo JHtmlString::truncate($item->extra->get('why_you'), 75, false, false); ?>
+										</div>
+									<?php endif; ?>
+									<?php if (!empty($item->extra->get('comment'))): ?>
+										<div>
+											<?php echo JHtmlString::truncate($item->extra->get('comment'), 75, false, false); ?>
+										</div>
+									<?php endif; ?>
+								</a>
+								<div class="icons uk-margin-small-top">
+									<a data-prototype-show="<?php echo $item->id; ?>">
+										<?php
+										$item->region = ($item->region == '*') ? 100 : $item->region;
+										echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
+											array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
+									</a>
+									<?php if ($item->map): ?>
+										<a href="<?php echo $item->map->get('link'); ?>"
+										   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>">
+											<?php echo HTMLHelper::image('icons/map_30.png', Text::_('TPL_NERUDAS_ON_MAP'),
+												'', true); ?>
+										</a>
+									<?php endif; ?>
 								</div>
-								<?php if (!$item->state || ($item->publish_down !== '0000-00-00 00:00:00' &&
-										$item->publish_down < Factory::getDate()->toSql())): ?>
-									<div>
-										<span class="uk-badge uk-badge-danger">
-											<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
-										</span>
-									</div>
-								<?php endif; ?>
-								<?php if (!empty($item->extra->get('why_you'))): ?>
-									<div class="uk-text-muted uk-text-small">
-										<?php echo JHtmlString::truncate($item->extra->get('why_you'), 50, false, false); ?>
-									</div>
-								<?php endif; ?>
-								<?php if (!empty($item->extra->get('comment'))): ?>
-									<div class="uk-text-muted uk-text-small">
-										<?php echo JHtmlString::truncate($item->extra->get('comment'), 50, false, false); ?>
-									</div>
-								<?php endif; ?>
 							</div>
-							<div class="uk-width-xsmall-1-1 uk-width-small-1-2 uk-width-medium-1-3">
-								<div class="uk-grid uk-grid-margin uk-grid-small uk-margin-top-remove">
-									<?php if (!empty($item->extra->get('price_m3'))): ?>
-										<div class="uk-width-medium-1-3">
-											<?php echo Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>:
-										</div>
-										<div class="uk-width-medium-2-3 uk-text-bold uk-text-right">
-											<?php echo $item->extra->get('price_m3') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
-										</div>
-									<?php endif; ?>
-									<?php if (!empty($item->extra->get('price_t'))): ?>
-										<div class="uk-width-medium-1-3">
-											<?php echo Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>:
-										</div>
-										<div class="uk-width-medium-2-3 uk-text-bold uk-text-right">
-											<?php echo $item->extra->get('price_t') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
-										</div>
-									<?php endif; ?>
-								</div>
+							<div class="uk-hidden-small uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
+								<?php if ($item->map): ?>
+									<div class="">
+										<a class="uk-flex uk-flex-right uk-link-muted"
+										   href="<?php echo $item->map->get('link'); ?>">
+											<?php echo $item->placemark->options['customLayout']; ?>
+										</a>
+									</div>
+								<?php endif; ?>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
 			<?php endforeach; ?>
 		</div>

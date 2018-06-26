@@ -3491,10 +3491,6 @@ svg[data-name="Nerudas"] .dots .background {
 	border-bottom: none;
 }
 
-#prototype.map [data-prototype-itemlist="back"] {
-	display: none;
-}
-
 #prototype.map .geo {
 	display: none;
 	position: absolute;
@@ -3522,9 +3518,38 @@ svg[data-name="Nerudas"] .dots .background {
 
 [data-prototype-balloon-error],
 [data-prototype-balloon-loading] {
-	/*display: none;*/
+	display: none;
 }
 
+#prototype.itemlist .items > .item[data-show="true"] .ifnotshow,
+#prototype.itemlist .items > .item[data-show="false"] .ifshow {
+	display: none;
+}
+
+#prototype.itemlist .items > .item[data-show="false"]:hover {
+	background: #f0f0f0 !important;
+}
+
+#prototype.itemlist .items > .item[data-show="false"]:nth-of-type(2n+1) {
+	background: #fafafa;
+}
+
+#prototype.itemlist .items > .item {
+	border-bottom: 1px solid #E5E5E5;
+}
+
+#prototype.itemlist .items > .item:last-child {
+	border-bottom: none;
+}
+
+#prototype.itemlist .items > .item .icons img {
+	height: 25px;
+	opacity: .7;
+}
+
+#prototype.itemlist .items > .item [data-prototype-placemark] {
+	margin: 0;
+}
 
 /* Pages
 ========================================================================== */
