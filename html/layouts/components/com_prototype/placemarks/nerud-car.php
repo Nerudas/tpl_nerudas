@@ -101,7 +101,6 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 		text-overflow: ellipsis;
 		background: #fff;
 		border: 1px solid #dcdcdc;
-		border-bottom: none;
 		white-space: nowrap;
 		overflow: hidden;
 		box-sizing: border-box;
