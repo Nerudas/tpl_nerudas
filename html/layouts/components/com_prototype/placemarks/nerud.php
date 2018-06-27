@@ -42,6 +42,7 @@ if ($publish_down)
 }
 
 $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Factory::getDate()->toSql()));
+$catFields    = new Registry($category->get('fields'));
 ?>
 <style>
 	[data-prototype-placemark].nerud {
@@ -173,9 +174,7 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 	 data-placemark-coordinates="[[[-60, -60],[60, -60],[60, 0],[60, 0],[0, 0],[-60, -10],[-60, -10]]]"
 	 class="placemark nerud<?php echo ($onModeration) ? ' onModeration' : ''; ?>" data-viewed="false">
 	<div class="price">
-		<?php
-		$price_type = $extra_filter->get('price_m3t', 'm3');
-		?>
+		<?php $price_type = ($catFields->get('price_o')) ? 'o' : $extra_filter->get('price_m3t', 'm3'); ?>
 		<div class="type"><?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_' . $price_type); ?></div>
 		<div class="number">
 			<?php echo $extra->get('price_' . $price_type, '---'); ?>

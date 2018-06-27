@@ -41,6 +41,11 @@ use Joomla\CMS\Factory;
 					<?php
 					endif;
 				endif; ?>
+				<?php if (!empty($item->extra->get('price_o'))): ?>
+					<div class="uk-text-bold">
+						<?php echo $item->extra->get('price_o') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+					</div>
+				<?php endif; ?>
 				<?php if (!empty($item->extra->get('why_you'))): ?>
 					<div class="uk-text-muted uk-text-small">
 						<?php echo JHtmlString::truncate($item->extra->get('why_you'), 50, false, false); ?>

@@ -48,8 +48,10 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job_contacts')) :
 	new Registry($item->get('author_contacts'));
 
+$catFields = new Registry($category->get('fields'));
+
 ?>
-<div class="uk-grid uk-margin-top-remove" data-uk-grid-margin data-uk-grid-match >
+<div class="uk-grid uk-margin-top-remove" data-uk-grid-margin data-uk-grid-match>
 	<div class="uk-width-medium-1-4">
 		<div>
 			<?php echo HTMLHelper::image($image,
@@ -61,17 +63,25 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 		</div>
 		<div class="prices uk-margin-small-bottom">
-			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-				<?php echo $extra->get('price_m3', '..') . ' ' .
-					Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-					. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>
-			</div>
+			<?php if ($catFields->get('price_o')): ?>
+				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
+					<?php echo $extra->get('price_o', '..') . ' ' .
+						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
+				</div>
+			<?php else: ?>
+				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
+					<?php echo $extra->get('price_m3', '..') . ' ' .
+						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+						. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>
+				</div>
 
-			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-				<?php echo $extra->get('price_t', '..') . ' ' .
-					Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-					. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>
-			</div>
+				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
+					<?php echo $extra->get('price_t', '..') . ' ' .
+						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+						. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<?php if (!empty($extra->get('why_you'))): ?>
