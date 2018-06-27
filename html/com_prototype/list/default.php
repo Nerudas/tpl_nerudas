@@ -14,6 +14,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 $app = Factory::getApplication();
 $doc = Factory::getDocument();
@@ -95,7 +96,8 @@ if (!empty($app->input->get('item_id')))
 			<?php foreach ($this->items as $id => $item):
 				$onModeration = (!$item->state || ($item->publish_down !== '0000-00-00 00:00:00' &&
 						$item->publish_down < Factory::getDate()->toSql()));
-				$item->image = ($item->image) ? $item->image : 'templates/nerudas/images/noimage.jpg'
+				$item->image = ($item->image) ? $item->image : 'templates/nerudas/images/noimage.jpg';
+				$catFelds = new Registry($item->category->get('fields'));
 				?>
 				<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
 					<div class="uk-padding">
@@ -113,28 +115,65 @@ if (!empty($app->input->get('item_id')))
 								</h2>
 								<a class="uk-flex uk-flex-wrap uk-link-muted uk-margin-small-bottom uk-width-1-1"
 								   data-prototype-show="<?php echo $item->id; ?>">
-									<?php if (!empty($this->category->filters['price_m3t'])): ?>
-										<div>
+									<?php if ($catFelds->get('price_m3')): ?>
+										<div class="uk-margin-right">
 											<span class="uk-text-medium uk-text-bold">
 												<?php echo $item->extra->get('price_m3', '...'); ?>
 											</span>
 											<span class="uk-text-muted">
 												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>
+													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
 											</span>
 										</div>
-
-										<div class="uk-margin-left">
+									<?php endif; ?>
+									<?php if ($catFelds->get('price_t')): ?>
+										<div class="uk-margin-right">
 											<span class="uk-text-medium uk-text-bold">
 												<?php echo $item->extra->get('price_t', '...'); ?>
 											</span>
 											<span class="uk-text-muted">
 												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>
+													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
 											</span>
 										</div>
-
 									<?php endif; ?>
+
+									<?php if ($catFelds->get('price_o')): ?>
+										<div class="uk-margin-right">
+											<span class="uk-text-medium uk-text-bold">
+												<?php echo $item->extra->get('price_o', '...'); ?>
+											</span>
+											<span class="uk-text-muted">
+												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
+											</span>
+										</div>
+									<?php endif; ?>
+
+									<?php if ($catFelds->get('price_h')): ?>
+										<div class="uk-margin-right">
+											<span class="uk-text-medium uk-text-bold">
+												<?php echo $item->extra->get('price_h', '...'); ?>
+											</span>
+											<span class="uk-text-muted">
+												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
+											</span>
+										</div>
+									<?php endif; ?>
+
+									<?php if ($catFelds->get('price_s')): ?>
+										<div class="uk-margin-right">
+											<span class="uk-text-medium uk-text-bold">
+												<?php echo $item->extra->get('price_s', '...'); ?>
+											</span>
+											<span class="uk-text-muted">
+												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
+											</span>
+										</div>
+									<?php endif; ?>
+
 								</a>
 								<a class="uk-display-block uk-text-muted uk-text-small"
 								   data-prototype-show="<?php echo $item->id; ?>">
