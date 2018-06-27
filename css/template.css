@@ -3499,23 +3499,16 @@ svg[data-name="Nerudas"] .dots .background {
 	z-index: 24;
 }
 
-#prototype.map .counter {
+#prototype.map .users-counter {
 	display: none;
 	position: absolute;
-	top: 0;
+	bottom: 0;
+	left: 50%;
+	margin-left: -150px;
 	z-index: 24;
 	padding: 5px 10px;
 	background: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.06);
-	border-top: none;
-}
-
-#prototype.map .counter.placemarks {
-	right: 0;
-}
-
-#prototype.map .counter.users {
-	left: 0;
 }
 
 #prototype.map .desktop-filter {
