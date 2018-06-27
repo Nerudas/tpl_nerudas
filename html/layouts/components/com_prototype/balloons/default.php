@@ -78,7 +78,7 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 			</div>
 		<?php elseif (!empty($extra->get('comment'))): ?>
 			<div class="">
-				<?php echo $extra->get('comment'); ?>
+				<?php echo nl2br($extra->get('comment')); ?>
 			</div>
 		<?php endif; ?>
 
