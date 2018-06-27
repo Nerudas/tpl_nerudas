@@ -46,6 +46,16 @@ use Joomla\CMS\Factory;
 						<?php echo $item->extra->get('price_o') . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
 					</div>
 				<?php endif; ?>
+				<?php if (!empty($this->extra_filter->get('price_hs'))):
+					$price_type = $this->extra_filter->get('price_hs');
+					if (!empty($item->extra->get('price_' . $price_type))):
+						?>
+						<div class="uk-text-bold">
+							<?php echo $item->extra->get('price_' . $price_type) . ' ' . Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB'); ?>
+						</div>
+					<?php
+					endif;
+				endif; ?>
 				<?php if (!empty($item->extra->get('why_you'))): ?>
 					<div class="uk-text-muted uk-text-small">
 						<?php echo JHtmlString::truncate($item->extra->get('why_you'), 50, false, false); ?>
