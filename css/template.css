@@ -2051,7 +2051,7 @@ html:not(.new) .uk-breadcrumb > li:last-child::after {
 }
 
 .uk-breadcrumb.subitems > li:not(:last-child)::after {
-	content: "|";
+	content: "";
 	display: inline-block;
 	margin: 0 8px;
 }

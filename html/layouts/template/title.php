@@ -84,9 +84,9 @@ $margin = (!isset($margin)) ? true : $margin;
 			</div>
 		</div>
 		<?php if (!empty($subitems)): ?>
-			<ul class="uk-breadcrumb subitems uk-margin-small-top uk-margin-bottom-remove">
+			<ul class="uk-breadcrumb subitems uk-margin-remove">
 				<?php foreach ($subitems as $subitem): ?>
-					<li class="item">
+					<li class="item uk-margin-small-top">
 						<a href="<?php echo Route::_($subitem->link); ?>">
 							<?php echo $subitem->name; ?>
 						</a>

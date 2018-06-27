@@ -44,7 +44,7 @@ Factory::getDocument()->addScriptDeclaration(
 		$menus         = $app->getMenu();
 		$menu          = $menus->getActive();
 		$subitems      = array();
-		if ($menu->level > 1 && !empty($this->children))
+		if ($menu->level > 1)
 		{
 			foreach ($this->children as $child)
 			{
