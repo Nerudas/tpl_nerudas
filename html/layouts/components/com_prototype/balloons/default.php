@@ -15,6 +15,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Date\Date;
 use Joomla\Registry\Registry;
+use Joomla\CMS\Router\Route;
 
 extract($displayData);
 
@@ -64,9 +65,29 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 			</div>
 		<?php endif; ?>
 	</div>
-	<div class="uk-width-medium-2-4">
+	<div class="uk-width-medium-3-4">
 		<div class="uk-margin-bottom uk-text-xlarge uk-margin-remove">
 			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+		</div>
+		<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-bottom">
+			<div>
+				<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
+				<?php echo HTMLHelper::date($item->get('created'), 'd M Y'); ?>
+			</div>
+			<div class="uk-margin-small-left uk-margin-small-right">|</div>
+			<div>
+				<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
+			</div>
+			<?php if (!empty($extra->get('discussion_link'))): ?>
+				<div class="uk-margin-small-left uk-margin-small-right">|</div>
+				<div>
+					<a href="<?php echo Route::_($extra->get('discussion_link')); ?>"
+					   class="uk-button uk-button-primary uk-button-small">
+						<i class="uk-icon-comment-o uk-margin-small-right"></i>
+						<?php echo Text::_('TPL_NERUDAS_ACTIONS_DISCUSS'); ?>
+					</a>
+				</div>
+			<?php endif; ?>
 		</div>
 		<?php if (!empty($item->get('html'))): ?>
 			<div>
@@ -77,21 +98,10 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 				<?php echo nl2br($extra->get('why_you')); ?>
 			</div>
 		<?php elseif (!empty($extra->get('comment'))): ?>
-			<div class="">
+			<div class="uk-text-medium">
 				<?php echo nl2br($extra->get('comment')); ?>
 			</div>
 		<?php endif; ?>
-
-		<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-small-top">
-			<div>
-				<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
-				<?php echo HTMLHelper::date($item->get('created'), 'd M Y'); ?>
-			</div>
-			<div class="uk-margin-small-left uk-margin-small-right">|</div>
-			<div>
-				<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
-			</div>
-		</div>
 	</div>
 </div>
 
