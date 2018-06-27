@@ -87,6 +87,18 @@ Factory::getDocument()->addScriptDeclaration(
 				<a data-prototype-map-zoom="minus"
 				   class="uk-flex uk-flex-middle uk-flex-center uk-icon-small uk-icon-minus uk-text-danger"></a>
 			</div>
+
+			<div class="users counter" data-afterInit="show">
+				<?php
+				$this->visitors = ($this->visitors > 2) ? $this->visitors : 2;
+				echo Text::sprintf('TPL_NERUDAS_MAP_VISITORS', $this->visitors); ?>
+			</div>
+			<div class="placemarks counter" data-afterInit="show">
+				<i class="uk-icon-map-marker uk-margin-small-right"></i>
+				<span data-prototype-counter="current">0</span>
+				/
+				<span data-prototype-counter="total">0</span>
+			</div>
 			<div class="geo" data-afterInit="show">
 				<a class="uk-button uk-icon-location-arrow" data-prototype-map-geo></a>
 			</div>

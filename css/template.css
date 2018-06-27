@@ -3499,6 +3499,25 @@ svg[data-name="Nerudas"] .dots .background {
 	z-index: 24;
 }
 
+#prototype.map .counter {
+	display: none;
+	position: absolute;
+	top: 0;
+	z-index: 24;
+	padding: 5px 10px;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.06);
+	border-top: none;
+}
+
+#prototype.map .counter.placemarks {
+	right: 0;
+}
+
+#prototype.map .counter.users {
+	left: 0;
+}
+
 #prototype.map .desktop-filter {
 	padding: 10px 5px 0;
 	box-sizing: border-box;
