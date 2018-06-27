@@ -13,15 +13,12 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
-use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Registry\Registry;
 
 HTMLHelper::_('jquery.framework');
 
-HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
-
-$boardModule           = ModuleHelper::getModule('mod_board_latest', Text::_('MOD_BOARD_LATEST_ITEMS'));
+$boardModule           = ModuleHelper::getModule('mod_board_latest', Text::_('TPL_NERUDAS_PROFILES_PROFILE_BOARD'));
 $boardModule->position = '';
 $boardModule->params   = new Registry($boardModule->params);
 $boardModule->params->set('layout', 'nerudas:profile');
@@ -31,16 +28,6 @@ $boardModule->params->set('allregions', 1);
 $boardModule->params = (string) $boardModule->params;
 $boardModule->style  = 'blank';
 $boardModule         = ModuleHelper::renderModule($boardModule);
-
-HTMLHelper::_('script', 'profilemap.min.js', array('version' => 'auto', 'relative' => true));
-$mapParams              = array();
-$mapParams['selector']  = 'profileMap';
-$mapParams['latitude']  = $this->item->region_latitude;
-$mapParams['longitude'] = $this->item->region_longitude;
-$mapParams['center']    = array($this->item->region_latitude, $this->item->region_longitude);
-$mapParams['zoom']      = $this->item->region_zoom;
-$mapParams['author_id'] = $this->item->id;
-Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 
 ?>
 <div id="profiles" class="item">
@@ -97,10 +84,9 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 			<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<?php endif; ?>
 		<?php if (!empty($this->jobs)) : ?>
-			<li><a href="#jobs"><?php echo Text::_('COM_PROFILES_PROFILE_JOBS'); ?></a></li>
+			<li><a href="#jobs"><?php echo Text::_('TPL_NERUDAS_PROFILES_PROFILE_JOB'); ?></a></li>
 		<?php endif; ?>
-		<li><a href="#board"><?php echo Text::_('MOD_BOARD_LATEST_ITEMS'); ?></a></li>
-		<li><a href="#map"><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
+		<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_PROFILES_PROFILE_BOARD'); ?></a></li>
 		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
 	</ul>
 
@@ -263,9 +249,6 @@ Factory::getDocument()->addScriptOptions('profileMap', $mapParams);
 			<div>
 				<?php echo $boardModule; ?>
 			</div>
-		</li>
-		<li data-tab="map" class="uk-panel uk-panel-box uk-padding-remove">
-			<div id="profileMap"></div>
 		</li>
 		<li data-tab="comments" class="uk-panel uk-panel-box">
 			<div class="uk-text-muted uk-text-large uk-text-center">
