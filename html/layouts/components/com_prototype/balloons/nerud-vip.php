@@ -76,13 +76,13 @@ $catFields = new Registry($category->get('fields'));
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 				<?php echo $extra->get('price_m3', '..') . ' ' .
 					Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-					. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_M3'); ?>
+					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
 			</div>
 
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 				<?php echo $extra->get('price_t', '..') . ' ' .
 					Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-					. '/' . Text::_('COM_PROTOTYPE_FILTER_EXTRA_PRICE_M3T_T'); ?>
+					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
 			</div>
 		<?php endif; ?>
 	</div>
