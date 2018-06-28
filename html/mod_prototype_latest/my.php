@@ -72,13 +72,11 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 									</div>
 								</div>
 								<div class="uk-margin-small-top">
-
 									<a href="<?php echo $item->editLink; ?>"
 									   class="uk-button uk-button-small uk-button-white">
 										<i class="uk-icon-pencil uk-margin-small-right"></i>
 										<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>
 									</a>
-
 								</div>
 							</div>
 							<div class="uk-hidden-small uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
