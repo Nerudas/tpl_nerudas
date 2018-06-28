@@ -12,9 +12,26 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\HTML\HTMLHelper;
-
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\Registry\Registry;
 
+// Prototype module
+$prototypeModule            = new stdClass();
+$prototypeModule->id        = 0;
+$prototypeModule->title     = Text::_('TPL_NERUDAS_COMPANY_PROTOTYPE');
+$prototypeModule->module    = 'mod_prototype_latest';
+$prototypeModule->position  = '';
+$prototypeModule->content   = '';
+$prototypeModule->showtitle = 0;
+$prototypeModule->control   = '';
+$prototypeModule->params    = new Registry();
+$prototypeModule->params->set('layout', 'nerudas:company');
+$prototypeModule->params->set('style', 'blank');
+$prototypeModule->params->set('company_id', $this->item->id);
+$prototypeModule->params->set('allregions', 1);
+$prototypeModule->params = (string) $prototypeModule->params;
+$prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 ?>
 <div id="companies" class="item">
 	<?php echo LayoutHelper::render('template.title', array('edit' => $this->editLink)); ?>
@@ -67,6 +84,7 @@ use Joomla\CMS\Language\Text;
 		<?php if ($this->item->portfolio) : ?>
 			<li><a href="#portfolio"><?php echo Text::_('COM_COMPANIES_COMPANY_PORTFOLIO'); ?></a></li>
 		<?php endif; ?>
+		<li><a href="#prototype"><?php echo Text::_('TPL_NERUDAS_COMPANY_PROTOTYPE'); ?></a></li>
 		<?php if (!empty($this->employees)) : ?>
 			<li><a href="#employees"><?php echo Text::_('COM_COMPANIES_EMPLOYEES'); ?></a></li>
 		<?php endif; ?>
@@ -248,6 +266,11 @@ use Joomla\CMS\Language\Text;
 			</li>
 
 		<?php endif; ?>
+		<li data-tab="prototype" class="uk-panel uk-panel-box uk-padding-remove">
+			<div>
+				<?php echo $prototypeModule; ?>
+			</div>
+		</li>
 		<?php if (!empty($this->employees)) : ?>
 			<li data-tab="employees" class="uk-panel uk-panel-box">
 				<div class="employees">
