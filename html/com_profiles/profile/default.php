@@ -18,9 +18,16 @@ use Joomla\Registry\Registry;
 
 HTMLHelper::_('jquery.framework');
 
-$boardModule           = ModuleHelper::getModule('mod_board_latest', Text::_('TPL_NERUDAS_PROFILES_PROFILE_BOARD'));
-$boardModule->position = '';
-$boardModule->params   = new Registry($boardModule->params);
+// Board module
+$boardModule            = new stdClass();
+$boardModule->id        = 0;
+$boardModule->title     = Text::_('TPL_NERUDAS_PROFILE_BOARD');
+$boardModule->module    = 'mod_board_latest';
+$boardModule->position  = '';
+$boardModule->content   = '';
+$boardModule->showtitle = 0;
+$boardModule->control   = '';
+$boardModule->params    = new Registry();
 $boardModule->params->set('layout', 'nerudas:profile');
 $boardModule->params->set('style', 'blank');
 $boardModule->params->set('author_id', $this->item->id);
@@ -28,6 +35,24 @@ $boardModule->params->set('allregions', 1);
 $boardModule->params = (string) $boardModule->params;
 $boardModule->style  = 'blank';
 $boardModule         = ModuleHelper::renderModule($boardModule);
+
+
+// Prototype module
+$prototypeModule            = new stdClass();
+$prototypeModule->id        = 0;
+$prototypeModule->title     = Text::_('TPL_NERUDAS_PROFILE_PROTOTYPE');
+$prototypeModule->module    = 'mod_prototype_latest';
+$prototypeModule->position  = '';
+$prototypeModule->content   = '';
+$prototypeModule->showtitle = 0;
+$prototypeModule->control   = '';
+$prototypeModule->params    = new Registry();
+$prototypeModule->params->set('layout', 'nerudas:profile');
+$prototypeModule->params->set('style', 'blank');
+$prototypeModule->params->set('author_id', $this->item->id);
+$prototypeModule->params->set('allregions', 1);
+$prototypeModule->params = (string) $prototypeModule->params;
+$prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 
 ?>
 <div id="profiles" class="item">
@@ -84,9 +109,10 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 			<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
 		<?php endif; ?>
 		<?php if (!empty($this->jobs)) : ?>
-			<li><a href="#jobs"><?php echo Text::_('TPL_NERUDAS_PROFILES_PROFILE_JOB'); ?></a></li>
+			<li><a href="#jobs"><?php echo Text::_('TPL_NERUDAS_PROFILE_JOB'); ?></a></li>
 		<?php endif; ?>
-		<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_PROFILES_PROFILE_BOARD'); ?></a></li>
+		<li><a href="#prototype"><?php echo Text::_('TPL_NERUDAS_PROFILE_PROTOTYPE'); ?></a></li>
+		<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_PROFILE_BOARD'); ?></a></li>
 		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
 	</ul>
 
@@ -245,6 +271,11 @@ $boardModule         = ModuleHelper::renderModule($boardModule);
 				</div>
 			</li>
 		<?php endif; ?>
+		<li data-tab="prototype" class="uk-panel uk-panel-box uk-padding-remove">
+			<div>
+				<?php echo $prototypeModule; ?>
+			</div>
+		</li>
 		<li data-tab="board" class="uk-panel uk-panel-box">
 			<div>
 				<?php echo $boardModule; ?>

@@ -31,11 +31,6 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 
 
 <div class="prototype-lastes-module default-list">
-	<div class="add uk-margin-bottom uk-text-right">
-		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
-		</a>
-	</div>
 	<?php if ($items) : ?>
 		<div class="items uk-margin-bottom ">
 			<?php foreach ($items as $id => $item):
