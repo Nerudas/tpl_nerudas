@@ -477,6 +477,12 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	}
 }
 
+#office.home .prototype-lastes-module .add {
+	position: absolute;
+	top: -35px;
+	right: 0;
+}
+
 /*  Yandex Share
 ========================================================================== */
 .ya-share2__container_size_m .ya-share2__icon {
@@ -3533,11 +3539,6 @@ svg[data-name="Nerudas"] .dots .background {
 	display: none;
 }
 
-#prototype.itemlist .items > .item[data-show="true"] .ifnotshow,
-#prototype.itemlist .items > .item[data-show="false"] .ifshow {
-	display: none;
-}
-
 #prototype.itemlist .items > .item[data-show="false"]:hover {
 	background: #f0f0f0 !important;
 }
@@ -3560,6 +3561,31 @@ svg[data-name="Nerudas"] .dots .background {
 }
 
 #prototype.itemlist .items > .item [data-prototype-placemark] {
+	margin: 0;
+}
+
+.prototype-lastes-module.default-list .items > .item[data-show="false"]:hover {
+	background: #f0f0f0 !important;
+}
+
+.prototype-lastes-module.default-list .items > .item[data-show="false"]:nth-of-type(2n+1) {
+	background: #fafafa;
+}
+
+.prototype-lastes-module.default-list .items > .item {
+	border-bottom: 1px solid #E5E5E5;
+}
+
+.prototype-lastes-module.default-list .items > .item:last-child {
+	border-bottom: none;
+}
+
+.prototype-lastes-module.default-list .items > .item .icons img {
+	height: 25px;
+	opacity: .7;
+}
+
+.prototype-lastes-module.default-list .items > .item [data-prototype-placemark] {
 	margin: 0;
 }
 

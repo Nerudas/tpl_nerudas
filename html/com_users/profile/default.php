@@ -32,9 +32,16 @@ $editLink    = Route::_('index.php?option=com_users&task=profile.edit&user_id=' 
 JLoader::register('CompaniesHelperRoute', JPATH_SITE . '/components/com_companies/helpers/route.php');
 $companyAddLink = Route::_(CompaniesHelperRoute::getFormRoute());
 
-$myBoardModule           = ModuleHelper::getModule('mod_board_latest', Text::_('MOD_BOARD_LATEST_ITEMS'));
-$myBoardModule->position = '';
-$myBoardModule->params   = new Registry($myBoardModule->params);
+// Board Module
+$myBoardModule            = new stdClass();
+$myBoardModule->id        = 0;
+$myBoardModule->title     = Text::_('TPL_NERUDAS_OFFICE_MY_BOARD');
+$myBoardModule->module    = 'mod_board_latest';
+$myBoardModule->position  = '';
+$myBoardModule->content   = '';
+$myBoardModule->showtitle = 0;
+$myBoardModule->control   = '';
+$myBoardModule->params    = new Registry();
 $myBoardModule->params->set('layout', 'nerudas:my');
 $myBoardModule->params->set('style', 'blank');
 $myBoardModule->params->set('onlymy', 1);
@@ -43,17 +50,39 @@ $myBoardModule->params = (string) $myBoardModule->params;
 $myBoardModule->style  = 'blank';
 $myBoardModule         = ModuleHelper::renderModule($myBoardModule);
 
-
-$myTopicsModule          = ModuleHelper::getModule('mod_discussions_latest_topics', Text::_('mod_discussions_latest_topics'));
-$myTopicsModule->position = '';
-$myTopicsModule->params   = new Registry($myTopicsModule->params);
+// Topics Module
+$myTopicsModule            = new stdClass();
+$myTopicsModule->id        = 0;
+$myTopicsModule->title     = Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS');
+$myTopicsModule->module    = 'mod_discussions_latest_topics';
+$myTopicsModule->position  = '';
+$myTopicsModule->content   = '';
+$myTopicsModule->showtitle = 0;
+$myTopicsModule->control   = '';
+$myTopicsModule->params    = new Registry();
 $myTopicsModule->params->set('layout', 'nerudas:my');
 $myTopicsModule->params->set('style', 'blank');
 $myTopicsModule->params->set('onlymy', 1);
 $myTopicsModule->params = (string) $myTopicsModule->params;
 $myTopicsModule->style  = 'blank';
-$myTopicsModule        = ModuleHelper::renderModule($myTopicsModule);
+$myTopicsModule         = ModuleHelper::renderModule($myTopicsModule);
 
+// Prototype module
+$myPrototypeModule            = new stdClass();
+$myPrototypeModule->id        = 0;
+$myPrototypeModule->title     = Text::_('TPL_NERUDAS_OFFICE_MY_PROTOTYPE');
+$myPrototypeModule->module    = 'mod_prototype_latest';
+$myPrototypeModule->position  = '';
+$myPrototypeModule->content   = '';
+$myPrototypeModule->showtitle = 0;
+$myPrototypeModule->control   = '';
+$myPrototypeModule->params    = new Registry();
+$myPrototypeModule->params->set('layout', 'nerudas:my');
+$myPrototypeModule->params->set('style', 'blank');
+$myPrototypeModule->params->set('onlymy', 1);
+$myPrototypeModule->params->set('allregions', 1);
+$myPrototypeModule->params = (string) $myPrototypeModule->params;
+$myPrototypeModule         = ModuleHelper::renderModule($myPrototypeModule);
 
 $this->data->contacts = new Registry($this->data->contacts);
 
@@ -102,7 +131,7 @@ $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'med
 				<li><a href="#company"><?php echo (empty($this->data->jobs)) ?
 							Text::_('TPL_NERUDAS_NO_COMPANY') :
 							Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY'); ?></a></li>
-				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD_ITEMS'); ?></a></li>
+				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD'); ?></a></li>
 				<li><a href="#discussion"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS'); ?></a></li>
 			</ul>
 			<ul id="leftTabs" class="uk-switcher" data-uk-switcher-tabs="">
@@ -263,18 +292,19 @@ $this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'med
 					<?php echo $myBoardModule; ?>
 				</li>
 				<li data-tab="discussions" class="">
-					<?php echo $myTopicsModule ; ?>
+					<?php echo $myTopicsModule; ?>
 				</li>
 			</ul>
 		</div>
 		<div class="uk-width-medium-1-2">
 			<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#rightTabs', swiping: false}">
+				<li>
+					<a href="#prototyp"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROTOTYPE'); ?></a>
+				</li>
 			</ul>
 			<ul id="rightTabs" class="uk-switcher" data-uk-switcher-tabs="">
-				<li data-tab="items-discussions" class="uk-panel uk-panel-box">
-					<div class="uk-text-muted uk-text-large uk-text-center">
-						<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
-					</div>
+				<li data-tab="prototype" class="uk-panel uk-panel-box uk-padding-remove">
+					<?php echo $myPrototypeModule; ?>
 				</li>
 			</ul>
 		</div>
