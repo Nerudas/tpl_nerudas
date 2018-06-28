@@ -58,117 +58,56 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 										<?php endif; ?>
 									</a>
 								</h2>
-								<a class="uk-flex uk-flex-wrap uk-link-muted uk-margin-small-bottom uk-width-1-1"
-								   data-prototype-show="<?php echo $item->id; ?>">
-									<?php if ($catFelds->get('price_m3')): ?>
-										<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_m3', '...'); ?>
-											</span>
-											<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
-											</span>
-										</div>
-									<?php endif; ?>
-									<?php if ($catFelds->get('price_t')): ?>
-										<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_t', '...'); ?>
-											</span>
-											<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
-											</span>
-										</div>
-									<?php endif; ?>
+								<div>
+									<?php echo $item->category->get('title'); ?>
+								</div>
+								<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-small-top">
+									<div>
+										<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
+										<?php echo HTMLHelper::date($item->created, 'd M Y'); ?>
+									</div>
+									<div class="uk-margin-small-left uk-margin-small-right">|</div>
+									<div>
+										<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+									</div>
+								</div>
+								<div class="uk-margin-small-top">
 
-									<?php if ($catFelds->get('price_o')): ?>
-										<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_o', '...'); ?>
-											</span>
-											<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
-											</span>
-										</div>
-									<?php endif; ?>
-
-									<?php if ($catFelds->get('price_h')): ?>
-										<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_h', '...'); ?>
-											</span>
-											<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
-											</span>
-										</div>
-									<?php endif; ?>
-
-									<?php if ($catFelds->get('price_s')): ?>
-										<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_s', '...'); ?>
-											</span>
-											<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
-											</span>
-										</div>
-									<?php endif; ?>
-
-								</a>
-								<a class="uk-display-block uk-text-muted uk-text-small"
-								   data-prototype-show="<?php echo $item->id; ?>">
-									<?php if (!empty($item->extra->get('why_you'))): ?>
-										<div>
-											<?php echo JHtmlString::truncate($item->extra->get('why_you'), 75, false, false); ?>
-										</div>
-									<?php endif; ?>
-									<?php if (!empty($item->extra->get('comment'))): ?>
-										<div>
-											<?php echo JHtmlString::truncate($item->extra->get('comment'), 75, false, false); ?>
-										</div>
-									<?php endif; ?>
-								</a>
-								<div class="icons uk-margin-small-top">
-									<a data-prototype-show="<?php echo $item->id; ?>">
-										<?php
-										$item->region = ($item->region == '*') ? 100 : $item->region;
-										echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
-											array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
+									<a href="<?php echo $item->editLink; ?>"
+									   class="uk-button uk-button-small uk-button-white">
+										<i class="uk-icon-pencil uk-margin-small-right"></i>
+										<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>
 									</a>
-									<?php if ($item->map): ?>
-										<a href="<?php echo $item->map->get('link'); ?>"
-										   data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>">
-											<?php echo HTMLHelper::image('icons/map_30.png', Text::_('TPL_NERUDAS_ON_MAP'),
-												'', true); ?>
-										</a>
-									<?php endif; ?>
+
 								</div>
 							</div>
 							<div class="uk-hidden-small uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
-								<?php if ($item->map): ?>
-									<div class="">
-										<a class="uk-flex uk-flex-right uk-link-muted"
-										   href="<?php echo $item->map->get('link'); ?>">
-											<?php echo $item->placemark->options['customLayout']; ?>
-										</a>
-									</div>
-								<?php endif; ?>
+								<div>
+									<?php if ($item->publish_down !== '0000-00-00 00:00:00'): ?>
+										<div class="uk-margin-bottom uk-text-center">
+											<div class="uk-text-small uk-text-muted">
+												<?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROTOTYPE_DATE_PUBLISH_DOWN'); ?>
+											</div>
+											<div class="">
+												<?php echo HTMLHelper::date($item->publish_down, 'd.m.Y'); ?>
+											</div>
+										</div>
+									<?php endif; ?>
+
+									<?php if ($item->map): ?>
+										<div class="">
+											<a class="uk-flex uk-flex-right uk-link-muted"
+											   href="<?php echo $item->map->get('link'); ?>">
+												<?php echo $item->placemark->options['customLayout']; ?>
+											</a>
+										</div>
+									<?php endif; ?>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			<?php endforeach; ?>
-		</div>
-		<div class="more uk-text-center">
-			<a href="<?php echo $listLink; ?>"
-			   class="uk-button uk-button-large uk-width-1-1 uk-text-center">
-				<?php echo Text::_('TPL_NERUDAS_SHOWMORE'); ?>
-			</a>
 		</div>
 	<?php endif; ?>
 	<div data-prototype-balloon class="uk-modal">

@@ -747,7 +747,10 @@ a:hover, .uk-link:hover, .uk-button-link:hover {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
 
+.uk-text-underline {
+	text-decoration: underline;
 }
 
 /* Height

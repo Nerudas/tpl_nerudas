@@ -80,6 +80,7 @@ $myPrototypeModule->params    = new Registry();
 $myPrototypeModule->params->set('layout', 'nerudas:my');
 $myPrototypeModule->params->set('style', 'blank');
 $myPrototypeModule->params->set('onlymy', 1);
+$myPrototypeModule->params->set('limit', 0);
 $myPrototypeModule->params->set('allregions', 1);
 $myPrototypeModule->params = (string) $myPrototypeModule->params;
 $myPrototypeModule         = ModuleHelper::renderModule($myPrototypeModule);
