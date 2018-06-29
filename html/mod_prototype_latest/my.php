@@ -79,7 +79,7 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 									</a>
 								</div>
 							</div>
-							<div class="uk-hidden-small uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
+							<div class="uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
 								<div>
 									<?php if ($item->publish_down !== '0000-00-00 00:00:00'): ?>
 										<div class="uk-margin-bottom uk-text-center">
