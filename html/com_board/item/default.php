@@ -76,10 +76,6 @@ if ($this->item->map)
 					<span class="uk-badge uk-badge-white uk-margin-small-left">
 						<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
 					</span>
-					<a href="<?php echo $this->item->link; ?>#comments"
-					   class="uk-badge uk-badge-white uk-margin-small-left">
-						<i class="uk-icon-comment-o uk-margin-small-right"></i>0
-					</a>
 				</div>
 			</div>
 		</div>
@@ -95,7 +91,6 @@ if ($this->item->map)
 		<?php if ($this->item->map): ?>
 			<li><a href="#map"><?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?></a></li>
 		<?php endif; ?>
-		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
 	</ul>
 
 	<ul id="boardTabs" class="uk-switcher" data-uk-switcher-tabs="">
@@ -340,10 +335,5 @@ if ($this->item->map)
 				data-tabmap="<?php echo 'board_' . $this->item->id; ?>">
 			</li>
 		<?php endif; ?>
-		<li data-tab="comments" class="uk-panel uk-panel-box">
-			<div class="uk-text-muted uk-text-large uk-text-center">
-				<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
-			</div>
-		</li>
 	</ul>
 </div>

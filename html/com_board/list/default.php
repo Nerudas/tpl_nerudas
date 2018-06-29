@@ -144,10 +144,6 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 								   class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
 								</a>
-								<a href="<?php echo $item->link; ?>#comments"
-								   class="uk-badge uk-badge-white uk-margin-small-left">
-									<i class="uk-icon-comment-o uk-margin-small-right"></i>0
-								</a>
 							</div>
 						</div>
 					</div>

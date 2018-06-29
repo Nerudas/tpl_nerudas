@@ -41,10 +41,6 @@ use Joomla\CMS\Language\Text;
 							   class="uk-badge uk-badge-white uk-margin-small-left">
 								<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
 							</a>
-							<a href="<?php echo $item->link; ?>#comments"
-							   class="uk-badge uk-badge-white uk-margin-small-left">
-								<i class="uk-icon-comment-o uk-margin-small-right"></i>0
-							</a>
 						</div>
 					</div>
 					<h2 class="uk-h4 uk-margin-top uk-margin-small-bottom">
