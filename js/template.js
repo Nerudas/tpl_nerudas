@@ -84,7 +84,7 @@
 	});
 
 	function newMapHeight() {
-		var newMap = $('html.new .tm-middle.map');
+		var newMap = $('html.map .tm-middle.map');
 		if (newMap.length > 0) {
 			$(newMap).outerHeight($(window).outerHeight() - $(newMap).offset().top);
 		}
@@ -146,34 +146,7 @@
 			location.reload();
 		});
 
-		if ($('*').is('[data-phones]')) {
-			phones('start', $(this));
-		}
-		$('body').on('click', '[data-phone-add]', function () {
-			phones('add', $(this).parents('[data-phones]'));
-		});
 
-		function phones(action, parent) {
-			var phones = parent.find('[data-phone]');
-			if (action == 'start') {
-				$(phones).each(function () {
-					var input = $(this).find('[data-phone-number] input');
-					if (input.val() !== '') {
-						$(this).removeClass('uk-hidden');
-						$(this).addClass('uk-show');
-					}
-				});
-			}
-			var hidden = parent.find('[data-phone].uk-hidden');
-			if (hidden.length > 0) {
-				hidden[0].removeClass('uk-hidden');
-				hidden[0].addClass('uk-show');
-			}
-			var show = parent.find('[data-phone].uk-show');
-			if (show.length == phones.length) {
-				parent.find('[data-phone-add]').addClass('uk-hidden');
-			}
-		}
 
 		if (window.location.hash) {
 			var hash = window.location.hash.substring(1);
