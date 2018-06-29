@@ -18,7 +18,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 	<?php echo LayoutHelper::render('template.title', array('cancel' => $this->category->cancelLink)); ?>
 	<div class="itemlist uk-panel uk-panel-box uk-margin-bottom">
 		<div class="item uk-margin-large-bottom">
-			<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
+			<div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
 				<?php foreach ($this->children as $child): ?>
 					<div class="uk-text-center uk-width-xsmall-1-3 uk-width-small-1-4 uk-width-medium-1-5 uk-width-large-1-5 uk-width-xlarge-1-5">
 						<a href="<?php echo $child->formLink; ?>" class="uk-display-block uk-link-muted">
