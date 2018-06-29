@@ -58,10 +58,14 @@ Factory::getDocument()->addScriptDeclaration(
 		{
 			foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
 			{
-				$object       = new stdClass();
-				$object->name = $menuItem->title;
-				$object->link = $menuItem->link;
-				$subitems[]   = $object;
+				if ($menuItem->getParams()->get('menu_show'))
+				{
+					$object       = new stdClass();
+					$object->name = $menuItem->title;
+					$object->link = $menuItem->link;
+
+					$subitems[] = $object;
+				}
 			}
 		} ?>
 
