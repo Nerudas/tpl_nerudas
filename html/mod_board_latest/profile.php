@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Layout\LayoutHelper;
 
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
@@ -136,9 +135,6 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 								<span
 										class="uk-badge uk-badge-white uk-margin-small-left">
 									<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
-								</span>
-								<span class="uk-badge uk-badge-white uk-margin-small-left">
-									<i class="uk-icon-comment-o uk-margin-small-right"></i>0
 								</span>
 							</div>
 						</div>

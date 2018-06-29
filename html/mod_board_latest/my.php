@@ -51,9 +51,6 @@ use Joomla\CMS\Language\Text;
 
 										<span class="uk-badge uk-badge-white uk-margin-small-right">
 										<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?></span>
-
-										<span class="uk-badge uk-badge-white">
-										<i class="uk-icon-comment-o uk-margin-small-right"></i>0</span>
 									</div>
 									<div>
 										<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"
