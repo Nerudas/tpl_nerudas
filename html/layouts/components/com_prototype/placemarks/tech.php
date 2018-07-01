@@ -172,6 +172,7 @@ $catFields    = new Registry($category->get('fields'));
 </style>
 <div data-prototype-placemark="<?php echo $item->get('id', 'x'); ?>"
 	 data-placemark-coordinates="[[[-65, -65],[65, -65],[65, 0],[65, 0],[0, 0],[-65, -10],[-65, -10]]]"
+	 data-placemark-coordinates-viewed="[[[-49, -45],[49, -45],[49, 0],[49, 0],[0, 0],[-49, -10],[-49, -10]]]"
 	 class="placemark tech<?php echo ($onModeration) ? ' onModeration' : ''; ?>" data-viewed="false">
 	<div class="price">
 		<?php $price_type = $extra_filter->get('price_hs', 'h'); ?>

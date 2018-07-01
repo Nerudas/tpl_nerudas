@@ -172,6 +172,7 @@ $catFields    = new Registry($category->get('fields'));
 </style>
 <div data-prototype-placemark="<?php echo $item->get('id', 'x'); ?>"
 	 data-placemark-coordinates="[[[-60, -60],[60, -60],[60, 0],[60, 0],[0, 0],[-60, -10],[-60, -10]]]"
+	 data-placemark-coordinates-viewed="[[[-45, -45],[45, -45],[45, 0],[45, 0],[0, 0],[-45, -10],[-45, -10]]]"
 	 class="placemark nerud<?php echo ($onModeration) ? ' onModeration' : ''; ?>" data-viewed="false">
 	<div class="price">
 		<?php $price_type = ($catFields->get('price_o')) ? 'o' : $extra_filter->get('price_m3t', 'm3'); ?>

@@ -134,6 +134,7 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 </style>
 <div data-prototype-placemark="<?php echo $item->get('id', 'x'); ?>"
 	 data-placemark-coordinates="[[[-60, -68],[60, -68],[60, 0],[60, 0],[0, 0],[-60, -10],[-60, -10]]]"
+	 data-placemark-coordinates-viewed="[[[-45, -60],[45, -60],[45, 0],[45, 0],[0, 0],[-45, -10],[-45, -10]]]"
 	 class="placemark no-price<?php echo ($onModeration) ? ' onModeration' : ''; ?>" data-viewed="false">
 	<div class="image">
 		<?php echo HTMLHelper::image($image, $item->get('title', Text::_('JGLOBAL_TITLE'))); ?>
