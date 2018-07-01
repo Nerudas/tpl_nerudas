@@ -116,6 +116,7 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 		width: 7px;
 		height: 15px;
 	}
+
 	[data-prototype-placemark].no-price[data-viewed="true"] .image {
 		bottom: 15px;
 		width: 90px;
