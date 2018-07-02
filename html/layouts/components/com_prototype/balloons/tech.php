@@ -105,7 +105,7 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 			?>
 		<?php else: ?>
 			<div>
-				<div class="uk-link-muted uk-text-uppercase">
+				<a class="uk-link-muted uk-text-uppercase" href="<?php echo $item->get('author_job_link'); ?>">
 					<?php echo $item->get('author_job_name'); ?>
 					<?php if ($item->get('author_job_logo')): ?>
 						<div>
@@ -114,7 +114,7 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 								 style="height: 20px !important;"/>
 						</div>
 					<?php endif; ?>
-				</div>
+				</a>
 				<div class="uk-text-muted uk-margin-small-top uk-text-small">
 					<?php echo HTMLHelper::_('string.truncate', (strip_tags($item->get('author_job_about'))), 100); ?>
 				</div>
