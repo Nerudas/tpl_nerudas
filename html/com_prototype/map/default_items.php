@@ -20,6 +20,13 @@ use Joomla\CMS\Factory;
 		<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
 			<a class="uk-link-muted uk-display-block  uk-padding"
 			   data-prototype-show="<?php echo $item->id; ?>">
+				<div class="uk-text-muted uk-text-small uk-text-right uk-margin-small-bottom">
+					<?php if ($item->category->get('parent_id') > 1): ?>
+						<span><?php echo $item->category->get('parent_title'); ?></span>
+						<span> / </span>
+					<?php endif; ?>
+					<span><?php echo $item->category->get('title'); ?></span>
+				</div>
 				<div class="uk-text-medium">
 					<?php echo $item->title; ?>
 				</div>

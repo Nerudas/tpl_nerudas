@@ -59,7 +59,11 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 									</a>
 								</h2>
 								<div>
-									<?php echo $item->category->get('title'); ?>
+									<?php if ($item->category->get('parent_id') > 1): ?>
+										<span><?php echo $item->category->get('parent_title'); ?></span>
+										<span> / </span>
+									<?php endif; ?>
+									<span><?php echo $item->category->get('title'); ?></span>
 								</div>
 								<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-small-top">
 									<div>
