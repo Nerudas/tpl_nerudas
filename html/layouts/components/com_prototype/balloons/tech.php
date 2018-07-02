@@ -57,8 +57,15 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 		</div>
 	</div>
 	<div class="uk-width-medium-2-4">
-		<div class="uk-margin-bottom uk-text-xlarge uk-margin-remove">
+		<div class="uk-text-xlarge uk-margin-remove">
 			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+		</div>
+		<div class="uk-text-small uk-text-muted uk-margin-bottom">
+			<?php if ($category->get('parent_id') > 1): ?>
+				<span><?php echo $category->get('parent_title'); ?></span>
+				<span> / </span>
+			<?php endif; ?>
+			<span><?php echo $category->get('title'); ?></span>
 		</div>
 		<div class="prices uk-margin-small-bottom">
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">

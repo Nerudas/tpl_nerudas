@@ -51,8 +51,15 @@ $catFields = new Registry($category->get('fields'));
 ?>
 <div class="uk-flex uk-flex-space-between uk-flex-wrap uk-flex-top">
 	<div>
-		<div class="uk-margin-bottom uk-text-xlarge uk-margin-remove">
+		<div class="uk-text-xlarge uk-margin-remove">
 			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+		</div>
+		<div class="uk-text-small uk-text-muted uk-margin-bottom">
+			<?php if ($category->get('parent_id') > 1): ?>
+				<span><?php echo $category->get('parent_title'); ?></span>
+				<span> / </span>
+			<?php endif; ?>
+			<span><?php echo $category->get('title'); ?></span>
 		</div>
 		<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-bottom">
 			<div>
