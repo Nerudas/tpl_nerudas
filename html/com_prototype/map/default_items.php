@@ -20,13 +20,6 @@ use Joomla\CMS\Factory;
 		<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
 			<a class="uk-link-muted uk-display-block  uk-padding"
 			   data-prototype-show="<?php echo $item->id; ?>">
-				<div class="uk-text-muted uk-text-small uk-text-right uk-margin-small-bottom">
-					<?php if ($item->category->get('parent_id') > 1): ?>
-						<span><?php echo $item->category->get('parent_title'); ?></span>
-						<span> / </span>
-					<?php endif; ?>
-					<span><?php echo $item->category->get('title'); ?></span>
-				</div>
 				<div class="uk-text-medium">
 					<?php echo $item->title; ?>
 				</div>
@@ -38,6 +31,13 @@ use Joomla\CMS\Factory;
 						</span>
 					</div>
 				<?php endif; ?>
+				<div class="uk-text-small uk-margin-small-bottom">
+					<?php if ($item->category->get('parent_id') > 1): ?>
+						<span><?php echo $item->category->get('parent_title'); ?></span>
+						<span> / </span>
+					<?php endif; ?>
+					<span><?php echo $item->category->get('title'); ?></span>
+				</div>
 				<?php if (!empty($this->extra_filter->get('price_m3t'))):
 					$price_type = $this->extra_filter->get('price_m3t');
 					if (!empty($item->extra->get('price_' . $price_type))):

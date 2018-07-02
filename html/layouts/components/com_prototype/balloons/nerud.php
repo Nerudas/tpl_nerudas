@@ -66,19 +66,19 @@ $catFields = new Registry($category->get('fields'));
 			<?php if ($catFields->get('price_o')): ?>
 				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 					<?php echo $extra->get('price_o', '..') . ' ' .
-						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
 				</div>
 			<?php else: ?>
 				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 					<?php echo $extra->get('price_m3', '..') . ' ' .
-						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
 				</div>
 
 				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 					<?php echo $extra->get('price_t', '..') . ' ' .
-						Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
 				</div>
 			<?php endif; ?>

@@ -63,12 +63,12 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 		<div class="prices uk-margin-small-bottom">
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 				<?php echo $extra->get('price_h', '..') . ' ' .
-					Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+					Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
 			</div>
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
 				<?php echo $extra->get('price_s', '..') . ' ' .
-					Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+					Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
 			</div>
 		</div>
