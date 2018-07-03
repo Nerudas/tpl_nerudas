@@ -482,7 +482,30 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	top: -35px;
 	right: 0;
 }
+#office.home .prototype-lastes-module .items > .item[data-show="false"]:hover {
+	background: #f0f0f0 !important;
+}
 
+#office.home .prototype-lastes-module .items > .item[data-show="false"]:nth-of-type(2n+1) {
+	background: #fafafa;
+}
+
+#office.home .prototype-lastes-module .items > .item {
+	border-bottom: 1px solid #E5E5E5;
+}
+
+#office.home .prototype-lastes-module .items > .item:last-child {
+	border-bottom: none;
+}
+
+#office.home .prototype-lastes-module .items > .item .icons img {
+	height: 25px;
+	opacity: .7;
+}
+
+#office.home .prototype-lastes-module .items > .item [data-prototype-placemark] {
+	margin: 0;
+}
 /*  Yandex Share
 ========================================================================== */
 .ya-share2__container_size_m .ya-share2__icon {

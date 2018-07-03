@@ -30,7 +30,7 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 ?>
 
 
-<div class="prototype-lastes-module default-list">
+<div class="prototype-lastes-module my">
 	<div class="add uk-margin-bottom uk-text-right">
 		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
