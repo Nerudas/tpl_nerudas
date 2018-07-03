@@ -46,11 +46,12 @@ use Joomla\CMS\Language\Text;
 								</div>
 								<div class="uk-flex-wrap uk-flex uk-flex-space-between uk-flex-middle">
 									<div>
-									<span class="uk-badge uk-badge-white uk-margin-small-right">
-										<?php echo $item->region_name; ?></span>
+										<span class="uk-badge uk-badge-white uk-margin-small-right">
+											<?php echo $item->region_name; ?></span>
 
 										<span class="uk-badge uk-badge-white uk-margin-small-right">
-										<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?></span>
+											<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
+										</span>
 									</div>
 									<div>
 										<time class="timeago uk-text-muted uk-text-small uk-text-nowrap uk-margin-small-left"

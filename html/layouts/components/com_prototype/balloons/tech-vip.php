@@ -47,42 +47,42 @@ $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Fa
 $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job_contacts')) :
 	new Registry($item->get('author_contacts'));
 ?>
-<div class="uk-flex uk-flex-space-between uk-flex-wrap uk-flex-top">
-	<div>
-		<div class="uk-text-xlarge uk-margin-remove">
-			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
-		</div>
-		<div class="uk-text-small uk-text-muted uk-margin-bottom">
-			<?php if ($category->get('parent_id') > 1): ?>
-				<span><?php echo $category->get('parent_title'); ?></span>
-				<span> / </span>
-			<?php endif; ?>
-			<span><?php echo $category->get('title'); ?></span>
-		</div>
-		<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-bottom">
-			<div>
-				<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
-				<?php echo HTMLHelper::date($item->get('created'), 'd M Y'); ?>
+	<div class="uk-flex uk-flex-space-between uk-flex-wrap uk-flex-top">
+		<div>
+			<div class="uk-text-xlarge uk-margin-remove">
+				<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 			</div>
-			<div class="uk-margin-small-left uk-margin-small-right">|</div>
-			<div>
-				<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
+			<div class="uk-text-small uk-text-muted uk-margin-bottom">
+				<?php if ($category->get('parent_id') > 1): ?>
+					<span><?php echo $category->get('parent_title'); ?></span>
+					<span> / </span>
+				<?php endif; ?>
+				<span><?php echo $category->get('title'); ?></span>
+			</div>
+			<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-bottom">
+				<div>
+					<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
+					<?php echo HTMLHelper::date($item->get('created'), 'd M Y'); ?>
+				</div>
+				<div class="uk-margin-small-left uk-margin-small-right">|</div>
+				<div>
+					<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
+				</div>
+			</div>
+		</div>
+		<div class="prices uk-margin-small-bottom uk-flex-right">
+			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
+				<?php echo $extra->get('price_h', '..') . ' ' .
+					Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
+			</div>
+			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
+				<?php echo $extra->get('price_s', '..') . ' ' .
+					Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
 			</div>
 		</div>
 	</div>
-	<div class="prices uk-margin-small-bottom uk-flex-right">
-		<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-			<?php echo $extra->get('price_h', '..') . ' ' .
-				Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
-				. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
-		</div>
-		<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-			<?php echo $extra->get('price_s', '..') . ' ' .
-				Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
-				. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
-		</div>
-	</div>
-</div>
 <?php if (!empty($item->get('html'))): ?>
 	<div>
 		<?php echo $item->get('html'); ?>
@@ -101,9 +101,9 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 			</span>
 		<?php endif; ?>
 		<?php if ($item->get('editLink')): ?>
-		<a href="<?php echo $item->get('editLink'); ?>" class="uk-badge uk-badge-success">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>
-		</a>
+			<a href="<?php echo $item->get('editLink'); ?>" class="uk-badge uk-badge-success">
+				<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>
+			</a>
 		<?php endif; ?>
 	</div>
 <?php endif; ?>

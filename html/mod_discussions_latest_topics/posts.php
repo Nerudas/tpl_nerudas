@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\HTML\HTMLHelper;
+
 ?>
 <?php if (!$module->showtitle): ?>
 	<div class="uk-h2 uk-clearfix">

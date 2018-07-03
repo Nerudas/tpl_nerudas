@@ -42,9 +42,9 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 								  title="<?php echo HTMLHelper::date($this->item->created, 'd.m.Y H:i'); ?>"></time>
 						</div>
 						<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
-						<span class="uk-badge uk-badge-white uk-margin-small-left">
-							<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
-						</span>
+							<span class="uk-badge uk-badge-white uk-margin-small-left">
+								<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
+							</span>
 							<a href="#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
 								<i class="uk-icon-comment-o uk-margin-small-right"></i>
@@ -72,7 +72,8 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 						</li>
 					<?php endforeach; ?>
 				</ul>
-				<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+				<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous"
+				   data-uk-slideshow-item="previous"></a>
 				<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
 				<ul class="uk-pagination">
 					<?php
@@ -99,8 +100,8 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 					<div class="tags uk-margin-small-bottom">
 						<?php foreach ($this->item->tags->itemTags as $tag): ?>
 							<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
-							<?php echo $tag->title; ?>
-						</span>
+								<?php echo $tag->title; ?>
+							</span>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>
@@ -126,7 +127,7 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 	<?php endif; ?>
 
 	<?php if ($this->comments): ?>
-		<div  id="comments"  class="uk-panel uk-panel-box uk-margin-large-bottom uk-anchor">
+		<div id="comments" class="uk-panel uk-panel-box uk-margin-large-bottom uk-anchor">
 			<h2>
 				<?php echo $this->item->params->get('comments_title', Text::_('COM_INFO_ITEM_COMMENTS')); ?>
 			</h2>

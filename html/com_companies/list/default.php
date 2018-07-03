@@ -139,8 +139,8 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							<?php if ($item->tags): ?>
 								<?php foreach ($item->tags->itemTags as $tag): ?>
 									<span class="uk-tag">
-											<?php echo $tag->title; ?>
-										</span>
+										<?php echo $tag->title; ?>
+									</span>
 								<?php endforeach; ?>
 							<?php endif; ?>
 						</div>

@@ -54,7 +54,7 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 										<?php echo $item->title; ?>
 										<?php if ($onModeration): ?>
 											<span class="uk-badge uk-badge-danger">
-											<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?></span>
+												<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?></span>
 										<?php endif; ?>
 									</a>
 								</h2>

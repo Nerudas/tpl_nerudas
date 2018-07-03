@@ -29,8 +29,7 @@ $doc->addScriptDeclaration(
 $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category', 1)));
 ?>
 
-
-<div class="prototype-lastes-module profile">
+<div class="prototype-lastes-module company">
 	<?php if ($items) : ?>
 		<div class="items uk-margin-bottom ">
 			<?php foreach ($items as $id => $item):
@@ -83,63 +82,62 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 							   data-prototype-show="<?php echo $item->id; ?>">
 								<?php if ($catFelds->get('price_m3')): ?>
 									<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_m3', '...'); ?>
-											</span>
+										<span class="uk-text-medium uk-text-bold">
+											<?php echo $item->extra->get('price_m3', '...'); ?>
+										</span>
 										<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
-											</span>
+											<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+												. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
+										</span>
 									</div>
 								<?php endif; ?>
 								<?php if ($catFelds->get('price_t')): ?>
 									<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_t', '...'); ?>
-											</span>
+										<span class="uk-text-medium uk-text-bold">
+											<?php echo $item->extra->get('price_t', '...'); ?>
+										</span>
 										<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
-											</span>
+											<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+												. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
+										</span>
 									</div>
 								<?php endif; ?>
 
 								<?php if ($catFelds->get('price_o')): ?>
 									<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_o', '...'); ?>
-											</span>
+										<span class="uk-text-medium uk-text-bold">
+											<?php echo $item->extra->get('price_o', '...'); ?>
+										</span>
 										<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
-											</span>
+											<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+												. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
+										</span>
 									</div>
 								<?php endif; ?>
 
 								<?php if ($catFelds->get('price_h')): ?>
 									<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_h', '...'); ?>
-											</span>
+										<span class="uk-text-medium uk-text-bold">
+											<?php echo $item->extra->get('price_h', '...'); ?>
+										</span>
 										<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
-											</span>
+											<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+												. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
+										</span>
 									</div>
 								<?php endif; ?>
 
 								<?php if ($catFelds->get('price_s')): ?>
 									<div class="uk-margin-right">
-											<span class="uk-text-medium uk-text-bold">
-												<?php echo $item->extra->get('price_s', '...'); ?>
-											</span>
+										<span class="uk-text-medium uk-text-bold">
+											<?php echo $item->extra->get('price_s', '...'); ?>
+										</span>
 										<span class="uk-text-muted">
-												<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
-													. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
-											</span>
+											<?php echo Text::_('JGLOBAL_FIELD_PRICE_CURRENCY_RUB')
+												. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
+										</span>
 									</div>
 								<?php endif; ?>
-
 							</a>
 							<a class="uk-display-block uk-link-muted"
 							   data-prototype-show="<?php echo $item->id; ?>">

@@ -136,8 +136,8 @@ $level0 = ModRegionSelectHelper::getChildren($all['100'], $rows = $all);
 													 alt="<?php echo $region->title; ?>"
 													 class="uk-align-medium-left uk-margin-small-right uk-margin-bottom-remove">
 												<span class="uk-text-middle uk-link-muted">
-											<?php echo $region->title; ?>
-										</span>
+													<?php echo $region->title; ?>
+												</span>
 											</a>
 										</div>
 									<?php endforeach; ?>

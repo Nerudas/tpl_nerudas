@@ -175,9 +175,9 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 									<?php echo 'uk-width-small-1-' . $count; ?>">
 										<a class="uk-position-relative uk-display-block"
 										   href="<?php echo $item->link; ?>">
-											 <span class="image uk-thumbnail uk-display-block uk-cover-background"
-												   style="background-image: url('<?php echo $image['src']; ?>')"
-												   data-ratio-height="[166,125]"></span>
+											<span class="image uk-thumbnail uk-display-block uk-cover-background"
+												  style="background-image: url('<?php echo $image['src']; ?>')"
+												  data-ratio-height="[166,125]"></span>
 										</a>
 									</div>
 								<?php endforeach; ?>
@@ -189,8 +189,8 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 							<?php if ($item->tags): ?>
 								<?php foreach ($item->tags->itemTags as $tag): ?>
 									<span class="uk-tag">
-											<?php echo $tag->title; ?>
-										</span>
+										<?php echo $tag->title; ?>
+									</span>
 								<?php endforeach; ?>
 							<?php endif; ?>
 						</div>

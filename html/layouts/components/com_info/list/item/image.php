@@ -38,7 +38,7 @@ $item = $displayData;
 						<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->hits; ?>
 					</span>
 					<span class="uk-badge uk-badge-white uk-margin-small-left">
-						<i class="uk-icon-comment-o uk-margin-small-right"></i><?php echo $item->commentsCount;?>
+						<i class="uk-icon-comment-o uk-margin-small-right"></i><?php echo $item->commentsCount; ?>
 					</span>
 					<?php if ($item->in_work): ?>
 						<span class="uk-badge uk-badge-danger uk-margin-small-left">

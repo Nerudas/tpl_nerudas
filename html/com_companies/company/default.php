@@ -57,9 +57,9 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 								  title="<?php echo HTMLHelper::date($this->item->created, 'd.m.Y H:i'); ?>"></time>
 						</div>
 						<div class="uk-text-right uk-margin-small-bottom uk-text-nowrap">
-						<span class="uk-badge uk-badge-white uk-margin-small-left">
-							<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
-						</span>
+							<span class="uk-badge uk-badge-white uk-margin-small-left">
+								<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $this->item->hits; ?>
+							</span>
 							<a href="<?php echo $this->item->link; ?>#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
 								<i class="uk-icon-comment-o uk-margin-small-right"></i>0

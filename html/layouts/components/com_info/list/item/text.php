@@ -34,7 +34,7 @@ $item = $displayData;
 			</a>
 			<a href="<?php echo $item->link; ?>#comments"
 			   class="uk-badge uk-badge-white uk-margin-small-left">
-				<i class="uk-icon-comment-o uk-margin-small-right"></i><?php echo $item->commentsCount;?>
+				<i class="uk-icon-comment-o uk-margin-small-right"></i><?php echo $item->commentsCount; ?>
 			</a>
 		</div>
 	</div>
@@ -54,8 +54,8 @@ $item = $displayData;
 			<div class="tags">
 				<?php foreach ($item->tags->itemTags as $tag): ?>
 					<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
-							<?php echo $tag->title; ?>
-						</span>
+						<?php echo $tag->title; ?>
+					</span>
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>

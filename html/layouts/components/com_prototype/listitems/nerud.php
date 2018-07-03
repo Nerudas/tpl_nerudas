@@ -185,9 +185,9 @@ else
 									<?php echo 'uk-width-small-1-' . $count; ?>">
 						<a class="uk-position-relative uk-display-block"
 						   data-prototype-show="<?php echo $item->get('id'); ?>">
-						 <span class="image uk-thumbnail uk-display-block uk-cover-background"
-							   style="background-image: url('<?php echo $image['src']; ?>')"
-							   data-ratio-height="[166,125]"></span>
+							<span class="image uk-thumbnail uk-display-block uk-cover-background"
+								  style="background-image: url('<?php echo $image['src']; ?>')"
+								  data-ratio-height="[166,125]"></span>
 						</a>
 					</div>
 				<?php endforeach; ?>
