@@ -29,8 +29,19 @@ extract($displayData);
 
 $image = ($item->get('image', false)) ? $item->get('image') : 'templates/nerudas/images/noimage.jpg';
 
-$text = '';
+$publish_down = $item->get('publish_down', '0000-00-00 00:00:00');
+if ($publish_down == '0000-00-00 00:00:00')
+{
+	$publish_down = false;
+}
+if ($publish_down)
+{
+	$publish_down = new Date($publish_down);
+	$publish_down->toSql();
+}
+$onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Factory::getDate()->toSql()));
 
+$text = '';
 if (!empty($extra->get('why_you')))
 {
 	$text = $extra->get('why_you');
@@ -39,17 +50,8 @@ elseif (!empty($extra->get('comment')))
 {
 	$text = $extra->get('comment');
 }
-
 $text = JHtmlString::truncate($text, 150, false, false);
 $text = str_replace('...', '', $text);
-
-
-//echo '<pre>', print_r($item, true), '</pre>';
-//echo '<pre>', print_r($extra, true), '</pre>';
-//echo '<pre>', print_r($category, true), '</pre>';
-//echo '<pre>', print_r($placemark, true), '</pre>';
-//echo '<pre>', print_r($map, true), '</pre>';
-
 ?>
 
 <div class="item default uk-panel uk-panel-box uk-margin-bottom">
@@ -59,6 +61,11 @@ $text = str_replace('...', '', $text);
 				<a data-prototype-show="<?php echo $item->get('id'); ?>" class="uk-link-muted">
 					<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 				</a>
+				<?php if ($onModeration): ?>
+					<span class="uk-badge uk-badge-danger uk-margin-small-right">
+						<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+					</span>
+				<?php endif; ?>
 			</div>
 			<div class="uk-text-small">
 				<?php if ($category->get('parent_id') > 1): ?>

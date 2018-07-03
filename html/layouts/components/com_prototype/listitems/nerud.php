@@ -37,7 +37,6 @@ if ($publish_down)
 	$publish_down = new Date($publish_down);
 	$publish_down->toSql();
 }
-
 $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Factory::getDate()->toSql()));
 
 $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job_contacts')) :
@@ -107,6 +106,11 @@ else
 				   class="uk-badge uk-badge-white uk-margin-small-left">
 					<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
 				</a>
+				<?php if ($onModeration): ?>
+					<span class="uk-badge uk-badge-danger uk-margin-small-left">
+						<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+					</span>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
