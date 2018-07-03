@@ -72,7 +72,7 @@ else
 	<div class="title uk-flex uk-flex-space-between">
 		<div class="author uk-clearfix uk-width-1-1">
 			<div class="avatar uk-position-relative uk-display-inline-block uk-align-left  uk-margin-bottom-remove">
-				<a class="image uk-avatar-48"
+				<a class="image uk-avatar-48<?php echo ($as_copmany) ? ' logo' : ''; ?>"
 				   data-prototype-show="<?php echo $item->get('id'); ?>"
 				   style="background-image: url('<?php echo $author->image; ?>');">
 				</a>

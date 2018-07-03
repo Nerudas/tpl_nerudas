@@ -482,6 +482,7 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 	top: -35px;
 	right: 0;
 }
+
 #office.home .prototype-lastes-module .items > .item[data-show="false"]:hover {
 	background: #f0f0f0 !important;
 }
@@ -506,6 +507,7 @@ header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
 #office.home .prototype-lastes-module .items > .item [data-prototype-placemark] {
 	margin: 0;
 }
+
 /*  Yandex Share
 ========================================================================== */
 .ya-share2__container_size_m .ya-share2__icon {
@@ -2097,9 +2099,15 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 	display: inline-block;
 	position: relative;
 	border-radius: 50%;
+	border: 1px solid transparent;
 	background: no-repeat 50% 50%;
 	background-size: cover;
 	box-sizing: border-box;
+}
+
+[class*="uk-avatar-"].logo {
+	border: 1px solid #f3f3f3;
+	background-size: 100%;
 }
 
 [class*="uk-avatar-"].uk-flex {
