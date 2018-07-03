@@ -54,7 +54,7 @@ $catFields = new Registry($category->get('fields'));
 			<div class="uk-text-xlarge uk-margin-remove">
 				<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 			</div>
-			<div class="uk-text-small uk-text-muted uk-margin-bottom">
+			<div class="uk-text-small uk-margin-bottom">
 				<?php if ($category->get('parent_id') > 1): ?>
 					<span><?php echo $category->get('parent_title'); ?></span>
 					<span> / </span>
@@ -75,19 +75,19 @@ $catFields = new Registry($category->get('fields'));
 		<div class="prices uk-margin-small-bottom uk-flex-right">
 			<?php if ($catFields->get('price_o')): ?>
 				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-					<?php echo $extra->get('price_o', '..') . ' ' .
+					<?php echo $extra->get('price_o', '---') . ' ' .
 						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
 				</div>
 			<?php else: ?>
 				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-					<?php echo $extra->get('price_m3', '..') . ' ' .
+					<?php echo $extra->get('price_m3', '---') . ' ' .
 						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
 				</div>
 
 				<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-					<?php echo $extra->get('price_t', '..') . ' ' .
+					<?php echo $extra->get('price_t', '---') . ' ' .
 						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
 				</div>

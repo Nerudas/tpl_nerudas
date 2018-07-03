@@ -127,12 +127,12 @@ else
 		<div class="uk-width-small-1-4 uk-flex uk-flex-top uk-flex-right">
 			<div class="uk-price uk-text-right">
 				<div>
-					<?php echo $extra->get('price_h', '..') . ' ' .
+					<?php echo $extra->get('price_h', '---') . ' ' .
 						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
 				</div>
 				<div>
-					<?php echo $extra->get('price_s', '..') . ' ' .
+					<?php echo $extra->get('price_s', '---') . ' ' .
 						Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 						. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
 				</div>

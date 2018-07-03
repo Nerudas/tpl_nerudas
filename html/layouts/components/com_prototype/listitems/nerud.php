@@ -128,18 +128,18 @@ else
 			<div class="uk-price uk-text-right">
 				<?php if ($catFields->get('price_o')): ?>
 					<div>
-						<?php echo $extra->get('price_o', '..') . ' ' .
+						<?php echo $extra->get('price_o', '---') . ' ' .
 							Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 							. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
 					</div>
 				<?php else: ?>
 					<div>
-						<?php echo $extra->get('price_m3', '..') . ' ' .
+						<?php echo $extra->get('price_m3', '---') . ' ' .
 							Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 							. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
 					</div>
 					<div>
-						<?php echo $extra->get('price_t', '..') . ' ' .
+						<?php echo $extra->get('price_t', '---') . ' ' .
 							Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 							. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
 					</div>

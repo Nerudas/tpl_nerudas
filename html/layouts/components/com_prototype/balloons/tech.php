@@ -60,7 +60,7 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 		<div class="uk-text-xlarge uk-margin-remove">
 			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 		</div>
-		<div class="uk-text-small uk-text-muted uk-margin-bottom">
+		<div class="uk-text-small uk-margin-bottom">
 			<?php if ($category->get('parent_id') > 1): ?>
 				<span><?php echo $category->get('parent_title'); ?></span>
 				<span> / </span>
@@ -69,12 +69,12 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 		</div>
 		<div class="prices uk-margin-small-bottom">
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-				<?php echo $extra->get('price_h', '..') . ' ' .
+				<?php echo $extra->get('price_h', '---') . ' ' .
 					Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
 			</div>
 			<div class="uk-text-large uk-text-bold uk-margin-small-bottom">
-				<?php echo $extra->get('price_s', '..') . ' ' .
+				<?php echo $extra->get('price_s', '---') . ' ' .
 					Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 					. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
 			</div>
