@@ -271,7 +271,7 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 				</div>
 			</li>
 		<?php endif; ?>
-		<li data-tab="prototype" class="uk-panel uk-panel-box uk-padding-remove">
+		<li data-tab="prototype" class="uk-panel uk-panel-box">
 			<div>
 				<?php echo $prototypeModule; ?>
 			</div>
