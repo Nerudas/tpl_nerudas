@@ -43,7 +43,7 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 						<div>
 							<div class="uk-h3 title uk-margin-bottom-remove">
 								<a data-prototype-show="<?php echo $item->id; ?>" class="uk-link-muted">
-									<?php echo $item->title, Text::_('JGLOBAL_TITLE'); ?>
+									<?php echo $item->title; ?>
 								</a>
 								<?php if ($onModeration): ?>
 									<span class="uk-badge uk-badge-danger uk-margin-small-right">
