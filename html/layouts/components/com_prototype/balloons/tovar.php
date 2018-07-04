@@ -158,17 +158,6 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						</span>
 					</div>
 				<?php endif; ?>
-				<?php if ($catFields->get('price_o')): ?>
-					<div>
-						<span class="uk-text-large uk-text-bold">
-							<?php echo $extra->get('price_o', '---'); ?>
-						</span>
-						<span class="uk-text-medium uk-text-uppercase">
-							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
-								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
-						</span>
-					</div>
-				<?php endif; ?>
 				<?php if ($catFields->get('price_h')): ?>
 					<div>
 						<span class="uk-text-large uk-text-bold">
@@ -188,6 +177,17 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						<span class="uk-text-muted uk-text-uppercase">
 							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
+						</span>
+					</div>
+				<?php endif; ?>
+				<?php if ($catFields->get('price_o')): ?>
+					<div>
+						<span class="uk-text-large uk-text-bold">
+							<?php echo $extra->get('price_o', '---'); ?>
+						</span>
+						<span class="uk-text-muted uk-text-uppercase">
+							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
 						</span>
 					</div>
 				<?php endif; ?>
