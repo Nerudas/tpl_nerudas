@@ -1943,6 +1943,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 	color: #222222;
 	font-size: 14px;
 	padding: 0 10px;
+	text-transform: lowercase;
 }
 
 /* Title

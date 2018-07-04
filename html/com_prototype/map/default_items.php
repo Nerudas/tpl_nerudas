@@ -35,6 +35,10 @@ use Joomla\Registry\Registry;
 		{
 			$price_type = $this->extra_filter->get('price_m3t', 'm3');
 		}
+		elseif ($catFields->get('price_m3'))
+		{
+			$price_type = 'm3';
+		}
 		if ($catFields->get('price_h') && $catFields->get('price_s'))
 		{
 			$price_type = $this->extra_filter->get('price_hs', 'h');
@@ -54,7 +58,7 @@ use Joomla\Registry\Registry;
 						<div class=" uk-text-medium">
 							<?php echo $item->title; ?>
 						</div>
-						<div class="uk-text-small uk-text-muted">
+						<div class="uk-text-small uk-text-muted uk-text-lowercase">
 							<?php if ($item->category->get('parent_level') > 1): ?>
 								<span><?php echo $item->category->get('parent_title'); ?> </span>
 							<?php endif; ?>

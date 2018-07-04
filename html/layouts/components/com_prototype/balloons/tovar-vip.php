@@ -83,7 +83,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 			<div class="uk-text-xlarge uk-margin-remove">
 				<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 			</div>
-			<div class="uk-margin-bottom uk-text-muted">
+			<div class="uk-margin-bottom uk-text-muted uk-text-lowercase">
 				<?php if ($category->get('parent_level') > 1): ?>
 					<span><?php echo $category->get('parent_title'); ?> </span>
 				<?php endif; ?>

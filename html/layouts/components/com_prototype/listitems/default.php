@@ -56,24 +56,19 @@ $text = str_replace('...', '', $text);
 
 <div class="item default uk-panel uk-panel-box uk-margin-bottom">
 	<div class="title uk-flex uk-flex-space-between uk-margin-bottom">
-		<div>
+		<a data-prototype-show="<?php echo $item->get('id'); ?>" class="uk-link-muted uk-display-block">
 			<div class="uk-h3 title uk-margin-bottom-remove">
-				<a data-prototype-show="<?php echo $item->get('id'); ?>" class="uk-link-muted">
+				<div>
 					<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
-				</a>
-				<?php if ($onModeration): ?>
-					<span class="uk-badge uk-badge-danger uk-margin-small-right">
-						<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
-					</span>
-				<?php endif; ?>
+				</div>
 			</div>
-			<div class="uk-text-small">
+			<div class="uk-text-small uk-text-muted uk-text-lowercase">
 				<?php if ($category->get('parent_level') > 1): ?>
 					<span><?php echo $category->get('parent_title'); ?> </span>
 				<?php endif; ?>
 				<span><?php echo $category->get('title'); ?></span>
 			</div>
-		</div>
+		</a>
 		<div>
 			<div class="uk-text-right">
 				<div class="uk-text-nowrap">
@@ -84,13 +79,18 @@ $text = str_replace('...', '', $text);
 				</div>
 			</div>
 			<div class="uk-text-left uk-margin-small-bottom uk-text-nowrap">
+				<?php if ($onModeration): ?>
+					<span class="uk-button uk-button-danger uk-button-mini uk-margin-small-right">
+						<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?>
+					</span>
+				<?php endif; ?>
 				<a data-prototype-show="<?php echo $item->get('id'); ?>"
-				   class="uk-button uk-button-white uk-button-mini uk-margin-small-left">
+				   class="uk-button uk-button-white uk-button-mini">
 					<i class="uk-icon-eye uk-margin-small-right"></i><?php echo $item->get('hits'); ?>
 				</a>
 				<?php if (!empty($extra->get('discussion_link'))): ?>
 					<a href="<?php echo Route::_($extra->get('discussion_link')); ?>"
-					   class="uk-button uk-button-primary uk-button-mini">
+					   class="uk-button uk-button-primary uk-button-mini uk-margin-small-left">
 						<i class="uk-icon-comment-o uk-margin-small-right"></i>
 						<?php echo Text::_('TPL_NERUDAS_ACTIONS_DISCUSS'); ?>
 					</a>
