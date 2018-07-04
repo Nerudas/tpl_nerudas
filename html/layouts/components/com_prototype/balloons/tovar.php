@@ -128,9 +128,8 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 					<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 				</div>
 				<div class="uk-margin-bottom uk-text-muted">
-					<?php if ($category->get('parent_id') > 1): ?>
-						<span><?php echo $category->get('parent_title'); ?></span>
-						<span> / </span>
+					<?php if ($category->get('parent_level') > 1): ?>
+						<span><?php echo $category->get('parent_title'); ?> </span>
 					<?php endif; ?>
 					<span><?php echo $category->get('title'); ?></span>
 				</div>

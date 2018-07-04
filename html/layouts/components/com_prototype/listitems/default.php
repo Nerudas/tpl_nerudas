@@ -68,9 +68,8 @@ $text = str_replace('...', '', $text);
 				<?php endif; ?>
 			</div>
 			<div class="uk-text-small">
-				<?php if ($category->get('parent_id') > 1): ?>
-					<span><?php echo $category->get('parent_title'); ?></span>
-					<span> / </span>
+				<?php if ($category->get('parent_level') > 1): ?>
+					<span><?php echo $category->get('parent_title'); ?> </span>
 				<?php endif; ?>
 				<span><?php echo $category->get('title'); ?></span>
 			</div>

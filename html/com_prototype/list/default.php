@@ -83,7 +83,7 @@ if (!empty($app->input->get('item_id')))
 		</div>
 		<div class="uk-position-cover uk-flex uk-flex-middle uk-flex-center uk-position-z-index">
 			<div class="uk-button uk-button-white uk-button-large uk-text-uppercase">
-				<?php if ($this->category->parent_id > 1): ?>
+				<?php if ($this->category->parent_level > 1): ?>
 					<span><?php echo $this->category->parent_title; ?> </span>
 				<?php endif; ?>
 				<span><?php echo $this->category->title; ?> </span>

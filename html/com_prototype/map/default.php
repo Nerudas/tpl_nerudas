@@ -103,37 +103,36 @@ Factory::getDocument()->addScriptDeclaration(
 		</div>
 	</div>
 	<div data-prototype-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove uk-hidden-small">
-		<?php if ($menu->level > 1): ?>
-			<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
-				  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
-				  data-prototype-filter>
-				<div class="">
-					<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
-						<div class="uk-margin-right uk-flex">
-							<?php
-							$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
-							$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
-							$this->filterForm->setFieldAttribute('search', 'id', 'filter_search_desktop');
-							echo $this->filterForm->getInput('search', 'filter'); ?>
-							<div class="uk-button-group left-input">
-								<button type="submit" class="uk-button uk-text-primary uk-icon-search uk-hidden-small"
-										title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
-								</button>
-							</div>
+
+		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
+			  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
+			  data-prototype-filter>
+			<div class="">
+				<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
+					<div class="uk-margin-right uk-flex">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
+						$this->filterForm->setFieldAttribute('search', 'id', 'filter_search_desktop');
+						echo $this->filterForm->getInput('search', 'filter'); ?>
+						<div class="uk-button-group left-input">
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search uk-hidden-small"
+									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
+							</button>
 						</div>
 					</div>
-					<?php foreach ($this->filterForm->getFieldset('extra') as $field):
-						$name = $field->getAttribute('name');
-						$class = $field->getAttribute('class');
-						$this->filterForm->setFieldAttribute($name, 'class', $class . ' uk-width-1-1', 'extra');
-						?>
-						<div class="uk-form-row">
-							<?php echo $this->filterForm->getInput($name, 'extra'); ?>
-						</div>
-					<?php endforeach; ?>
 				</div>
-			</form>
-		<?php endif; ?>
+				<?php foreach ($this->filterForm->getFieldset('extra') as $field):
+					$name = $field->getAttribute('name');
+					$class = $field->getAttribute('class');
+					$this->filterForm->setFieldAttribute($name, 'class', $class . ' uk-width-1-1', 'extra');
+					?>
+					<div class="uk-form-row">
+						<?php echo $this->filterForm->getInput($name, 'extra'); ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</form>
 		<div data-prototype-itemlist="items"></div>
 		<div class="uk-margin-large-bottom"></div>
 	</div>
