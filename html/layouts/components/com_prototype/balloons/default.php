@@ -16,6 +16,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Date\Date;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Router\Route;
+use Joomla\Utilities\ArrayHelper;
 
 extract($displayData);
 
@@ -29,7 +30,11 @@ extract($displayData);
  */
 
 
-$image = ($item->get('image', false)) ? $item->get('image') : 'templates/nerudas/images/noimage.jpg';
+$images = ArrayHelper::fromObject($item->get('images'));
+if (empty($images))
+{
+	$images['image_1'] = array('src' => 'templates/nerudas/images/noimage.jpg');
+}
 
 $publish_down = $item->get('publish_down', '0000-00-00 00:00:00');
 if ($publish_down == '0000-00-00 00:00:00')
@@ -41,42 +46,97 @@ if ($publish_down)
 	$publish_down = new Date($publish_down);
 	$publish_down->toSql();
 }
-
 $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Factory::getDate()->toSql()));
-
 
 $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job_contacts')) :
 	new Registry($item->get('author_contacts'));
 
+$catFields = new Registry($category->get('fields'));
+
+$as_copmany = ($item->get('author_company'));
+
+$author         = new stdClass();
+$author->online = $item->get('author_online');
+$author->name   = (!$as_copmany) ? $item->get('author_name') : $item->get('author_job_name');
+$author->link   = (!$as_copmany) ? $item->get('author_link') : $item->get('author_job_link');
+$author->image  = (!$as_copmany) ? $item->get('author_avatar') : $item->get('author_job_logo');
+if (!($author->image))
+{
+	$author->image = '/media/com_profiles/images/no-avatar.jpg';
+}
+$author->subname = '';
+$author->sublink = (!$as_copmany) ? $item->get('author_job_link') : $item->get('author_link');
+if (!$as_copmany)
+{
+	$author->subname = (!empty($item->get('author_job_name'))) ? $item->get('author_job_name')
+		: '[' . Text::_('TPL_NERUDAS_NO_COMPANY') . ']';
+}
+else
+{
+	$author->subname = (!empty($item->get('author_position'))) ? $item->get('author_position')
+		: $item->get('author_name');
+}
+$author->text = (!$as_copmany) ? $item->get('author_status') : $item->get('author_job_about');
+$author->text = JHtmlString::truncate($author->text, 150, false, false);
+
 ?>
-<div class="uk-grid uk-margin-top-remove" data-uk-grid-margin data-uk-grid-match>
-	<div class="uk-width-medium-1-4">
-		<?php if (!empty($item->get('images'))): ?>
-			<?php foreach ($item->get('images') as $image): ?>
-				<div class="uk-width-1-1 uk-margin-bottom">
-					<?php echo HTMLHelper::image($image->src,
-						$item->get('title', Text::_('JGLOBAL_TITLE')), array('class' => 'uk-width-1-1')); ?>
+<div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
+	<div class="uk-width-medium-3-10">
+		<div>
+			<div class="uk-slidenav-position uk-slidenav-imagenavs uk-position-relative uk-balloon-slideshow"
+				 data-uk-slideshow="{autoplay:true, autoplayInterval: 3000}">
+				<ul class="uk-slideshow">
+					<?php foreach ($images as $image): ?>
+						<li>
+							<div class="image uk-display-block uk-cover-background"
+								 style="background-image: url('/<?php echo $image['src']; ?>');">
+							</div>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<a href="" class="uk-slidenav uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+				<a href="" class="uk-slidenav uk-slidenav-next" data-uk-slideshow-item="next"></a>
+				<div class="uk-position-bottom-right uk-position-z-index navigation">
+					<ul class=" uk-grid uk-grid-collapse">
+						<?php $i = 0;
+						foreach ($images as $image): ?>
+							<li data-uk-slideshow-item="<?php echo $i; ?>">
+								<a href="">
+									<div class="image uk-display-block uk-cover-background"
+										 style="background-image: url('/<?php echo $image['src']; ?>');"></div>
+								</a>
+							</li>
+							<?php $i++; ?>
+						<?php endforeach; ?>
+					</ul>
 				</div>
-			<?php endforeach; ?>
-		<?php else: ?>
+			</div>
+		</div>
+	</div>
+	<div class="uk-width-medium-7-10">
+		<div class="title">
+			<div class="uk-text-xlarge uk-margin-remove">
+				<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+			</div>
+			<div class="uk-margin-bottom uk-text-muted">
+				<?php if ($category->get('parent_id') > 1): ?>
+					<span><?php echo $category->get('parent_title'); ?></span>
+					<span> / </span>
+				<?php endif; ?>
+				<span><?php echo $category->get('title'); ?></span>
+			</div>
+		</div>
+		<?php if (!empty($item->get('html'))): ?>
 			<div>
-				<?php echo HTMLHelper::image($image,
-					$item->get('title', Text::_('JGLOBAL_TITLE')), array('class' => 'uk-width-1-1')); ?>
+				<?php echo $item->get('html'); ?>
+			</div>
+		<?php elseif (!empty($extra->get('comment'))): ?>
+			<div class="uk-text-medium">
+				<?php echo nl2br($extra->get('comment')); ?>
 			</div>
 		<?php endif; ?>
-	</div>
-	<div class="uk-width-medium-3-4">
-		<div class="uk-margin-bottom uk-text-xlarge uk-margin-remove">
-			<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
-		</div>
-		<div class="uk-text-small uk-text-muted uk-margin-bottom">
-			<?php if ($category->get('parent_id') > 1): ?>
-				<span><?php echo $category->get('parent_title'); ?></span>
-				<span> / </span>
-			<?php endif; ?>
-			<span><?php echo $category->get('title'); ?></span>
-		</div>
-		<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-bottom">
+
+		<div class="info uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-top">
 			<div>
 				<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
 				<?php echo HTMLHelper::date($item->get('created'), 'd M Y'); ?>
@@ -96,19 +156,6 @@ $contacts = ($item->get('author_company')) ? new Registry($item->get('author_job
 				</div>
 			<?php endif; ?>
 		</div>
-		<?php if (!empty($item->get('html'))): ?>
-			<div>
-				<?php echo $item->get('html'); ?>
-			</div>
-		<?php elseif (!empty($extra->get('why_you'))): ?>
-			<div class="uk-text-medium">
-				<?php echo nl2br($extra->get('why_you')); ?>
-			</div>
-		<?php elseif (!empty($extra->get('comment'))): ?>
-			<div class="uk-text-medium">
-				<?php echo nl2br($extra->get('comment')); ?>
-			</div>
-		<?php endif; ?>
 	</div>
 </div>
 

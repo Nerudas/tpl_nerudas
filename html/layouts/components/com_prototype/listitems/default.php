@@ -110,7 +110,7 @@ $text = str_replace('...', '', $text);
 		<div class="uk-width-medium-2-3">
 			<a class="uk-link-muted uk-display-block uk-height-1-1"
 			   data-prototype-show="<?php echo $item->get('id'); ?>">
-				<span class="uk-text-small"><?php echo !empty($text) ? $text . '... ' : ''; ?></span>
+				<?php echo !empty($text) ? $text . '... ' : ''; ?>
 			</a>
 		</div>
 	</div>
