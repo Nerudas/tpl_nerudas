@@ -28,7 +28,6 @@ extract($displayData);
  * @var   Registry $placemark Placemark data
  */
 
-
 $images = ArrayHelper::fromObject($item->get('images'));
 if (empty($images))
 {
@@ -128,7 +127,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 				<div class="uk-text-xlarge uk-margin-remove">
 					<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
 				</div>
-				<div class="uk-margin-bottom">
+				<div class="uk-margin-bottom uk-text-muted">
 					<?php if ($category->get('parent_id') > 1): ?>
 						<span><?php echo $category->get('parent_title'); ?></span>
 						<span> / </span>
