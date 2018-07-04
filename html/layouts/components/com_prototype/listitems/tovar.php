@@ -27,6 +27,8 @@ extract($displayData);
  * @var   Registry $map       Map data
  */
 
+$images = ArrayHelper::fromObject($item->get('images'));
+
 $publish_down = $item->get('publish_down', '0000-00-00 00:00:00');
 if ($publish_down == '0000-00-00 00:00:00')
 {
@@ -47,26 +49,28 @@ $catFields = new Registry($category->get('fields'));
 $as_copmany = ($item->get('author_company'));
 
 $author         = new stdClass();
-$author->online = $item->get('$author_online');
+$author->online = $item->get('author_online');
 $author->name   = (!$as_copmany) ? $item->get('author_name') : $item->get('author_job_name');
-
-$author->image = (!$as_copmany) ? $item->get('author_avatar') : $item->get('author_job_logo');
+$author->link   = (!$as_copmany) ? $item->get('author_link') : $item->get('author_job_link');
+$author->image  = (!$as_copmany) ? $item->get('author_avatar') : $item->get('author_job_logo');
 if (!($author->image))
 {
 	$author->image = '/media/com_profiles/images/no-avatar.jpg';
 }
-$author->subtext = '';
+$author->subname = '';
+$author->sublink = (!$as_copmany) ? $item->get('author_job_link') : $item->get('author_link');
 if (!$as_copmany)
 {
-	$author->subtext = (!empty($item->get('author_job_name'))) ? $item->get('author_job_name')
+	$author->subname = (!empty($item->get('author_job_name'))) ? $item->get('author_job_name')
 		: '[' . Text::_('TPL_NERUDAS_NO_COMPANY') . ']';
 }
 else
 {
-	$author->subtext = (!empty($item->get('author_position'))) ? $item->get('author_position')
-		: '[' . Text::_('TPL_NERUDAS_NO_COMPANY_POSITION') . ']';
+	$author->subname = (!empty($item->get('author_position'))) ? $item->get('author_position')
+		: $item->get('author_name');
 }
-
+$author->text = (!$as_copmany) ? $item->get('author_status') : $item->get('author_job_about');
+$author->text = JHtmlString::truncate($author->text, 150, false, false);
 ?>
 <div class="item nerud uk-panel uk-panel-box uk-margin-bottom">
 	<div class="title uk-flex uk-flex-space-between">
@@ -89,7 +93,7 @@ else
 				<div class="job uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
 					<a class="uk-text-muted"
 					   data-prototype-show="<?php echo $item->get('id'); ?>">
-						<?php echo $author->subtext; ?>
+						<?php echo $author->name; ?>
 					</a>
 				</div>
 			</div>
@@ -115,33 +119,71 @@ else
 		</div>
 	</div>
 
-	<a class="uk-margin-top uk-grid uk-grid-small uk-link-muted" data-prototype-show="<?php echo $item->get('id'); ?>">
+	<a class="uk-margin-small-top uk-grid uk-grid-small uk-link-muted"
+	   data-prototype-show="<?php echo $item->get('id'); ?>">
 		<div class="uk-width-small-3-4">
 			<div class="uk-h4 uk-margin-small-bottom">
 				<?php echo $item->get('title'); ?>
 			</div>
 			<div class="uk-text-small">
-				<?php echo $extra->get('why_you'); ?>
+				<?php echo nl2br($extra->get('why_you')); ?>
 			</div>
 		</div>
-		<div class="uk-width-small-1-4 uk-flex uk-flex-top uk-flex-right">
-			<div class="uk-price uk-text-right">
+		<div class="uk-width-small-1-4 uk-flex uk-flex-middle uk-flex-right">
+			<div class="price uk-text-right">
+				<?php if ($catFields->get('price_m3')): ?>
+					<div>
+						<span class="uk-text-medium uk-text-bold">
+							<?php echo $extra->get('price_m3', '---'); ?>
+						</span>
+						<span class="uk-text-small uk-text-muted uk-text-uppercase">
+							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
+						</span>
+					</div>
+				<?php endif; ?>
+				<?php if ($catFields->get('price_t')): ?>
+					<div>
+						<span class="uk-text-medium uk-text-bold">
+							<?php echo $extra->get('price_t', '---'); ?>
+						</span>
+						<span class="uk-text-small uk-text-muted uk-text-uppercase">
+							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
+						</span>
+					</div>
+				<?php endif; ?>
 				<?php if ($catFields->get('price_o')): ?>
 					<div>
-						<?php echo $extra->get('price_o', '---') . ' ' .
-							Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
-							. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
+						<span class="uk-text-medium uk-text-bold">
+							<?php echo $extra->get('price_o', '---'); ?>
+						</span>
+						<span class="uk-text-small uk-text-muted uk-text-uppercase">
+							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
+						</span>
 					</div>
-				<?php else: ?>
+				<?php endif; ?>
+				<?php if ($catFields->get('price_h')): ?>
 					<div>
-						<?php echo $extra->get('price_m3', '---') . ' ' .
-							Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
-							. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
+						<span class="uk-text-medium uk-text-bold">
+							<?php echo $extra->get('price_h', '---'); ?>
+						</span>
+						<span class="uk-text-small uk-text-muted uk-text-uppercase">
+							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
+						</span>
 					</div>
+				<?php endif; ?>
+				<?php if ($catFields->get('price_s')): ?>
 					<div>
-						<?php echo $extra->get('price_t', '---') . ' ' .
-							Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
-							. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
+						<span class="uk-text-medium uk-text-bold">
+							<?php echo $extra->get('price_s', '---'); ?>
+						</span>
+						<span class="uk-text-small uk-text-muted uk-text-uppercase">
+							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
+								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
+						</span>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -174,15 +216,13 @@ else
 			<?php endif; ?>
 		</div>
 	</div>
-	<?php if ($item->get('image')) : ?>
+	<?php if (!empty($images)) : ?>
 		<div class="uk-margin-top">
 			<div class="uk-grid uk-grid-small image">
 				<?php
-				$images = ArrayHelper::fromObject($item->get('images'));
-				$count  = count($images);
+				$count = count($images);
 				foreach ($images as $image): ?>
-					<div class="uk-container-center
-									<?php echo 'uk-width-small-1-' . $count; ?>">
+					<div class="uk-container-center<?php echo ' uk-width-small-1-' . $count; ?>">
 						<a class="uk-position-relative uk-display-block"
 						   data-prototype-show="<?php echo $item->get('id'); ?>">
 							<span class="image uk-thumbnail uk-display-block uk-cover-background"

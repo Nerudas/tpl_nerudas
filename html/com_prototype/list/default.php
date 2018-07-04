@@ -71,32 +71,32 @@ if (!empty($app->input->get('item_id')))
 						</div>
 					</div>
 				</div>
-				<div class="uk-form-row">
-					<?php if (!Factory::getUser()->guest):
-						$onlymy = $this->filterForm->getField('onlymy', 'filter');
-						$this->filterForm->setFieldAttribute('onlymy', 'onchange', 'this.form.submit()', 'filter');
-						?>
-
-						<label for="<?php echo $onlymy->id; ?>" class="uk-flex-inline uk-flex-middle uk-margin-top">
-							<?php echo $this->filterForm->getInput('onlymy', 'filter'); ?>
-							<span class="uk-margin-small-left">
-								<?php echo Text::_('COM_PROTOTYPE_ONLYMY_ITEMS'); ?>
-							</span>
-						</label>
-
-					<?php endif; ?>
-				</div>
 			</div>
 		</form>
 	</div>
-
+	<a href="<?php echo $this->mapLink; ?>"
+	   class="uk-display-block uk-panel uk-panel-box uk-padding-remove uk-margin-bottom uk-position-relative"
+	   title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
+	   data-uk-tooltip>
+		<?php echo HTMLHelper::image('prototype-map.png', Text::_('TPL_NERUDAS_ON_MAP'), array('class' => 'uk-width-1-1'), true); ?>
+		<div class="uk-position-cover" style="background: rgba(0,0,0,0.1)">
+		</div>
+		<div class="uk-position-cover uk-flex uk-flex-middle uk-flex-center uk-position-z-index">
+			<div class="uk-button uk-button-white uk-button-large uk-text-uppercase">
+				<?php if ($this->category->parent_id > 1): ?>
+					<span><?php echo $this->category->parent_title; ?> </span>
+				<?php endif; ?>
+				<span><?php echo $this->category->title; ?> </span>
+				<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>
+			</div>
+		</div>
+	</a>
 	<?php if ($this->items) : ?>
 		<div class="items">
 			<?php foreach ($this->items as $id => $item)
 			{
 				echo $item->listitem;
-			};
-			?>
+			}; ?>
 		</div>
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
