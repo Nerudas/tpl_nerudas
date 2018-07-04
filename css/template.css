@@ -3177,6 +3177,32 @@ svg[data-name="Nerudas"] .dots .background {
 	opacity: 0.3;
 }
 
+.uk-balloon-slideshow,
+.uk-balloon-slideshow .uk-slideshow .image {
+	height: 250px;
+	background-color: #e5e5e5;
+}
+
+.uk-balloon-slideshow .navigation li {
+	border-top: 1px solid #b4b4b4;
+	border-left: 1px solid #b4b4b4;
+	background-color: #e5e5e5;
+}
+
+.uk-balloon-slideshow .navigation li > a {
+	display: block;
+	height: 48px;
+	width: 48px;
+}
+
+.uk-balloon-slideshow .navigation li > a .image {
+	width: 100%;
+	height: 100%;
+}
+
+.uk-balloon-slideshow .navigation li.uk-active > a {
+	opacity: 0.3;
+}
 [data-tabmap] {
 	max-height: 90vh;
 	min-height: 50vh;
