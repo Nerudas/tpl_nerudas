@@ -142,7 +142,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						<span class="uk-text-large uk-text-bold">
 							<?php echo $extra->get('price_m3', '---'); ?>
 						</span>
-						<span class="uk-text-medium uk-text-muted">
+						<span class="uk-text-muted uk-text-uppercase">
 							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_M3'); ?>
 						</span>
@@ -153,7 +153,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						<span class="uk-text-large uk-text-bold">
 							<?php echo $extra->get('price_t', '---'); ?>
 						</span>
-						<span class="uk-text-medium uk-text-muted">
+						<span class="uk-text-muted uk-text-uppercase">
 							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_T'); ?>
 						</span>
@@ -164,7 +164,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						<span class="uk-text-large uk-text-bold">
 							<?php echo $extra->get('price_o', '---'); ?>
 						</span>
-						<span class="uk-text-medium">
+						<span class="uk-text-medium uk-text-uppercase">
 							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_O'); ?>
 						</span>
@@ -175,7 +175,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						<span class="uk-text-large uk-text-bold">
 							<?php echo $extra->get('price_h', '---'); ?>
 						</span>
-						<span class="uk-text-medium uk-text-muted">
+						<span class="uk-text-muted uk-text-uppercase">
 							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_H'); ?>
 						</span>
@@ -186,7 +186,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 						<span class="uk-text-large uk-text-bold">
 							<?php echo $extra->get('price_s', '---'); ?>
 						</span>
-						<span class="uk-text-medium uk-text-muted">
+						<span class="uk-text-muted uk-text-uppercase">
 							<?php echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB')
 								. '/' . Text::_('TPL_NERUDAS_PRICE_TYPE_S'); ?>
 						</span>
@@ -195,7 +195,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 			</div>
 		</div>
 		<?php if (!empty($extra->get('why_you'))): ?>
-			<div class="">
+			<div>
 				<?php echo nl2br($extra->get('why_you')); ?>
 			</div>
 		<?php endif; ?>
