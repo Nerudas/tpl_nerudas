@@ -46,14 +46,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 
 	<?php if ($this->items) : ?>
 		<div class="items">
-			<?php
-			$count = count($this->items);
-			$half  = round($count / 2);
-			$i     = 1;
-			foreach ($this->items as $id => $item): ?>
-				<?php if ($i == $half): ?>
-
-				<?php endif; ?>
+			<?php foreach ($this->items as $id => $item): ?>
 				<div class="item uk-margin-bottom uk-panel uk-panel-box">
 					<div class="uk-grid uk-grid-small">
 						<div class="uk-width-small-3-4">
@@ -100,6 +93,25 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 							</div>
 						</div>
 					</div>
+					<?php if (!empty($item->portfolio)): ?>
+						<div class="uk-margin-small-top">
+							<div class="uk-grid uk-grid-small image">
+								<?php
+								$count = count($item->portfolio);
+								foreach ($item->portfolio as $image): ?>
+									<div class="uk-container-center<?php echo ($count > 6) ? ' uk-width-small-1-6'
+										: ' uk-width-small-1-' . $count; ?>">
+										<a class="uk-position-relative uk-display-block"
+										   href="<?php echo $item->link; ?>">
+											<span class="image uk-thumbnail uk-display-block uk-cover-background"
+												  style="background-image: url('<?php echo $image['src']; ?>')"
+												  data-ratio-height="[166,125]"></span>
+										</a>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 					<?php if (!empty($item->tags->itemTags)): ?>
 						<div class="uk-margin-small-top tags">
 							<?php if ($item->tags): ?>
@@ -112,7 +124,6 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 						</div>
 					<?php endif; ?>
 				</div>
-
 			<?php endforeach; ?>
 		</div>
 		<div>
