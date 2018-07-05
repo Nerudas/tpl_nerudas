@@ -48,7 +48,7 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 							<a href="#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
 								<i class="uk-icon-comment-o uk-margin-small-right"></i>
-								<?php echo ($this->comments) ? $this->comments->total : 0; ?>
+								<?php echo ($this->comments && $this->comments->total) ? $this->comments->total : 0; ?>
 							</a>
 						</div>
 					</div>
