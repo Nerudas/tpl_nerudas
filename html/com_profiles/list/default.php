@@ -15,10 +15,6 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 
-require_once JPATH_THEMES . '/nerudas/helper.php';
-$showAdvansedFiler = tplNerudasHelper::checkAdvansedFilterActivity($this->filterForm,
-	array('tags', 'regions'));
-
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('formbehavior.chosen', 'select');
 
@@ -29,48 +25,24 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 			  class="uk-form filter">
 			<div class="uk-form-row">
-				<div class="uk-flex uk-flex-space-between">
-					<?php
-					$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
-					$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
-					echo $this->filterForm->getInput('search', 'filter'); ?>
-					<div class="uk-button-group left-input advanced-fiter
-							<?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
-						<a href="<?php echo $this->link; ?>"
-						   class="uk-button uk-text-danger uk-icon-times">
-						</a>
-						<button type="submit" class="uk-button uk-text-primary uk-icon-search"
-								title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
-						</button>
+				<div class="uk-grid uk-grid-small" data-uk-margin>
+					<div class="uk-width-small-1-2 uk-width-medium-2-5 uk-hidden-large">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('tag', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('tag', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('tag', 'filter'); ?>
 					</div>
-				</div>
-
-			</div>
-			<div class="uk-form-row advanced-fiter uk-text-right <?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
-				<a data-uk-toggle="{target:'.advanced-fiter'}">
-					<?php echo Text::_('TPL_NERUDAS_ADVANCED_FITER'); ?>
-				</a>
-			</div>
-			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
-				<?php echo $this->filterForm->getInput('tags', 'filter'); ?>
-			</div>
-			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
-				<div class="uk-flex uk-flex-wrap uk-flex-space-between uk-flex-middle">
-					<div class="">
-						<div class="uk-flex-inline uk-margin-right uk-margin-top">
-							<?php $region = $this->filterForm->getField('region', 'filter'); ?>
-							<label for="<?php echo $region->id; ?>">
-								<?php echo $this->filterForm->getInput('region', 'filter'); ?>
-							</label>
-						</div>
-					</div>
-					<div class="uk-flex-inline uk-margin-top">
-						<div class="uk-button-group">
-							<a href="<?php echo $this->link; ?>" class="uk-button uk-button-danger">
-								<?php echo Text::_('JCLEAR'); ?>
+					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-width-large-1-1 uk-flex uk-flex-space-between">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('search', 'filter'); ?>
+						<div class="uk-button-group left-input advanced-fiter">
+							<a href="<?php echo $this->link; ?>"
+							   class="uk-button uk-text-danger uk-icon-times">
 							</a>
-							<button type="submit" class="uk-button uk-button-primary">
-								<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
+									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
 							</button>
 						</div>
 					</div>
@@ -81,14 +53,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 
 	<?php if ($this->items) : ?>
 		<div class="items">
-			<?php
-			$count = count($this->items);
-			$half  = round($count / 2);
-			$i     = 1;
-			foreach ($this->items as $id => $item): ?>
-				<?php if ($i == $half): ?>
-
-				<?php endif; ?>
+			<?php foreach ($this->items as $id => $item): ?>
 				<div class="item uk-margin-large-bottom ">
 					<div class="avatar <?php echo ($item->online) ? ' online' : '' ?>">
 						<a href="<?php echo $item->link; ?>" class="image"
@@ -131,7 +96,8 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 										</a>
 										<a href="<?php echo $item->link; ?>#comments"
 										   class="uk-badge uk-badge-white uk-margin-small-left">
-											<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+											<i class="uk-icon-comment-o uk-margin-small-right"></i>
+											<?php echo $item->commentsCount; ?>
 										</a>
 										<div class="region uk-margin-top uk-text-small">
 											<?php

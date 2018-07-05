@@ -94,7 +94,8 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 							</span>
 							<a href="<?php echo $this->item->link; ?>#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
-								<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+								<i class="uk-icon-comment-o uk-margin-small-right"></i>
+								<?php echo ($this->comments && $this->comments->total) ? $this->comments->total : 0; ?>
 							</a>
 						</div>
 					</div>
@@ -103,7 +104,8 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 		</div>
 	</div>
 
-	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}">
+	<ul class="uk-tab-new uk-margin-bottom-remove" data-uk-switcher="{connect:'#profileTabs', swiping: false}"
+		data-save-tabs="profileTabs">
 		<li><a href="#about"><?php echo Text::_('COM_PROFILES_PROFILE_ABOUT'); ?></a></li>
 		<?php if ($this->item->contacts) : ?>
 			<li><a href="#contacts"><?php echo Text::_('COM_PROFILES_PROFILE_CONTACTS'); ?></a></li>
@@ -113,7 +115,7 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 		<?php endif; ?>
 		<li><a href="#prototype"><?php echo Text::_('TPL_NERUDAS_PROFILE_PROTOTYPE'); ?></a></li>
 		<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_PROFILE_BOARD'); ?></a></li>
-		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
+		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_REVIEWS'); ?></a></li>
 	</ul>
 
 	<ul id="profileTabs" class="uk-switcher" data-uk-switcher-tabs="">
@@ -282,9 +284,7 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 			</div>
 		</li>
 		<li data-tab="comments" class="uk-panel uk-panel-box">
-			<div class="uk-text-muted uk-text-large uk-text-center">
-				<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
-			</div>
+			<?php echo $this->comments->render; ?>
 		</li>
 	</ul>
 </div>
