@@ -43,7 +43,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
 						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
 						echo $this->filterForm->getInput('search', 'filter'); ?>
-						<div class="uk-button-group left-input advanced-fiter">
+						<div class="uk-button-group left-input">
 							<a href="<?php echo $this->link; ?>"
 							   class="uk-button uk-text-danger uk-icon-times">
 							</a>
@@ -59,15 +59,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 
 	<?php if ($this->items) : ?>
 		<div class="items uk-panel uk-panel-box uk-margin-bottom">
-			<?php
-			$count = count($this->items);
-			$half  = round($count / 2);
-			$i     = 1;
-			foreach ($this->items as $id => $item): ?>
-				<?php if ($i == $half): ?>
-
-				<?php endif; ?>
-
+			<?php foreach ($this->items as $id => $item): ?>
 				<div class="item">
 					<div class="title uk-flex uk-flex-space-between">
 						<?php $item->author_link = $item->link;
@@ -87,7 +79,8 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 							</div>
 						</div>
 					</div>
-					<a class="uk-margin-top-remove uk-grid uk-grid-small uk-link-muted" href="<?php echo $item->link; ?>">
+					<a class="uk-margin-top-remove uk-grid uk-grid-small uk-link-muted"
+					   href="<?php echo $item->link; ?>">
 						<div class="uk-width-small-1-1">
 							<div class="uk-margin-small-bottom">
 								<?php if ($item->for_when == 'today'): ?>
@@ -155,7 +148,7 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 					</div>
 				</div>
 				<hr>
-				<?php $i++; endforeach; ?>
+			<?php endforeach; ?>
 			<div>
 				<?php echo $this->pagination->getPagesLinks(); ?>
 			</div>

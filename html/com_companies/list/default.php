@@ -15,10 +15,6 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
 
-require_once JPATH_THEMES . '/nerudas/helper.php';
-$showAdvansedFiler = tplNerudasHelper::checkAdvansedFilterActivity($this->filterForm,
-	array('tags', 'regions'));
-
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('formbehavior.chosen', 'select');
 
@@ -34,8 +30,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 					$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
 					$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
 					echo $this->filterForm->getInput('search', 'filter'); ?>
-					<div class="uk-button-group left-input advanced-fiter
-							<?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
+					<div class="uk-button-group left-input">
 						<a href="<?php echo $this->link; ?>"
 						   class="uk-button uk-text-danger uk-icon-times">
 						</a>
@@ -45,36 +40,6 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 					</div>
 				</div>
 
-			</div>
-			<div class="uk-form-row advanced-fiter uk-text-right <?php echo ($showAdvansedFiler) ? 'uk-hidden' : ''; ?>">
-				<a data-uk-toggle="{target:'.advanced-fiter'}">
-					<?php echo Text::_('TPL_NERUDAS_ADVANCED_FITER'); ?>
-				</a>
-			</div>
-			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
-				<?php echo $this->filterForm->getInput('tags', 'filter'); ?>
-			</div>
-			<div class="uk-form-row advanced-fiter <?php echo (!$showAdvansedFiler) ? ' uk-hidden' : ''; ?>">
-				<div class="uk-flex uk-flex-wrap uk-flex-space-between uk-flex-middle">
-					<div class="">
-						<div class="uk-flex-inline uk-margin-right uk-margin-top">
-							<?php $region = $this->filterForm->getField('region', 'filter'); ?>
-							<label for="<?php echo $region->id; ?>">
-								<?php echo $this->filterForm->getInput('region', 'filter'); ?>
-							</label>
-						</div>
-					</div>
-					<div class="uk-flex-inline uk-margin-top">
-						<div class="uk-button-group">
-							<a href="<?php echo $this->link; ?>" class="uk-button uk-button-danger">
-								<?php echo Text::_('JCLEAR'); ?>
-							</a>
-							<button type="submit" class="uk-button uk-button-primary">
-								<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>
-							</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</form>
 	</div>

@@ -65,7 +65,10 @@ if (!empty($app->input->get('item_id')))
 						$this->filterForm->setFieldAttribute('search', 'id', 'filter_search_desktop');
 						echo $this->filterForm->getInput('search', 'filter'); ?>
 						<div class="uk-button-group left-input">
-							<button type="submit" class="uk-button uk-text-primary uk-icon-search uk-hidden-small"
+							<a href="<?php echo $this->listLink; ?>"
+							   class="uk-button uk-text-danger uk-icon-times">
+							</a>
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
 									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
 							</button>
 						</div>
