@@ -42,6 +42,8 @@
 		<position>home-left</position>
 		<position>home-center</position>
 		<position>home-right</position>
+		<position>map-beforeitems</position>
+		<position>mobilefilter</position>
 	</positions>
 	<config>
 		<fields name="params">

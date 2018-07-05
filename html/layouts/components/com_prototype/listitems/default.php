@@ -12,6 +12,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die;
 
@@ -36,8 +37,7 @@ if ($publish_down == '0000-00-00 00:00:00')
 }
 if ($publish_down)
 {
-	$publish_down = new Date($publish_down);
-	$publish_down->toSql();
+	$publish_down = Factory::getDate($publish_down)->toSql();
 }
 $onModeration = (!$item->get('state', 0) || ($publish_down && $publish_down < Factory::getDate()->toSql()));
 
