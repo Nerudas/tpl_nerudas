@@ -25,21 +25,28 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 			  class="uk-form filter">
 			<div class="uk-form-row">
-				<div class="uk-flex uk-flex-space-between">
-					<?php
-					$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
-					$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
-					echo $this->filterForm->getInput('search', 'filter'); ?>
-					<div class="uk-button-group left-input">
-						<a href="<?php echo $this->link; ?>"
-						   class="uk-button uk-text-danger uk-icon-times">
-						</a>
-						<button type="submit" class="uk-button uk-text-primary uk-icon-search"
-								title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
-						</button>
+				<div class="uk-grid uk-grid-small" data-uk-margin>
+					<div class="uk-width-small-1-2 uk-width-medium-2-5 uk-hidden-large">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('tag', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('tag', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('tag', 'filter'); ?>
+					</div>
+					<div class="uk-width-small-1-2 uk-width-medium-3-5 uk-width-large-1-1 uk-flex uk-flex-space-between">
+						<?php
+						$class = $this->filterForm->getFieldAttribute('search', 'class', '', 'filter') . ' uk-width-1-1';
+						$this->filterForm->setFieldAttribute('search', 'class', $class, 'filter');
+						echo $this->filterForm->getInput('search', 'filter'); ?>
+						<div class="uk-button-group left-input advanced-fiter">
+							<a href="<?php echo $this->link; ?>"
+							   class="uk-button uk-text-danger uk-icon-times">
+							</a>
+							<button type="submit" class="uk-button uk-text-primary uk-icon-search"
+									title="<?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?>" data-uk-tooltip>
+							</button>
+						</div>
 					</div>
 				</div>
-
 			</div>
 		</form>
 	</div>
