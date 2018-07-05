@@ -62,7 +62,8 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 							</span>
 							<a href="<?php echo $this->item->link; ?>#comments"
 							   class="uk-badge uk-badge-white uk-margin-small-left">
-								<i class="uk-icon-comment-o uk-margin-small-right"></i>0
+								<i class="uk-icon-comment-o uk-margin-small-right"></i>
+								<?php echo ($this->comments) ? $this->comments->total : 0; ?>
 							</a>
 						</div>
 					</div>
@@ -88,7 +89,7 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 		<?php if (!empty($this->employees)) : ?>
 			<li><a href="#employees"><?php echo Text::_('COM_COMPANIES_EMPLOYEES'); ?></a></li>
 		<?php endif; ?>
-		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_COMMENTS'); ?></a></li>
+		<li><a href="#comments"><?php echo Text::_('TPL_NERUDAS_REVIEWS'); ?></a></li>
 	</ul>
 
 	<ul id="companyTabs" class="uk-switcher" data-uk-switcher-tabs="">
@@ -300,9 +301,7 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 			</li>
 		<?php endif; ?>
 		<li data-tab="comments" class="uk-panel uk-panel-box">
-			<div class="uk-text-muted uk-text-large uk-text-center">
-				<?php echo Text::_('TPL_NERUDAS_IN_DEVELOPING'); ?>
-			</div>
+			<?php echo $this->comments->render; ?>
 		</li>
 	</ul>
 </div>
