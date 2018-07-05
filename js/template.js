@@ -72,7 +72,7 @@
 
 	$(document).ready(function () {
 		$('[data-save-tabs]').each(function () {
-			var key = window.location.href + '#' + $(this).data('save-tabs'),
+			var key = window.location.href.split('?')[0] + '#' + $(this).data('save-tabs'),
 				storage = sessionStorage.getItem(key);
 			if (storage) {
 				$(this).find('a[href="' + storage + '"]').closest('li').addClass('uk-active');
