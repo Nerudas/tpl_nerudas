@@ -33,11 +33,10 @@ use Joomla\CMS\HTML\HTMLHelper;
 				<div class="uk-link-muted uk-text-uppercase">
 					<?php echo $item->name; ?>
 					<?php if ($item->logo): ?>
-						<sup>
 							<img src="<?php echo $item->logo; ?>"
 								 alt="<?php echo str_replace('"', '', $item->name); ?>"
 								 style="height: 20px !important;"/>
-						</sup>
+
 					<?php endif; ?>
 				</div>
 				<div class="uk-text-muted">
