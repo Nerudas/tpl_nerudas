@@ -76,6 +76,7 @@ $margin = (!isset($margin)) ? true : $margin;
 			<?php endforeach; ?>
 		</ul>
 	<?php endif; ?>
+	<?php echo Factory::getDocument()->loadRenderer('modules')->render('mobilefilter', array('style' => 'blank')); ?>
 	<hr>
 	<div class="actions uk-margin-small-top uk-text-right">
 		<a class="close uk-button uk-button-white" data-uk-tooltip

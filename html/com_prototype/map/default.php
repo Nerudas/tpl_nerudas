@@ -133,6 +133,9 @@ Factory::getDocument()->addScriptDeclaration(
 				<?php endforeach; ?>
 			</div>
 		</form>
+		<div class="modules">
+			<?php echo Factory::getDocument()->loadRenderer('modules')->render('map-beforeitems', array('style' => 'blank')); ?>
+		</div>
 		<div data-prototype-itemlist="items"></div>
 		<div class="uk-margin-large-bottom"></div>
 	</div>
