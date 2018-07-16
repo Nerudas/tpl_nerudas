@@ -42,7 +42,6 @@ $doc->addScriptDeclaration('
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
 
 	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
-		<?php echo LayoutHelper::render('components.com_board.form.categories', $this); ?>
 		<?php echo $this->form->renderField('title'); ?>
 		<?php echo $this->form->renderField('for_when'); ?>
 		<?php
@@ -86,6 +85,14 @@ $doc->addScriptDeclaration('
 		</div>
 		<div>
 			<?php echo $this->form->getInput('map'); ?>
+		</div>
+	</div>
+	<div class="uk-panel uk-panel-box uk-margin-bottom">
+		<div class="uk-h3">
+			<?php echo Text::_('JTAG'); ?>
+		</div>
+		<div>
+			<?php echo $this->form->getInput('tags'); ?>
 		</div>
 	</div>
 
