@@ -94,7 +94,7 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 				<div class="job uk-text-uppercase-letter uk-text-small uk-text-ellipsis">
 					<a class="uk-text-muted"
 					   data-prototype-show="<?php echo $item->get('id'); ?>">
-						<?php echo $author->name; ?>
+						<?php echo $author->subname; ?>
 					</a>
 				</div>
 			</div>
