@@ -16,25 +16,45 @@ use Joomla\CMS\Language\Text;
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('script', 'media/com_location/js/regions.min.js', array('version' => 'auto'));
 HTMLHelper::_('script', 'media/mod_location_regions/js/ajax.min.js', array('version' => 'auto'));
-HTMLHelper::_('script', 'media/mod_location_regions/js/default.min.js', array('version' => 'auto'));
-
-//echo '<pre>', var_dump($new), '</pre>';
-//echo '<pre>', print_r($current, true), '</pre>';
-
-if ($new)
-{
-	echo Text::sprintf('MOD_LOCATION_REGIONS_NEW', $current->name);
-}
+HTMLHelper::_('script', 'mod_location_regions.min.js', array('version' => 'auto', 'relative' => true));
 ?>
 
-<div data-mod-location-regions="<?php echo $module->id; ?>">
-	<h2><?php echo Text::sprintf('MOD_LOCATION_REGIONS_CURRENT', $current->name); ?></h2>
-	<h3><?php echo Text::_('MOD_LOCATION_REGIONS_SELECT'); ?></h3>
-	<div class="success"></div>
-	<div class="loading">L</div>
-	<div class="error"></div>
-	<div class="items"></div>
-	<div>
-		<a class="refresh">R</a>
+<li class="region">
+	<a href="#locationSelect" data-uk-modal="" data-uk-tooltip="pos:'bottom-right', cls:'big'"
+	   title="<?php echo Text::sprintf('MOD_LOCATION_REGIONS_CURRENT', $current->name); ?>">
+		<img src="<?php echo $current->icon; ?>" alt="<?php echo $current->name; ?>"/>
+	</a>
+	<?php if ($new): ?>
+		<div id="locationNewRegion" class="new region">
+			<div class="uk-text-nowrap uk-text-small">
+				<?php echo Text::sprintf('MOD_LOCATION_REGIONS_NEW', $current->name); ?>
+			</div>
+			<div class="uk-text-right uk-margin-small-top uk-text-nowrap">
+				<a class="uk-button uk-button-white uk-button-small"
+				   data-uk-toggle="{target:'#locationNewRegion'}">
+					<?php echo Text::_('JYES'); ?>
+				</a>
+				<a class="uk-button uk-button-white uk-button-small"
+				   href="#locationSelect" data-uk-modal="" data-uk-tooltip="pos:'bottom-right', cls:'big'">
+					<?php echo Text::_('MOD_LOCATION_REGIONS_SELECT'); ?>
+				</a>
+			</div>
+		</div>
+	<?php endif; ?>
+</li>
+
+<div id="locationSelect" class="uk-modal" data-mod-location-regions="<?php echo $module->id; ?>">
+	<div class="uk-modal-dialog uk-modal-dialog-large">
+		<a class="uk-modal-close uk-close">
+		</a>
+		<div class="uk-h4 uk-modal-header">
+			<?php echo Text::sprintf('MOD_LOCATION_REGIONS_CURRENT', $current->name); ?>
+		</div>
+		<div>
+			<div class="success uk-alert uk-alert-success"></div>
+			<div class="loading"><i class="uk-icon-spinner uk-icon-spin uk-icon-large"></i></div>
+			<div class="error uk-alert uk-alert-danger"></div>
+			<div class="items uk-overflow-container"></div>
+		</div>
 	</div>
 </div>

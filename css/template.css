@@ -75,13 +75,6 @@ html.map {
 	letter-spacing: 1px;
 }
 
-/* Header
-========================================================================== */
-header.tm-top:not('.new') .uk-navbar-flip .uk-navbar-nav > .region > a > img {
-	margin-top: -3px;
-	height: 30px;
-}
-
 /* Microdata
 ========================================================================== */
 .microdata {
@@ -3040,6 +3033,16 @@ nav.tm-toppanel-mobile .module.show .module-content {
 	display: block;
 }
 
+nav.tm-toppanel .right > .modules > li.region .new {
+	display: block;
+	position: absolute;
+	top: 42px;
+	background: #fff;
+	color: #444;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+
 /*  Logo
 ========================================================================== */
 svg[data-name="Nerudas"] {
@@ -3396,4 +3399,11 @@ svg[data-name="Nerudas"] .dots .background {
 
 hr.mutted {
 	border-color: #f0f0f0;
+}
+
+#locationSelect .loading,
+#locationSelect .success,
+#locationSelect .error,
+#locationSelect .items {
+	display: none;
 }
