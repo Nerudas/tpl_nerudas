@@ -206,9 +206,10 @@ $author->text = JHtmlString::truncate($author->text, 150, false, false);
 			<?php endif; ?>
 		</div>
 		<div class="uk-width-small-1-3 uk-flex uk-flex-right uk-flex-bottom">
-			<?php
-			echo HTMLHelper::image('regions/' . $item->get('region') . '.png', $item->get('region_name'),
-				array('title' => $item->get('region_name'), 'data-uk-tooltip' => ''), true); ?>
+			<?php if ($item->get('region_icon')): ?>
+				<img src="<?php echo $item->get('region_icon'); ?>" alt="<?php echo $item->get('region_name'); ?>"
+					 data-uk-tooltip title="<?php echo $item->get('region_name'); ?>"/>
+			<?php endif; ?>
 			<?php if ($map): ?>
 				<a data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
 				   href="<?php echo $map->get('link'); ?>">

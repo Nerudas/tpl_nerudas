@@ -122,9 +122,10 @@ $text = str_replace('...', '', $text);
 			</div>
 		<?php endif; ?>
 		<div class="uk-flex-right">
-			<?php
-			echo HTMLHelper::image('regions/' . $item->get('region') . '.png', $item->get('region_name'),
-				array('title' => $item->get('region_name'), 'data-uk-tooltip' => ''), true); ?>
+			<?php if ($item->get('region_icon')): ?>
+				<img src="<?php echo $item->get('region_icon'); ?>" alt="<?php echo $item->get('region_name'); ?>"
+					 data-uk-tooltip title="<?php echo $item->get('region_name'); ?>"/>
+			<?php endif; ?>
 			<?php if ($map): ?>
 				<a data-uk-tooltip title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
 				   href="<?php echo $map->get('link'); ?>">
