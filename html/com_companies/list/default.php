@@ -91,11 +91,13 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 										<i class="uk-icon-comment-o uk-margin-small-right"></i>
 										<?php echo $item->commentsCount; ?>
 									</a>
-									<div class="region uk-margin-top uk-text-small">
-										<?php
-										echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
-											array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
-									</div>
+									<?php if ($item->region_icon): ?>
+										<div class="region uk-margin-top uk-text-small">
+											<img src="<?php echo $item->region_icon; ?>"
+												 alt="<?php echo $item->region_name; ?>"
+												 data-uk-tooltip title="<?php echo $item->region_name; ?>"/>
+										</div>
+									<?php endif; ?>
 								</div>
 							</div>
 						</div>
