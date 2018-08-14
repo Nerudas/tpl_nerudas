@@ -258,11 +258,13 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 											   class="uk-badge uk-badge-white uk-margin-small-left">
 												<i class="uk-icon-comment-o uk-margin-small-right"></i>0
 											</a>
-											<div class="region uk-margin-top uk-text-small">
-												<?php
-												echo HTMLHelper::image('regions/' . $company->region . '.png', $company->region_name,
-													array('title' => $company->region_name, 'data-uk-tooltip' => ''), true); ?>
-											</div>
+											<?php if ($company->region_icon): ?>
+												<div class="region uk-margin-top uk-text-small">
+													<img src="<?php echo $company->region_icon; ?>"
+														 alt="<?php echo $company->region_name; ?>"
+														 data-uk-tooltip title="<?php echo $company->region_name; ?>"/>
+												</div>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
