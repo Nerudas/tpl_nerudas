@@ -99,10 +99,10 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 							<?php endif; ?>
 						</div>
 						<div class="uk-width-small-1-3 uk-flex uk-flex-right uk-flex-top">
-							<?php
-							$item->region = ($item->region == '*') ? 100 : $item->region;
-							echo HTMLHelper::image('regions/' . $item->region . '.png', $item->region_name,
-								array('title' => $item->region_name, 'data-uk-tooltip' => ''), true); ?>
+							<?php if ($item->region_icon): ?>
+								<img src="<?php echo $item->region_icon; ?>" alt="<?php echo $item->region_name; ?>"
+									 data-uk-tooltip title="<?php echo $item->region_name; ?>"/>
+							<?php endif; ?>
 
 							<?php if ($item->map):
 								$item->map = $item->map->toArray();
