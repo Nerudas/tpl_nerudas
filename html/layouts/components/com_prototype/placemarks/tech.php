@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    techas Template
- * @version    4.9.24
+ * @version    4.9.25
  * @author     techas  - techas.ru
  * @copyright  Copyright (c) 2013 - 2018 techas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
