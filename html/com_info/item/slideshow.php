@@ -63,10 +63,10 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 					<?php foreach ($this->item->images as $key => $image): ?>
 						<li>
 							<div>
-								<img src="<?php echo $image['src']; ?>"
-									 alt="<?php echo $this->item->title . str_replace('image_', ' ', $key) ?>">
+								<img src="<?php echo $image->src; ?>"
+									 alt="<?php echo $this->item->title . ' ' . ($key + 1) ?>">
 								<div>
-									<?php echo $image['text']; ?>
+									<?php echo $image->text; ?>
 								</div>
 							</div>
 						</li>
