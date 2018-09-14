@@ -9,7 +9,6 @@
 
 (function ($) {
 	$(document).ready(function () {
-		console.log('aaa');
 		var block = $('#locationSelect');
 
 		$(block).appendTo('body');
