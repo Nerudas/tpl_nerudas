@@ -18,6 +18,9 @@ use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\HTML\HTMLHelper;
 
+JLoader::register('FieldTypesFilesHelper', JPATH_PLUGINS . '/fieldtypes/files/helper.php');
+
+
 if (Factory::getUser()->id != $this->data->id)
 {
 	Factory::getApplication()->redirect(Route::_('index.php?option=com_users&view=profile'));
@@ -87,7 +90,11 @@ $myPrototypeModule         = ModuleHelper::renderModule($myPrototypeModule);
 
 $this->data->contacts = new Registry($this->data->contacts);
 
-$this->data->avatar = (!empty($this->data->avatar)) ? $this->data->avatar : 'media/com_profiles/images/no-avatar.jpg'
+$imagesHelper = new FieldTypesFilesHelper();
+$imagesFolder = 'images/profiles/' . $this->data->id;
+
+$this->data->avatar = $imagesHelper->getImage('avatar', $imagesFolder, 'media/com_profiles/images/no-avatar.jpg', false);
+$this->data->header = $imagesHelper->getImage('header', $imagesFolder, 'media/com_profiles/images/no-header.jpg', false);
 ?>
 <div id="office" class="home">
 	<div class="uk-grid" data-uk-grid-match="" data-uk-grid-margin="">
