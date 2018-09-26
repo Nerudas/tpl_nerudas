@@ -253,12 +253,12 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 					<?php $count = count($this->item->portfolio);
 					foreach ($this->item->portfolio as $image): ?>
 						<div class="uk-width-small-1-<?php echo ($count > 1) ? 3 : 1; ?> uk-flex uk-flex-center uk-flex-top">
-							<a class="uk-position-relative uk-display-inline-block" href="/<?php echo $image['src']; ?>"
+							<a class="uk-position-relative uk-display-inline-block" href="/<?php echo $image->src; ?>"
 							   data-uk-lightbox="{group:'company_<?php echo $this->item->id; ?>'}"
-							   title="<?php echo $image['text']; ?>">
-								<?php echo HTMLHelper::image($image['src'], '', 'class="uk-thumbnail"'); ?>
+							   title="<?php echo $image->text; ?>">
+								<?php echo HTMLHelper::image($image->src, '', 'class="uk-thumbnail"'); ?>
 								<div class="uk-text-center uk-text-muted uk-margin-small-top uk-margin-small-bottom">
-									<?php echo $image['text']; ?>
+									<?php echo $image->text; ?>
 								</div>
 							</a>
 						</div>

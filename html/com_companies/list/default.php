@@ -113,7 +113,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 										<a class="uk-position-relative uk-display-block"
 										   href="<?php echo $item->link; ?>">
 											<span class="image uk-thumbnail uk-display-block uk-cover-background"
-												  style="background-image: url('<?php echo $image['src']; ?>')"
+												  style="background-image: url('<?php echo $image->src; ?>')"
 												  data-ratio-height="[166,125]"></span>
 										</a>
 									</div>
