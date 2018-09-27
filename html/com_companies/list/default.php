@@ -106,8 +106,14 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 						<div class="uk-margin-small-top">
 							<div class="uk-grid uk-grid-small image">
 								<?php
+								$i = 0;
 								$count = count($item->portfolio);
-								foreach ($item->portfolio as $image): ?>
+								foreach ($item->portfolio as $image):
+									if ($i == 6) {
+										break;
+									}
+									$i ++;
+									?>
 									<div class="uk-container-center<?php echo ($count > 6) ? ' uk-width-small-1-6'
 										: ' uk-width-small-1-' . $count; ?>">
 										<a class="uk-position-relative uk-display-block"
