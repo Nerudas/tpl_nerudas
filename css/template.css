@@ -121,23 +121,8 @@ html.map {
 }
 
 #companies.form #jform_header {
-	width: 1200px !important;
-	height: 392px !important;
-}
-
-#companies.form #jform_header .form {
-	width: 1200px !important;
-	height: 392px !important;
-	padding: 0;
-	overflow: hidden;
-}
-
-#companies.form #jform_header img {
-	min-height: 100%;
 	width: 100%;
-	max-height: none;
 }
-
 
 /* Profiles
 ========================================================================== */
@@ -366,7 +351,6 @@ html.map {
 	width: 100%;
 	max-height: none;
 }
-
 
 /* office
 ========================================================================== */
@@ -2248,7 +2232,6 @@ h6.uk-accordion-title, .uk-h6.uk-accordion-title {
 .uk-icon-anchor-license::before {
 	content: "\f1c3";
 }
-
 
 /* Thumbnails
 ========================================================================== */
