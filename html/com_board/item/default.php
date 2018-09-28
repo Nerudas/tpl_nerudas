@@ -39,7 +39,7 @@ if ($this->item->map)
 				<?php foreach ($this->item->images as $image): ?>
 					<li>
 						<div class="image uk-display-block uk-cover-background"
-							 style="background-image: url('<?php echo $image['src']; ?>');">
+							 style="background-image: url('<?php echo $image->src; ?>');">
 						</div>
 					</li>
 				<?php endforeach; ?>
@@ -53,7 +53,7 @@ if ($this->item->map)
 						<li data-uk-slideshow-item="<?php echo $i; ?>">
 							<a href="">
 								<div class="image uk-display-block uk-cover-background"
-									 style="background-image: url('<?php echo $image['src']; ?>');"></div>
+									 style="background-image: url('<?php echo $image->src; ?>');"></div>
 							</a>
 						</li>
 						<?php $i++; ?>
@@ -321,9 +321,9 @@ if ($this->item->map)
 					<?php $count = count($this->item->images);
 					foreach ($this->item->images as $image): ?>
 						<div class="uk-width-small-1-<?php echo ($count > 1) ? 3 : 1; ?> uk-flex uk-flex-center uk-flex-middle">
-							<a class="uk-position-relative uk-display-inline-block" href="/<?php echo $image['src']; ?>"
+							<a class="uk-position-relative uk-display-inline-block" href="/<?php echo $image->src; ?>"
 							   data-uk-lightbox="{group:'board_<?php echo $this->item->id; ?>'}">
-								<?php echo HTMLHelper::image($image['src'], '', 'class="uk-thumbnail"'); ?>
+								<?php echo HTMLHelper::image($image->src, '', 'class="uk-thumbnail"'); ?>
 							</a>
 						</div>
 					<?php endforeach; ?>
