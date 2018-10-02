@@ -65,11 +65,11 @@ HTMLHelper::_('jquery.framework');
 				<div class="uk-margin-top uk-grid uk-grid-small">
 					<?php foreach ($this->topic->images as $image): ?>
 						<div class="uk-width-1-3 uk-width-medium-1-5">
-							<a href="<?php echo $image['src']; ?>"
+							<a href="<?php echo $image->src; ?>"
 							   data-uk-lightbox="{group:'topic-<?php echo $this->topic->id; ?>'}">
 								<div class="image uk-display-block uk-cover-background"
 									 data-ratio-height="[4,3]"
-									 style="background-image: url('<?php echo $image['src']; ?>');"></div>
+									 style="background-image: url('<?php echo $image->src; ?>');"></div>
 							</a>
 						</div>
 					<?php endforeach; ?>

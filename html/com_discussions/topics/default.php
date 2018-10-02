@@ -99,7 +99,7 @@ $filters = array_keys($this->filterForm->getGroup('filter'));
 											<div class="uk-width-1-3 uk-width-medium-1-5">
 												<div class="image uk-display-block uk-cover-background"
 													 data-ratio-height="[4,3]"
-													 style="background-image: url('<?php echo $image['src']; ?>');"></div>
+													 style="background-image: url('<?php echo $image->src; ?>');"></div>
 
 											</div>
 										<?php endforeach; ?>
