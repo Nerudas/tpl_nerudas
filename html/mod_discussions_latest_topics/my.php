@@ -49,7 +49,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 
 												<div class="image uk-display-block uk-cover-background"
 													 data-ratio-height="[4,3]"
-													 style="background-image: url('<?php echo $image['src']; ?>');"></div>
+													 style="background-image: url('<?php echo $image->src; ?>');"></div>
 
 											</div>
 										<?php endforeach; ?>
