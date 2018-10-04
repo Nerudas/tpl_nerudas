@@ -16,6 +16,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Router\Route;
 use Joomla\Utilities\ArrayHelper;
+use Joomla\CMS\Uri\Uri;
 
 extract($displayData);
 
@@ -60,8 +61,9 @@ $author->link   = (!$as_copmany) ? $item->get('author_link') : $item->get('autho
 $author->image  = (!$as_copmany) ? $item->get('author_avatar') : $item->get('author_job_logo');
 if (!($author->image))
 {
-	$author->image = '/media/com_profiles/images/no-avatar.jpg';
+	$author->image = 'media/com_profiles/images/no-avatar.jpg';
 }
+$author->image   = trim(Uri::root(true), '/') . '/' . $author->image;
 $author->subname = '';
 $author->sublink = (!$as_copmany) ? $item->get('author_job_link') : $item->get('author_link');
 if (!$as_copmany)
