@@ -13,11 +13,6 @@ defined('_JEXEC') or die;
 $template = $displayData;
 $header   = $template->header;
 $panel    = $header->panel;
-
-use Joomla\CMS\Factory;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Language\Text;
-
 ///echo '<pre>', print_r($header, true), '</pre>';
 ?>
 <header class="tm-top new">
@@ -54,7 +49,7 @@ use Joomla\CMS\Language\Text;
 		</div>
 	</nav>
 	<?php if ($panel->mobile && !$template->map): ?>
-		<nav class="tm-toppanel-mobile uk-container uk-container-center uk-margin-top uk-hidden-large">
+		<nav class="tm-toppanel-mobile uk-container uk-container-center uk-margin-top uk-hidden">
 			<div class="modules uk-accordion uk-grid uk-grid uk-grid-width-medium-1-2 uk-panel uk-panel-box"
 				 data-uk-grid-match
 				 data-uk-grid-margin>
