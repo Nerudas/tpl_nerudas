@@ -15,11 +15,11 @@ $template = $displayData;
 ?>
 <div class="tm-middle uk-container uk-container-center uk-margin-top uk-margin-bottom">
 	<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
-		<main class="tm-center uk-width-medium-1-1 uk-width-large-2-3">
+		<main class="tm-center uk-width-medium-1-1 uk-width-large-3-4">
 			<jdoc:include type="component"/>
 		</main>
 		<?php if ($template->countModules('sidebar')): ?>
-			<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-3">
+			<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-4">
 				<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
 					<jdoc:include type="modules" name="sidebar" style="sidebar_new"/>
 				</div>

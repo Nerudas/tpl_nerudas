@@ -551,11 +551,6 @@ body, h1, h2, h3, h4, h5, h6, .uk-navbar-nav > li > a {
 	max-width: 1380px;
 }
 
-.uk-container {
-	padding: 0 5px;
-	max-width: 1110px;
-}
-
 @media (min-width: 768px) {
 	.uk-container {
 		padding: 0 10px;
