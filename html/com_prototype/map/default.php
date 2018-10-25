@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Nerudas Template
- * @version    4.9.30
+ * @version    4.9.29
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -44,30 +44,41 @@ Factory::getDocument()->addScriptDeclaration(
 		$menus         = $app->getMenu();
 		$menu          = $menus->getActive();
 		$subitems      = array();
-		if ($menu->level > 1)
+		foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
 		{
-			foreach ($this->children as $child)
+			if ($menuItem->getParams()->get('menu_show'))
 			{
 				$object       = new stdClass();
-				$object->name = $child->title;
-				$object->link = $child->mapLink;
-				$subitems[]   = $object;
+				$object->name = $menuItem->title;
+				$object->link = $menuItem->link;
+
+				$subitems[] = $object;
 			}
 		}
-		else
-		{
-			foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
-			{
-				if ($menuItem->getParams()->get('menu_show'))
-				{
-					$object       = new stdClass();
-					$object->name = $menuItem->title;
-					$object->link = $menuItem->link;
-
-					$subitems[] = $object;
-				}
-			}
-		} ?>
+		//		if ($menu->level > 1)
+		//		{
+		//			foreach ($this->children as $child)
+		//			{
+		//				$object       = new stdClass();
+		//				$object->name = $child->title;
+		//				$object->link = $child->mapLink;
+		//				$subitems[]   = $object;
+		//			}
+		//		}
+		//		else
+		//		{
+		//			foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
+		//			{
+		//				if ($menuItem->getParams()->get('menu_show'))
+		//				{
+		//					$object       = new stdClass();
+		//					$object->name = $menuItem->title;
+		//					$object->link = $menuItem->link;
+		//
+		//					$subitems[] = $object;
+		//				}
+		//			}
+		//		} ?>
 
 		<?php echo LayoutHelper::render('template.title.mobilefilter', array(
 			'add'      => $this->addLink,
