@@ -12,17 +12,15 @@ defined('_JEXEC') or die;
 
 ?>
 <?php if ($tags): ?>
-	<ul class="info-tags-module uk-nav uk-nav-side uk-nav-parent-icon new" data-uk-nav="">
+	<div class="info-tags-module tags" data-uk-nav="">
 		<?php foreach ($tags as $id => $item):
-			$class = 'item-' . $id;
+			$class = 'uk-tag item-' . $id;
 			if ($item->active)
 			{
-				$class .= ' uk-active';
+				$class .= ' uk-tag-primary';
 			}
 			?>
-			<li class="<?php echo $class; ?>">
-				<a href="<?php echo $item->link; ?>"><?php echo $item->title; ?></a>
-			</li>
+			<a href="<?php echo $item->link; ?>" class="<?php echo $class; ?>"><?php echo $item->title; ?></a>
 		<?php endforeach; ?>
-	</ul>
+	</div>
 <?php endif; ?>
