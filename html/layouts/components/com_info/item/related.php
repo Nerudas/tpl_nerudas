@@ -1,7 +1,7 @@
 <?
 /**
  * @package    Nerudas Template
- * @version    4.9.30
+ * @version    4.9.31
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
