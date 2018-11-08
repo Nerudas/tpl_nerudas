@@ -17,10 +17,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 $app = Factory::getApplication();
 
-
 LayoutHelper::render('components.com_prototype.list.scripts');
-
-
 
 if (!empty($app->input->get('item_id')))
 {
@@ -95,13 +92,14 @@ if (!empty($app->input->get('item_id')))
 			<?php
 			$count = count($this->items);
 			$i     = 0;
-			foreach ($this->items as $id => $item):
-				$i++; ?>
+			foreach ($this->items as $id => $item):?>
 				<?php echo $item->render->listItem; ?>
-				<?php if ($i != $count): ?>
-				<hr class="uk-hidden-small">
-				<hr class="uk-hidden-medium uk-hidden-large uk-margin-large-top uk-margin-large-bottom">
-			<?php endif; ?>
+				<?php
+				$i++;
+				if ($i != $count): ?>
+					<hr class="uk-hidden-small">
+					<hr class="uk-hidden-medium uk-hidden-large uk-margin-large-top uk-margin-large-bottom">
+				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 		<div>
