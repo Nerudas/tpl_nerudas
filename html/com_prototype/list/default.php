@@ -23,13 +23,15 @@ HTMLHelper::_('jquery.framework');
 HTMLHelper::_('formbehavior.chosen', 'select');
 HTMLHelper::_('script', 'media/com_prototype/js/list.min.js', array('version' => 'auto'));
 
-$doc->addScriptDeclaration(
-	"function showPrototypeListBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
+$doc->addScriptDeclaration("
+	function showPrototypeListBalloon() {UIkit.modal('[data-prototype-list-balloon]', {center: true}).show();}
+	function showPrototypeListAuthor() {UIkit.modal('[data-prototype-list-author]', {center: true}).show();}
+");
 
 if (!empty($app->input->get('item_id')))
 {
 	$doc->addScriptDeclaration('	jQuery(document).ready(function () {
-		jQuery(\'[data-prototype-show="' . $app->input->get('item_id') . '"]\').trigger(\'click\');
+		jQuery(\'[data-prototype-show-balloon="' . $app->input->get('item_id') . '"]\').trigger(\'click\');
 	});');
 }
 ?>
@@ -78,7 +80,7 @@ if (!empty($app->input->get('item_id')))
 		</form>
 	</div>
 	<a href="<?php echo $this->mapLink; ?>"
-	   class="uk-display-block uk-panel uk-panel-box uk-padding-remove uk-margin-bottom uk-position-relative"
+	   class="uk-display-block uk-panel uk-panel-box uk-padding-remove uk-position-relative"
 	   title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
 	   data-uk-tooltip>
 		<?php echo HTMLHelper::image('prototype-map.png', Text::_('TPL_NERUDAS_ON_MAP'), array('class' => 'uk-width-1-1'), true); ?>
@@ -95,30 +97,24 @@ if (!empty($app->input->get('item_id')))
 		</div>
 	</a>
 	<?php if ($this->items) : ?>
-		<div class="items">
-			<?php foreach ($this->items as $id => $item)
-			{
-				echo $item->listitem;
-			}; ?>
+		<div class="items uk-panel uk-panel-box uk-margin-large-bottom">
+			<?php
+			$count = count($this->items);
+			$i     = 0;
+			foreach ($this->items as $id => $item):
+				$i++; ?>
+				<?php echo $item->render->listItem; ?>
+				<?php if ($i != $count): ?>
+				<hr class="uk-hidden-small">
+				<hr class="uk-hidden-medium uk-hidden-large uk-margin-large-top uk-margin-large-bottom">
+			<?php endif; ?>
+			<?php endforeach; ?>
 		</div>
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
 	<?php endif; ?>
-	<div data-prototype-balloon class="uk-modal">
-		<div class="uk-modal-dialog uk-modal-dialog-large">
-			<button class="uk-modal-close uk-close" type="button"></button>
-			<div class="uk-alert uk-alert-danger" data-prototype-balloon-error>
-				<?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
-			</div>
-			<div data-prototype-balloon-loading>
-				<i class="uk-icon-spinner uk-icon-spin uk-margin-small-right"></i>
-				<?php echo JText::_('TPL_NERUDAS_LOADING'); ?>
-			</div>
-			<div data-prototype-balloon-content class="uk-overflow-container">
-			</div>
-		</div>
-	</div>
+
 </div>
 
 
