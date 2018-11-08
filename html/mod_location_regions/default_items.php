@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Nerudas Template
- * @version    4.9.31
+ * @version    4.9.32
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -40,7 +40,7 @@ $others = $children[$default->id] + $children[-1];
 					<div class="uk-width-medium-1-4">
 						<a data-location-set-region="<?php echo $region->id; ?>"
 						   class="uk-link-muted uk-display-block uk-text-center">
-							<img src="<?php echo $region->icon; ?>" alt="<?php echo $region->name; ?>">
+							<img src="/<?php echo $region->icon; ?>" alt="<?php echo $region->name; ?>">
 						</a>
 					</div>
 				<?php endforeach; ?>
@@ -58,7 +58,7 @@ $others = $children[$default->id] + $children[-1];
 				<div class="uk-width-medium-1-4">
 					<a data-location-set-region="<?php echo $region->id; ?>"
 					   class="uk-link-muted uk-display-block uk-text-center">
-						<img src="<?php echo $region->icon; ?>" alt="<?php echo $region->name; ?>">
+						<img src="/<?php echo $region->icon; ?>" alt="<?php echo $region->name; ?>">
 					</a>
 				</div>
 			<?php endforeach; ?>
