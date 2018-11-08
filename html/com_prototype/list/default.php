@@ -10,27 +10,21 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 
 $app = Factory::getApplication();
-$doc = Factory::getDocument();
 
 
-HTMLHelper::_('jquery.framework');
-HTMLHelper::_('formbehavior.chosen', 'select');
-HTMLHelper::_('script', 'media/com_prototype/js/list.min.js', array('version' => 'auto'));
+LayoutHelper::render('components.com_prototype.list.scripts');
 
-$doc->addScriptDeclaration("
-	function showPrototypeListBalloon() {UIkit.modal('[data-prototype-list-balloon]', {center: true}).show();}
-	function showPrototypeListAuthor() {UIkit.modal('[data-prototype-list-author]', {center: true}).show();}
-");
+
 
 if (!empty($app->input->get('item_id')))
 {
-	$doc->addScriptDeclaration('	jQuery(document).ready(function () {
+	Factory::getDocument()->addScriptDeclaration('	jQuery(document).ready(function () {
 		jQuery(\'[data-prototype-show-balloon="' . $app->input->get('item_id') . '"]\').trigger(\'click\');
 	});');
 }
@@ -113,8 +107,9 @@ if (!empty($app->input->get('item_id')))
 		<div>
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
+		<?php echo LayoutHelper::render('components.com_prototype.list.balloon'); ?>
+		<?php echo LayoutHelper::render('components.com_prototype.list.author'); ?>
 	<?php endif; ?>
-
 </div>
 
 
