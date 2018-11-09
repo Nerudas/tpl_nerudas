@@ -30,7 +30,7 @@ extract($displayData);
 		<?php endif; ?>
 	</div>
 	<div class="uk-width-medium-4-12">
-		<a class="uk-display-block uk-link-muted" data-prototype-show-balloon="<?php echo $item->get('id'); ?>">
+		<a class="uk-display-block uk-link-muted" data-prototype-list-show-balloon="<?php echo $item->get('id'); ?>">
 			<div class="uk-h3">
 				<?php echo $item->get('title'); ?>
 			</div>
@@ -40,7 +40,7 @@ extract($displayData);
 		</a>
 	</div>
 	<div class="uk-width-medium-1-12 uk-text-center">
-		<a class="uk-display-block uk-link-muted" data-prototype-show-balloon="<?php echo $item->get('id'); ?>">
+		<a class="uk-display-block uk-link-muted" data-prototype-list-show-balloon="<?php echo $item->get('id'); ?>">
 			<div class="uk-text-nowrap uk-text-bold uk-text-xlarge">
 				<?php if (!empty($item->get('price'))) : ?>
 					<?php echo $item->get('price'); ?> ₽
@@ -64,7 +64,7 @@ extract($displayData);
 	</div>
 	<div class="uk-width-medium-3-12 uk-flex uk-flex-top">
 		<a class="author uk-link-muted uk-display-inline-block"
-		   data-prototype-show-author="<?php echo $item->get('id'); ?>">
+		   data-prototype-list-show-author="<?php echo $item->get('id'); ?>">
 			<div class="name uk-link">
 				<?php echo $author->get('name'); ?>
 			</div>
@@ -77,7 +77,7 @@ extract($displayData);
 	</div>
 	<div class="uk-width-medium-1-12 uk-text-center uk-flex uk-flex-top uk-flex-center">
 		<a class="author uk-link-muted uk-display-inline-block"
-		   data-prototype-show-author="<?php echo $item->get('id'); ?>">
+		   data-prototype-list-show-author="<?php echo $item->get('id'); ?>">
 			<?php echo HTMLHelper::image('templates/nerudas/images/prototype-call-icon.png', ''); ?>
 		</a>
 	</div>
