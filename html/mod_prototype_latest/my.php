@@ -67,13 +67,13 @@ $doc = Factory::getDocument();
 							</div>
 							<div class="uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
 								<div>
-									<?php if ($item->payment_down->end): ?>
+									<?php if ($item->payment_down->date !== 'never'): ?>
 										<div class="uk-margin-bottom uk-text-center">
 											<div class="uk-text-small uk-text-muted">
 												<?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROTOTYPE_DATE_PUBLISH_DOWN'); ?>
 											</div>
 											<div class="">
-												<?php echo $item->payment_down->date; //HTMLHelper::date($item->payment_down->date, 'd.m.Y'); ?>
+												<?php echo HTMLHelper::date($item->payment_down->date, 'd.m.Y'); ?>
 											</div>
 										</div>
 									<?php endif; ?>
