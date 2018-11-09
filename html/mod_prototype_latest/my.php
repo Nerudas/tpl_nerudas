@@ -18,8 +18,6 @@ $app = Factory::getApplication();
 $doc = Factory::getDocument();
 
 ?>
-
-
 <div class="prototype-lastes-module my">
 	<div class="add uk-margin-bottom uk-text-right">
 		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
