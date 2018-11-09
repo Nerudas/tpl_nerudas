@@ -32,64 +32,58 @@ $doc->addScriptDeclaration('
 		}
 	};
 ');
-
-$extraFields = $this->form->getGroup('extra');
-foreach ($extraFields as $extraField)
-{
-	$name = $extraField->getAttribute('name');
-	$type = $extraField->getAttribute('type');
-	if ($type == 'textarea')
-	{
-		$this->form->setFieldAttribute($name, 'class', 'uk-width-1-1', 'extra');
-		$this->form->setFieldAttribute($name, 'rows', '3', 'extra');
-	}
-
-}
 ?>
 <form action="<?php echo Route::_(PrototypeHelperRoute::getFormRoute($this->item->id, $this->category->id,
 	$app->input->getCmd('return_view'))); ?>" method="post" name="adminForm" id="prototype"
 	  class="form form-validate uk-form uk-margin-bottom" enctype="multipart/form-data">
-
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
-
-	<div class="uk-panel uk-panel-box  uk-form-horizontal uk-margin-bottom">
-		<?php echo $this->form->renderField('title'); ?>
-
-		<?php echo $this->form->renderFieldSet('extra'); ?>
-
-	</div>
-
-	<div class="uk-panel uk-panel-box uk-margin-bottom">
-		<div class="uk-panel-title uk-h3">
-			<?php echo Text::_('JGLOBAL_FIELD_MAP_LABEL'); ?>
+	<?php echo LayoutHelper::render('components.com_prototype.form.presets',
+		array('form' => $this->form, 'presets' => $this->presets)); ?>
+	<div data-prototype-form="form" style="display: none">
+		<div class="uk-text-right uk-margin-bottom">
+			<span data-preset-title="label" class="uk-text-muted uk-margin-small-right"></span>
+			<a data-prototype-form="change-preset">
+				<?php echo Text::_('TPL_NERUDAS_ACTIONS_CHANGE'); ?>
+			</a>
 		</div>
-		<div>
-			<?php echo $this->form->getInput('map'); ?>
+		<div class="uk-panel uk-panel-box uk-form-horizontal uk-margin-bottom">
+			<?php echo $this->form->renderField('title'); ?>
+			<?php echo $this->form->renderField('price'); ?>
+			<?php $this->form->setFieldAttribute('text', 'class', 'uk-width-1-1');
+			echo $this->form->renderField('text'); ?>
 		</div>
-	</div>
 
-	<div class="uk-panel uk-panel-box uk-margin-bottom">
-		<div class="uk-panel-title uk-h3">
-			<?php echo Text::_('COM_PROTOTYPE_ITEM_IMAGES'); ?>
+		<div class="uk-panel uk-panel-box uk-margin-bottom">
+			<div class="uk-panel-title uk-h3">
+				<?php echo Text::_('JGLOBAL_FIELD_MAP_LABEL'); ?>
+			</div>
+			<div>
+				<?php echo $this->form->getInput('map'); ?>
+			</div>
 		</div>
-		<div>
-			<?php echo $this->form->getInput('images'); ?>
+		<div class="uk-panel uk-panel-box uk-margin-bottom">
+			<div class="uk-panel-title uk-h3">
+				<?php echo Text::_('COM_PROTOTYPE_ITEM_IMAGES'); ?>
+			</div>
+			<div>
+				<?php echo $this->form->getInput('images'); ?>
+			</div>
 		</div>
-	</div>
 
-	<?php echo $this->form->renderFieldSet('hidden'); ?>
+		<?php echo $this->form->renderFieldSet('hidden'); ?>
 
-	<input type="hidden" name="task" value=""/>
-	<input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>"/>
-	<?php echo HTMLHelper::_('form.token'); ?>
+		<input type="hidden" name="task" value=""/>
+		<input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>"/>
+		<?php echo HTMLHelper::_('form.token'); ?>
 
-	<div class="uk-form-row uk-text-center">
-		<button onclick="Joomla.submitbutton('item.cancel');"
-				class="uk-button uk-button-danger">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
-		</button>
-		<button onclick="Joomla.submitbutton('item.save');" class="uk-button uk-button-success">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
-		</button>
+		<div class="uk-form-row uk-text-center">
+			<button onclick="Joomla.submitbutton('item.cancel');"
+					class="uk-button uk-button-danger">
+				<?php echo Text::_('TPL_NERUDAS_ACTIONS_CANCEL'); ?>
+			</button>
+			<button onclick="Joomla.submitbutton('item.save');" class="uk-button uk-button-success">
+				<?php echo Text::_('TPL_NERUDAS_ACTIONS_SAVE'); ?>
+			</button>
+		</div>
 	</div>
 </form>
