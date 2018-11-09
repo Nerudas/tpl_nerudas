@@ -3222,7 +3222,7 @@ svg[data-name="Nerudas"] .dots .background {
 	color: #999 !important;
 }
 
-#prototype.map [data-prototype-itemlist="container"] {
+#prototype.map [data-prototype-map-itemlist="container"] {
 	width: 350px;
 	box-sizing: border-box;
 	height: 100%;
@@ -3230,19 +3230,19 @@ svg[data-name="Nerudas"] .dots .background {
 	padding-bottom: 70px !important;
 }
 
-#prototype.map [data-prototype-itemlist="items"] .item[data-show="false"]:hover {
+#prototype.map [data-prototype-map-itemlist="items"] .item[data-show="false"]:hover {
 	background: #f0f0f0 !important;
 }
 
-#prototype.map [data-prototype-itemlist="items"] .item[data-show="false"]:nth-of-type(2n+1) {
+#prototype.map [data-prototype-map-itemlist="items"] .item[data-show="false"]:nth-of-type(2n+1) {
 	background: #fafafa;
 }
 
-#prototype.map [data-prototype-itemlist="items"] .item {
+#prototype.map [data-prototype-map-itemlist="items"] .item {
 	border-bottom: 1px solid #E5E5E5;
 }
 
-#prototype.map [data-prototype-itemlist="items"] .item:last-child {
+#prototype.map [data-prototype-map-itemlist="items"] .item:last-child {
 	border-bottom: none;
 }
 

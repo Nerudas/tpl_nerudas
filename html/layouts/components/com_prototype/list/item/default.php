@@ -34,9 +34,11 @@ extract($displayData);
 			<div class="uk-h3">
 				<?php echo $item->get('title'); ?>
 			</div>
-			<div class="uk-text-small uk-text-muted">
-				<?php echo JHtmlString::truncate($item->get('text'), 70, false, false); ?>
-			</div>
+			<?php if (!empty($item->get('text'))): ?>
+				<div class="uk-text-small uk-text-muted">
+					<?php echo JHtmlString::truncate($item->get('text'), 70, false, false); ?>
+				</div>
+			<?php endif; ?>
 		</a>
 	</div>
 	<div class="uk-width-medium-1-12 uk-text-center">

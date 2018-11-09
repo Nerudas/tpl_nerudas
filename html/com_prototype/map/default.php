@@ -11,19 +11,14 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
-use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
 $app = Factory::getApplication();
-HTMLHelper::_('formbehavior.chosen', 'select');
-HTMLHelper::_('script', '//api-maps.yandex.ru/2.1/?lang=ru-RU', array('version' => 'auto', 'relative' => true));
-HTMLHelper::_('script', 'media/com_prototype/js/map.min.js', array('version' => 'auto'));
 
-Factory::getDocument()->addScriptDeclaration(
-	"function showPrototypeMapBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
+LayoutHelper::render('components.com_prototype.map.head');
+
 ?>
-
 <div id="prototype" class="map">
 	<div class="map-block">
 		<div class="uk-hidden-medium uk-hidden-large">
@@ -55,30 +50,7 @@ Factory::getDocument()->addScriptDeclaration(
 				$subitems[] = $object;
 			}
 		}
-		//		if ($menu->level > 1)
-		//		{
-		//			foreach ($this->children as $child)
-		//			{
-		//				$object       = new stdClass();
-		//				$object->name = $child->title;
-		//				$object->link = $child->mapLink;
-		//				$subitems[]   = $object;
-		//			}
-		//		}
-		//		else
-		//		{
-		//			foreach ($menus->getItems(array('menutype', 'level'), array($menu->menutype, 2)) as $menuItem)
-		//			{
-		//				if ($menuItem->getParams()->get('menu_show'))
-		//				{
-		//					$object       = new stdClass();
-		//					$object->name = $menuItem->title;
-		//					$object->link = $menuItem->link;
-		//
-		//					$subitems[] = $object;
-		//				}
-		//			}
-		//		} ?>
+		?>
 
 		<?php echo LayoutHelper::render('template.title.mobilefilter', array(
 			'add'      => $this->addLink,
@@ -113,11 +85,11 @@ Factory::getDocument()->addScriptDeclaration(
 			</div>
 		</div>
 	</div>
-	<div data-prototype-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove uk-hidden-small">
+	<div data-prototype-map-itemlist="container" class="uk-panel uk-panel-box uk-padding-remove uk-hidden-small">
 
 		<form action="<?php echo htmlspecialchars(Factory::getURI()->toString()); ?>" method="get" name="adminForm"
 			  class="uk-form primary-fiter filter desktop-filter uk-margin-small-bottom"
-			  data-prototype-filter>
+			  data-prototype-map-filter>
 			<div class="">
 				<div class="uk-form-row uk-flex uk-flex-wrap uk-flex-middle">
 					<div class="uk-margin-right uk-flex">
@@ -147,22 +119,9 @@ Factory::getDocument()->addScriptDeclaration(
 		<div class="modules">
 			<?php echo Factory::getDocument()->loadRenderer('modules')->render('map-beforeitems', array('style' => 'blank')); ?>
 		</div>
-		<div data-prototype-itemlist="items"></div>
+		<div data-prototype-map-itemlist="items"></div>
 		<div class="uk-margin-large-bottom"></div>
 	</div>
-	<div data-prototype-balloon class="uk-modal">
-		<div class="uk-modal-dialog uk-modal-dialog-large">
-			<button class="uk-modal-close uk-close" type="button"></button>
-			<div class="uk-alert uk-alert-danger" data-prototype-balloon-error>
-				<?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
-			</div>
-			<div data-prototype-balloon-loading>
-				<i class="uk-icon-spinner uk-icon-spin uk-margin-small-right"></i>
-				<?php echo JText::_('TPL_NERUDAS_LOADING'); ?>
-			</div>
-			<div data-prototype-balloon-content class="uk-overflow-container">
-			</div>
-		</div>
-	</div>
 </div>
+<?php echo LayoutHelper::render('components.com_prototype.map.balloon'); ?>
 
