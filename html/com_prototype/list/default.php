@@ -19,8 +19,6 @@ $app = Factory::getApplication();
 
 LayoutHelper::render('components.com_prototype.list.head');
 ?>
-
-
 <div id="prototype" class="itemlist">
 	<?php
 	$layouts  = array('list' => $this->listLink, 'map' => $this->mapLink, 'active' => 'list');
