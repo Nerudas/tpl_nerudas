@@ -17,7 +17,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 $app = Factory::getApplication();
 
-LayoutHelper::render('components.com_prototype.list.scripts');
+LayoutHelper::render('components.com_prototype.list.head');
 
 if (!empty($app->input->get('item_id')))
 {

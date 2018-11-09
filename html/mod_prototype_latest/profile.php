@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
-LayoutHelper::render('components.com_prototype.list.scripts');
+LayoutHelper::render('components.com_prototype.list.head');
 ?>
 
 <div class="prototype-lastes-module profile">
