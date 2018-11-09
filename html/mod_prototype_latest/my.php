@@ -13,20 +13,10 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
-use Joomla\Registry\Registry;
 
 $app = Factory::getApplication();
 $doc = Factory::getDocument();
 
-
-HTMLHelper::_('jquery.framework');
-HTMLHelper::_('script', 'media/com_prototype/js/list.min.js', array('version' => 'auto'));
-
-$doc->addScriptDeclaration(
-	"function showPrototypeListBalloon() {UIkit.modal('[data-prototype-balloon]', {center: true}).show();}");
-
-
-$doc->addScriptOptions('prototypeList', array('catid' => $params->get('category', 1)));
 ?>
 
 
@@ -38,12 +28,7 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 	</div>
 	<?php if ($items) : ?>
 		<div class="items uk-margin-bottom ">
-			<?php foreach ($items as $id => $item):
-				$onModeration = (!$item->state || ($item->publish_down !== '0000-00-00 00:00:00' &&
-						$item->publish_down < Factory::getDate()->toSql()));
-				$item->image = ($item->image) ? $item->image : 'templates/nerudas/images/noimage.jpg';
-				$catFelds = new Registry($item->category->get('fields'));
-				?>
+			<?php foreach ($items as $id => $item): ?>
 				<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
 					<div class="uk-padding">
 						<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
@@ -52,17 +37,17 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 									<a class="uk-link-muted uk-display-block"
 									   data-prototype-show="<?php echo $item->id; ?>">
 										<?php echo $item->title; ?>
-										<?php if ($onModeration): ?>
+										<?php if ((!$item->state)): ?>
 											<span class="uk-badge uk-badge-danger">
 												<?php echo Text::_('TPL_NERUDAS_ONMODERATION'); ?></span>
 										<?php endif; ?>
 									</a>
 								</h2>
 								<div class="uk-text-muted uk-text-lowercase">
-									<?php if ($item->category->get('parent_level') > 1): ?>
-										<span><?php echo $item->category->get('parent_title'); ?> </span>
+									<?php if ($item->category->parent_level > 1): ?>
+										<span><?php echo $item->category->parent_title; ?> </span>
 									<?php endif; ?>
-									<span><?php echo $item->category->get('title'); ?></span>
+									<span><?php echo $item->category->title; ?></span>
 								</div>
 								<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-small-top">
 									<div>
@@ -84,23 +69,14 @@ $doc->addScriptOptions('prototypeList', array('catid' => $params->get('category'
 							</div>
 							<div class="uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
 								<div>
-									<?php if ($item->publish_down !== '0000-00-00 00:00:00'): ?>
+									<?php if ($item->payment_down->end): ?>
 										<div class="uk-margin-bottom uk-text-center">
 											<div class="uk-text-small uk-text-muted">
 												<?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROTOTYPE_DATE_PUBLISH_DOWN'); ?>
 											</div>
 											<div class="">
-												<?php echo HTMLHelper::date($item->publish_down, 'd.m.Y'); ?>
+												<?php echo $item->payment_down->date; //HTMLHelper::date($item->payment_down->date, 'd.m.Y'); ?>
 											</div>
-										</div>
-									<?php endif; ?>
-
-									<?php if ($item->map): ?>
-										<div class="">
-											<a class="uk-flex uk-flex-right uk-link-muted"
-											   href="<?php echo $item->map->get('link'); ?>">
-												<?php echo $item->placemark->options['customLayout']; ?>
-											</a>
 										</div>
 									<?php endif; ?>
 								</div>
