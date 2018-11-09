@@ -10,10 +10,6 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\Utilities\ArrayHelper;
-
 extract($displayData);
 
 /**
