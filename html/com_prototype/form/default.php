@@ -37,15 +37,19 @@ $doc->addScriptDeclaration('
 	$app->input->getCmd('return_view'))); ?>" method="post" name="adminForm" id="prototype"
 	  class="form form-validate uk-form uk-margin-bottom" enctype="multipart/form-data">
 	<?php echo LayoutHelper::render('template.title', array('form' => 'item')); ?>
-	<?php echo LayoutHelper::render('components.com_prototype.form.presets',
-		array('form' => $this->form, 'presets' => $this->presets)); ?>
-	<div data-prototype-form="form" style="display: none">
-		<div class="uk-text-right uk-margin-bottom">
-			<span data-preset-title="label" class="uk-text-muted uk-margin-small-right"></span>
-			<a data-prototype-form="change-preset">
-				<?php echo Text::_('TPL_NERUDAS_ACTIONS_CHANGE'); ?>
-			</a>
-		</div>
+	<?php if (!empty($this->presets)): ?>
+		<?php echo LayoutHelper::render('components.com_prototype.form.presets',
+			array('form' => $this->form, 'presets' => $this->presets)); ?>
+	<?php endif; ?>
+	<div data-prototype-form="form" <?php echo (!empty($this->presets)) ? 'style="display: none"' : ''; ?>>
+		<?php if (!empty($this->presets)): ?>
+			<div class="uk-text-right uk-margin-bottom uk-hidden">
+				<span data-preset-title="label" class="uk-text-muted uk-margin-small-right"></span>
+				<a data-prototype-form="change-preset">
+					<?php echo Text::_('TPL_NERUDAS_ACTIONS_CHANGE'); ?>
+				</a>
+			</div>
+		<?php endif; ?>
 		<div class="uk-panel uk-panel-box uk-form-horizontal uk-margin-bottom">
 			<?php echo $this->form->renderField('title'); ?>
 			<?php echo $this->form->renderField('price'); ?>
