@@ -54,27 +54,14 @@ extract($displayData);
 			</div>
 		</div>
 		<div class="uk-width-medium-2-3">
-			<div class="title">
-				<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
-					<div class="title uk-width-medium-3-4">
-						<div class="uk-text-xlarge uk-margin-remove">
-							<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
-						</div>
-					</div>
-					<div class="uk-width-medium-1-4 uk-text-right">
-						<div class="uk-text-muted uk-text-lowercase">
-							<?php if ($category->get('parent_level') > 1): ?>
-								<span><?php echo $category->get('parent_title'); ?> </span>
-							<?php endif; ?>
-							<span><?php echo $category->get('title'); ?></span>
-						</div>
-					</div>
-
-				</div>
-			</div>
 			<div class="content">
 				<div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
 					<div class="uk-width-medium-3-5">
+						<div class="title">
+							<div class="uk-text-xlarge uk-margin-remove">
+								<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+							</div>
+						</div>
 						<?php if (!empty($item->get('price'))): ?>
 							<div class="price uk-margin-bottom ">
 								<span class="uk-text-large uk-text-bold">
@@ -82,7 +69,6 @@ extract($displayData);
 								</span>
 								<span class="uk-text-muted uk-text-uppercase uk-text-small">
 									<span>₽</span>
-									<?php //echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB'); ?>
 									<?php if (!empty($preset->get('price'))) : ?>
 										<span> / </span>
 										<?php echo $preset->get('price')->title; ?>
@@ -90,9 +76,22 @@ extract($displayData);
 								</span>
 							</div>
 						<?php endif; ?>
+						<div class="uk-text-muted uk-text-lowercase">
+							<?php if ($category->get('parent_level') > 1): ?>
+								<span><?php echo $category->get('parent_title'); ?> </span>
+							<?php endif; ?>
+							<span><?php echo $category->get('title'); ?></span>
+						</div>
 						<?php if (!empty($item->get('text'))): ?>
 							<div>
 								<?php echo $item->get('text'); ?>
+							</div>
+						<?php endif; ?>
+						<?php if (!empty($item->get('external_link'))): ?>
+							<div>
+								<a href="<?php echo $item->get('external_link'); ?>">
+									<?php echo Text::_('TPL_NERUDAS_READMORE'); ?>...
+								</a>
 							</div>
 						<?php endif; ?>
 					</div>

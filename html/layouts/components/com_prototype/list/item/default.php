@@ -33,6 +33,9 @@ extract($displayData);
 		<a class="uk-display-block uk-link-muted" data-prototype-list-show-balloon="<?php echo $item->get('id'); ?>">
 			<div class="uk-h3">
 				<?php echo $item->get('title'); ?>
+				<?php if (!empty($item->get('images'))): ?>
+					<i class="uk-icon-photo"></i>
+				<?php endif; ?>
 			</div>
 			<?php if (!empty($item->get('text'))): ?>
 				<div class="uk-text-small uk-text-muted">

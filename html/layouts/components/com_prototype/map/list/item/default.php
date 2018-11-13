@@ -29,6 +29,9 @@ extract($displayData);
 			<div class="uk-width-medium-<?php echo ($item->get('price', false)) ? '3-5' : '1-1'; ?>">
 				<div class=" uk-text-medium">
 					<?php echo $item->get('title'); ?>
+					<?php if (!empty($item->get('images'))): ?>
+						<i class="uk-icon-photo"></i>
+					<?php endif; ?>
 				</div>
 				<div class="uk-text-small uk-text-muted uk-text-lowercase">
 					<?php if ($category->get('parent_level') > 1): ?>
@@ -42,10 +45,12 @@ extract($displayData);
 					<div class="price uk-margin-small-top">
 						<div>
 							<span class="uk-text-bold">
-								<?php echo $item->get('price'); ?> ₽
+								<?php echo $item->get('price'); ?>
 							</span>
-							<span class="uk-text-mini uk-text-muted uk-text-uppercase">
+							<span class="uk-text-muted uk-text-uppercase uk-text-mini">
+								<span>₽</span>
 								<?php if (!empty($preset->get('price'))) : ?>
+									<span> / </span>
 									<?php echo $preset->get('price')->title; ?>
 								<?php endif; ?>
 							</span>
