@@ -27,7 +27,7 @@ extract($displayData);
 ?>
 <div class="prototype baloon">
 	<div class="uk-grid uk-margin-top-remove" data-uk-grid-margin data-uk-grid-match>
-		<div class="uk-width-medium-3-10">
+		<div class="uk-width-medium-1-3">
 			<div>
 				<div class="uk-slidenav-position uk-slidenav-imagenavs uk-position-relative uk-balloon-slideshow"
 					 data-uk-slideshow="{autoplay:true, autoplayInterval: 3000}">
@@ -53,84 +53,98 @@ extract($displayData);
 				</div>
 			</div>
 		</div>
-		<div class="uk-width-medium-4-10">
-			<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
-				<div class="title uk-width-medium-1-2">
-					<div class="uk-text-xlarge uk-margin-remove">
-						<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+		<div class="uk-width-medium-2-3">
+			<div class="title">
+				<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match>
+					<div class="title uk-width-medium-3-4">
+						<div class="uk-text-xlarge uk-margin-remove">
+							<?php echo $item->get('title', Text::_('JGLOBAL_TITLE')); ?>
+						</div>
 					</div>
-					<div class="uk-margin-bottom uk-text-muted uk-text-lowercase">
-						<?php if ($category->get('parent_level') > 1): ?>
-							<span><?php echo $category->get('parent_title'); ?> </span>
-						<?php endif; ?>
-						<span><?php echo $category->get('title'); ?></span>
-					</div>
-				</div>
-				<div class="price uk-width-medium-1-2 uk-text-right">
-					<div>
-						<span class="uk-text-large uk-text-bold">
-							<?php echo $item->get('price', '---'); ?>
-						</span>
-						<span class="uk-text-muted uk-text-uppercase">
-							<?php if (!empty($preset->get('price'))) : ?>
-								<?php echo $preset->get('price')->title; ?>
+					<div class="uk-width-medium-1-4 uk-text-right">
+						<div class="uk-text-muted uk-text-lowercase">
+							<?php if ($category->get('parent_level') > 1): ?>
+								<span><?php echo $category->get('parent_title'); ?> </span>
 							<?php endif; ?>
-						</span>
+							<span><?php echo $category->get('title'); ?></span>
+						</div>
 					</div>
-				</div>
-			</div>
-			<?php if (!empty($item->get('text'))): ?>
-				<div>
-					<?php echo $item->get('text'); ?>
-				</div>
-			<?php endif; ?>
-		</div>
-		<div class="uk-width-medium-3-10">
-			<div class="author uk-clearfix uk-width-1-1">
-				<div class="avatar uk-position-relative uk-display-inline-block uk-align-left  uk-margin-bottom-remove">
-					<a class="image uk-avatar-48 <?php echo ($author->get('type') == 'legal') ? 'logo' : ''; ?>"
-					   href="<?php echo $author->get('link'); ?>"
-					   style="background-image: url('/<?php echo $author->get('avatar'); ?>');">
-					</a>
-					<?php if ($author->get('online')): ?>
-						<i class="uk-position-bottom-right uk-icon-profile-state-online"></i>
-					<?php endif; ?>
-				</div>
-				<div class="sub uk-text-ellipsis">
-					<div class="name">
-						<a href="<?php echo $author->get('link'); ?>">
-							<?php echo $author->get('name'); ?>
-						</a>
-					</div>
-					<div class="job uk-text-uppercase-letter uk-text-small uk-text-muted uk-text-ellipsis">
-						<?php echo $author->get('signature'); ?>
-					</div>
-				</div>
-			</div>
-			<div class="uk-text-small uk-text-muted">
-				<?php echo $author->get('status'); ?>
-			</div>
-			<?php if ($author->get('contacts', false)) : ?>
-				<div class="uk-margin-small-top">
-					<?php if (!empty($author->get('contacts')->phones)) : ?>
-						<div class="uk-margin-bottom">
-							<?php foreach ($author->get('contacts')->phones as $phone): ?>
-								<div class="uk-margin-small-bottom uk-display-block">
-									<a class="uk-text-xlarge "
-									   href="tel:<?php echo $phone->code . $phone->number; ?>">
-										<?php $phone->display = (!empty($phone->display)) ?
-											$phone->display : $phone->code . $phone->number;
 
-										$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
-										$subst   = '$1($2)$3-$4-$5';
-										echo preg_replace($regular, $subst, $phone->display); ?>
+				</div>
+			</div>
+			<div class="content">
+				<div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
+					<div class="uk-width-medium-3-5">
+						<?php if (!empty($item->get('price'))): ?>
+							<div class="price uk-margin-bottom ">
+								<span class="uk-text-large uk-text-bold">
+									<?php echo $item->get('price'); ?>
+								</span>
+								<span class="uk-text-muted uk-text-uppercase uk-text-small">
+									<span>₽</span>
+									<?php //echo Text::_('TPL_NERUDAS_PRICE_TYPE_RUB'); ?>
+									<?php if (!empty($preset->get('price'))) : ?>
+										<span> / </span>
+										<?php echo $preset->get('price')->title; ?>
+									<?php endif; ?>
+								</span>
+							</div>
+						<?php endif; ?>
+						<?php if (!empty($item->get('text'))): ?>
+							<div>
+								<?php echo $item->get('text'); ?>
+							</div>
+						<?php endif; ?>
+					</div>
+					<div class="uk-width-medium-2-5">
+						<div class="author uk-clearfix uk-width-1-1">
+							<div class="avatar uk-position-relative uk-display-inline-block uk-align-left  uk-margin-bottom-remove">
+								<a class="image uk-avatar-48 <?php echo ($author->get('type') == 'legal') ? 'logo' : ''; ?>"
+								   href="<?php echo $author->get('link'); ?>"
+								   style="background-image: url('/<?php echo $author->get('avatar'); ?>');">
+								</a>
+								<?php if ($author->get('online')): ?>
+									<i class="uk-position-bottom-right uk-icon-profile-state-online"></i>
+								<?php endif; ?>
+							</div>
+							<div class="sub uk-text-ellipsis">
+								<div class="name">
+									<a href="<?php echo $author->get('link'); ?>">
+										<?php echo $author->get('name'); ?>
 									</a>
 								</div>
-							<?php endforeach; ?>
+								<div class="job uk-text-uppercase-letter uk-text-small uk-text-muted uk-text-ellipsis">
+									<?php echo $author->get('signature'); ?>
+								</div>
+							</div>
 						</div>
-					<?php endif; ?>
+						<div class="uk-text-small uk-text-muted">
+							<?php echo $author->get('status'); ?>
+						</div>
+						<?php if ($author->get('contacts', false)) : ?>
+							<div class="uk-margin-small-top">
+								<?php if (!empty($author->get('contacts')->phones)) : ?>
+									<div class="uk-margin-bottom">
+										<?php foreach ($author->get('contacts')->phones as $phone): ?>
+											<div class="uk-margin-small-bottom uk-display-block">
+												<a class="uk-text-xlarge "
+												   href="tel:<?php echo $phone->code . $phone->number; ?>">
+													<?php $phone->display = (!empty($phone->display)) ?
+														$phone->display : $phone->code . $phone->number;
+
+													$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
+													$subst   = '$1($2)$3-$4-$5';
+													echo preg_replace($regular, $subst, $phone->display); ?>
+												</a>
+											</div>
+										<?php endforeach; ?>
+									</div>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
 
