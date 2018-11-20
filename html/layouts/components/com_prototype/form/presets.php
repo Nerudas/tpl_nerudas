@@ -1,7 +1,7 @@
 <?php
 /**
- * @package    Nerudas Template
- * @version    4.9.34
+ * @package    Prototype Component
+ * @version    1.3.5
  * @author     Nerudas  - nerudas.ru
  * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
@@ -10,38 +10,86 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 extract($displayData);
-
-HTMLHelper::_('jquery.framework');
-HTMLHelper::_('script', 'media/com_prototype/js/form-presets.min.js', array('version' => 'auto'));
-
 ?>
-<div class="uk-margin-large-bottom  uk-panel uk-panel-box " data-prototype-form="presets" style="display: none;">
-	<div class="uk-grid" data-uk-grid-margin data-uk-grid-match>
+<script>
+	(function ($) {
+		$(document).ready(function () {
+			setDesctHeight();
 
-		<?php foreach ($presets as $preset): ?>
-			<div class="uk-text-center uk-width-xsmall-1-3 uk-width-small-1-4 uk-width-medium-1-5 uk-width-large-1-5 uk-width-xlarge-1-5">
-				<a data-preset="<?php echo $preset['key']; ?>"
-				   data-preset-title="<?php echo $preset['title']; ?>"
-				   data-preset-price="<?php echo $preset['price']; ?>"
-				   data-preset-price_title="<?php echo $preset['price_title']; ?>"
-				   data-preset-delivery="<?php echo $preset['delivery']; ?>"
-				   data-preset-delivery_title="<?php echo $preset['delivery_title']; ?>"
-				   data-preset-object="<?php echo $preset['object']; ?>"
-				   data-preset-object_title="<?php echo $preset['object_title']; ?>"
-				   class="uk-display-block uk-link-muted">
-					<div>
-						<?php if (!empty($preset['icon']))
-						{
-							echo HTMLHelper::_('image', $preset['icon'], $preset['title'], array('title' => $preset['title']));
-						}
-						?>
-						<div class="uk-text-small"><?php echo $preset['title']; ?></div>
+			$('[name="jform[payment]"]:radio').change(function () {
+				seletctTarif();
+			});
+			$('[name="jform[payment]"]:radio').on('click', function () {
+				seletctTarif();
+			});
+			$('[name="jform[payment]"]:radio').on('change', function () {
+				seletctTarif();
+			});
+			$('body').on('change', '[name="jform[payment]"]:radio', function () {
+				$('[name="jform[payment]"]:radio').change(function () {
+					seletctTarif();
+				});
+			});
+			seletctTarif();
+
+			function seletctTarif() {
+				var payment = $('[data-prototype-form="author"]').find('[data-author-phones="payment"]'),
+					free = $('[data-prototype-form="author"]').find('[data-author-phones="free"]'),
+					value = $('[name="jform[payment]"]:checked').val();
+
+				$('[name="jform[payment]"]').closest('label').removeClass('active');
+
+				$('[name="jform[payment]"]:checked').closest('label').addClass('active');
+			}
+
+			var maxHeight = 0;
+			$('#<?php echo $id; ?>').find('.description').each(function (d, desc) {
+				if ($(desc).innerHeight() > maxHeight) {
+					maxHeight = $(desc).innerHeight();
+				}
+
+				console.log(maxHeight);
+			});
+			$('#<?php echo $id; ?>').find('.description').innerHeight(maxHeight);
+		});
+
+
+
+
+	})(jQuery);
+</script>
+<div id="<?php echo $id; ?>" class="uk-margin-bottom uk-margin-top">
+	<div class="uk-h2 uk-margin-bottom uk-margin-top"><?php echo Text::_('COM_PROTOTYPE_ITEM_PAYMENT'); ?></div>
+	<div class="uk-grid uk-grid-small" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
+		<?php foreach ($options as $i => $option) : ?>
+			<div class="uk-width-medium-1-3">
+				<label for="<?php echo $id . '_' . $i; ?>"
+					   class="uk-panel uk-panel-box uk-display-block uk-margin-small-bottom"
+					   data-prototype-form-tariff>
+					<div class="title tariff uk-h3 uk-flex uk-flex-wrap uk-flex-middle  uk-padding-left uk-padding-right">
+						<input type="radio" id="<?php echo $id . '_' . $i; ?>" name="<?php echo $name; ?>"
+							   class="uk-hidden"
+							   value="<?php echo $option['value']; ?>" <?php echo $option['checked'] ? 'checked="checked"' : ''; ?>/>
+						<strong class="uk-display-inline-block"><?php echo $option['title']; ?></strong>
+					</div>
+					<hr>
+					<div class="description uk-hidden-small uk-text-muted uk-margin-top uk-margin-bottom uk-padding-left uk-padding-right">
+						<?php echo nl2br($option['description']); ?>
+					</div>
+					<div class="short uk-hidden-medium uk-hidden-large uk-text-muted uk-margin-top uk-margin-bottom uk-padding-left uk-padding-right">
+						<?php echo nl2br($option['short']); ?>
+					</div>
+					<div class="price uk-padding-left uk-padding-right">
+						<strong><?php echo $option['price']; ?></strong>
 					</div>
 
-				</a>
+					<div class="uk-button uk-margin-top  uk-button-large uk-width-1-1">
+						<?php echo Text::_('TPL_NERUDAS_ACTIONS_SELECT'); ?>
+					</div>
+				</label>
 			</div>
 		<?php endforeach; ?>
 	</div>
