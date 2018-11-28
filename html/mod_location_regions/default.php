@@ -25,7 +25,7 @@ HTMLHelper::_('script', 'mod_location_regions.min.js', array('version' => 'auto'
 		<img src="<?php echo $current->icon; ?>" alt="<?php echo $current->name; ?>"/>
 	</a>
 	<?php if ($new): ?>
-		<div id="locationNewRegion" class="new region">
+		<div id="locationNewRegion" class="new region uk-hidden">
 			<div class="uk-text-nowrap uk-text-small">
 				<?php echo Text::sprintf('MOD_LOCATION_REGIONS_NEW', $current->name); ?>
 			</div>
