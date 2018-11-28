@@ -441,13 +441,6 @@ html.map {
 		padding: 10px;
 	}
 }
-
-#office.home .prototype-lastes-module .add {
-	position: absolute;
-	top: -35px;
-	right: 0;
-}
-
 #office.home .prototype-lastes-module .items > .item[data-show="false"]:hover {
 	background: #f0f0f0 !important;
 }

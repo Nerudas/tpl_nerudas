@@ -19,13 +19,13 @@ $doc = Factory::getDocument();
 
 ?>
 <div class="prototype-lastes-module my">
-	<div class="add uk-margin-bottom uk-text-right">
+	<div class="add uk-margin-small-bottom uk-margin-small-top uk-text-right">
 		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
 			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
 		</a>
 	</div>
 	<?php if ($items) : ?>
-		<div class="items uk-margin-bottom ">
+		<div class="items uk-margin-bottom uk-panel uk-panel-box uk-padding-remove">
 			<?php foreach ($items as $id => $item): ?>
 				<div class="item" data-show="false" data-prototype-item="<?php echo $item->id; ?>">
 					<div class="uk-padding">

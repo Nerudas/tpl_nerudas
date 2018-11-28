@@ -305,7 +305,7 @@ $this->data->header = $imagesHelper->getImage('header', $imagesFolder, 'media/co
 				<li><a href="#discussion"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS'); ?></a></li>
 			</ul>
 			<ul id="rightTabs" class="uk-switcher" data-uk-switcher-tabs="">
-				<li data-tab="prototype" class="uk-panel uk-panel-box uk-padding-remove">
+				<li data-tab="prototype" class="">
 					<?php echo $myPrototypeModule; ?>
 				</li>
 				<li data-tab="board" class="">
