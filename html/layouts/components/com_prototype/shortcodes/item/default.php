@@ -34,6 +34,12 @@ extract($displayData);
 			<div class="uk-h3">
 				<?php echo $item->get('title'); ?>
 			</div>
+			<div class="uk-text-small uk-text-muted uk-text-lowercase uk-margin-small-bottom">
+				<?php if ($category->get('parent_level') > 1): ?>
+					<span><?php echo $category->get('parent_title'); ?> </span>
+				<?php endif; ?>
+				<span><?php echo $category->get('title'); ?></span>
+			</div>
 			<?php if (!empty($item->get('text'))): ?>
 				<div class="uk-text-small uk-text-muted">
 					<?php echo JHtmlString::truncate($item->get('text'), 70, false, false); ?>
