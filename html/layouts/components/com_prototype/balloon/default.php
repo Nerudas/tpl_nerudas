@@ -10,6 +10,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 
@@ -149,6 +150,14 @@ extract($displayData);
 
 	<?php if ($item->get('editLink')): ?>
 		<div class="uk-text-right uk-margin-top">
+			<?php
+			$user = Factory::getUser();
+			if ($item->get('editLink') && $user->authorise('core.manage', 'com_prototype') && $user->authorise('core.admin')): ?>
+				<a href="/administrator/index.php?option=com_prototype&task=item.edit&id=<?php echo $item->get('id'); ?>"
+				   target="_blank" class="uk-margin-right">
+					#<?php echo $item->get('id'); ?>
+				</a>
+			<?php endif; ?>
 			<?php if ($item->get('editLink')): ?>
 				<a href="<?php echo $item->get('editLink'); ?>" class="uk-badge uk-badge-success">
 					<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>
