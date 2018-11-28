@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 HTMLHelper::_('script', '//yastatic.net/es5-shims/0.0.2/es5-shims.min.js', array('version' => 'auto', 'relative' => true));
 HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'auto', 'relative' => true));
@@ -92,7 +93,16 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 			</div>
 		</div>
 	<?php endif; ?>
-
+	<?php
+	$user = Factory::getUser();
+	if ($user->authorise('core.edit', 'com_prototype') && $user->authorise('core.manage', 'com_prototype') && $user->authorise('core.admin')): ?>
+		<div class=" uk-margin-large-bottom">
+			<a href="/administrator/index.php?option=com_info&task=item.edit&id=<?php echo $this->item->id; ?>"
+			   target="_blank" class="uk-margin-right">
+				#<?php echo $this->item->id; ?>
+			</a>
+		</div>
+	<?php endif; ?>
 	<?php if ($this->comments): ?>
 		<div id="comments" class="uk-panel uk-panel-box uk-margin-large-bottom uk-anchor">
 			<h2>
