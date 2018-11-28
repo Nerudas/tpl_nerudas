@@ -139,8 +139,6 @@ $this->data->header = $imagesHelper->getImage('header', $imagesFolder, 'media/co
 				<li><a href="#company"><?php echo (empty($this->data->jobs)) ?
 							Text::_('TPL_NERUDAS_NO_COMPANY') :
 							Text::_('TPL_NERUDAS_OFFICE_MY_COMPANY'); ?></a></li>
-				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD'); ?></a></li>
-				<li><a href="#discussion"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS'); ?></a></li>
 			</ul>
 			<ul id="leftTabs" class="uk-switcher" data-uk-switcher-tabs="">
 				<li data-tab="profile" class="uk-panel uk-panel-box">
@@ -296,12 +294,6 @@ $this->data->header = $imagesHelper->getImage('header', $imagesFolder, 'media/co
 						</div>
 					<?php endif; ?>
 				</li>
-				<li data-tab="board" class="">
-					<?php echo $myBoardModule; ?>
-				</li>
-				<li data-tab="discussions" class="">
-					<?php echo $myTopicsModule; ?>
-				</li>
 			</ul>
 		</div>
 		<div class="uk-width-medium-1-2">
@@ -309,10 +301,18 @@ $this->data->header = $imagesHelper->getImage('header', $imagesFolder, 'media/co
 				<li>
 					<a href="#prototyp"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_PROTOTYPE'); ?></a>
 				</li>
+				<li><a href="#board"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_BOARD'); ?></a></li>
+				<li><a href="#discussion"><?php echo Text::_('TPL_NERUDAS_OFFICE_MY_DISCUSSIONS'); ?></a></li>
 			</ul>
 			<ul id="rightTabs" class="uk-switcher" data-uk-switcher-tabs="">
 				<li data-tab="prototype" class="uk-panel uk-panel-box uk-padding-remove">
 					<?php echo $myPrototypeModule; ?>
+				</li>
+				<li data-tab="board" class="">
+					<?php echo $myBoardModule; ?>
+				</li>
+				<li data-tab="discussions" class="">
+					<?php echo $myTopicsModule; ?>
 				</li>
 			</ul>
 		</div>
