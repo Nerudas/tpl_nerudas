@@ -13,6 +13,8 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 
 extract($displayData);
+
+if(empty($options)) return;
 ?>
 <script>
 	(function ($) {
