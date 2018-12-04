@@ -67,6 +67,11 @@ $doc = Factory::getDocument();
 							</div>
 							<div class="uk-width-medium-1-4 uk-flex uk-flex-right uk-flex-middle">
 								<div>
+									<div class="uk-margin-small-bottom uk-text-center">
+										<div class="">
+											<?php echo $item->payment->get('title'); ?>
+										</div>
+									</div>
 									<?php if ($item->payment_down->date !== 'never'): ?>
 										<div class="uk-margin-bottom uk-text-center">
 											<div class="uk-text-small uk-text-muted">
