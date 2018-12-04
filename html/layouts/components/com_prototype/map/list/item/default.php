@@ -45,7 +45,7 @@ extract($displayData);
 					<div class="price uk-margin-small-top">
 						<div>
 							<span class="uk-text-bold">
-								<?php echo $item->get('price'); ?>
+								<?php echo ($item->get('price') > 0) ? $item->get('price') : '---'; ?>
 							</span>
 							<span class="uk-text-muted uk-text-uppercase uk-text-mini">
 								<span>₽</span>
@@ -65,4 +65,28 @@ extract($displayData);
 			</div>
 		<?php endif; ?>
 	</a>
+	<?php if ($author->get('contacts', false) && is_object($item->get('payment_down', false))
+		&& !$item->get('payment_down')->end) : ?>
+		<div class="uk-text-center">
+			<?php if (!empty($author->get('contacts')->phones)) : ?>
+				<?php foreach ($author->get('contacts')->phones as $phone): ?>
+					<a class="uk-display-block uk-margin-bottom"
+					   href="tel:<?php echo $phone->code . $phone->number; ?>">
+						<?php $phone->display = (!empty($phone->display)) ?
+							$phone->display : $phone->code . $phone->number;
+
+						$regular = "/(\\+\\d{1})(\\d{3})(\\d{3})(\\d{2})(\\d{2})/";
+						$subst   = '$1($2)$3-$4-$5';
+						$display = preg_replace($regular, $subst, $phone->display); ?>
+						<span class="uk-text-large uk-hidden-small">
+							<?php echo $display; ?>
+						</span>
+						<span class="uk-text-medium uk-hidden-medium uk-hidden-large">
+							<?php echo $display; ?>
+						</span>
+					</a>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
 </div>

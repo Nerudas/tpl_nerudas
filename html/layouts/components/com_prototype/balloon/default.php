@@ -66,7 +66,7 @@ extract($displayData);
 						<?php if (!empty($item->get('price'))): ?>
 							<div class="price uk-margin-bottom ">
 								<span class="uk-text-large uk-text-bold">
-									<?php echo $item->get('price'); ?>
+									<?php echo ($item->get('price') > 0) ? $item->get('price') : '---'; ?>
 								</span>
 								<span class="uk-text-muted uk-text-uppercase uk-text-small">
 									<span>₽</span>
