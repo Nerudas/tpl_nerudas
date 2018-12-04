@@ -65,7 +65,9 @@ LayoutHelper::render('components.com_prototype.list.head');
 	   class="uk-display-block uk-panel uk-panel-box uk-padding-remove uk-position-relative"
 	   title="<?php echo Text::_('TPL_NERUDAS_ON_MAP'); ?>"
 	   data-uk-tooltip>
-		<?php echo HTMLHelper::image('prototype-map.png', Text::_('TPL_NERUDAS_ON_MAP'), array('class' => 'uk-width-1-1'), true); ?>
+		<?php
+		$map_header = ($this->category->map_header) ? $this->category->map_header : 'templates/nerudas/images/prototype-map.png';
+		echo HTMLHelper::image($map_header, Text::_('TPL_NERUDAS_ON_MAP'), array('class' => 'uk-width-1-1')); ?>
 		<div class="uk-position-cover" style="background: rgba(0,0,0,0.1)">
 		</div>
 		<div class="uk-position-cover uk-flex uk-flex-middle uk-flex-center uk-position-z-index">
