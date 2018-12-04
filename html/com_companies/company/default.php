@@ -27,6 +27,7 @@ $prototypeModule->showtitle = 0;
 $prototypeModule->control   = '';
 $prototypeModule->params    = new Registry();
 $prototypeModule->params->set('layout', 'nerudas:company');
+$prototypeModule->params->set('limit', '20');
 $prototypeModule->params->set('style', 'blank');
 $prototypeModule->params->set('company_id', $this->item->id);
 $prototypeModule->params->set('allregions', 1);

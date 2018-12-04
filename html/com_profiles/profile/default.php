@@ -49,6 +49,7 @@ $prototypeModule->control   = '';
 $prototypeModule->params    = new Registry();
 $prototypeModule->params->set('layout', 'nerudas:profile');
 $prototypeModule->params->set('style', 'blank');
+$prototypeModule->params->set('limit', '20');
 $prototypeModule->params->set('author_id', $this->item->id);
 $prototypeModule->params->set('allregions', 1);
 $prototypeModule->params = (string) $prototypeModule->params;
