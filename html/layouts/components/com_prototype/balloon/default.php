@@ -46,7 +46,7 @@ extract($displayData);
 			<div class="uk-text-muted uk-flex uk-flex-wrap uk-flex-middle uk-margin-small-top uk-flex-space-between">
 				<div>
 					<?php echo Text::_('TPL_NERUDAS_DATE_INFO_EDIT'); ?>:
-					<?php echo HTMLHelper::date($item->get('created'), 'd.m.Y'); ?>
+					<?php echo HTMLHelper::date($item->get('modified'), 'd.m.Y'); ?>
 				</div>
 				<div class="">|</div>
 				<div>
