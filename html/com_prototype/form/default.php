@@ -52,6 +52,7 @@ $doc->addScriptDeclaration('
 		<?php endif; ?>
 		<div class="uk-panel uk-panel-box uk-form-horizontal uk-margin-bottom">
 			<?php echo $this->form->renderField('title'); ?>
+			<?php echo $this->form->renderField('active'); ?>
 			<?php echo $this->form->renderField('price'); ?>
 			<?php $this->form->setFieldAttribute('text', 'class', 'uk-width-1-1');
 			echo $this->form->renderField('text'); ?>
