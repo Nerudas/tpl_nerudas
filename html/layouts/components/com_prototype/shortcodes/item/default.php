@@ -103,7 +103,8 @@ extract($displayData);
 									<?php echo $display; ?>
 								</span>
 							</a>
-						<?php endforeach; ?>
+							<?php break;
+						endforeach; ?>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
