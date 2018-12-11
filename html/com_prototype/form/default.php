@@ -66,7 +66,8 @@ $doc->addScriptDeclaration('
 				</div>
 			</div>
 		</div>
-
+		<?php echo LayoutHelper::render('components.com_prototype.form.author',
+			array('form' => $this->form, 'author' => $this->author, 'isNew' => (!empty($this->item->id)))); ?>
 		<div class="uk-panel uk-panel-box uk-margin-bottom">
 			<div class="uk-panel-title uk-h3">
 				<?php echo Text::_('JGLOBAL_FIELD_MAP_LABEL'); ?>
