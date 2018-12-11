@@ -7,7 +7,7 @@
 	<license>>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
 	<authorEmail>support@nerudas.ru</authorEmail>
 	<authorUrl>nerudas.ru</authorUrl>
-	<version>4.9.36</version>
+	<version>4.9.37</version>
 	<description>TPL_NERUDAS_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<files>
