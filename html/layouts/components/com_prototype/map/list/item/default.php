@@ -9,7 +9,7 @@
  */
 
 defined('_JEXEC') or die;
-
+use Joomla\CMS\Language\Text;
 
 extract($displayData);
 
@@ -27,10 +27,15 @@ extract($displayData);
 	   data-prototype-map-show-balloon="<?php echo $item->get('id'); ?>">
 		<div class="title uk-grid uk-grid-small">
 			<div class="uk-width-medium-<?php echo ($item->get('price', false)) ? '3-5' : '1-1'; ?>">
-				<div class=" uk-text-medium">
+				<div class="uk-text-medium">
 					<?php echo $item->get('title'); ?>
 					<?php if (!empty($item->get('images'))): ?>
 						<i class="uk-icon-photo"></i>
+					<?php endif; ?>
+					<?php if (!$item->get('active')): ?>
+						<span class="uk-badge uk-badge-danger">
+							<?php echo Text::_('TPL_NERUDAS_PROTOTYPE_NOACTIVE'); ?>
+						</span>
 					<?php endif; ?>
 				</div>
 				<div class="uk-text-small uk-text-muted uk-text-lowercase">

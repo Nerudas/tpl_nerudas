@@ -158,6 +158,11 @@ extract($displayData);
 					#<?php echo $item->get('id'); ?>
 				</a>
 			<?php endif; ?>
+			<?php if (!$item->get('active')): ?>
+				<span class="uk-badge uk-badge-danger">
+					<?php echo Text::_('TPL_NERUDAS_PROTOTYPE_NOACTIVE'); ?>
+				</span>
+			<?php endif; ?>
 			<?php if ($item->get('editLink')): ?>
 				<a href="<?php echo $item->get('editLink'); ?>" class="uk-badge uk-badge-success">
 					<?php echo Text::_('TPL_NERUDAS_ACTIONS_EDIT'); ?>

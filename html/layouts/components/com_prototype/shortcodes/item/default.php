@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 
 extract($displayData);
 
@@ -34,6 +35,12 @@ extract($displayData);
 			<div class="uk-h3">
 				<?php echo $item->get('title'); ?>
 			</div>
+
+			<?php if (!$item->get('active')): ?>
+				<span class="uk-badge uk-badge-danger">
+					<?php echo Text::_('TPL_NERUDAS_PROTOTYPE_NOACTIVE'); ?>
+				</span>
+			<?php endif; ?>
 			<div class="uk-text-small uk-text-muted uk-text-lowercase uk-margin-small-bottom">
 				<?php if ($category->get('parent_level') > 1): ?>
 					<span><?php echo $category->get('parent_title'); ?> </span>
