@@ -10,6 +10,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
@@ -290,4 +291,14 @@ $prototypeModule         = ModuleHelper::renderModule($prototypeModule);
 			<?php echo $this->comments->render; ?>
 		</li>
 	</ul>
+	<?php
+	$user = Factory::getUser();
+	if ($user->authorise('core.edit', 'com_users') && $user->authorise('core.manage', 'com_users') && $user->authorise('core.admin')): ?>
+		<div class=" uk-margin-top uk-text-large">
+			<a href="/administrator/index.php?option=com_users&task=user.edit&id=<?php echo $this->item->id; ?>"
+			   target="_blank" class="uk-margin-right">
+				#<?php echo $this->item->id; ?>
+			</a>
+		</div>
+	<?php endif; ?>
 </div>
