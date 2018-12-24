@@ -83,12 +83,12 @@ extract($displayData);
 		<div>
 			<a class="author uk-link-muted uk-display-inline-block"
 			   data-prototype-list-show-author="<?php echo $item->get('id'); ?>">
-				<div class="name uk-link">
-					<?php echo $author->get('name'); ?>
+				<div class="name uk-link uk-text-nowrap">
+					<?php echo JHtmlString::truncate($author->get('name'), 25, true, false); ?>
 				</div>
 				<?php if (!empty($author->get('signature'))): ?>
-					<div class="job uk-text-uppercase-letter uk-text-small  uk-text-small uk-text-muted uk-text-ellipsis">
-						[ <?php echo $author->get('signature'); ?> ]
+					<div class="job uk-text-uppercase-letter uk-text-small  uk-text-small uk-text-muted uk-text-ellipsis uk-text-nowrap">
+						[ <?php echo JHtmlString::truncate($author->get('signature'), 20, true, false); ?> ]
 					</div>
 				<?php endif; ?>
 			</a>
