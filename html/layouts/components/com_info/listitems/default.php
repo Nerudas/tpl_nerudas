@@ -64,9 +64,16 @@ $item = $displayData;
 		<?php if (!empty($item->tags->itemTags)): ?>
 			<div class="tags">
 				<?php foreach ($item->tags->itemTags as $tag): ?>
-					<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
-						<?php echo $tag->title; ?>
-					</span>
+					<?php if (!empty($tag->note)) : ?>
+						<a href="<?php echo $tag->note; ?>"
+						   class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+							<?php echo $tag->title; ?>
+						</a>
+					<?php else: ?>
+						<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+							<?php echo $tag->title; ?>
+						</span>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
 		<?php endif; ?>

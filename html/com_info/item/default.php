@@ -67,9 +67,16 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 				<?php if (!empty($this->item->tags->itemTags)): ?>
 					<div class="tags uk-margin-small-bottom">
 						<?php foreach ($this->item->tags->itemTags as $tag): ?>
-							<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
-								<?php echo $tag->title; ?>
-							</span>
+							<?php if (!empty($tag->note)) : ?>
+								<a href="<?php echo $tag->note; ?>"
+								   class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+									<?php echo $tag->title; ?>
+								</a>
+							<?php else: ?>
+								<span class="uk-tag<?php echo ($tag->main) ? ' uk-tag-primary' : '' ?>">
+							<?php echo $tag->title; ?>
+						</span>
+							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>
@@ -87,8 +94,8 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 				<?php echo $this->item->params->get('related_title', Text::_('COM_INFO_ITEM_RELATED')); ?>
 			</h2>
 			<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
-				<?php foreach ($this->related as $item): ?>
-					<?php echo LayoutHelper::render('components.com_info.item.related', $item); ?>
+				<?php foreach ($this->related as $this->item): ?>
+					<?php echo LayoutHelper::render('components.com_info.item.related', $this->item); ?>
 				<?php endforeach; ?>
 			</div>
 		</div>
