@@ -94,15 +94,16 @@ HTMLHelper::_('script', '//yastatic.net/share2/share.js', array('version' => 'au
 				<?php echo $this->item->params->get('related_title', Text::_('COM_INFO_ITEM_RELATED')); ?>
 			</h2>
 			<div class="uk-grid" data-uk-grid-match data-uk-grid-margin>
-				<?php foreach ($this->related as $this->item): ?>
-					<?php echo LayoutHelper::render('components.com_info.item.related', $this->item); ?>
+				<?php foreach ($this->related as $item): ?>
+					<?php echo LayoutHelper::render('components.com_info.item.related', $item); ?>
 				<?php endforeach; ?>
 			</div>
 		</div>
 	<?php endif; ?>
 	<?php
 	$user = Factory::getUser();
-	if ($user->authorise('core.edit', 'com_prototype') && $user->authorise('core.manage', 'com_prototype') && $user->authorise('core.admin')): ?>
+	if ($user->authorise('core.edit', 'com_info') && $user->authorise('core.manage', 'com_info')
+		&& $user->authorise('core.admin')): ?>
 		<div class=" uk-margin-large-bottom">
 			<a href="/administrator/index.php?option=com_info&task=item.edit&id=<?php echo $this->item->id; ?>"
 			   target="_blank" class="uk-margin-right">
