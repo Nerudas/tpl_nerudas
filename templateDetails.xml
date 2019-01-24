@@ -39,9 +39,7 @@
 		<position>footer-top</position>
 		<position>footer-bottom</position>
 		<position>home-filter</position>
-		<position>home-left</position>
-		<position>home-center</position>
-		<position>home-right</position>
+		<position>home</position>
 		<position>map-beforeitems</position>
 		<position>mobilefilter</position>
 	</positions>

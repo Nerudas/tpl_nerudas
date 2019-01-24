@@ -22,6 +22,11 @@ $template = $displayData;
 		<?php endif; ?>
 	</div>
 	<div class="tm-middle uk-container uk-container-center uk-margin-top uk-margin-bottom">
+		<?php if ($template->countModules('home')): ?>
+		<div class="uk-grid" data-uk-grid-margin>
+			<jdoc:include type="modules" name="home" style="home"/>
+		</div>
+		<?php endif; ?>
 		<div class="uk-grid" data-uk-grid-margin>
 			<?php if ($template->countModules('home-left')): ?>
 				<aside class="tm-sidebar uk-width-medium-1-1 uk-width-large-1-4">

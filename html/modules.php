@@ -21,6 +21,21 @@ function modChrome_blank($module, &$params, &$attribs)
 	}
 }
 
+// home
+function modChrome_home($module, &$params, &$attribs)
+{
+	if ($module->content)
+	{
+		echo '<div id="mod-' . $module->id . '" class="module ' . htmlspecialchars($params->get('moduleclass_sfx')) . '">';
+		if ($module->showtitle)
+		{
+			echo '<h3 class="uk-margin-small-bottom">' . $module->title . '</h3>';
+		}
+		echo $module->content;
+		echo '</div>';
+	}
+}
+
 // Sidebar
 function modChrome_sidebar($module, &$params, &$attribs)
 {
