@@ -25,12 +25,12 @@ extract($displayData);
 ?>
 <div class="item uk-grid uk-grid-margin uk-grid-small uk-margin-top-remove" data-uk-grid-margin="" data-uk-grid-match=""
 	 data-prototype-item="<?php echo $item->get('id'); ?>">
-	<div class="uk-width-medium-1-12 uk-text-center">
+	<div class="uk-width-1-4 uk-width-medium-1-12 uk-text-center">
 		<?php if ($preset->get('icon')): ?>
 			<?php echo HTMLHelper::image($preset->get('icon'), $preset->get('title', $item->get('title'))); ?>
 		<?php endif; ?>
 	</div>
-	<div class="uk-width-medium-1-12 uk-text-center">
+	<div class="uk-width-1-4 uk-width-medium-1-12 uk-text-center">
 		<a class="uk-display-block uk-link-muted" data-prototype-list-show-balloon="<?php echo $item->get('id'); ?>">
 			<div class="uk-text-nowrap uk-text-bold uk-text-xlarge">
 				<?php if (!empty($item->get('price'))) : ?>
@@ -44,7 +44,7 @@ extract($displayData);
 			</div>
 		</a>
 	</div>
-	<div class="uk-width-medium-2-12 uk-text-center">
+	<div class="uk-width-1-2 uk-width-medium-2-12 uk-text-center">
 		<?php if (!empty($item->get('images'))): ?>
 			<a data-prototype-list-show-balloon="<?php echo $item->get('id'); ?>">
 				<?php echo HTMLHelper::image($item->get('image'), $preset->get('title', $item->get('title'))); ?>
