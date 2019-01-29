@@ -3,7 +3,7 @@
  * @package    Nerudas Template
  * @version    4.9.40
  * @author     Nerudas  - nerudas.ru
- * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @copyright  Copyright (c) 2013 - 2019 Nerudas. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  * @link       https://nerudas.ru
  */
@@ -29,7 +29,7 @@ LayoutHelper::render('components.com_prototype.list.head');
 				$count = count($items);
 				$i     = 0;
 				foreach ($items as $id => $item):?>
-					<?php echo $item->render->listItem; ?>
+					<?php echo LayoutHelper::render('components.com_prototype.list.item.mobile', $item->displayData); ?>
 					<?php
 					$i++;
 					if ($i != $count): ?>

@@ -21,14 +21,10 @@ HTMLHelper::_('script', 'modalmap.min.js', array('version' => 'auto', 'relative'
 
 ?>
 <div class="board-lastes-module">
-	<div class="title uk-margin-bottom uk-flex uk-flex-middle uk-flex-wrap">
-		<h2 class="uk-margin-bottom-remove uk-margin-right">
-			<a class="uk-text-muted" href="<?php echo $categoryLink; ?>"><?php echo $module->title; ?></a>
-		</h2>
-		<a href="<?php echo $addLink; ?>" class="uk-button uk-button uk-button-success">
-			<?php echo Text::_('TPL_NERUDAS_ACTIONS_ADD'); ?>
-		</a>
-	</div>
+	<?php if (!empty($module->content))
+	{
+		echo $module->content;
+	} ?>
 	<?php if ($items) : ?>
 		<div class="items uk-panel uk-panel-box uk-margin-bottom">
 			<?php foreach ($items as $id => $item): ?>
